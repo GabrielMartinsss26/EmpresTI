@@ -1,0 +1,1946 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aula 8 — Greenfield: a ordem dos artefatos</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #050a14;
+  --cyan: #00e5ff;
+  --green: #00ff88;
+  --orange: #ff6b35;
+  --purple: #7c3aed;
+  --pink: #f472b6;
+  --yellow: #ffd500;
+  --text: #e8f4f8;
+  --muted: #7fa8c0;
+  --card: rgba(255,255,255,0.04);
+  --border: rgba(0,229,255,0.15);
+}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html, body { width:100%; height:100%; overflow:hidden; background:var(--bg); color:var(--text); font-family:'IBM Plex Sans',sans-serif; }
+
+#bg { position:fixed; inset:0; z-index:0; opacity:.3; pointer-events:none; }
+
+#progress-bar { position:fixed; top:0; left:0; height:3px; z-index:200;
+  background:linear-gradient(90deg, var(--cyan), var(--purple)); transition: width .4s ease; }
+
+#topbar {
+  position:fixed; top:0; left:0; right:0; height:52px; z-index:150;
+  background:rgba(5,10,20,.88); backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--border);
+  display:flex; align-items:center; justify-content:space-between; padding:0 32px;
+}
+.tb-label { font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--cyan); letter-spacing:2px; text-transform:uppercase; }
+.tb-counter { font-family:'IBM Plex Mono',monospace; font-size:13px; color:var(--muted); }
+.tb-title { font-size:13px; color:var(--muted); max-width:360px; text-align:center; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+
+#slides { position:fixed; inset:0; z-index:1; }
+.slide {
+  position:absolute; inset:0;
+  display:flex; flex-direction:column; justify-content:flex-start; align-items:center;
+  padding:72px 60px 80px;
+  opacity:0; pointer-events:none;
+  transition: opacity .5s ease, transform .5s ease;
+  transform: translateX(60px);
+  overflow-y: auto;
+}
+.slide.active { opacity:1; pointer-events:all; transform:translateX(0); }
+.slide.prev   { opacity:0; pointer-events:none; transform:translateX(-60px); }
+.slide-inner { width:100%; max-width:1060px; margin:auto 0; }
+.slide-scroll { overflow-y:auto; max-height:calc(100vh - 140px); padding-right:8px; }
+.slide-scroll::-webkit-scrollbar { width:4px; }
+.slide-scroll::-webkit-scrollbar-thumb { background:rgba(0,229,255,.2); border-radius:2px; }
+
+#nav-prev, #nav-next {
+  position:fixed; top:50%; z-index:200; transform:translateY(-50%);
+  width:48px; height:48px; border-radius:50%;
+  border:1px solid var(--border); background:rgba(5,10,20,.7);
+  backdrop-filter:blur(8px); cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  font-size:20px; color:var(--cyan); transition:all .2s; user-select:none;
+}
+#nav-prev { left:16px; } #nav-next { right:16px; }
+#nav-prev:hover, #nav-next:hover { background:rgba(0,229,255,.12); border-color:var(--cyan); }
+#nav-prev.disabled, #nav-next.disabled { opacity:.25; pointer-events:none; }
+
+#dots { position:fixed; bottom:18px; left:50%; transform:translateX(-50%); display:flex; gap:7px; z-index:200; }
+.dot { width:7px; height:7px; border-radius:50%; background:var(--muted); opacity:.4; cursor:pointer; transition:all .3s; }
+.dot.active { background:var(--cyan); opacity:1; transform:scale(1.3); }
+
+.tag  { font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--cyan);   letter-spacing:3px; text-transform:uppercase; margin-bottom:10px; display:block; }
+.gtag { font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--green);  letter-spacing:3px; text-transform:uppercase; margin-bottom:10px; display:block; }
+.ptag { font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--purple); letter-spacing:3px; text-transform:uppercase; margin-bottom:10px; display:block; }
+.otag { font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--orange); letter-spacing:3px; text-transform:uppercase; margin-bottom:10px; display:block; }
+
+h1.hero-title { font-family:'Syne',sans-serif; font-size:clamp(2.2rem,4.6vw,4.2rem); font-weight:800; line-height:1.05; margin-bottom:20px; }
+h2.sec-title  { font-family:'Syne',sans-serif; font-size:clamp(1.5rem,3.3vw,2.5rem); font-weight:800; line-height:1.15; margin-bottom:12px; }
+h3.slide-h3   { font-family:'Syne',sans-serif; font-size:1.2rem; font-weight:700; margin-bottom:16px; }
+p.lead { color:var(--muted); font-size:1rem; line-height:1.7; margin-bottom:24px; }
+
+.badge {
+  display:inline-flex; align-items:center; gap:8px;
+  background:rgba(0,229,255,.08); border:1px solid var(--border);
+  border-radius:20px; padding:6px 16px;
+  font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--cyan); letter-spacing:1px;
+  margin-bottom:28px; width:fit-content;
+}
+.badge::before { content:''; width:7px; height:7px; background:var(--green); border-radius:50%; animation:pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.5)} }
+
+.hero-q {
+  background:linear-gradient(135deg,rgba(0,229,255,.06),rgba(124,58,237,.06));
+  border:1px solid rgba(0,229,255,.2); border-left:4px solid var(--cyan);
+  border-radius:12px; padding:22px 28px; font-size:1.1rem; font-style:italic; color:var(--text);
+  max-width:740px; margin-top:8px;
+}
+
+.card { background:var(--card); border:1px solid var(--border); border-radius:16px; padding:24px; }
+.g2 { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+.g3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; }
+@media(max-width:680px){.g2,.g3{grid-template-columns:1fr}}
+
+.bridge { background:linear-gradient(135deg,rgba(0,229,255,.05),rgba(124,58,237,.05)); border:1px solid rgba(0,229,255,.2); border-radius:14px; padding:22px 26px; }
+
+.code { background:rgba(0,0,0,.42); border:1px solid var(--border); border-radius:10px;
+  padding:14px 18px; font-family:'IBM Plex Mono',monospace; font-size:.76rem;
+  line-height:1.75; overflow-x:auto; white-space:pre; color:#bfe4f2; }
+.code .c { color:var(--muted); font-style:italic; }
+.code .h { color:var(--cyan); font-weight:500; }
+.code .s { color:var(--green); }
+
+.tbl { width:100%; border-collapse:collapse; font-size:.84rem; }
+.tbl th { text-align:left; font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:var(--cyan); padding:10px 14px; border-bottom:1px solid var(--border); }
+.tbl td { padding:11px 14px; border-bottom:1px solid rgba(255,255,255,.05); color:var(--muted); vertical-align:top; line-height:1.55; }
+.tbl td strong { color:var(--text); }
+.tbl tbody tr:hover td { background:rgba(0,229,255,.03); }
+
+.yn { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+@media(max-width:680px){ .yn{ grid-template-columns:1fr; } }
+.yn-col { border-radius:14px; padding:18px 20px; }
+.yn-yes { background:rgba(0,255,136,.05); border:1px solid rgba(0,255,136,.22); }
+.yn-no  { background:rgba(255,107,53,.05); border:1px solid rgba(255,107,53,.22); }
+.yn-col h4 { font-family:'Syne',sans-serif; font-size:.95rem; margin-bottom:12px; }
+.yn-col li { list-style:none; font-size:.83rem; color:var(--muted); line-height:1.55; padding:6px 0 6px 20px; position:relative; }
+.yn-yes li::before { content:'✓'; position:absolute; left:0; color:var(--green); }
+.yn-no  li::before { content:'✕'; position:absolute; left:0; color:var(--orange); }
+
+.hsec { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:14px 18px; margin-bottom:10px; border-left:3px solid var(--purple); }
+.hsec .hn { font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--purple); letter-spacing:1.5px; margin-bottom:5px; }
+.hsec .ht { font-family:'Syne',sans-serif; font-weight:700; font-size:.92rem; margin-bottom:4px; }
+.hsec .hd { color:var(--muted); font-size:.82rem; line-height:1.55; }
+.hsec.star { border-left-color:var(--orange); background:rgba(255,107,53,.04); }
+.hsec.star .hn { color:var(--orange); }
+.hsec.ok { border-left-color:var(--green); background:rgba(0,255,136,.04); }
+.hsec.ok .hn { color:var(--green); }
+
+.filebox { border:1px solid var(--border); border-radius:12px; overflow:hidden; background:rgba(0,0,0,.42); margin-bottom:14px; }
+.filebox-head { display:flex; align-items:center; justify-content:space-between; gap:12px;
+  background:rgba(0,229,255,.06); border-bottom:1px solid var(--border);
+  padding:8px 14px; font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--cyan); letter-spacing:1px; }
+.filebox-head .fb-path::before { content:'▸ '; opacity:.6; }
+.filebox.prompt { border-color:rgba(124,58,237,.35); }
+.filebox.prompt .filebox-head { background:rgba(124,58,237,.1); border-bottom-color:rgba(124,58,237,.35); color:var(--pink); }
+.filebox.prompt .fb-path::before { content:'💬 '; }
+.copybtn { font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:1px; text-transform:uppercase;
+  border:1px solid var(--border); background:transparent; color:var(--muted);
+  border-radius:6px; padding:4px 10px; cursor:pointer; transition:.2s; }
+.copybtn:hover { border-color:var(--cyan); color:var(--cyan); }
+.copybtn.done { border-color:var(--green); color:var(--green); }
+.filebox pre { padding:14px 18px; font-family:'IBM Plex Mono',monospace; font-size:.74rem;
+  line-height:1.7; overflow-x:auto; white-space:pre; color:#bfe4f2; max-height:340px; overflow-y:auto; }
+.filebox pre::-webkit-scrollbar { width:4px; height:4px; }
+.filebox pre::-webkit-scrollbar-thumb { background:rgba(0,229,255,.2); border-radius:2px; }
+.ph { color:var(--yellow); }
+
+/* ═══ BARRA DE GIT — fecha cada fase ═══ */
+.filebox.git { border-color:rgba(0,255,136,.3); background:rgba(0,0,0,.5); }
+.filebox.git .filebox-head { background:rgba(0,255,136,.08); border-bottom-color:rgba(0,255,136,.3); color:var(--green); }
+.filebox.git .fb-path::before { content:'⎇ '; opacity:.9; }
+.filebox.git pre { font-size:.73rem; color:#c9f5df; }
+
+/* ═══ SAÍDA ESPERADA DO AGENTE ═══ */
+.filebox.out { border-color:rgba(124,58,237,.3); }
+.filebox.out .filebox-head { background:rgba(124,58,237,.08); border-bottom-color:rgba(124,58,237,.3); color:var(--pink); }
+.filebox.out .fb-path::before { content:'⤶ '; opacity:.9; }
+.filebox.out pre { color:#d9cdf5; }
+
+/* ═══ FATIA ZERO — travessia das camadas ═══ */
+.wsk { display:flex; align-items:stretch; justify-content:center; gap:8px; flex-wrap:wrap; margin:14px 0 10px; }
+.wnode { flex:1 1 150px; min-width:140px; max-width:210px; border-radius:14px; padding:14px 15px;
+  background:var(--card); border:1px solid var(--border); text-align:center; }
+.wnode .wk { font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:1.5px;
+  text-transform:uppercase; color:var(--muted); margin-bottom:6px; }
+.wnode .wt { font-family:'Syne',sans-serif; font-weight:700; font-size:.88rem; color:var(--text); line-height:1.25; margin-bottom:5px; }
+.wnode .wd { font-size:.74rem; color:var(--muted); line-height:1.45; }
+.wnode.n1 { border-color:rgba(0,229,255,.45); } .wnode.n1 .wk { color:var(--cyan); }
+.wnode.n2 { border-color:rgba(124,58,237,.45); } .wnode.n2 .wk { color:var(--purple); }
+.wnode.n3 { border-color:rgba(244,114,182,.4); } .wnode.n3 .wk { color:var(--pink); }
+.wnode.n4 { border-color:rgba(0,255,136,.45); background:rgba(0,255,136,.05); } .wnode.n4 .wk { color:var(--green); }
+.warr { display:flex; align-items:center; font-size:1.3rem; color:var(--muted); }
+@media(max-width:820px){ .warr{ transform:rotate(90deg); justify-content:center; width:100%; } }
+.wband { text-align:center; font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:2px;
+  text-transform:uppercase; color:var(--orange); border:1px dashed rgba(255,107,53,.4);
+  border-radius:10px; padding:8px 14px; margin-bottom:14px; }
+
+.expected { background:rgba(0,255,136,.05); border:1px solid rgba(0,255,136,.25); border-left:3px solid var(--green); border-radius:12px; padding:14px 18px; margin-top:14px; }
+.expected .ex-h { font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--green); margin-bottom:8px; }
+.expected li { list-style:none; font-size:.83rem; color:var(--muted); line-height:1.6; padding:3px 0 3px 20px; position:relative; }
+.expected li::before { content:'→'; position:absolute; left:0; color:var(--green); }
+.expected li strong { color:var(--text); }
+
+.warnbox { background:rgba(255,107,53,.05); border:1px solid rgba(255,107,53,.25); border-left:3px solid var(--orange); border-radius:12px; padding:14px 18px; margin-top:14px; }
+.warnbox .wh { font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--orange); margin-bottom:7px; }
+.warnbox p { font-size:.83rem; color:var(--muted); line-height:1.6; }
+.warnbox p strong { color:var(--text); }
+
+.checklist { display:grid; grid-template-columns:1fr 1fr; gap:9px; }
+@media(max-width:680px){ .checklist{ grid-template-columns:1fr; } }
+.chk { display:flex; gap:10px; align-items:flex-start; background:var(--card); border:1px solid var(--border); border-radius:10px; padding:11px 14px; font-size:.83rem; color:var(--muted); line-height:1.5; cursor:pointer; transition:.2s; user-select:none; }
+.chk:hover { border-color:var(--cyan); }
+.chk .box { flex-shrink:0; width:16px; height:16px; border:1px solid var(--muted); border-radius:4px; margin-top:2px; display:flex; align-items:center; justify-content:center; font-size:11px; color:transparent; }
+.chk.on { border-color:var(--green); background:rgba(0,255,136,.06); color:var(--text); }
+.chk.on .box { border-color:var(--green); background:var(--green); color:var(--bg); }
+.chk.on .box::before { content:'✓'; }
+.chk code { font-family:'IBM Plex Mono',monospace; color:var(--cyan); font-size:.78rem; }
+
+.practice-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+@media(max-width:680px){ .practice-grid{ grid-template-columns:1fr; } }
+.practice-card { background:var(--card); border:1px solid var(--border); border-left:3px solid var(--cyan);
+  border-radius:10px; padding:13px 16px; }
+.practice-card b { font-family:'Syne',sans-serif; font-size:.9rem; display:block; margin-bottom:5px; color:var(--text); }
+.practice-card span { font-size:.8rem; color:var(--muted); line-height:1.55; display:block; }
+.practice-card code { font-family:'IBM Plex Mono',monospace; color:var(--cyan); font-size:.76rem; }
+
+/* ═══ MOTOR DE ANIMAÇÃO ═══ */
+.anim .ai { opacity:0; }
+.anim.run .ai { animation:aIn .5s ease forwards; animation-delay:var(--d,0s); }
+@keyframes aIn { from{opacity:0; transform:translateY(-10px)} to{opacity:1; transform:translateY(0)} }
+@media (prefers-reduced-motion: reduce) {
+  .anim .ai { opacity:1 !important; }
+  .anim.run .ai, .badge::before { animation:none !important; }
+  .slide { transition:none !important; }
+}
+.replay { font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:1px;
+  border:1px solid var(--border); background:transparent; color:var(--muted);
+  border-radius:8px; padding:6px 16px; cursor:pointer; transition:.2s; }
+.replay:hover { border-color:var(--cyan); color:var(--cyan); }
+
+/* ═══ PASSO NUMERADO ═══ */
+.stepnum { display:inline-flex; align-items:center; gap:9px; font-family:'IBM Plex Mono',monospace;
+  font-size:11px; letter-spacing:2.5px; text-transform:uppercase; color:var(--cyan);
+  border:1px solid var(--border); border-radius:20px; padding:5px 14px; margin-bottom:12px; }
+.stepnum.o { color:var(--orange); border-color:rgba(255,107,53,.35); }
+.stepnum.g { color:var(--green); border-color:rgba(0,255,136,.35); }
+.stepnum.p { color:var(--purple); border-color:rgba(124,58,237,.4); }
+
+/* ═══ ORDEM — FLUXO VERTICAL ═══ */
+.seq { display:flex; flex-direction:column; gap:6px; margin-bottom:14px; }
+.seqrow { display:grid; grid-template-columns:44px 1fr 150px; gap:14px; align-items:center;
+  border:1px solid var(--border); border-radius:12px; background:var(--card); padding:11px 16px; }
+@media(max-width:760px){ .seqrow{ grid-template-columns:38px 1fr; } .seqrow .sq-w{ grid-column:1/-1; text-align:left; } }
+.seqrow .sq-n { font-family:'Syne',sans-serif; font-weight:800; font-size:1.35rem; color:var(--muted); text-align:center; }
+.seqrow .sq-t { font-family:'IBM Plex Mono',monospace; font-size:.82rem; color:var(--text); margin-bottom:3px; }
+.seqrow .sq-d { font-size:.77rem; color:var(--muted); line-height:1.45; }
+.seqrow .sq-w { font-family:'IBM Plex Mono',monospace; font-size:9.5px; letter-spacing:1.3px;
+  text-transform:uppercase; color:var(--muted); text-align:right; }
+.seqrow.pri { border-color:rgba(0,255,136,.38); background:rgba(0,255,136,.05); }
+.seqrow.pri .sq-n, .seqrow.pri .sq-w { color:var(--green); }
+.seqrow.pos { border-color:rgba(124,58,237,.4); background:rgba(124,58,237,.05); }
+.seqrow.pos .sq-n, .seqrow.pos .sq-w { color:var(--pink); }
+.seqrow.mid { border-color:rgba(255,213,0,.35); }
+.seqrow.mid .sq-n, .seqrow.mid .sq-w { color:var(--yellow); }
+
+/* ═══ JOGO DE ORDENAÇÃO ═══ */
+.og { border:1px solid var(--border); border-radius:14px; background:rgba(0,0,0,.25); padding:16px 18px; margin-bottom:14px; }
+.og-h { font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:1.8px; text-transform:uppercase;
+  color:var(--cyan); margin-bottom:10px; }
+.og-pool { display:flex; flex-wrap:wrap; gap:8px; min-height:44px; padding:8px;
+  border:1px dashed rgba(127,168,192,.3); border-radius:10px; margin-bottom:14px; }
+.og-chip { font-family:'IBM Plex Mono',monospace; font-size:.75rem; color:var(--text);
+  background:rgba(0,229,255,.07); border:1px solid var(--border); border-radius:8px;
+  padding:7px 12px; cursor:pointer; transition:.18s; user-select:none; }
+.og-chip:hover { border-color:var(--cyan); background:rgba(0,229,255,.16); transform:translateY(-1px); }
+.og-slots { display:flex; flex-direction:column; gap:6px; }
+.og-slot { display:grid; grid-template-columns:34px 1fr; gap:12px; align-items:center;
+  border:1px solid rgba(255,255,255,.09); border-radius:9px; padding:8px 12px; min-height:40px; }
+.og-slot .os-n { font-family:'Syne',sans-serif; font-weight:800; font-size:1rem; color:var(--muted); text-align:center; }
+.og-slot .os-c { font-family:'IBM Plex Mono',monospace; font-size:.75rem; color:var(--muted); }
+.og-slot.filled { border-color:var(--border); background:rgba(0,229,255,.05); cursor:pointer; }
+.og-slot.filled .os-c { color:var(--text); }
+.og-slot.right { border-color:rgba(0,255,136,.5); background:rgba(0,255,136,.07); }
+.og-slot.right .os-n { color:var(--green); }
+.og-slot.wrong { border-color:rgba(255,107,53,.5); background:rgba(255,107,53,.07); }
+.og-slot.wrong .os-n { color:var(--orange); }
+.og-actions { display:flex; gap:9px; margin-top:12px; flex-wrap:wrap; align-items:center; }
+.og-msg { font-size:.82rem; color:var(--muted); line-height:1.5; margin-top:10px; min-height:20px; }
+.og-msg b { color:var(--text); }
+.og-msg.good { color:var(--green); }
+.og-msg.bad { color:var(--orange); }
+
+/* ═══ ACORDEÃO DE PASSOS ═══ */
+.acc { display:flex; flex-direction:column; gap:9px; }
+.acc-item { border:1px solid var(--border); border-radius:12px; background:var(--card); overflow:hidden; }
+.acc-head { display:flex; align-items:center; gap:12px; padding:12px 16px; cursor:pointer; user-select:none; transition:.2s; }
+.acc-head:hover { background:rgba(0,229,255,.05); }
+.acc-badge { font-family:'IBM Plex Mono',monospace; font-size:9.5px; letter-spacing:1.4px; text-transform:uppercase;
+  color:var(--bg); background:var(--cyan); border-radius:20px; padding:3px 10px; flex-shrink:0; }
+.acc-badge.mk { background:var(--green); }
+.acc-badge.wr { background:var(--orange); }
+.acc-q { font-family:'Syne',sans-serif; font-weight:700; font-size:.88rem; flex:1; line-height:1.35; }
+.acc-mode { font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--muted); flex-shrink:0; }
+.acc-tog { color:var(--muted); font-size:.8rem; transition:transform .25s; flex-shrink:0; }
+.acc-item.open .acc-tog { transform:rotate(180deg); }
+.acc-body { display:none; padding:0 16px 16px; border-top:1px solid rgba(255,255,255,.06); }
+.acc-item.open .acc-body { display:block; animation:aIn .3s ease; }
+.acc-body p { font-size:.83rem; color:var(--muted); line-height:1.65; margin:12px 0; }
+.acc-body p strong { color:var(--text); }
+.acc-body code { font-family:'IBM Plex Mono',monospace; color:var(--cyan); font-size:.78rem; }
+
+/* ═══ TOGGLE v0 / v1 ═══ */
+.vtabs { display:flex; gap:8px; margin-bottom:12px; }
+.vtab { font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:1.2px; text-transform:uppercase;
+  border:1px solid var(--border); background:transparent; color:var(--muted);
+  border-radius:8px; padding:7px 16px; cursor:pointer; transition:.2s; }
+.vtab:hover { border-color:var(--cyan); color:var(--cyan); }
+.vtab.on { background:rgba(0,229,255,.12); border-color:var(--cyan); color:var(--cyan); }
+.vpane { display:none; }
+.vpane.on { display:block; animation:aIn .3s ease; }
+
+/* ═══ DECISÕES INVISÍVEIS ═══ */
+.ghosts { display:flex; flex-direction:column; gap:7px; }
+.ghost { display:grid; grid-template-columns:1fr 128px; gap:14px; align-items:center;
+  border:1px solid rgba(255,107,53,.25); background:rgba(255,107,53,.04);
+  border-radius:10px; padding:10px 15px; }
+@media(max-width:680px){ .ghost{ grid-template-columns:1fr; gap:4px; } .ghost .gh-w{ text-align:left; } }
+.ghost .gh-t { font-size:.83rem; color:var(--text); line-height:1.45; }
+.ghost .gh-t span { color:var(--muted); }
+.ghost .gh-w { font-family:'IBM Plex Mono',monospace; font-size:9.5px; letter-spacing:1.3px;
+  text-transform:uppercase; color:var(--orange); text-align:right; }
+
+/* ═══ COMPARATIVO DE STACK (quadro em branco) ═══ */
+.board { border:1px solid var(--border); border-radius:14px; overflow:hidden; }
+.board table { width:100%; border-collapse:collapse; font-size:.8rem; }
+.board th { background:rgba(0,229,255,.07); text-align:left; font-family:'IBM Plex Mono',monospace;
+  font-size:10px; letter-spacing:1.3px; text-transform:uppercase; color:var(--cyan); padding:9px 12px; }
+.board td { padding:9px 12px; border-top:1px solid rgba(255,255,255,.06); color:var(--muted); vertical-align:top; }
+.board td:first-child { color:var(--text); font-family:'IBM Plex Mono',monospace; font-size:.74rem; }
+.board .blank { color:rgba(127,168,192,.35); font-style:italic; }
+</style>
+</head>
+<body>
+
+<canvas id="bg"></canvas>
+<div id="progress-bar"></div>
+
+<div id="topbar">
+  <span class="tb-label">⬡ Aula 08 — Greenfield: a ordem</span>
+  <span class="tb-title" id="slide-title-bar"></span>
+  <span class="tb-counter" id="slide-counter"></span>
+</div>
+
+<div id="nav-prev">←</div>
+<div id="nav-next">→</div>
+<div id="dots"></div>
+
+<div id="slides">
+
+<!-- ─── 1 · ABERTURA ─── -->
+<div class="slide active" data-title="Abertura">
+<div class="slide-inner">
+  <div class="badge">GREENFIELD · AULA 8</div>
+  <h1 class="hero-title">Um PRD.<br>Um ADR rascunhado.<br><span style="color:var(--orange)">Um repositório vazio.</span></h1>
+  <p class="lead" style="max-width:800px;">Todas as aulas anteriores começaram com alguma coisa pronta: um projeto Python, um repositório instruído, um sistema com testes passando. Hoje não tem nada. É a primeira vez que vocês abrem uma pasta vazia com um agente do lado.</p>
+  <div class="hero-q">💭 Qual é o <strong style="font-style:normal;color:var(--text)">primeiro arquivo</strong> deste repositório? E — mais difícil — por que não é o segundo?</div>
+</div>
+</div>
+
+<!-- ─── 2 · CONVERGIR A STACK ─── -->
+<div class="slide" data-title="Convergir a stack">
+<div class="slide-inner slide-scroll">
+  <span class="ptag">a discussão · vocês trouxeram doze decisões cada um</span>
+  <h2 class="sec-title">Doze itens.<br>Uma turma.<br>Uma stack só.</h2>
+  <p class="lead">Cada um chegou com um rascunho de ADR-001. Eles não são iguais — e não deveriam ser. Vamos preencher o quadro ao vivo e fechar <strong style="color:var(--text)">uma</strong> decisão por linha.</p>
+
+  <div class="board" style="margin-bottom:14px;">
+    <table>
+      <thead><tr><th style="width:32%">item do ADR-001</th><th style="width:24%">proposta A</th><th style="width:24%">proposta B</th><th>fechado</th></tr></thead>
+      <tbody>
+        <tr><td>linguagem / runtime</td><td class="blank">…</td><td class="blank">…</td><td class="blank">…</td></tr>
+        <tr><td>framework do backend</td><td class="blank">…</td><td class="blank">…</td><td class="blank">…</td></tr>
+        <tr><td>estilo da API</td><td class="blank">…</td><td class="blank">…</td><td class="blank">…</td></tr>
+        <tr><td>front: com build ou sem?</td><td class="blank">…</td><td class="blank">…</td><td class="blank">…</td></tr>
+        <tr><td>como o front é servido</td><td class="blank">…</td><td class="blank">…</td><td class="blank">…</td></tr>
+        <tr><td>autenticação / sessão</td><td class="blank">…</td><td class="blank">…</td><td class="blank">…</td></tr>
+        <tr><td>autorização</td><td class="blank">…</td><td class="blank">…</td><td class="blank">…</td></tr>
+        <tr><td>acesso ao banco</td><td class="blank">…</td><td class="blank">…</td><td class="blank">…</td></tr>
+        <tr><td>migrations</td><td class="blank">…</td><td class="blank">…</td><td class="blank">…</td></tr>
+        <tr><td>testes</td><td class="blank">…</td><td class="blank">…</td><td class="blank">…</td></tr>
+        <tr><td>execução local</td><td class="blank">…</td><td class="blank">…</td><td class="blank">…</td></tr>
+        <tr><td>banco</td><td colspan="3" style="color:var(--green)">PostgreSQL — já decidido pelo time, não está em discussão</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="g2" style="margin-bottom:14px;">
+    <div class="card" style="border-color:rgba(0,255,136,.32)">
+      <span class="gtag">regras da discussão</span>
+      <p style="color:var(--muted);font-size:.83rem;line-height:1.7;">Uma linha de justificativa por item. <strong style="color:var(--text)">"É o que eu uso" não é justificativa</strong> — é preferência, e preferência não sobrevive a uma pergunta do tech lead. Quem defende uma escolha precisa dizer o que ela custa.</p>
+    </div>
+    <div class="card" style="border-color:rgba(255,107,53,.3)">
+      <span class="otag">o que vai acontecer com quem perder</span>
+      <p style="color:var(--muted);font-size:.83rem;line-height:1.7;">Nada se perde. A proposta que não ganhou vira a seção <strong style="color:var(--text)">alternativas descartadas</strong> do ADR — com o motivo. É a parte do ADR que mais é lida seis meses depois, quando alguém pergunta "por que não usaram X?".</p>
+    </div>
+  </div>
+
+  <div class="warnbox">
+    <div class="wh">o desconforto é o conteúdo</div>
+    <p>Boa parte da turma vai sair daqui trabalhando numa stack que <strong>não escolheu</strong>. É exatamente o que acontece no time real. O ADR não é o registro da sua opinião — é o registro da decisão do time, e ele existe justamente para que você consiga trabalhar dentro de uma escolha que não foi sua sem ter que rediscutir tudo toda semana.</p>
+  </div>
+</div>
+</div>
+
+<!-- ─── 3 · O ADR-001 FECHADO ─── -->
+<div class="slide" data-title="Fechando o ADR-001">
+<div class="slide-inner slide-scroll">
+  <span class="tag">o primeiro artefato de verdade</span>
+  <h2 class="sec-title">O ADR-001<br>sai da aula fechado</h2>
+  <p class="lead">Ninguém digita este arquivo à mão. Vocês ditam as decisões, o agente escreve — e <strong style="color:var(--text)">vocês conferem contra o formato abaixo</strong>. É a primeira vez na aula em que o papel de vocês é revisar, não redigir.</p>
+
+  <div class="filebox prompt">
+    <div class="filebox-head"><span class="fb-path">prompt · modo agente</span><button class="copybtn" onclick="cp(this)">copiar</button></div>
+    <pre>Crie docs/adr/001-stack.md com as decisões que eu vou ditar agora.
+
+Regras do arquivo:
+- uma tabela com item e escolha, nada além do que eu ditar
+- uma linha de justificativa por item, no meu vocabulário, sem elogiar
+  a tecnologia
+- uma seção de alternativas descartadas, com o motivo de cada descarte
+- uma seção de consequências: o que fica mais fácil, o que fica mais
+  difícil, e o que isso nos impede de fazer depois sem custo
+- uma seção final dizendo o que este ADR NÃO decide
+
+Não acrescente decisão que eu não ditei. Se eu deixar um item em branco,
+escreva "não decidido" — não preencha com o que você acha melhor.
+
+As decisões são:
+[ditar aqui os doze itens do quadro]</pre>
+  </div>
+
+  <p style="color:var(--muted);font-size:.86rem;line-height:1.7;margin-bottom:12px;">👀 <strong style="color:var(--text)">O que conferir na saída:</strong> ele acrescentou alguma escolha que ninguém ditou? Escreveu "não decidido" onde vocês deixaram em branco, ou inventou? A justificativa virou propaganda da ferramenta ("moderno", "performático", "amplamente adotado") em vez do critério de vocês? Se sim, mande reescrever — <strong style="color:var(--text)">ADR com justificativa de release note não serve para decidir nada depois.</strong></p>
+
+  <div class="filebox out">
+    <div class="filebox-head"><span class="fb-path">o que deve sair · docs/adr/001-stack.md</span><button class="copybtn" onclick="cp(this)">copiar</button></div>
+    <pre># ADR-001 — Stack do projeto
+
+**Status:** aceito
+**Contexto do produto:** docs/PRD.md
+
+## Contexto
+
+Sistema web interno de empréstimo de equipamentos. Front, backend e banco.
+Time pequeno, prazo curto, nenhum código existente. O banco já estava
+decidido: PostgreSQL.
+
+## Decisão
+
+| item                  | escolha        |
+|-----------------------|----------------|
+| linguagem / runtime   | &lt;LINGUAGEM&gt;    |
+| framework do backend  | &lt;FRAMEWORK&gt;    |
+| estilo da API         | &lt;API&gt;          |
+| front                 | &lt;FRONT&gt;        |
+| como o front é servido| &lt;SERVIR&gt;       |
+| autenticação          | &lt;AUTH&gt;         |
+| autorização           | &lt;AUTHZ&gt;        |
+| acesso ao banco       | &lt;DB-ACCESS&gt;    |
+| migrations            | &lt;MIGRATIONS&gt;   |
+| testes                | &lt;TESTES&gt;       |
+| execução local        | &lt;EXECUCAO&gt;     |
+| banco                 | PostgreSQL     |
+
+## Justificativa
+
+Uma linha por item. O critério foi: menor número de peças móveis que
+atende o PRD, e que a equipe consegue operar sem aprender uma ferramenta
+nova no meio do caminho.
+
+## Alternativas descartadas
+
+- &lt;ALTERNATIVA&gt; — descartada porque &lt;MOTIVO&gt;.
+- &lt;ALTERNATIVA&gt; — descartada porque &lt;MOTIVO&gt;.
+- &lt;ALTERNATIVA&gt; — descartada porque &lt;MOTIVO&gt;.
+
+## Consequências
+
+- O que fica mais fácil: ...
+- O que fica mais difícil: ...
+- O que essa escolha nos impede de fazer depois sem custo: ...
+
+## O que este ADR NÃO decide
+
+Estrutura de pastas, organização em camadas, nomes de módulo.
+Isso vem depois do esqueleto rodar, e vira ADR-002 se for caro de mudar.</pre>
+  </div>
+
+  <div class="expected">
+    <div class="ex-h">o que se espera deste arquivo</div>
+    <ul>
+      <li>Um <code>docs/adr/001-stack.md</code> commitado, <strong>igual para toda a turma</strong>.</li>
+      <li>Pelo menos três alternativas descartadas <strong>com motivo</strong> — não "não gostei".</li>
+      <li>A última seção preenchida. O ADR que não diz o que ele <strong>não</strong> decide convida o agente a decidir sozinho.</li>
+    </ul>
+  </div>
+
+  <span class="otag" style="margin-top:18px;">calibragem · o nível de detalhe esperado</span>
+  <div class="filebox out">
+    <div class="filebox-head"><span class="fb-path">exemplo de duas linhas bem escritas</span><button class="copybtn" onclick="cp(this)">copiar</button></div>
+    <pre>## Justificativa (trecho)
+
+- Front sem etapa de build: o PRD pede cinco telas simples e nenhuma
+  interação rica. Uma etapa de build adicionaria um segundo ambiente
+  para manter e depurar, sem entregar nada que o PRD peça.
+
+## Alternativas descartadas (trecho)
+
+- Front com framework e build próprio — descartado porque o custo de
+  manter dois processos e dois pipelines não se paga em cinco telas.
+  Se aparecerem telas com estado complexo, este ADR deve ser revisto.
+
+O que torna essas duas linhas boas: cada uma cita o PRD ou uma restrição
+real, e a segunda diz EM QUE CONDIÇÃO a decisão deixaria de valer.</pre>
+  </div>
+
+  <div class="filebox git">
+    <div class="filebox-head"><span class="fb-path">git · fecha a fase 1</span><button class="copybtn" onclick="cp(this)">copiar</button></div>
+    <pre>git init                       # só na primeira vez
+git add docs/adr/001-stack.md
+git commit -m "docs: ADR-001 define a stack do projeto"
+git log --oneline</pre>
+  </div>
+
+  <div class="warnbox">
+    <div class="wh">por que commitar agora, antes de existir código</div>
+    <p>O primeiro commit do repositório vai ser uma <strong>decisão</strong>, não um arquivo de código. Isso não é simbolismo: daqui a pouco o agente vai gerar dezenas de arquivos, e você vai precisar de um ponto limpo para voltar. <strong>Sem esse commit, o <code>git clean</code> do próximo slide apaga o ADR junto.</strong></p>
+  </div>
+</div>
+</div>
+
+<!-- ─── 4 · A ARMADILHA ─── -->
+<div class="slide" data-title="A armadilha">
+<div class="slide-inner slide-scroll">
+  <span class="otag">agora deixem o agente errar · façam junto</span>
+  <h2 class="sec-title">Pergunte a ele<br>o que fazer primeiro</h2>
+  <p class="lead">Repositório vazio, com o <code style="font-family:'IBM Plex Mono';color:var(--cyan)">docs/PRD.md</code> e o <code style="font-family:'IBM Plex Mono';color:var(--cyan)">docs/adr/001-stack.md</code> dentro. Nada mais. Abram o agente em modo agente e mandem exatamente isto:</p>
+
+  <div class="filebox prompt">
+    <div class="filebox-head"><span class="fb-path">prompt · modo agente</span><button class="copybtn" onclick="cp(this)">copiar</button></div>
+    <pre>Este é um projeto novo. O PRD está em docs/PRD.md e a stack
+decidida está em docs/adr/001-stack.md.
+
+Comece o projeto.</pre>
+  </div>
+
+  <p style="color:var(--muted);font-size:.86rem;line-height:1.7;margin-bottom:12px;">Não interrompam. Deixem rodar até ele parar sozinho ou até vocês não aguentarem mais. Depois olhem o <code style="font-family:'IBM Plex Mono';color:var(--cyan)">git status</code>.</p>
+
+  <div class="filebox git">
+    <div class="filebox-head"><span class="fb-path">git · medir o estrago</span><button class="copybtn" onclick="cp(this)">copiar</button></div>
+    <pre>git status --short | wc -l     # quantos arquivos ele criou
+git status --short             # quais</pre>
+  </div>
+
+  <div class="filebox out">
+    <div class="filebox-head"><span class="fb-path">o que costuma aparecer · exemplo real, sua saída vai variar</span><button class="copybtn" onclick="cp(this)">copiar</button></div>
+    <pre>$ git status --short | wc -l
+37
+
+$ git status --short
+?? .env
+?? Dockerfile
+?? app/
+?? app/auth/
+?? app/models/
+?? app/routers/emprestimos.py
+?? app/routers/equipamentos.py
+?? app/routers/usuarios.py
+?? migrations/
+?? requirements.txt
+?? static/
+?? tests/
+...
+
+Trinta e sete arquivos. Zero perguntas. E repare nos três routers:
+ele já implementou funcionalidade do PRD — sem spec, sem critério de
+aceitação, sem ninguém ter decidido como a regra dos 3 itens funciona.</pre>
+  </div>
+
+  <div class="expected">
+    <div class="ex-h">o que observar enquanto ele trabalha</div>
+    <ul>
+      <li><strong>Quantos arquivos apareceram</strong> antes de ele fazer a primeira pergunta. Normalmente: dezenas. Perguntas: zero.</li>
+      <li><strong>Ele criou pastas.</strong> Quem decidiu que a organização é essa?</li>
+      <li><strong>Ele escolheu bibliotecas</strong> que não estão no ADR-001.</li>
+      <li><strong>Ele provavelmente escreveu código de feature</strong> — login, catálogo — sem spec nenhuma.</li>
+      <li>E, o mais importante: <strong>você não consegue revisar isso.</strong> É grande demais e nasceu tudo de uma vez.</li>
+    </ul>
+  </div>
+
+  <div class="warnbox">
+    <div class="wh">o ponto do exercício</div>
+    <p>O agente não fez nada de errado. Ele fez <strong>exatamente o que foi pedido</strong>, num repositório que não tinha nada dizendo o contrário. O erro foi do repositório — e o repositório é responsabilidade sua.</p>
+  </div>
+
+  <div class="filebox git">
+    <div class="filebox-head"><span class="fb-path">git · desfazer tudo antes de seguir</span><button class="copybtn" onclick="cp(this)">copiar</button></div>
+    <pre>git clean -fd     # apaga arquivos e pastas novos, não rastreados
+git checkout .    # desfaz alterações em arquivos já rastreados
+git status        # deve voltar a "working tree clean"</pre>
+  </div>
+
+  <p style="color:var(--muted);font-size:.83rem;line-height:1.7;">O <code style="font-family:'IBM Plex Mono';color:var(--cyan)">git clean -fd</code> não pergunta e não tem desfazer. É seguro aqui <strong style="color:var(--text)">porque o ADR-001 já está commitado</strong> — tudo que ele apaga é lixo do experimento. Rode <code style="font-family:'IBM Plex Mono';color:var(--cyan)">git status</code> antes e confira que só aparece o que o agente criou.</p>
+</div>
+</div>
+
+<!-- ─── 5 · OS ADRs INVISÍVEIS ─── -->
+<div class="slide" data-title="As decisões invisíveis">
+<div class="slide-inner slide-scroll">
+  <span class="otag">o que acabou de acontecer</span>
+  <h2 class="sec-title">Ele tomou<br>seis decisões<br>de arquitetura</h2>
+  <p class="lead">Nenhuma delas apareceu como pergunta. Todas elas seriam ADR se uma pessoa tivesse tomado. Rodem os olhos pelo que ele gerou e procurem estas:</p>
+
+  <div class="ghosts anim" style="margin-bottom:14px;">
+    <div class="ghost ai" style="--d:.05s"><div class="gh-t">A organização de pastas — camadas? por feature? tudo num arquivo? <span>Ele escolheu, e agora todo o resto do projeto vai seguir essa escolha.</span></div><div class="gh-w">seria ADR</div></div>
+    <div class="ghost ai" style="--d:.15s"><div class="gh-t">A biblioteca de autenticação <span>e, junto com ela, onde a sessão mora e quanto tempo dura.</span></div><div class="gh-w">seria ADR</div></div>
+    <div class="ghost ai" style="--d:.25s"><div class="gh-t">O formato de erro da API <span>— status, corpo, se tem código de erro. É contrato com o front.</span></div><div class="gh-w">seria contrato</div></div>
+    <div class="ghost ai" style="--d:.35s"><div class="gh-t">O modelo de dados <span>— tabelas, nomes, o que é chave, o que é nullable. Sem nenhuma spec pedindo.</span></div><div class="gh-w">seria ADR</div></div>
+    <div class="ghost ai" style="--d:.45s"><div class="gh-t">Como o schema nasce <span>— migration versionada? script? o ORM criando na mão?</span></div><div class="gh-w">seria ADR</div></div>
+    <div class="ghost ai" style="--d:.55s"><div class="gh-t">O comportamento de regras do PRD <span>— o limite de 3 itens virou código com uma interpretação que ninguém revisou.</span></div><div class="gh-w">seria spec</div></div>
+  </div>
+
+  <div style="text-align:center;margin-bottom:14px;">
+    <button class="replay" onclick="replay(this)">▸ rodar de novo</button>
+  </div>
+
+  <div class="hero-q" style="max-width:940px;">
+    🎯 Em brownfield, o agente <strong style="font-style:normal;color:var(--text)">herda</strong> as decisões que já estão no código. Em greenfield ele <strong style="font-style:normal;color:var(--text)">inventa</strong> todas elas — e inventa em silêncio, porque não existe nada no repositório para contradizê-lo.
+  </div>
+
+  <div class="warnbox">
+    <div class="wh">a diferença que define a aula de hoje</div>
+    <p>Nas aulas 4 a 6 vocês trabalharam em projetos que já tinham AGENTS.md, ADRs e um esqueleto rodando. <strong>Alguém tinha feito o trabalho de hoje antes de vocês chegarem.</strong> Hoje esse alguém é você.</p>
+  </div>
+</div>
+</div>
+
+<!-- ─── 6 · FATIA ZERO ─── -->
+<div class="slide" data-title="Fatia zero (walking skeleton)">
+<div class="slide-inner slide-scroll">
+  <span class="tag">vocabulário · vai aparecer o resto da aula inteira</span>
+  <h2 class="sec-title">Fatia zero</h2>
+  <p class="lead">O nome técnico é <strong style="color:var(--text)">walking skeleton</strong>, do Alistair Cockburn. Em português aparece como <strong style="color:var(--text)">fatia zero</strong> ou <strong style="color:var(--text)">andar zero</strong> — é o nome que vou usar daqui pra frente. Os três significam a mesma coisa:</p>
+
+  <div class="hero-q" style="max-width:960px;margin-bottom:18px;">
+    🎯 A <strong style="font-style:normal;color:var(--text)">fatia mais fina possível que atravessa todas as camadas do sistema</strong>, de ponta a ponta, sem nenhuma regra de negócio dentro.
+  </div>
+
+  <div class="wsk anim">
+    <div class="wnode n1 ai" style="--d:.05s"><div class="wk">camada 1</div><div class="wt">uma página</div><div class="wd">servida pelo projeto, feia, com um texto só</div></div>
+    <div class="warr ai" style="--d:.15s">→</div>
+    <div class="wnode n2 ai" style="--d:.2s"><div class="wk">camada 2</div><div class="wt">um endpoint</div><div class="wd">GET /health, sem autenticação e sem parâmetro</div></div>
+    <div class="warr ai" style="--d:.3s">→</div>
+    <div class="wnode n3 ai" style="--d:.35s"><div class="wk">camada 3</div><div class="wt">o Postgres</div><div class="wd">uma consulta trivial, numa tabela criada por migration</div></div>
+    <div class="warr ai" style="--d:.45s">↩</div>
+    <div class="wnode n4 ai" style="--d:.5s"><div class="wk">e de volta</div><div class="wt">um teste que prova</div><div class="wd">o caminho inteiro, automatizado, rodando num comando</div></div>
+  </div>
+
+  <div class="wband">nenhum login · nenhum catálogo · nenhum empréstimo · nenhuma regra do PRD</div>
+
+  <div class="g2" style="margin-bottom:14px;">
+    <div class="card" style="border-color:rgba(0,229,255,.3)">
+      <span class="tag">a metáfora</span>
+      <p style="color:var(--muted);font-size:.83rem;line-height:1.7;">Não é a fundação — fundação é invisível e não prova nada. É o <strong style="color:var(--text)">térreo</strong>: o menor pedaço do prédio que já é um prédio. Porta que abre, luz que acende, água que sai da torneira. Todos os sistemas ligados, na menor escala possível. Os andares seguintes usam encanamento que você <strong style="color:var(--text)">já sabe que funciona</strong>.</p>
+    </div>
+    <div class="card" style="border-color:rgba(255,107,53,.3)">
+      <span class="otag">o que ela não é</span>
+      <p style="color:var(--muted);font-size:.83rem;line-height:1.7;"><strong style="color:var(--text)">Não é setup.</strong> Setup é instalar dependência e criar pasta. Você pode ter backend, banco e front instalados e mesmo assim descobrir na terceira feature que a decisão sobre como o front é servido não combina com a decisão sobre onde a sessão mora. <strong style="color:var(--text)">Fatia zero é provar que as peças se falam.</strong></p>
+    </div>
+  </div>
+
+  <div class="hsec ok">
+    <div class="hn">e por que ela existe nesta aula</div>
+    <div class="ht">O ADR-001 são onze escolhas feitas no papel</div>
+    <div class="hd">Numa discussão de sala de aula, com todo mundo concordando. A fatia zero é <strong style="color:var(--text)">a primeira vez que essas onze escolhas se encontram na vida real</strong>. Se duas forem incompatíveis, você quer descobrir agora — com o repositório vazio e nenhuma regra de negócio por perto — e não no meio da spec de login, onde você não vai saber se quebrou o ambiente ou a regra.</div>
+  </div>
+</div>
+</div>
+
+<!-- ─── 7 · ATIVIDADE: A ORDEM ─── -->
+<div class="slide" data-title="Atividade — monte a ordem">
+<div class="slide-inner slide-scroll">
+  <span class="gtag">atividade · em duplas, antes da resposta</span>
+  <h2 class="sec-title">Em que ordem?</h2>
+  <p class="lead">Sete coisas precisam existir antes da primeira feature de produto. Clique nelas na ordem em que você faria — clique num item já colocado para devolvê-lo. Discutam em dupla antes de conferir.</p>
+
+  <div class="og">
+    <div class="og-h">peças fora de ordem</div>
+    <div class="og-pool" id="ogPool"></div>
+    <div class="og-h">sua ordem</div>
+    <div class="og-slots" id="ogSlots"></div>
+    <div class="og-actions">
+      <button class="replay" onclick="ogCheck()">✓ conferir</button>
+      <button class="replay" onclick="ogReset()">↺ recomeçar</button>
+      <button class="replay" onclick="ogSolve()">👁 mostrar resposta</button>
+    </div>
+    <div class="og-msg" id="ogMsg"></div>
+  </div>
+
+  <div class="warnbox">
+    <div class="wh">enquanto discutem, defendam a posição de duas peças</div>
+    <p>O <code>AGENTS.md</code> e o <code>restrictions.md</code> parecem a mesma categoria de arquivo — os dois são "instrução para o agente", os dois são markdown, os dois moram no repositório. <strong>Se vocês colocaram os dois grudados, tudo bem. A resposta vai explicar por que eles se separam.</strong></p>
+  </div>
+</div>
+</div>
+
+<!-- ─── 7 · DUAS PASSADAS ─── -->
+<div class="slide" data-title="A priori × a posteriori">
+<div class="slide-inner slide-scroll">
+  <span class="tag">a resposta · parte 1</span>
+  <h2 class="sec-title">O AGENTS.md<br>se escreve<br><span style="color:var(--green)">duas vezes</span></h2>
+  <p class="lead">Na aula 2 ficou uma regra: <strong style="color:var(--text)">"não escreva as regras de antemão; escreva quando o agente errar"</strong>. Em greenfield não existe erro ainda. Se você escrever o AGENTS.md completo agora, vai escrever ficção — e ficção com autoridade é pior do que arquivo nenhum.</p>
+
+  <div class="yn" style="margin-bottom:16px;">
+    <div class="yn-col yn-yes">
+      <h4 style="color:var(--green)">Dá para escrever antes · a priori</h4>
+      <li><strong style="color:var(--text)">rules/restrictions.md</strong> — inteiro</li>
+      <li>Autoridade: o que o agente não pode decidir sozinho</li>
+      <li>Escopo: até onde vai uma tarefa</li>
+      <li>Ritmo: plano antes de código, uma tarefa por vez</li>
+      <li>A linha de precedência entre artefatos</li>
+      <li>Os ponteiros: onde moram PRD, ADRs e regras</li>
+    </div>
+    <div class="yn-col yn-no">
+      <h4 style="color:var(--orange)">Só depois que o projeto roda · a posteriori</h4>
+      <li>Como rodar os testes</li>
+      <li>Como subir o projeto</li>
+      <li>O mapa de diretórios</li>
+      <li>Convenções de nome e de módulo</li>
+      <li>O padrão de teste que o projeto segue</li>
+      <li>Qualquer coisa que você ainda não viu funcionando</li>
+    </div>
+  </div>
+
+  <div class="hsec ok">
+    <div class="hn">por que a divisão cai exatamente aí</div>
+    <div class="ht">Restrictions fala do agente. AGENTS.md fala do projeto.</div>
+    <div class="hd">O <code>restrictions.md</code> não menciona linguagem, pasta ou biblioteca nenhuma — ele limita <strong style="color:var(--text)">autoridade</strong>, e autoridade independe de stack. Por isso ele funciona igual no repositório vazio e no projeto de dois anos. Já o AGENTS.md é uma descrição <strong style="color:var(--text)">de fato</strong>: ele só pode afirmar o que já é verdade.</div>
+  </div>
+
+  <div class="hero-q" style="max-width:940px;margin-top:14px;">
+    💭 A régua para saber se uma linha entra no AGENTS.md v0: <strong style="font-style:normal;color:var(--text)">você conseguiria provar que ela é verdade rodando alguma coisa agora?</strong> Se não, ela não entra ainda.
+  </div>
+</div>
+</div>
+
+<!-- ─── 8 · A ORDEM COMPLETA ─── -->
+<div class="slide" data-title="A ordem completa">
+<div class="slide-inner slide-scroll">
+  <span class="tag">a resposta · parte 2</span>
+  <h2 class="sec-title">A ordem, inteira</h2>
+  <p class="lead">Verde é o que se escreve <strong style="color:var(--text)">antes</strong> de existir código. Amarelo é o que <strong style="color:var(--text)">produz</strong> o primeiro código. Rosa é o que só pode ser escrito <strong style="color:var(--text)">depois</strong> que ele roda.</p>
+
+  <div class="seq anim">
+    <div class="seqrow pri ai" style="--d:.05s"><div class="sq-n">1</div><div><div class="sq-t">docs/adr/001-stack.md</div><div class="sq-d">A decisão fechada. Sem ela, o passo 4 não tem o que provar.</div></div><div class="sq-w">a priori</div></div>
+    <div class="seqrow pri ai" style="--d:.15s"><div class="sq-n">2</div><div><div class="sq-t">rules/restrictions.md</div><div class="sq-d">O limite de autoridade. É ele que impede o passo 4 de virar aquele scaffold de dezenas de arquivos.</div></div><div class="sq-w">a priori</div></div>
+    <div class="seqrow pri ai" style="--d:.25s"><div class="sq-n">3</div><div><div class="sq-t">AGENTS.md — v0, pobre de propósito</div><div class="sq-d">O que é o projeto, onde moram os documentos, quem ganha a discussão. Nada de stack, pasta ou comando.</div></div><div class="sq-w">a priori</div></div>
+    <div class="seqrow mid ai" style="--d:.35s"><div class="sq-n">4</div><div><div class="sq-t">O andar zero</div><div class="sq-d">O projeto sobe, conecta no banco, tem um teste passando. É a prova de que o ADR-001 funciona na prática.</div></div><div class="sq-w">primeiro código</div></div>
+    <div class="seqrow mid ai" style="--d:.45s"><div class="sq-n">5</div><div><div class="sq-t">A estrutura, registrada</div><div class="sq-d">O agente propôs, você aprovou. Agora vira texto — no AGENTS.md ou num ADR-002, dependendo do custo de mudar.</div></div><div class="sq-w">primeiro código</div></div>
+    <div class="seqrow pos ai" style="--d:.55s"><div class="sq-n">6</div><div><div class="sq-t">AGENTS.md — v1, com fatos</div><div class="sq-d">Os comandos que você acabou de rodar. O mapa das pastas que existem. Nada inventado.</div></div><div class="sq-w">a posteriori</div></div>
+    <div class="seqrow pos ai" style="--d:.65s"><div class="sq-n">7</div><div><div class="sq-t">docs/specs/001-…/spec.md</div><div class="sq-d">Só agora a primeira funcionalidade de produto. O ciclo da aula 7 recomeça aqui, e daqui pra frente é sempre ele.</div></div><div class="sq-w">a posteriori</div></div>
+  </div>
+
+  <div style="text-align:center;margin-bottom:14px;">
+    <button class="replay" onclick="replay(this)">▸ rodar de novo</button>
+  </div>
+
+  <div class="filebox git">
+    <div class="filebox-head"><span class="fb-path">git · cada fase fecha com um commit</span><button class="copybtn" onclick="cp(this)">copiar</button></div>
+    <pre>fase 1  → docs: ADR-001 define a stack do projeto
+fase 2  → chore: limites de autoridade do agente
+fase 3  → chore: contexto inicial do repositorio
+fase 4a → docs: criterios do andar zero
+fase 4b → andar zero: AZ-0X ...        (um commit por tarefa)
+fase 5  → docs: ADR-002 registra a organizacao do codigo
+fase 6  → docs: AGENTS.md v1 com comandos e mapa reais
+
+Os três primeiros commits do projeto não têm uma linha de código.
+Isso não é lentidão — é o que te dá um ponto limpo para voltar quando
+o agente gerar trinta arquivos de uma vez.</pre>
+  </div>
+
+  <div class="warnbox">
+    <div class="wh">o erro que a ordem previne</div>
+    <p>Quase todo mundo tenta fazer o passo 7 primeiro, porque é o único que parece "trabalho de verdade". O resultado é uma spec de login escrita para um projeto que ainda não sobe — e que vai ser reescrita assim que o esqueleto revelar a primeira surpresa da stack.</p>
+  </div>
+</div>
+</div>
+
+<!-- ─── 9 · PASSO 2 · RESTRICTIONS ─── -->
+<div class="slide" data-title="Passo 2 — restrictions.md">
+<div class="slide-inner slide-scroll">
+  <span class="stepnum o">Passo 2</span>
+  <h2 class="sec-title">O arquivo que<br>já existia — agora<br>num repo vazio</h2>
+  <p class="lead">Vocês escreveram um <code style="font-family:'IBM Plex Mono';color:var(--cyan)">restrictions.md</code> na aula 6, num projeto que já existia. Reparem no quanto dele <strong style="color:var(--text)">continua valendo aqui</strong>, sem uma linha de código no repositório. Isso é a prova de que ele é a priori.</p>
+
+  <div class="filebox prompt">
+    <div class="filebox-head"><span class="fb-path">prompt · modo agente</span><button class="copybtn" onclick="cp(this)">copiar</button></div>
+    <pre>Crie rules/restrictions.md. É um arquivo de limites: só o que você
+NÃO pode fazer neste repositório.
+
+Organize em quatro seções: Autoridade, Escopo, Ritmo, Precedência.
+
+Cada linha precisa ser verificável — eu tenho que conseguir olhar o
+que você fez e dizer se a regra foi seguida ou não. "Escreva código
+limpo" não é regra; "não altere arquivo fora do escopo da tarefa
+atual" é.
+
+Não escreva nada sobre linguagem, framework, pasta ou biblioteca.
+Este arquivo vale igual em qualquer stack.
+
+Inclua explicitamente:
+- que você não escreve ADR, só descreve a decisão e para
+- que "pode implementar" autoriza UMA tarefa, não o plano inteiro
+- que sucesso parcial não é sucesso
+- que a spec vence o código quando os dois discordarem</pre>
+  </div>
+
+  <p style="color:var(--muted);font-size:.86rem;line-height:1.7;margin-bottom:12px;">👀 <strong style="color:var(--text)">O que conferir na saída:</strong> apareceu alguma regra que menciona a stack? Corte — ela não é a priori e vai envelhecer. Apareceu regra vaga do tipo "seja cuidadoso" ou "siga boas práticas"? Corte também: o agente concorda com ela e continua fazendo o que fazia. <strong style="color:var(--text)">Regra que não dá para verificar é decoração.</strong> Compare com a versão abaixo.</p>
+
+  <div class="filebox out">
+    <div class="filebox-head"><span class="fb-path">o que deve sair · rules/restrictions.md</span><button class="copybtn" onclick="cp(this)">copiar</button></div>
+    <pre># O que não fazer
+
+## Autoridade
+
+- Não escreva ADR. Se encontrar uma decisão que precisa de um, descreva a
+  decisão e as alternativas, e PARE. Quem decide é o time.
+- Não contrarie o que está em docs/adr/. Se precisar contrariar, pare e diga.
+- Não responda por conta própria o que o PRD deixou ambíguo. Liste as
+  perguntas e espere.
+- Não escolha biblioteca que não esteja no ADR-001. Proponha e espere.
+
+## Escopo
+
+- Não altere arquivo fora do escopo da tarefa atual.
+- Não crie estrutura de pastas nova que não esteja num plano aprovado.
+- Não gere scaffold automático de framework sem mostrar antes o que ele
+  vai criar.
+- Não escreva código de funcionalidade sem uma spec correspondente em
+  docs/specs/. O esqueleto do projeto é a única exceção.
+
+## Ritmo
+
+- Não escreva código antes de um plano aprovado. Escreva o plano, mostre,
+  e espere.
+- "Pode implementar" NÃO autoriza o plano inteiro: execute UMA tarefa,
+  rode os checks, mostre o resultado e pare.
+- Não relate sucesso parcial. Se um check falhou, a tarefa não terminou.
+
+## Precedência
+
+- Se o código e uma spec discordarem sobre comportamento, a spec está certa
+  até que alguém mude a spec.
+- Se uma spec e um ADR discordarem, pare e avise. Não escolha um dos dois.</pre>
+  </div>
+
+  <div class="expected">
+    <div class="ex-h">o que mudou em relação à versão da aula 6</div>
+    <ul>
+      <li>Três linhas novas em <strong>Autoridade e Escopo</strong>, e todas as três nasceram do que vocês acabaram de ver o agente fazer: escolher biblioteca, gerar scaffold, escrever feature sem spec.</li>
+      <li>A seção <strong>Precedência</strong>, que é a linha da aula 7 virando arquivo.</li>
+      <li>Sumiu a linha sobre <code>static/index.html</code> — era específica do projeto anterior. <strong>Regra que descreve algo que não existe é pior que regra nenhuma.</strong></li>
+    </ul>
+  </div>
+
+  <div class="filebox git">
+    <div class="filebox-head"><span class="fb-path">git · fecha a fase 2</span><button class="copybtn" onclick="cp(this)">copiar</button></div>
+    <pre>git add rules/restrictions.md
+git commit -m "chore: limites de autoridade do agente"</pre>
+  </div>
+</div>
+</div>
+
+<!-- ─── 10 · PASSO 3 · AGENTS v0 ─── -->
+<div class="slide" data-title="Passo 3 — AGENTS.md v0">
+<div class="slide-inner slide-scroll">
+  <span class="stepnum">Passo 3</span>
+  <h2 class="sec-title">Um AGENTS.md<br>que quase não<br>diz nada</h2>
+  <p class="lead">Na aula 4 eu entreguei um AGENTS.md "propositalmente pobre" já pronto. Hoje vocês escrevem o seu. E ele precisa ser pobre pelo mesmo motivo: <strong style="color:var(--text)">quase tudo que você quer colocar nele ainda não é verdade.</strong></p>
+
+  <div class="filebox prompt">
+    <div class="filebox-head"><span class="fb-path">prompt · modo agente</span><button class="copybtn" onclick="cp(this)">copiar</button></div>
+    <pre>Crie o AGENTS.md deste repositório.
+
+Regra dura: ele só pode afirmar coisas que eu consigo verificar HOJE,
+neste repositório. Não existe código, não existe comando de teste,
+não existe pasta de código. Não invente nenhum dos três.
+
+Seções: o que é o projeto, Onde olhar (ponteiros para os arquivos que
+já existem), Precedência, Processo, e Estado atual do projeto.
+
+Em "Estado atual do projeto", diga explicitamente que ainda não há
+código nem comandos, e que a seção será preenchida quando houver.
+
+Antes de escrever, liste para mim o que você ficou tentado a incluir
+e não incluiu por não ser verificável ainda.</pre>
+  </div>
+
+  <div class="filebox out">
+    <div class="filebox-head"><span class="fb-path">o que deve sair · AGENTS.md v0</span><button class="copybtn" onclick="cp(this)">copiar</button></div>
+    <pre># Empréstimo de Equipamentos Internos
+
+Sistema web interno para controlar empréstimo de equipamentos.
+O documento de negócio está em docs/PRD.md.
+
+## Onde olhar
+
+- docs/PRD.md — o que o negócio precisa. Não é spec.
+- docs/adr/ — decisões técnicas já tomadas e o motivo delas.
+- rules/restrictions.md — leia sempre, antes de qualquer tarefa.
+- docs/specs/ — uma pasta por funcionalidade, com spec, plano e tarefas.
+
+## Precedência
+
+Se dois artefatos discordarem sobre comportamento, a spec vence o código.
+Se algo não estiver em lugar nenhum, pergunte — não decida.
+
+## Processo
+
+- Leia docs/adr/ antes de propor qualquer coisa estrutural.
+- Antes de implementar, liste os requisitos ambíguos que encontrar.
+- Decisão estrutural nova precisa de ADR antes do código. Você não escreve
+  o ADR: você descreve a decisão e as alternativas, e para.
+- Uma tarefa por vez.
+
+## Estado atual do projeto
+
+O projeto ainda não tem código. Não existe comando de build, de teste
+nem de execução. Esta seção será preenchida quando existirem.</pre>
+  </div>
+
+  <div class="g2">
+    <div class="card" style="border-color:rgba(0,255,136,.32)">
+      <span class="gtag">a seção que ninguém escreve</span>
+      <p style="color:var(--muted);font-size:.83rem;line-height:1.7;"><strong style="color:var(--text)">"Estado atual do projeto"</strong>, dizendo explicitamente que não existe comando nenhum. Parece bobo. Mas sem ela o agente <em>infere</em> que existe um <code>make test</code> e tenta rodar. Dizer "não existe ainda" é informação; deixar em branco é convite.</p>
+    </div>
+    <div class="card" style="border-color:rgba(255,107,53,.3)">
+      <span class="otag">o que você quer colocar e não pode</span>
+      <p style="color:var(--muted);font-size:.83rem;line-height:1.7;">"Os testes ficam em <code>tests/</code>", "use camadas", "os endpoints seguem tal padrão". <strong style="color:var(--text)">Nada disso é verdade ainda</strong> — é desejo. Anote num papel se quiser, e traga de volta no v1, depois de ver se sobreviveu ao contato com a stack.</p>
+    </div>
+  </div>
+
+  <div class="filebox prompt" style="margin-top:14px;">
+    <div class="filebox-head"><span class="fb-path">prompt de verificação · modo Ask</span><button class="copybtn" onclick="cp(this)">copiar</button></div>
+    <pre>Quais arquivos de instrução você está enxergando neste repositório?
+Liste os caminhos e diga, em uma linha, o que cada um determina.</pre>
+  </div>
+
+  <div class="filebox out">
+    <div class="filebox-head"><span class="fb-path">resposta esperada · aproximadamente isto</span><button class="copybtn" onclick="cp(this)">copiar</button></div>
+    <pre>Estou enxergando três arquivos de instrução:
+
+- AGENTS.md — determina como se trabalha neste repositório: onde olhar,
+  a ordem de precedência entre artefatos e o processo de tarefas.
+- rules/restrictions.md — determina o que eu não posso fazer: os limites
+  de autoridade, escopo e ritmo.
+- docs/adr/001-stack.md — determina a stack decidida e o que essa
+  decisão não cobre.
+
+Observo que docs/specs/ é citado no AGENTS.md mas ainda não existe.</pre>
+  </div>
+
+  <div class="expected">
+    <div class="ex-h">antes de seguir</div>
+    <ul>
+      <li>Ele precisa citar <strong>AGENTS.md e rules/restrictions.md pelo caminho</strong>. Se não citar o segundo, seu harness não está carregando a pasta <code>rules/</code> — resolvam agora, com o que vocês viram na aula 3.</li>
+      <li>Se ele citar só o AGENTS.md e disser que "não há outras instruções", <strong>pare</strong>. O restrictions.md que você acabou de escrever não está valendo nada, e todo o resto da aula depende dele.</li>
+    </ul>
+  </div>
+
+  <div class="filebox git">
+    <div class="filebox-head"><span class="fb-path">git · fecha a fase 3</span><button class="copybtn" onclick="cp(this)">copiar</button></div>
+    <pre>git add AGENTS.md
+git commit -m "chore: contexto inicial do repositorio"
+git log --oneline   # devem existir 3 commits, nenhum com código</pre>
+  </div>
+</div>
+</div>
+
+<!-- ─── 11 · O ANDAR ZERO NÃO É SPEC ─── -->
+<div class="slide" data-title="O andar zero não é spec">
+<div class="slide-inner slide-scroll">
+  <span class="ptag">a pergunta que alguém vai fazer</span>
+  <h2 class="sec-title">"Então eu escrevo<br>uma spec para<br>o esqueleto?"</h2>
+  <p class="lead"><strong style="color:var(--text)">Não.</strong> E o motivo é a régua que vocês aprenderam na aula 7 — a mesma que separa o nível 1 do nível 2.</p>
+
+  <div class="hero-q" style="max-width:940px;margin-bottom:18px;">
+    🎯 Se a frase descreve algo que <strong style="font-style:normal;color:var(--text)">um usuário ou um auditor observaria</strong>, é spec. Se descreve algo que só quem abre o repositório veria, não é.
+  </div>
+
+  <div class="g2" style="margin-bottom:16px;">
+    <div class="card" style="border-color:rgba(255,107,53,.3)">
+      <span class="otag">"o projeto sobe e conecta no banco"</span>
+      <p style="color:var(--muted);font-size:.83rem;line-height:1.7;">Nenhum usuário observa isso. Nenhum auditor pergunta por isso. <strong style="color:var(--text)">Não é comportamento de produto</strong> — é a stack existindo. Não vira spec.</p>
+    </div>
+    <div class="card" style="border-color:rgba(0,255,136,.35)">
+      <span class="gtag">"quem tem item em atraso não pega outro emprestado"</span>
+      <p style="color:var(--muted);font-size:.83rem;line-height:1.7;">Isso um usuário sente e um auditor cobra. <strong style="color:var(--text)">É spec</strong>, com critério de aceitação numerado. Mas é a partir do passo 7, não hoje.</p>
+    </div>
+  </div>
+
+  <div class="hsec star">
+    <div class="hn">então o que é o andar zero?</div>
+    <div class="ht">É a prova do ADR-001</div>
+    <div class="hd">Ele existe para verificar que as onze escolhas que a turma fez no papel <strong style="color:var(--text)">realmente funcionam juntas</strong>. O "o quê" dele não vem de uma spec — vem direto do ADR. Ele tem critérios de aceitação, tem tarefas, tem commits. Só não tem spec, porque não há comportamento de produto para especificar.</div>
+  </div>
+
+  <div class="warnbox">
+    <div class="wh">a confusão que isso desfaz</div>
+    <p>Sair da aula 7 achando que <strong>SDD significa "tudo vira spec"</strong> é o jeito mais rápido de transformar o método em burocracia e abandoná-lo em duas semanas. Spec é para comportamento. Decisão é ADR. Procedimento é rule. Prova de stack é andar zero. <strong>Cada artefato tem um trabalho.</strong></p>
+  </div>
+</div>
+</div>
+
+<!-- ─── 12 · CRITÉRIOS DO ANDAR ZERO ─── -->
+<div class="slide" data-title="Os critérios do andar zero">
+<div class="slide-inner slide-scroll">
+  <span class="stepnum g">Passo 4a</span>
+  <h2 class="sec-title">O que conta como<br>"o esqueleto ficou pronto"</h2>
+  <p class="lead">Sem isto escrito, "pronto" vira opinião — e o agente sempre acha que está pronto. Cliquem conforme forem passando.</p>
+
+  <div class="checklist" style="margin-bottom:14px;">
+    <div class="chk" onclick="tk(this)"><div class="box"></div><div><strong>AZ-01</strong> · Um comando único sobe tudo, incluindo o Postgres, numa máquina limpa</div></div>
+    <div class="chk" onclick="tk(this)"><div class="box"></div><div><strong>AZ-02</strong> · A aplicação conecta no banco e falha com mensagem clara se ele não estiver de pé</div></div>
+    <div class="chk" onclick="tk(this)"><div class="box"></div><div><strong>AZ-03</strong> · Existe uma migration versionada, aplicada, ainda que crie uma tabela só</div></div>
+    <div class="chk" onclick="tk(this)"><div class="box"></div><div><strong>AZ-04</strong> · Um endpoint de saúde responde 200 com o status da conexão com o banco</div></div>
+    <div class="chk" onclick="tk(this)"><div class="box"></div><div><strong>AZ-05</strong> · Uma página servida pelo front carrega e mostra o resultado desse endpoint</div></div>
+    <div class="chk" onclick="tk(this)"><div class="box"></div><div><strong>AZ-06</strong> · Um comando roda a suíte de testes, com pelo menos um teste que exercita AZ-04</div></div>
+    <div class="chk" onclick="tk(this)"><div class="box"></div><div><strong>AZ-07</strong> · Configuração vem de variável de ambiente, com um <code>.env.example</code> versionado</div></div>
+    <div class="chk" onclick="tk(this)"><div class="box"></div><div><strong>AZ-08</strong> · O <code>.env</code> real está no <code>.gitignore</code> e nenhum segredo está commitado</div></div>
+  </div>
+
+  <div class="filebox prompt">
+    <div class="filebox-head"><span class="fb-path">prompt · modo agente</span><button class="copybtn" onclick="cp(this)">copiar</button></div>
+    <pre>Crie docs/andar-zero.md com os oito critérios que eu vou ditar,
+identificados como AZ-01 a AZ-08.
+
+Abra o arquivo deixando claro que isto NÃO é uma spec: não há
+comportamento de produto aqui. É a verificação de que a stack de
+docs/adr/001-stack.md funciona junta numa máquina limpa.
+
+Inclua uma seção "Fora de escopo" listando as funcionalidades do PRD
+que NÃO entram, e uma seção "Não decidido ainda" para a organização
+de pastas.
+
+Não invente critério novo e não transforme nenhum deles em tarefa
+técnica com nome de biblioteca. Critério diz O QUE precisa ser
+verdade, não como.
+
+Os critérios são:
+[ditar aqui os oito AZ do checklist acima]</pre>
+  </div>
+
+  <div class="filebox out">
+    <div class="filebox-head"><span class="fb-path">o que deve sair · docs/andar-zero.md</span><button class="copybtn" onclick="cp(this)">copiar</button></div>
+    <pre># Andar zero — prova do ADR-001
+
+Isto não é uma spec: não há comportamento de produto aqui.
+É a verificação de que a stack decidida em docs/adr/001-stack.md
+funciona junta, numa máquina limpa.
+
+## Critérios de aceitação
+
+- AZ-01 · um comando único sobe a aplicação e o Postgres do zero
+- AZ-02 · a aplicação conecta no banco; sem banco, erro claro e imediato
+- AZ-03 · existe uma migration versionada e aplicada
+- AZ-04 · GET /health devolve 200 e o status da conexão com o banco
+- AZ-05 · uma página servida pelo front carrega e mostra o resultado de AZ-04
+- AZ-06 · um comando roda os testes; existe pelo menos um teste sobre AZ-04
+- AZ-07 · configuração via variável de ambiente, com .env.example versionado
+- AZ-08 · .env no .gitignore, nenhum segredo no repositório
+
+## Fora de escopo
+
+Qualquer funcionalidade do PRD. Nada de login, catálogo, empréstimo ou
+devolução. Nenhuma tabela de domínio além da mínima para AZ-03.
+
+## Não decidido ainda
+
+Organização de pastas e camadas: será proposta pelo agente no plano,
+revisada por nós, e só então registrada.</pre>
+  </div>
+
+  <div class="warnbox">
+    <div class="wh">por que AZ-05 existe</div>
+    <p>É o critério que a maioria corta por parecer supérfluo. Ele é o único que prova que <strong>front e backend se falam</strong> — que a decisão sobre "como o front é servido" não era só uma linha bonita no ADR. Descobrir isso hoje custa dez minutos; descobrir na terceira feature custa uma refatoração.</p>
+  </div>
+
+  <div class="filebox git">
+    <div class="filebox-head"><span class="fb-path">git · fecha a fase 4a</span><button class="copybtn" onclick="cp(this)">copiar</button></div>
+    <pre>git add docs/andar-zero.md
+git commit -m "docs: criterios do andar zero"</pre>
+  </div>
+</div>
+</div>
+
+<!-- ─── 13 · EXECUTANDO ─── -->
+<div class="slide" data-title="Executando o andar zero">
+<div class="slide-inner slide-scroll">
+  <span class="stepnum g">Passo 4b</span>
+  <h2 class="sec-title">Agora sim,<br>mão na massa</h2>
+  <p class="lead">Cliquem em cada passo para abrir. Um de cada vez, junto comigo. Repare no que os prompts <em>não</em> dizem: nenhum deles cita stack, pasta ou biblioteca — <strong style="color:var(--text)">isso já está no repositório.</strong></p>
+
+  <div class="acc">
+
+    <div class="acc-item">
+      <div class="acc-head" onclick="ac(this)">
+        <span class="acc-badge">PASSO 1</span>
+        <span class="acc-q">Pedir o plano — e só o plano</span>
+        <span class="acc-mode">🤖 agente</span>
+        <span class="acc-tog">▼</span>
+      </div>
+      <div class="acc-body">
+        <div class="filebox prompt" style="margin-top:12px;">
+          <div class="filebox-head"><span class="fb-path">prompt</span><button class="copybtn" onclick="cp(this)">copiar</button></div>
+          <pre>Leia docs/andar-zero.md, docs/adr/001-stack.md e rules/restrictions.md.
+
+Escreva em docs/plan-andar-zero.md um plano com tarefas pequenas e
+verificáveis para atender os critérios AZ-01 a AZ-08. Cada tarefa
+precisa dizer qual critério ela atende e como eu verifico que ela
+terminou.
+
+Inclua no plano uma proposta de organização de pastas, com uma linha
+dizendo por que é essa e não outra.
+
+Não escreva código. Mostre o plano e pare.</pre>
+        </div>
+        <div class="filebox out">
+          <div class="filebox-head"><span class="fb-path">o que deve voltar · trecho, agnóstico de stack</span><button class="copybtn" onclick="cp(this)">copiar</button></div>
+          <pre># Plano — andar zero
+
+## Organização de pastas proposta
+
+  &lt;estrutura, uma linha por pasta&gt;
+
+Por que essa e não outra: é a convenção padrão do framework escolhido
+no ADR-001. Fugir dela obrigaria a configurar o carregamento de módulos
+na mão, sem ganho.
+
+## Tarefas
+
+- [ ] T1 · Subir Postgres em container com volume nomeado
+      atende: AZ-01 (parcial)
+      verifico assim: o container sobe e aceita conexão na porta
+
+- [ ] T2 · Criar o projeto do backend, sem rota nenhuma
+      atende: nenhum AZ ainda — é pré-requisito de T3
+      verifico assim: o processo sobe e responde 404 em qualquer rota
+
+- [ ] T3 · Endpoint GET /health devolvendo status estático
+      atende: AZ-04 (parcial, ainda sem banco)
+      verifico assim: curl devolve 200
+
+- [ ] T4 · Conexão com o banco lida de variável de ambiente
+      atende: AZ-02, AZ-07
+      verifico assim: sem a variável, sobe com erro claro; com ela, conecta
+
+- [ ] T5 · Primeira migration versionada
+      atende: AZ-03
+      verifico assim: aplicar do zero cria a tabela; rodar de novo não quebra
+
+... T6 a T9 no mesmo formato, cobrindo AZ-05, AZ-06 e AZ-08.</pre>
+        </div>
+        <p><strong>O que conferir antes de aprovar:</strong> toda tarefa cita um AZ (ou diz explicitamente que é pré-requisito de outra); nenhuma tarefa cria arquivo de funcionalidade do PRD; o "verifico assim" é algo que <strong>você</strong> consegue rodar, não "os testes passam"; e a proposta de pastas tem justificativa — se for só "é o padrão do framework", que ele diga qual padrão e onde isso está documentado.</p>
+        <p>⚠️ <strong>Se voltarem só três ou quatro tarefas gigantes</strong>, mande refazer: "quebre em tarefas que eu consiga verificar uma de cada vez". Tarefa grande é onde o controle se perde.</p>
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-head" onclick="ac(this)">
+        <span class="acc-badge">PASSO 2</span>
+        <span class="acc-q">Revisar a proposta de pastas — você, não ele</span>
+        <span class="acc-mode">👤 humano</span>
+        <span class="acc-tog">▼</span>
+      </div>
+      <div class="acc-body">
+        <p>Este é o momento humano da aula. A estrutura que sair daqui vai governar todas as features do projeto. Três perguntas:</p>
+        <div class="filebox">
+          <div class="filebox-head"><span class="fb-path">as três perguntas</span><button class="copybtn" onclick="cp(this)">copiar</button></div>
+          <pre>1. Onde mora a regra de negócio nessa estrutura? Aponte a pasta.
+2. Se eu adicionar uma feature nova, quantas pastas eu toco?
+3. O que dessa estrutura é convenção do framework e o que é escolha nossa?
+   Só o segundo grupo é decisão — o primeiro é herança.</pre>
+        </div>
+        <div class="filebox out">
+          <div class="filebox-head"><span class="fb-path">como distinguir uma resposta boa de uma ruim</span><button class="copybtn" onclick="cp(this)">copiar</button></div>
+          <pre>PERGUNTA 1 · Onde mora a regra de negócio?
+
+  ruim: "está distribuída entre os controllers e os models"
+        → não tem lugar. A regra dos 3 itens vai acabar em três
+          arquivos diferentes, e a quarta feature repete a lógica.
+
+  boa:  "numa pasta de domínio, e ela não importa nada de fora"
+        → tem endereço. Você consegue revisar a regra sem abrir o
+          resto do sistema.
+
+PERGUNTA 2 · Quantas pastas eu toco numa feature nova?
+
+  ruim: "sete"  → toda feature vira uma expedição, e o agente vai
+                  precisar de contexto demais para cada tarefa.
+  boa:  "duas ou três" → o escopo de uma tarefa cabe na revisão de
+                         uma pessoa.
+
+PERGUNTA 3 · O que é convenção e o que é escolha nossa?
+
+  ruim: ele não sabe separar → tudo virou "padrão", e você não sabe
+        o que pode mudar sem quebrar o framework.
+  boa:  ele aponta quais pastas o framework exige e quais nós criamos
+        → só o segundo grupo é decisão. Só ele vira ADR.</pre>
+        </div>
+        <p>Se as respostas forem confusas, <strong>a estrutura está errada</strong> e é mais barato mudar agora do que depois de três features. Peça outra proposta — não conserte você mesmo.</p>
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-head" onclick="ac(this)">
+        <span class="acc-badge mk">PASSO 3</span>
+        <span class="acc-q">Executar — uma tarefa, e parar</span>
+        <span class="acc-mode">🤖 agente</span>
+        <span class="acc-tog">▼</span>
+      </div>
+      <div class="acc-body">
+        <div class="filebox prompt" style="margin-top:12px;">
+          <div class="filebox-head"><span class="fb-path">prompt</span><button class="copybtn" onclick="cp(this)">copiar</button></div>
+          <pre>Plano aprovado. Execute APENAS a tarefa 1.
+
+Ao terminar: mostre os arquivos que criou, diga qual critério AZ
+está atendido e como eu verifico. Depois pare.</pre>
+        </div>
+        <div class="filebox out">
+          <div class="filebox-head"><span class="fb-path">o relato que deve vir no fim de cada tarefa</span><button class="copybtn" onclick="cp(this)">copiar</button></div>
+          <pre>Tarefa 1 concluída.
+
+Arquivos criados:
+  - &lt;arquivo de orquestração dos containers&gt;
+  - .env.example
+
+Critério atendido: AZ-01, parcialmente — o banco sobe, mas a aplicação
+ainda não existe, então o "um comando sobe tudo" ainda não está completo.
+
+Como verificar:
+  1. rode &lt;comando de subida&gt;
+  2. o container do banco deve aparecer como saudável
+  3. conectar na porta configurada deve funcionar
+
+Não avancei para a tarefa 2.</pre>
+        </div>
+        <p><strong>Três coisas precisam estar nesse relato:</strong> os arquivos que ele tocou, o critério AZ e — a mais importante — <strong>como você verifica</strong>. Se ele disser só "pronto, funcionando", peça a verificação. E repare no valor de um relato que admite atendimento parcial: agente que declara AZ-01 completo aqui está mentindo, e o restrictions.md tem uma linha exatamente sobre isso.</p>
+        <p>Repitam: uma tarefa, uma verificação, um commit. <strong>Se você disser "pode ir" e ele fizer o plano inteiro, o restrictions.md não está sendo lido</strong> — pare tudo e descubra por quê antes de continuar.</p>
+        <div class="filebox git">
+          <div class="filebox-head"><span class="fb-path">git · a cada tarefa, sem exceção</span><button class="copybtn" onclick="cp(this)">copiar</button></div>
+          <pre>git add -A
+git commit -m "andar zero: &lt;AZ-0X&gt; &lt;o que foi feito&gt;"
+
+# se a tarefa deu errado e você quer voltar ao estado anterior:
+git reset --hard HEAD</pre>
+        </div>
+        <p>💡 O commit por tarefa não é capricho: é o que te deixa <strong>desfazer uma tarefa sem desfazer as outras</strong>. É a rede de segurança que torna aceitável deixar o agente escrever o código.</p>
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-head" onclick="ac(this)">
+        <span class="acc-badge wr">PASSO 4</span>
+        <span class="acc-q">A verificação que importa: a máquina limpa</span>
+        <span class="acc-mode">⌨️ terminal</span>
+        <span class="acc-tog">▼</span>
+      </div>
+      <div class="acc-body">
+        <p>"Funciona na minha máquina" é exatamente o que o AZ-01 existe para matar. Derrubem tudo e subam do zero:</p>
+        <div class="filebox">
+          <div class="filebox-head"><span class="fb-path">terminal · substitua pelos comandos da stack escolhida</span><button class="copybtn" onclick="cp(this)">copiar</button></div>
+          <pre># derruba tudo, inclusive o volume do banco
+&lt;COMANDO-DOWN&gt;
+
+# sobe do zero e aplica as migrations
+&lt;COMANDO-UP&gt;
+
+# roda os testes
+&lt;COMANDO-TESTES&gt;
+
+# confere o endpoint
+curl -s localhost:&lt;PORTA&gt;/health</pre>
+        </div>
+        <p>Se algum desses passos precisar de um comando manual que não está documentado, <strong>o AZ-01 não passou</strong> — e a linha que falta é justamente o que vai para o AGENTS.md v1.</p>
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-head" onclick="ac(this)">
+        <span class="acc-badge">PASSO 5</span>
+        <span class="acc-q">Perguntar a ele o que ficou ambíguo</span>
+        <span class="acc-mode">💬 Ask</span>
+        <span class="acc-tog">▼</span>
+      </div>
+      <div class="acc-body">
+        <p>O agente é o melhor revisor das instruções dele mesmo — ele sabe exatamente onde teve que chutar.</p>
+        <div class="filebox prompt">
+          <div class="filebox-head"><span class="fb-path">prompt</span><button class="copybtn" onclick="cp(this)">copiar</button></div>
+          <pre>Durante o andar zero, o que você precisou decidir sozinho porque
+nem o ADR-001, nem o AGENTS.md, nem o restrictions.md diziam?
+
+Liste cada decisão e diga em qual arquivo ela deveria estar
+registrada. Não altere nada.</pre>
+        </div>
+        <div class="filebox out">
+          <div class="filebox-head"><span class="fb-path">o tipo de lista que costuma voltar</span><button class="copybtn" onclick="cp(this)">copiar</button></div>
+          <pre>Decidi sozinho:
+
+1. O nome e o formato das variáveis de ambiente.
+   Deveria estar em: AGENTS.md, seção de convenções.
+
+2. Que o banco de teste é separado do de desenvolvimento, e como ele
+   é criado antes dos testes.
+   Deveria estar em: AGENTS.md, seção "como testar".
+
+3. O formato do corpo de erro da API (campo, status, se tem código).
+   Deveria estar em: um ADR — é contrato com o front e mudar depois
+   quebra quem já consome.
+
+4. A convenção de nome das migrations.
+   Deveria estar em: AGENTS.md, seção de convenções.
+
+5. Que o /health não exige autenticação.
+   Deveria estar em: a spec do login, quando ela existir.</pre>
+        </div>
+        <p><strong>Essa lista é ouro e tem prazo de validade.</strong> Ela só existe enquanto a sessão está viva; amanhã, num chat novo, essas cinco decisões vão estar no código sem que ninguém saiba que foram decisões. Copiem para um bloco de notas <strong>agora</strong> — os itens 1, 2 e 4 viram seções do AGENTS.md v1, o item 3 é candidato a ADR, e o item 5 é uma pergunta que vocês levam para a spec 001.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="filebox git" style="margin-top:16px;">
+    <div class="filebox-head"><span class="fb-path">git · fecha a fase 4b</span><button class="copybtn" onclick="cp(this)">copiar</button></div>
+    <pre>git add -A
+git commit -m "andar zero: plano executado, AZ-01 a AZ-08"
+git log --oneline    # uma linha por tarefa, não um commit gigante</pre>
+  </div>
+</div>
+</div>
+
+<!-- ─── 14 · ESTRUTURA: ADR OU AGENTS? ─── -->
+<div class="slide" data-title="Onde registrar a estrutura">
+<div class="slide-inner slide-scroll">
+  <span class="stepnum p">Passo 5</span>
+  <h2 class="sec-title">A estrutura virou<br>fato. Onde ela<br>fica registrada?</h2>
+  <p class="lead">Agora as pastas existem, e existem porque você aprovou. Falta escolher onde isso mora — e a resposta não é "nos dois lugares".</p>
+
+  <table class="tbl" style="margin-bottom:16px;">
+    <thead><tr><th style="width:34%">a pergunta</th><th style="width:33%">se a resposta for sim</th><th>então</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Mudar isso depois é caro?</strong> (mexe em muitos arquivos, migra dado, quebra contrato)</td><td>É decisão arquitetural</td><td><strong style="color:var(--cyan)">ADR-002</strong>, com alternativas e consequências</td></tr>
+      <tr><td><strong>Alguém vai perguntar "por quê" daqui a seis meses?</strong></td><td>O motivo precisa sobreviver</td><td><strong style="color:var(--cyan)">ADR-002</strong> — AGENTS.md não guarda motivo</td></tr>
+      <tr><td><strong>É só "onde as coisas estão"?</strong></td><td>É orientação de navegação</td><td><strong style="color:var(--green)">AGENTS.md v1</strong>, no mapa de diretórios</td></tr>
+      <tr><td><strong>É convenção do próprio framework?</strong></td><td>Não foi você que decidiu</td><td><strong style="color:var(--green)">AGENTS.md v1</strong>, uma linha. Não vire ADR de algo que você herdou</td></tr>
+    </tbody>
+  </table>
+
+  <div class="hsec ok">
+    <div class="hn">a divisão em uma frase</div>
+    <div class="ht">ADR guarda o porquê. AGENTS.md guarda o onde.</div>
+    <div class="hd">Se você escrever o motivo no AGENTS.md, ele vai engordar até ninguém ler — e você já viu na aula 2 o que arquivo grande faz com o contexto. Se você escrever o mapa de pastas no ADR, ele vira mentira no primeiro refactor, porque ADR <strong style="color:var(--text)">não se atualiza, se substitui</strong>.</div>
+  </div>
+
+  <div class="warnbox">
+    <div class="wh">não invente um ADR-002 se não precisar</div>
+    <p>Se a estrutura for a convenção padrão do framework escolhido, <strong>uma linha no AGENTS.md basta</strong>. ADR escrito por obrigação é ruído: ele ocupa o lugar onde deveriam estar as decisões que realmente doeram.</p>
+  </div>
+
+  <span class="ptag" style="margin-top:18px;">se a resposta da tabela foi "ADR-002"</span>
+  <div class="filebox prompt">
+    <div class="filebox-head"><span class="fb-path">prompt · modo agente</span><button class="copybtn" onclick="cp(this)">copiar</button></div>
+    <pre>Crie docs/adr/002-estrutura.md registrando a organização de pastas
+que já está no repositório — leia a estrutura real, não invente.
+
+Separe explicitamente o que é convenção herdada do framework do que
+foi escolha nossa. Só o segundo grupo é decisão: descreva a alternativa
+que consideramos e por que ela não foi escolhida.
+
+Na seção de consequências, diga o que essa estrutura torna caro de
+mudar depois.</pre>
+  </div>
+
+  <div class="filebox out">
+    <div class="filebox-head"><span class="fb-path">o que deve sair · trecho</span><button class="copybtn" onclick="cp(this)">copiar</button></div>
+    <pre># ADR-002 — Organização do código
+
+## Herdado do framework (não é decisão nossa)
+  &lt;as pastas que o framework exige, uma por linha&gt;
+
+## Escolha nossa
+A regra de negócio fica isolada numa pasta de domínio que não importa
+nada de infraestrutura.
+
+Alternativa considerada: deixar a regra junto das rotas, como o
+framework sugere nos exemplos. Descartada porque o PRD tem regras que
+atravessam mais de uma tela — o limite de 3 itens vale no empréstimo e
+na devolução — e duplicá-las seria a primeira fonte de divergência.
+
+## Consequências
+Fica caro de mudar: toda feature já escrita teria que ser movida.
+Fica mais fácil: testar a regra sem subir o banco.</pre>
+  </div>
+
+  <div class="filebox git">
+    <div class="filebox-head"><span class="fb-path">git · fecha a fase 5</span><button class="copybtn" onclick="cp(this)">copiar</button></div>
+    <pre>git add docs/adr/
+git commit -m "docs: ADR-002 registra a organizacao do codigo"</pre>
+  </div>
+</div>
+</div>
+
+<!-- ─── 15 · AGENTS v1 ─── -->
+<div class="slide" data-title="AGENTS.md v1">
+<div class="slide-inner slide-scroll">
+  <span class="stepnum p">Passo 6</span>
+  <h2 class="sec-title">A segunda passada</h2>
+  <p class="lead">Agora tudo que você queria escrever no começo já é <strong style="color:var(--text)">verificável</strong>. Alternem entre as duas versões e reparem no que entrou — e de onde cada linha veio.</p>
+
+  <div class="vtabs">
+    <button class="vtab on" onclick="vt(this,'v0')">AGENTS.md · v0</button>
+    <button class="vtab" onclick="vt(this,'v1')">AGENTS.md · v1</button>
+  </div>
+
+  <div class="vpane on" id="v0">
+    <div class="filebox">
+      <div class="filebox-head"><span class="fb-path">AGENTS.md · antes do andar zero</span><button class="copybtn" onclick="cp(this)">copiar</button></div>
+      <pre># Empréstimo de Equipamentos Internos
+
+Sistema web interno para controlar empréstimo de equipamentos.
+O documento de negócio está em docs/PRD.md.
+
+## Onde olhar
+- docs/PRD.md
+- docs/adr/
+- rules/restrictions.md
+- docs/specs/
+
+## Precedência
+A spec vence o código. Se não estiver escrito, pergunte.
+
+## Processo
+- Leia docs/adr/ antes de propor qualquer coisa estrutural.
+- Uma tarefa por vez.
+
+## Estado atual do projeto
+O projeto ainda não tem código. Não existe comando de build, de teste
+nem de execução.</pre>
+    </div>
+    <div class="warnbox">
+      <div class="wh">o que ele não conseguia dizer</div>
+      <p>Nada sobre como rodar, onde as coisas ficam ou como se escreve um teste aqui. <strong>Não por omissão — por honestidade.</strong> Nada disso existia.</p>
+    </div>
+  </div>
+
+  <div class="vpane" id="v1">
+    <div class="filebox prompt">
+      <div class="filebox-head"><span class="fb-path">prompt · modo agente</span><button class="copybtn" onclick="cp(this)">copiar</button></div>
+      <pre>Atualize o AGENTS.md. O projeto agora tem código e sobe.
+
+Acrescente as seções Comandos, Mapa de diretórios, Convenções não
+óbvias e Como testar. Substitua "Estado atual do projeto" por elas.
+
+Regras:
+- Todo comando que você escrever precisa ter sido executado neste
+  repositório. Se você não tem certeza de que um comando funciona,
+  não escreva: me pergunte.
+- O mapa de diretórios descreve as pastas que EXISTEM. Não liste
+  pasta planejada.
+- Em "convenções não óbvias", inclua apenas o que você erraria se
+  chutasse. Não escreva o que dá para ler abrindo um arquivo.
+- Não repita o conteúdo dos ADRs. Aponte para eles.
+
+Estas são as decisões que você me disse ter tomado sozinho durante o
+andar zero — distribua cada uma na seção certa:
+[colar aqui a lista do passo 5]</pre>
+    </div>
+
+    <p style="color:var(--muted);font-size:.86rem;line-height:1.7;margin-bottom:12px;">👀 <strong style="color:var(--text)">O teste final antes de aceitar:</strong> pegue três comandos do arquivo e rode. Se um falhar, o AGENTS.md já está mentindo — e ele acabou de nascer.</p>
+
+    <div class="filebox out">
+      <div class="filebox-head"><span class="fb-path">o que deve sair · AGENTS.md v1</span><button class="copybtn" onclick="cp(this)">copiar</button></div>
+      <pre># Empréstimo de Equipamentos Internos
+
+Sistema web interno para controlar empréstimo de equipamentos.
+Stack em docs/adr/001-stack.md. Negócio em docs/PRD.md.
+
+## Onde olhar
+
+- docs/PRD.md — o que o negócio precisa. Não é spec.
+- docs/adr/ — decisões técnicas e o motivo delas.
+- rules/restrictions.md — leia sempre, antes de qualquer tarefa.
+- docs/specs/&lt;NNN-funcionalidade&gt;/ — spec, plano e tarefas de cada feature.
+- docs/andar-zero.md — o que o esqueleto garante. Não é feature.
+
+## Precedência
+
+Se dois artefatos discordarem sobre comportamento, a spec vence o código.
+Se algo não estiver em lugar nenhum, pergunte — não decida.
+
+## Comandos
+
+- subir tudo do zero: &lt;COMANDO-UP&gt;
+- derrubar: &lt;COMANDO-DOWN&gt;
+- rodar os testes: &lt;COMANDO-TESTES&gt;
+- criar uma migration: &lt;COMANDO-MIGRATION&gt;
+- aplicar migrations: &lt;COMANDO-MIGRATE&gt;
+
+Um check só passa quando &lt;COMANDO-TESTES&gt; termina sem falha.
+Sucesso parcial não é sucesso.
+
+## Mapa de diretórios
+
+&lt;MAPA-REAL-DE-PASTAS&gt;
+  uma linha por pasta, dizendo o que vive ali
+
+## Convenções não óbvias
+
+- Configuração só por variável de ambiente. Nunca leia arquivo de config
+  direto; nunca commite .env.
+- Toda mudança de schema é uma migration versionada. Nada de alterar
+  tabela por fora.
+- &lt;O QUE VOCÊ DESCOBRIU HOJE QUE ELE ERRARIA SE CHUTASSE&gt;
+
+## Como testar
+
+- Todo teste roda contra o banco de teste, nunca contra o de desenvolvimento.
+- Teste de endpoint verifica status e corpo, não só status.
+- &lt;O PADRÃO QUE O ANDAR ZERO ESTABELECEU&gt;
+
+## Processo
+
+- Decisão estrutural nova precisa de ADR antes do código. Você não escreve
+  o ADR: descreve a decisão e as alternativas, e para.
+- Código de funcionalidade só com spec em docs/specs/.
+- Uma tarefa por vez.</pre>
+    </div>
+    <div class="expected">
+      <div class="ex-h">de onde saiu cada bloco novo</div>
+      <ul>
+        <li><strong>Comandos</strong> — do passo 4 do exercício, a verificação em máquina limpa. Você só escreveu o que digitou de verdade.</li>
+        <li><strong>Mapa de diretórios</strong> — da proposta que o agente fez e <strong>você aprovou</strong>. Não é o que ele inventou sozinho.</li>
+        <li><strong>Convenções não óbvias</strong> — da pergunta do passo 5: o que ele teve que chutar.</li>
+        <li><strong>Como testar</strong> — do AZ-06, que agora existe e passa.</li>
+      </ul>
+    </div>
+
+    <div class="filebox git">
+      <div class="filebox-head"><span class="fb-path">git · fecha a fase 6</span><button class="copybtn" onclick="cp(this)">copiar</button></div>
+      <pre>git add AGENTS.md
+git commit -m "docs: AGENTS.md v1 com comandos e mapa reais"
+
+# vale a pena olhar o diff das duas versões lado a lado:
+git log --oneline -- AGENTS.md
+git diff &lt;hash-do-v0&gt; HEAD -- AGENTS.md</pre>
+    </div>
+  </div>
+
+  <div class="hero-q" style="max-width:940px;margin-top:14px;">
+    💭 Nenhuma linha do v1 é opinião sobre como o projeto <em>deveria</em> ser. Todas são descrição de como ele <strong style="font-style:normal;color:var(--text)">é</strong>. É por isso que ele não envelhece na primeira semana — e é por isso que ele não podia ter sido escrito antes.
+  </div>
+</div>
+</div>
+
+<!-- ─── 16 · ARMADILHAS ─── -->
+<div class="slide" data-title="Armadilhas do greenfield">
+<div class="slide-inner slide-scroll">
+  <span class="otag">o que costuma dar errado</span>
+  <h2 class="sec-title">Cinco armadilhas<br>de projeto novo</h2>
+
+  <div class="practice-grid" style="margin-bottom:14px;">
+    <div class="practice-card" style="border-left-color:var(--orange);"><b>🏗️ Deixar o scaffold rodar</b><span>Um <code>create-app</code> gera dezenas de arquivos em segundos e você aceita todos porque revisar dá trabalho. Metade nunca vai ser usada, e o agente vai tratar essa metade como contexto verdadeiro pelo resto do projeto.</span></div>
+    <div class="practice-card" style="border-left-color:var(--orange);"><b>📜 AGENTS.md de 400 linhas no dia um</b><span>Escrito com o projeto na cabeça, não no disco. Envelhece antes da primeira feature e começa a mentir — e regra que mente é pior do que regra nenhuma.</span></div>
+    <div class="practice-card" style="border-left-color:var(--orange);"><b>🧱 ADR para tudo</b><span>ADR-004 sobre o nome de uma variável. Quando tudo é decisão arquitetural, ninguém lê a pasta — e a decisão que importava fica enterrada entre as que não importavam.</span></div>
+    <div class="practice-card" style="border-left-color:var(--orange);"><b>🚀 Pular o andar zero</b><span>Ir direto para a spec de login. A primeira surpresa da stack aparece no meio da feature, e aí você está debugando ambiente e regra de negócio ao mesmo tempo, sem saber qual dos dois quebrou.</span></div>
+  </div>
+
+  <div class="card" style="border-color:rgba(255,107,53,.28);">
+    <b style="font-family:'Syne',sans-serif;font-size:.95rem;color:var(--orange);display:block;margin-bottom:6px;">🔑 E a quinta: o <code style="font-family:'IBM Plex Mono',monospace">.env</code> commitado</b>
+    <span style="color:var(--muted);font-size:.85rem;line-height:1.6;">É a primeira vez que este curso tem banco de dados, e portanto a primeira vez que existe credencial. O agente vai gerar um <code style="font-family:'IBM Plex Mono',monospace">.env</code> com senha e, se o <code style="font-family:'IBM Plex Mono',monospace">.gitignore</code> não estiver pronto <strong style="color:var(--text)">antes</strong>, ele entra no primeiro commit. É o AZ-08, e ele existe por isso. Conferir depois é tarde: o histórico do git guarda.</span>
+  </div>
+</div>
+</div>
+
+<!-- ─── 17 · CHECKLIST DE SAÍDA ─── -->
+<div class="slide" data-title="Checklist de saída">
+<div class="slide-inner slide-scroll">
+  <span class="gtag">antes de fechar o notebook</span>
+  <h2 class="sec-title">O repositório<br>que você leva</h2>
+  <p class="lead">Todo mundo precisa sair com o mesmo estado — a próxima aula continua exatamente daqui.</p>
+
+  <div class="filebox">
+    <div class="filebox-head"><span class="fb-path">estado esperado do repositório</span><button class="copybtn" onclick="cp(this)">copiar</button></div>
+    <pre>emprestimo-equipamentos/
+├── AGENTS.md                 ← v1, com comandos reais
+├── .gitignore                ← com .env
+├── .env.example              ← versionado, sem segredo
+├── docs/
+│   ├── PRD.md
+│   ├── andar-zero.md
+│   ├── plan-andar-zero.md
+│   └── adr/
+│       ├── 001-stack.md      ← fechado, com alternativas descartadas
+│       └── 002-*.md          ← só se a estrutura for cara de mudar
+├── rules/
+│   └── restrictions.md
+├── docs/specs/               ← vazio. A primeira spec é a próxima aula.
+└── &lt;o esqueleto, com os testes passando&gt;</pre>
+  </div>
+
+  <div class="checklist" style="margin-bottom:14px;">
+    <div class="chk" onclick="tk(this)"><div class="box"></div><div>Os oito critérios AZ passam numa máquina limpa</div></div>
+    <div class="chk" onclick="tk(this)"><div class="box"></div><div>O <code>git log</code> tem um commit por tarefa, não um commit gigante</div></div>
+    <div class="chk" onclick="tk(this)"><div class="box"></div><div>Nenhum arquivo de funcionalidade do PRD foi criado</div></div>
+    <div class="chk" onclick="tk(this)"><div class="box"></div><div>Nenhum segredo no histórico do git</div></div>
+    <div class="chk" onclick="tk(this)"><div class="box"></div><div>O AGENTS.md v1 não afirma nada que você não rodou</div></div>
+    <div class="chk" onclick="tk(this)"><div class="box"></div><div>O ADR-001 diz explicitamente o que ele <em>não</em> decide</div></div>
+  </div>
+
+  <div class="filebox git">
+    <div class="filebox-head"><span class="fb-path">git · fecha a aula</span><button class="copybtn" onclick="cp(this)">copiar</button></div>
+    <pre>git add -A
+git commit -m "chore: andar zero completo, AGENTS.md v1"
+
+# marca o ponto de partida da próxima aula
+git tag andar-zero
+git log --oneline</pre>
+  </div>
+
+  <div class="filebox out">
+    <div class="filebox-head"><span class="fb-path">o histórico que você deve ver · a forma importa mais que os textos</span><button class="copybtn" onclick="cp(this)">copiar</button></div>
+    <pre>a1b2c3d (tag: andar-zero) chore: andar zero completo, AGENTS.md v1
+9f8e7d6 docs: AGENTS.md v1 com comandos e mapa reais
+7c6b5a4 docs: ADR-002 registra a organizacao do codigo
+5e4d3c2 andar zero: AZ-06 suite de testes rodando
+3b2a1f0 andar zero: AZ-05 pagina consumindo /health
+1a0f9e8 andar zero: AZ-04 endpoint de saude com status do banco
+8d7c6b5 andar zero: AZ-03 primeira migration
+6b5a4d3 andar zero: AZ-02 conexao com o banco por variavel de ambiente
+4a3b2c1 andar zero: AZ-01 subida do banco em container
+2c1b0a9 docs: criterios do andar zero
+0b9a8c7 chore: contexto inicial do repositorio
+8a7b6c5 chore: limites de autoridade do agente
+6c5b4a3 docs: ADR-001 define a stack do projeto
+
+Treze commits, e os três primeiros não têm uma linha de código.
+Se o seu histórico tiver dois commits gigantes, você não perdeu o
+código — perdeu a capacidade de desfazer uma decisão sem desfazer
+todas as outras.</pre>
+  </div>
+
+  <div class="warnbox">
+    <div class="wh">se o seu não subiu</div>
+    <p>Não fique para trás. Existe uma branch de referência com o andar zero pronto — pegue ela, compare com o que você fez e siga. <strong>A próxima aula começa com o esqueleto rodando; quem estiver debugando ambiente vai perder a spec 001.</strong></p>
+  </div>
+</div>
+</div>
+
+<!-- ─── 18 · FECHO ─── -->
+<div class="slide" data-title="Próxima aula e tarefa">
+<div class="slide-inner slide-scroll">
+  <span class="gtag">o que fica de hoje</span>
+  <h2 class="sec-title">Você não escreveu<br>nenhuma feature.<br><span style="color:var(--green)">E era esse o ponto.</span></h2>
+  <p class="lead">O PRD tem cinco funcionalidades e nenhuma delas foi tocada. O que foi construído hoje é a única coisa que <strong style="color:var(--text)">todas as cinco</strong> vão usar — e que fica cada vez mais cara de construir depois.</p>
+
+  <div class="g3" style="margin-bottom:16px;">
+    <div class="card" style="border-color:rgba(0,255,136,.3)"><span class="gtag">a regra da ordem</span><p style="color:var(--muted);font-size:.83rem;line-height:1.65;">Restrictions antes, AGENTS.md em duas passadas, esqueleto no meio. <strong style="color:var(--text)">Nunca afirme no repositório algo que você não pode verificar.</strong></p></div>
+    <div class="card" style="border-color:rgba(0,229,255,.3)"><span class="tag">a régua do artefato</span><p style="color:var(--muted);font-size:.83rem;line-height:1.65;">Spec para comportamento. ADR para decisão. Rule para procedimento. <strong style="color:var(--text)">Andar zero para provar a stack.</strong></p></div>
+    <div class="card" style="border-color:rgba(124,58,237,.35)"><span class="ptag">o que ainda não mudou</span><p style="color:var(--muted);font-size:.83rem;line-height:1.65;">Continua tudo à mão, sem framework de SDD. <strong style="color:var(--text)">Vocês precisam saber o que deveria acontecer antes de deixar uma ferramenta fazer acontecer.</strong></p></div>
+  </div>
+
+  <span class="tag">tarefa para a próxima aula</span>
+  <h3 class="slide-h3">A spec 001, rascunhada</h3>
+
+  <div class="filebox">
+    <div class="filebox-head"><span class="fb-path">tarefa · trazer pronto</span><button class="copybtn" onclick="cp(this)">copiar</button></div>
+    <pre>1. Escolha a PRIMEIRA funcionalidade do PRD a ser implementada e
+   justifique a escolha em uma linha. Não é óbvio — defenda.
+
+2. Rascunhe docs/specs/001-&lt;sua-escolha&gt;/spec.md no formato da aula 7:
+   objetivo, vínculo, regras, critérios de aceitação com identificador,
+   fora de escopo, contrato afetado.
+
+3. Liste as perguntas que o PRD não responde sobre essa funcionalidade,
+   marcando cada uma como: negócio, técnica ou fora de escopo.
+
+4. Diga quais critérios da sua spec o andar zero JÁ garante — e por que
+   eles não precisam ser reescritos.
+
+O item 4 vale tanto quanto os outros três juntos.</pre>
+  </div>
+
+  <div class="filebox out">
+    <div class="filebox-head"><span class="fb-path">exemplo do item 4 · para vocês saberem o que eu espero</span><button class="copybtn" onclick="cp(this)">copiar</button></div>
+    <pre>O que o andar zero já garante e eu NÃO reescrevo na spec:
+
+- Que a aplicação conecta no banco. Minha spec de login pode assumir
+  isso e falar só do comportamento do login. (AZ-02)
+- Que existe migration versionada. A tabela de usuários vai ser uma
+  migration nova, não um script solto — isso já está resolvido. (AZ-03)
+- Que o front consome o backend. Não preciso de critério de aceitação
+  sobre "a tela carrega". (AZ-05)
+- Que existe suíte de testes rodando num comando. Meus critérios viram
+  testes lá dentro, sem inventar estrutura nova. (AZ-06)
+
+O que a spec 001 precisa dizer e o andar zero NÃO cobre:
+o que acontece quando a senha está errada, onde a sessão mora, quanto
+tempo ela dura, e o que uma pessoa não autenticada vê.</pre>
+  </div>
+
+  <div class="warnbox">
+    <div class="wh">por que o item 4 vale mais</div>
+    <p>Ele é a única parte da tarefa que só quem <strong>entendeu para que serve o andar zero</strong> consegue responder. Quem tratar a fatia zero como "setup do projeto" vai reescrever na spec coisas que já estão provadas — e é exatamente esse desperdício que a ordem de hoje existe para evitar.</p>
+  </div>
+
+  <div class="hero-q" style="max-width:900px;">
+    💭 E uma pergunta para levar: hoje você escreveu à mão a ordem, os critérios e as restrições. <strong style="font-style:normal;color:var(--text)">O que aconteceria se uma ferramenta impusesse essa ordem para você — e o que você perderia junto?</strong>
+  </div>
+</div>
+</div>
+
+</div><!-- /slides -->
+
+<script>
+// ══════════════════════════ BG CANVAS ══════════════════════════
+const bgCanvas = document.getElementById('bg');
+const bgCtx = bgCanvas.getContext('2d');
+let BW, BH, nodes = [];
+function resizeBg() { BW = bgCanvas.width = window.innerWidth; BH = bgCanvas.height = window.innerHeight; }
+resizeBg(); window.addEventListener('resize', () => { resizeBg(); initNodes(); });
+function initNodes() {
+  nodes = [];
+  const n = Math.floor((BW * BH) / 18000);
+  for (let i = 0; i < n; i++) nodes.push({ x:Math.random()*BW, y:Math.random()*BH, vx:(Math.random()-.5)*.4, vy:(Math.random()-.5)*.4, r:Math.random()*2+1 });
+}
+initNodes();
+function drawBg() {
+  bgCtx.clearRect(0, 0, BW, BH);
+  nodes.forEach(n => { n.x += n.vx; n.y += n.vy; if(n.x<0||n.x>BW)n.vx*=-1; if(n.y<0||n.y>BH)n.vy*=-1; });
+  for (let i = 0; i < nodes.length; i++) for (let j = i+1; j < nodes.length; j++) {
+    const dx=nodes[i].x-nodes[j].x, dy=nodes[i].y-nodes[j].y, d=Math.sqrt(dx*dx+dy*dy);
+    if (d < 120) { bgCtx.beginPath(); bgCtx.moveTo(nodes[i].x,nodes[i].y); bgCtx.lineTo(nodes[j].x,nodes[j].y); bgCtx.strokeStyle='rgba(124,58,237,'+(.15*(1-d/120))+')'; bgCtx.lineWidth=.5; bgCtx.stroke(); }
+  }
+  nodes.forEach(n => { bgCtx.beginPath(); bgCtx.arc(n.x,n.y,n.r,0,Math.PI*2); bgCtx.fillStyle='rgba(0,229,255,.5)'; bgCtx.fill(); });
+  requestAnimationFrame(drawBg);
+}
+drawBg();
+
+// ══════════════════════════ SLIDE ENGINE ══════════════════════════
+const slideEls = Array.from(document.querySelectorAll('.slide'));
+const TOTAL = slideEls.length;
+let current = 0;
+
+const progressBar = document.getElementById('progress-bar');
+const counter     = document.getElementById('slide-counter');
+const titleBar    = document.getElementById('slide-title-bar');
+const navPrev     = document.getElementById('nav-prev');
+const navNext     = document.getElementById('nav-next');
+const dotsEl      = document.getElementById('dots');
+
+slideEls.forEach((_, i) => {
+  const d = document.createElement('div'); d.className = 'dot'; d.onclick = () => goTo(i);
+  dotsEl.appendChild(d);
+});
+
+function runAnims(slide) {
+  slide.querySelectorAll('.anim').forEach(box => {
+    box.classList.remove('run');
+    void box.offsetWidth;
+    box.classList.add('run');
+  });
+}
+
+function goTo(n) {
+  if (n < 0 || n >= TOTAL) return;
+  slideEls.forEach((s, i) => {
+    s.classList.remove('active', 'prev');
+    if (i < n) s.classList.add('prev');
+    if (i !== n) s.querySelectorAll('.anim').forEach(b => b.classList.remove('run'));
+  });
+  slideEls[n].classList.add('active');
+  slideEls[n].scrollTop = 0;
+  const sc = slideEls[n].querySelector('.slide-scroll');
+  if (sc) sc.scrollTop = 0;
+  current = n;
+  updateUI();
+  runAnims(slideEls[n]);
+}
+
+function updateUI() {
+  progressBar.style.width = ((current + 1) / TOTAL * 100) + '%';
+  counter.textContent = (current + 1) + ' / ' + TOTAL;
+  titleBar.textContent = slideEls[current].dataset.title || '';
+  navPrev.classList.toggle('disabled', current === 0);
+  navNext.classList.toggle('disabled', current === TOTAL - 1);
+  document.querySelectorAll('.dot').forEach((d,i) => d.classList.toggle('active', i === current));
+}
+
+navPrev.onclick = () => goTo(current - 1);
+navNext.onclick = () => goTo(current + 1);
+document.addEventListener('keydown', e => {
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') goTo(current + 1);
+  if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   goTo(current - 1);
+});
+requestAnimationFrame(() => goTo(0));
+
+// ══════════════════════════ COPIAR ══════════════════════════
+function cp(btn) {
+  const box = btn.closest('.filebox');
+  const txt = box.querySelector('pre').innerText;
+  navigator.clipboard.writeText(txt).then(() => {
+    btn.textContent = 'copiado ✓'; btn.classList.add('done');
+    setTimeout(() => { btn.textContent = 'copiar'; btn.classList.remove('done'); }, 1800);
+  }).catch(() => { btn.textContent = 'erro'; setTimeout(() => btn.textContent = 'copiar', 1500); });
+}
+
+// ══════════════════════════ REPLAY ══════════════════════════
+function replay(btn) {
+  btn.closest('.slide-inner').querySelectorAll('.anim').forEach(box => {
+    box.classList.remove('run');
+    void box.offsetWidth;
+    box.classList.add('run');
+  });
+}
+
+// ══════════════════════════ CHECKBOX ══════════════════════════
+function tk(el) { el.classList.toggle('on'); }
+
+// ══════════════════════════ ACORDEÃO ══════════════════════════
+function ac(head) { head.parentElement.classList.toggle('open'); }
+
+// ══════════════════════════ TOGGLE v0 / v1 ══════════════════════════
+function vt(btn, id) {
+  const wrap = btn.closest('.slide-inner');
+  wrap.querySelectorAll('.vtab').forEach(t => t.classList.remove('on'));
+  wrap.querySelectorAll('.vpane').forEach(p => p.classList.remove('on'));
+  btn.classList.add('on');
+  wrap.querySelector('#' + id).classList.add('on');
+}
+
+// ══════════════════════════ JOGO DE ORDENAÇÃO ══════════════════════════
+const OG_ITEMS = [
+  { id:0, label:'ADR-001 · stack fechada' },
+  { id:1, label:'rules/restrictions.md' },
+  { id:2, label:'AGENTS.md v0 (pobre)' },
+  { id:3, label:'andar zero rodando' },
+  { id:4, label:'estrutura de pastas registrada' },
+  { id:5, label:'AGENTS.md v1 (com comandos)' },
+  { id:6, label:'docs/specs/001 · primeira spec' }
+];
+const OG_WHY = [
+  'Sem a stack fechada, o andar zero não tem o que provar.',
+  'Precisa existir ANTES do primeiro prompt que gera arquivo — é o que impede o scaffold.',
+  'Só ponteiros e processo. Ainda não há comando nem pasta para descrever.',
+  'A prova de que as escolhas do ADR funcionam juntas. Primeiro código do projeto.',
+  'A estrutura só é real depois que o esqueleto existe. Antes disso é palpite.',
+  'Agora os comandos e as pastas são fatos verificáveis. Segunda passada.',
+  'Só com o esqueleto de pé a primeira feature de produto começa.'
+];
+let ogPlaced = [];
+
+function ogShuffle(a) { const b = a.slice(); for (let i=b.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [b[i],b[j]]=[b[j],b[i]]; } return b; }
+
+function ogRender() {
+  const pool = document.getElementById('ogPool');
+  const slots = document.getElementById('ogSlots');
+  pool.innerHTML = '';
+  ogPool.forEach(it => {
+    const c = document.createElement('div');
+    c.className = 'og-chip'; c.textContent = it.label;
+    c.onclick = () => ogPlace(it.id);
+    pool.appendChild(c);
+  });
+  slots.innerHTML = '';
+  for (let i = 0; i < OG_ITEMS.length; i++) {
+    const s = document.createElement('div');
+    s.className = 'og-slot';
+    const placed = ogPlaced[i];
+    s.innerHTML = '<div class="os-n">' + (i+1) + '</div><div class="os-c">' +
+      (placed === undefined ? '—' : OG_ITEMS[placed].label) + '</div>';
+    if (placed !== undefined) { s.classList.add('filled'); s.onclick = () => ogRemove(i); }
+    slots.appendChild(s);
+  }
+}
+let ogPool = ogShuffle(OG_ITEMS);
+
+function ogPlace(id) {
+  if (ogPlaced.length >= OG_ITEMS.length) return;
+  ogPlaced.push(id);
+  ogPool = ogPool.filter(x => x.id !== id);
+  document.getElementById('ogMsg').textContent = '';
+  document.getElementById('ogMsg').className = 'og-msg';
+  ogRender();
+}
+function ogRemove(i) {
+  const id = ogPlaced[i];
+  ogPlaced.splice(i, 1);
+  ogPool.push(OG_ITEMS[id]);
+  document.getElementById('ogMsg').textContent = '';
+  document.getElementById('ogMsg').className = 'og-msg';
+  ogRender();
+}
+function ogReset() {
+  ogPlaced = []; ogPool = ogShuffle(OG_ITEMS);
+  document.getElementById('ogMsg').textContent = '';
+  document.getElementById('ogMsg').className = 'og-msg';
+  ogRender();
+}
+function ogCheck() {
+  const msg = document.getElementById('ogMsg');
+  if (ogPlaced.length < OG_ITEMS.length) {
+    msg.className = 'og-msg bad';
+    msg.textContent = 'Faltam peças — coloque as sete antes de conferir.';
+    return;
+  }
+  const slots = document.querySelectorAll('#ogSlots .og-slot');
+  let hits = 0;
+  ogPlaced.forEach((id, i) => {
+    if (id === i) { slots[i].classList.add('right'); hits++; }
+    else { slots[i].classList.add('wrong'); }
+  });
+  msg.className = 'og-msg ' + (hits === OG_ITEMS.length ? 'good' : 'bad');
+  msg.innerHTML = hits === OG_ITEMS.length
+    ? '<b>Sete de sete.</b> Agora a parte difícil: por que o restrictions.md vem antes do AGENTS.md?'
+    : '<b>' + hits + ' de ' + OG_ITEMS.length + ' na posição certa.</b> Antes de ver a resposta: qual das suas trocas você consegue defender?';
+}
+function ogSolve() {
+  ogPlaced = OG_ITEMS.map(it => it.id); ogPool = [];
+  ogRender();
+  const slots = document.querySelectorAll('#ogSlots .og-slot');
+  slots.forEach((s, i) => {
+    s.classList.add('right');
+    const w = document.createElement('div');
+    w.style.cssText = 'grid-column:2;font-size:.73rem;color:var(--muted);line-height:1.4;margin-top:4px;font-family:IBM Plex Sans,sans-serif;';
+    w.textContent = OG_WHY[i];
+    s.appendChild(w);
+  });
+  const msg = document.getElementById('ogMsg');
+  msg.className = 'og-msg';
+  msg.innerHTML = '<b>Verde é a priori, o que se escreve sem código. Do 4 em diante, cada peça depende da anterior ter rodado.</b>';
+}
+ogRender();
+</script>
+</body>
+</html>

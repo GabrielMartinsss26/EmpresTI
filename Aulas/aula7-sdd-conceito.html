@@ -1,0 +1,1491 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aula 7 — SDD: o conceito</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #050a14;
+  --cyan: #00e5ff;
+  --green: #00ff88;
+  --orange: #ff6b35;
+  --purple: #7c3aed;
+  --pink: #f472b6;
+  --yellow: #ffd500;
+  --text: #e8f4f8;
+  --muted: #7fa8c0;
+  --card: rgba(255,255,255,0.04);
+  --border: rgba(0,229,255,0.15);
+}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html, body { width:100%; height:100%; overflow:hidden; background:var(--bg); color:var(--text); font-family:'IBM Plex Sans',sans-serif; }
+
+#bg { position:fixed; inset:0; z-index:0; opacity:.3; pointer-events:none; }
+
+#progress-bar { position:fixed; top:0; left:0; height:3px; z-index:200;
+  background:linear-gradient(90deg, var(--cyan), var(--purple)); transition: width .4s ease; }
+
+#topbar {
+  position:fixed; top:0; left:0; right:0; height:52px; z-index:150;
+  background:rgba(5,10,20,.88); backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--border);
+  display:flex; align-items:center; justify-content:space-between; padding:0 32px;
+}
+.tb-label { font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--cyan); letter-spacing:2px; text-transform:uppercase; }
+.tb-counter { font-family:'IBM Plex Mono',monospace; font-size:13px; color:var(--muted); }
+.tb-title { font-size:13px; color:var(--muted); max-width:360px; text-align:center; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+
+#slides { position:fixed; inset:0; z-index:1; }
+.slide {
+  position:absolute; inset:0;
+  display:flex; flex-direction:column; justify-content:flex-start; align-items:center;
+  padding:72px 60px 80px;
+  opacity:0; pointer-events:none;
+  transition: opacity .5s ease, transform .5s ease;
+  transform: translateX(60px);
+  overflow-y: auto;
+}
+.slide.active { opacity:1; pointer-events:all; transform:translateX(0); }
+.slide.prev   { opacity:0; pointer-events:none; transform:translateX(-60px); }
+.slide-inner { width:100%; max-width:1060px; margin:auto 0; }
+.slide-scroll { overflow-y:auto; max-height:calc(100vh - 140px); padding-right:8px; }
+.slide-scroll::-webkit-scrollbar { width:4px; }
+.slide-scroll::-webkit-scrollbar-thumb { background:rgba(0,229,255,.2); border-radius:2px; }
+
+#nav-prev, #nav-next {
+  position:fixed; top:50%; z-index:200; transform:translateY(-50%);
+  width:48px; height:48px; border-radius:50%;
+  border:1px solid var(--border); background:rgba(5,10,20,.7);
+  backdrop-filter:blur(8px); cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  font-size:20px; color:var(--cyan); transition:all .2s; user-select:none;
+}
+#nav-prev { left:16px; } #nav-next { right:16px; }
+#nav-prev:hover, #nav-next:hover { background:rgba(0,229,255,.12); border-color:var(--cyan); }
+#nav-prev.disabled, #nav-next.disabled { opacity:.25; pointer-events:none; }
+
+#dots { position:fixed; bottom:18px; left:50%; transform:translateX(-50%); display:flex; gap:7px; z-index:200; }
+.dot { width:7px; height:7px; border-radius:50%; background:var(--muted); opacity:.4; cursor:pointer; transition:all .3s; }
+.dot.active { background:var(--cyan); opacity:1; transform:scale(1.3); }
+
+.tag  { font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--cyan);   letter-spacing:3px; text-transform:uppercase; margin-bottom:10px; display:block; }
+.gtag { font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--green);  letter-spacing:3px; text-transform:uppercase; margin-bottom:10px; display:block; }
+.ptag { font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--purple); letter-spacing:3px; text-transform:uppercase; margin-bottom:10px; display:block; }
+.otag { font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--orange); letter-spacing:3px; text-transform:uppercase; margin-bottom:10px; display:block; }
+
+h1.hero-title { font-family:'Syne',sans-serif; font-size:clamp(2.2rem,4.6vw,4.2rem); font-weight:800; line-height:1.05; margin-bottom:20px; }
+h2.sec-title  { font-family:'Syne',sans-serif; font-size:clamp(1.5rem,3.3vw,2.5rem); font-weight:800; line-height:1.15; margin-bottom:12px; }
+h3.slide-h3   { font-family:'Syne',sans-serif; font-size:1.2rem; font-weight:700; margin-bottom:16px; }
+p.lead { color:var(--muted); font-size:1rem; line-height:1.7; margin-bottom:24px; }
+
+.badge {
+  display:inline-flex; align-items:center; gap:8px;
+  background:rgba(0,229,255,.08); border:1px solid var(--border);
+  border-radius:20px; padding:6px 16px;
+  font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--cyan); letter-spacing:1px;
+  margin-bottom:28px; width:fit-content;
+}
+.badge::before { content:''; width:7px; height:7px; background:var(--green); border-radius:50%; animation:pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.5)} }
+
+.hero-q {
+  background:linear-gradient(135deg,rgba(0,229,255,.06),rgba(124,58,237,.06));
+  border:1px solid rgba(0,229,255,.2); border-left:4px solid var(--cyan);
+  border-radius:12px; padding:22px 28px; font-size:1.1rem; font-style:italic; color:var(--text);
+  max-width:740px; margin-top:8px;
+}
+@keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+
+.card { background:var(--card); border:1px solid var(--border); border-radius:16px; padding:24px; }
+.g2 { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+.g3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; }
+@media(max-width:680px){.g2,.g3{grid-template-columns:1fr}}
+
+.bridge { background:linear-gradient(135deg,rgba(0,229,255,.05),rgba(124,58,237,.05)); border:1px solid rgba(0,229,255,.2); border-radius:14px; padding:22px 26px; }
+
+.code { background:rgba(0,0,0,.42); border:1px solid var(--border); border-radius:10px;
+  padding:14px 18px; font-family:'IBM Plex Mono',monospace; font-size:.76rem;
+  line-height:1.75; overflow-x:auto; white-space:pre; color:#bfe4f2; }
+.code .c { color:var(--muted); font-style:italic; }
+.code .h { color:var(--cyan); font-weight:500; }
+
+.tbl { width:100%; border-collapse:collapse; font-size:.84rem; }
+.tbl th { text-align:left; font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:var(--cyan); padding:10px 14px; border-bottom:1px solid var(--border); }
+.tbl td { padding:11px 14px; border-bottom:1px solid rgba(255,255,255,.05); color:var(--muted); vertical-align:top; line-height:1.55; }
+.tbl td strong { color:var(--text); }
+.tbl tbody tr:hover td { background:rgba(0,229,255,.03); }
+
+.yn { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+@media(max-width:680px){ .yn{ grid-template-columns:1fr; } }
+.yn-col { border-radius:14px; padding:18px 20px; }
+.yn-yes { background:rgba(0,255,136,.05); border:1px solid rgba(0,255,136,.22); }
+.yn-no  { background:rgba(255,107,53,.05); border:1px solid rgba(255,107,53,.22); }
+.yn-col h4 { font-family:'Syne',sans-serif; font-size:.95rem; margin-bottom:12px; }
+.yn-col li { list-style:none; font-size:.83rem; color:var(--muted); line-height:1.55; padding:6px 0 6px 20px; position:relative; }
+.yn-yes li::before { content:'✓'; position:absolute; left:0; color:var(--green); }
+.yn-no  li::before { content:'✕'; position:absolute; left:0; color:var(--orange); }
+
+.hsec { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:14px 18px; margin-bottom:10px; border-left:3px solid var(--purple); }
+.hsec .hn { font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--purple); letter-spacing:1.5px; margin-bottom:5px; }
+.hsec .ht { font-family:'Syne',sans-serif; font-weight:700; font-size:.92rem; margin-bottom:4px; }
+.hsec .hd { color:var(--muted); font-size:.82rem; line-height:1.55; }
+.hsec.star { border-left-color:var(--orange); background:rgba(255,107,53,.04); }
+.hsec.star .hn { color:var(--orange); }
+.hsec.ok { border-left-color:var(--green); background:rgba(0,255,136,.04); }
+.hsec.ok .hn { color:var(--green); }
+
+.filebox { border:1px solid var(--border); border-radius:12px; overflow:hidden; background:rgba(0,0,0,.42); margin-bottom:14px; }
+.filebox-head { display:flex; align-items:center; justify-content:space-between; gap:12px;
+  background:rgba(0,229,255,.06); border-bottom:1px solid var(--border);
+  padding:8px 14px; font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--cyan); letter-spacing:1px; }
+.filebox-head .fb-path::before { content:'▸ '; opacity:.6; }
+.copybtn { font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:1px; text-transform:uppercase;
+  border:1px solid var(--border); background:transparent; color:var(--muted);
+  border-radius:6px; padding:4px 10px; cursor:pointer; transition:.2s; }
+.copybtn:hover { border-color:var(--cyan); color:var(--cyan); }
+.copybtn.done { border-color:var(--green); color:var(--green); }
+.filebox pre { padding:14px 18px; font-family:'IBM Plex Mono',monospace; font-size:.74rem;
+  line-height:1.7; overflow-x:auto; white-space:pre; color:#bfe4f2; max-height:340px; overflow-y:auto; }
+.filebox pre::-webkit-scrollbar { width:4px; height:4px; }
+.filebox pre::-webkit-scrollbar-thumb { background:rgba(0,229,255,.2); border-radius:2px; }
+
+.expected { background:rgba(0,255,136,.05); border:1px solid rgba(0,255,136,.25); border-left:3px solid var(--green); border-radius:12px; padding:14px 18px; margin-top:14px; }
+.expected .ex-h { font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--green); margin-bottom:8px; }
+.expected li { list-style:none; font-size:.83rem; color:var(--muted); line-height:1.6; padding:3px 0 3px 20px; position:relative; }
+.expected li::before { content:'→'; position:absolute; left:0; color:var(--green); }
+.expected li strong { color:var(--text); }
+
+.warnbox { background:rgba(255,107,53,.05); border:1px solid rgba(255,107,53,.25); border-left:3px solid var(--orange); border-radius:12px; padding:14px 18px; margin-top:14px; }
+.warnbox .wh { font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--orange); margin-bottom:7px; }
+.warnbox p { font-size:.83rem; color:var(--muted); line-height:1.6; }
+.warnbox p strong { color:var(--text); }
+
+.checklist { display:grid; grid-template-columns:1fr 1fr; gap:9px; }
+@media(max-width:680px){ .checklist{ grid-template-columns:1fr; } }
+.chk { display:flex; gap:10px; align-items:flex-start; background:var(--card); border:1px solid var(--border); border-radius:10px; padding:11px 14px; font-size:.83rem; color:var(--muted); line-height:1.5; cursor:pointer; transition:.2s; user-select:none; }
+.chk:hover { border-color:var(--cyan); }
+.chk .box { flex-shrink:0; width:16px; height:16px; border:1px solid var(--muted); border-radius:4px; margin-top:2px; display:flex; align-items:center; justify-content:center; font-size:11px; color:transparent; }
+.chk.on { border-color:var(--green); background:rgba(0,255,136,.06); color:var(--text); }
+.chk.on .box { border-color:var(--green); background:var(--green); color:var(--bg); }
+.chk.on .box::before { content:'✓'; }
+
+
+/* ═══════════════════════════════════════════════════════════
+   MOTOR DE ANIMAÇÃO
+   Nada anima no load. Um container .anim só roda quando o slide
+   entra em foco — o JS remove e recoloca .run, reiniciando tudo.
+   ═══════════════════════════════════════════════════════════ */
+.anim .ai { opacity:0; }
+.anim.run .ai { animation:aIn .5s ease forwards; animation-delay:var(--d,0s); }
+@keyframes aIn { from{opacity:0; transform:translateY(-10px)} to{opacity:1; transform:translateY(0)} }
+.anim .bar { width:0; }
+.anim.run .bar { animation:barGrow .85s cubic-bezier(.2,.75,.3,1) forwards; animation-delay:var(--d,0s); }
+@keyframes barGrow { from{width:0} to{width:var(--w)} }
+
+@media (prefers-reduced-motion: reduce) {
+  .anim .ai { opacity:1 !important; }
+  .anim .bar { width:var(--w) !important; }
+  .anim.run .ai, .anim.run .bar, .badge::before, .pulsebox { animation:none !important; }
+  .slide { transition:none !important; }
+}
+
+.replay { font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:1px;
+  border:1px solid var(--border); background:transparent; color:var(--muted);
+  border-radius:8px; padding:6px 16px; cursor:pointer; transition:.2s; }
+.replay:hover { border-color:var(--cyan); color:var(--cyan); }
+
+/* ═══ FONTE DE VERDADE — 3 fluxos ═══ */
+.truth { display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; margin-bottom:16px; }
+@media(max-width:820px){ .truth{ grid-template-columns:1fr; } }
+.tcol { border-radius:14px; padding:16px 18px; background:var(--card); border:1px solid var(--border); }
+.tcol h4 { font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:1.6px; text-transform:uppercase; margin-bottom:12px; color:var(--muted); }
+.tcol.a { border-color:rgba(255,107,53,.3); } .tcol.a h4 { color:var(--orange); }
+.tcol.b { border-color:rgba(244,114,182,.3); } .tcol.b h4 { color:var(--pink); }
+.tcol.c { border-color:rgba(0,255,136,.35); background:rgba(0,255,136,.04); } .tcol.c h4 { color:var(--green); }
+.chainrow { display:flex; align-items:center; gap:7px; flex-wrap:wrap; margin-bottom:10px; }
+.cbox { font-family:'IBM Plex Mono',monospace; font-size:.7rem; padding:5px 9px; border-radius:7px;
+  border:1px solid rgba(255,255,255,.12); background:rgba(0,0,0,.3); color:var(--muted); }
+.cbox.truthsrc { border-color:var(--cyan); color:var(--cyan); background:rgba(0,229,255,.1); font-weight:500;
+  animation:tpulse 2.2s ease-in-out infinite; }
+@keyframes tpulse { 0%,100%{box-shadow:0 0 0 0 rgba(0,229,255,.3)} 50%{box-shadow:0 0 0 7px rgba(0,229,255,0)} }
+.cbox.dead { opacity:.45; text-decoration:line-through; }
+.carr { color:var(--muted); font-size:.8rem; }
+.tcol .tnote { font-size:.78rem; color:var(--muted); line-height:1.55; border-top:1px solid rgba(255,255,255,.07); padding-top:10px; }
+.tcol .tnote strong { color:var(--text); }
+
+/* ═══ BARRAS DE CUSTO ═══ */
+.costs { display:flex; flex-direction:column; gap:9px; margin:4px 0 14px; }
+.costrow { display:grid; grid-template-columns:150px 1fr; gap:14px; align-items:center; }
+@media(max-width:680px){ .costrow{ grid-template-columns:1fr; gap:4px; } }
+.costrow .cl { font-family:'IBM Plex Mono',monospace; font-size:.74rem; color:var(--muted); text-align:right; }
+@media(max-width:680px){ .costrow .cl{ text-align:left; } }
+.bar { height:28px; border-radius:8px; display:flex; align-items:center; padding:0 12px;
+  font-family:'IBM Plex Mono',monospace; font-size:.72rem; font-weight:600; color:var(--bg); white-space:nowrap; }
+.bar.b1 { background:linear-gradient(90deg,var(--green),rgba(0,255,136,.55)); }
+.bar.b2 { background:linear-gradient(90deg,var(--cyan),rgba(0,229,255,.5)); }
+.bar.b3 { background:linear-gradient(90deg,var(--yellow),rgba(255,213,0,.5)); }
+.bar.b4 { background:linear-gradient(90deg,var(--orange),rgba(255,107,53,.5)); color:#fff; }
+
+/* ═══ RAÍZES × IMPLEMENTAÇÕES ═══ */
+.roots { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px; }
+@media(max-width:820px){ .roots{ grid-template-columns:1fr; } }
+.rootcol { border-radius:14px; padding:18px 20px; background:var(--card); border:1px solid var(--border); }
+.rootcol.old { border-color:rgba(255,107,53,.28); }
+.rootcol.now { border-color:rgba(0,255,136,.32); background:rgba(0,255,136,.04); }
+.rootcol h4 { font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:1.6px; text-transform:uppercase; margin-bottom:14px; }
+.rootcol.old h4 { color:var(--orange); } .rootcol.now h4 { color:var(--green); }
+.ritem { display:flex; gap:10px; align-items:flex-start; padding:8px 0; border-bottom:1px solid rgba(255,255,255,.05); font-size:.8rem; color:var(--muted); line-height:1.5; }
+.ritem:last-child { border-bottom:none; }
+.ritem b { color:var(--text); font-weight:600; font-family:'Syne',sans-serif; }
+.ritem .rmark { color:var(--muted); font-family:'IBM Plex Mono',monospace; font-size:.7rem; flex-shrink:0; padding-top:2px; }
+
+/* ═══ CADEIA HORIZONTAL DE ABERTURA ═══ */
+.bigchain { display:flex; align-items:stretch; justify-content:center; gap:10px; flex-wrap:wrap; margin:18px 0 8px; }
+.bcstep { flex:1 1 190px; min-width:180px; max-width:250px; border-radius:16px; padding:20px 18px;
+  background:var(--card); border:1px solid var(--border); text-align:center; }
+.bcstep .bck { font-family:'Syne',sans-serif; font-weight:800; font-size:1.5rem; margin-bottom:6px; }
+.bcstep .bcw { font-family:'IBM Plex Mono',monospace; font-size:1.05rem; letter-spacing:1px; color:var(--text); margin-bottom:10px; }
+.bcstep .bcd { font-size:.78rem; color:var(--muted); line-height:1.5; }
+.bcstep.s1 { border-color:rgba(0,229,255,.45); background:rgba(0,229,255,.06); } .bcstep.s1 .bck { color:var(--cyan); }
+.bcstep.s2 { border-color:rgba(124,58,237,.45); } .bcstep.s2 .bck { color:var(--purple); }
+.bcstep.s3 { border-color:rgba(244,114,182,.4); } .bcstep.s3 .bck { color:var(--pink); }
+.bcstep.s4 { border-color:rgba(0,255,136,.45); background:rgba(0,255,136,.05); } .bcstep.s4 .bck { color:var(--green); }
+.bcarr { display:flex; align-items:center; font-size:1.5rem; color:var(--muted); }
+@media(max-width:820px){ .bcarr{ transform:rotate(90deg); justify-content:center; width:100%; } }
+
+/* ═══ CADEIA VERTICAL (nós derivados) ═══ */
+.flowbox { display:flex; flex-direction:column; align-items:center; gap:6px; margin:10px 0 4px; }
+.fnode { background:var(--card); border:1px solid var(--border); border-radius:12px;
+  padding:12px 18px; text-align:center; min-width:210px; max-width:420px; }
+.fnode .fn-k { font-family:'IBM Plex Mono',monospace; font-size:9.5px; letter-spacing:1.6px;
+  text-transform:uppercase; color:var(--muted); margin-bottom:5px; }
+.fnode .fn-t { font-family:'Syne',sans-serif; font-weight:700; font-size:.92rem; color:var(--text); line-height:1.3; }
+.fnode .fn-d { font-size:.75rem; color:var(--muted); margin-top:5px; line-height:1.45; }
+.fnode.hub { border-color:var(--cyan); background:rgba(0,229,255,.07); }
+.fnode.hub .fn-k, .fnode.hub .fn-t { color:var(--cyan); }
+.fnode.lock { border-color:rgba(0,255,136,.4); background:rgba(0,255,136,.05); }
+.fnode.lock .fn-k, .fnode.lock .fn-t { color:var(--green); }
+.fnode.ask { border-color:rgba(124,58,237,.45); background:rgba(124,58,237,.07); }
+.fnode.ask .fn-k { color:var(--pink); }
+.fnode.mono .fn-t { font-family:'IBM Plex Mono',monospace; font-size:.78rem; font-weight:500; }
+.farrow { color:var(--muted); font-size:1.05rem; display:flex; align-items:center; gap:10px; }
+.fbranch { font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); }
+
+/* ═══ CAMADA PERMANENTE (contexto que restringe) ═══ */
+.ctxband { border:1px dashed rgba(124,58,237,.45); background:rgba(124,58,237,.05);
+  border-radius:14px; padding:14px 18px; margin-bottom:6px; }
+.ctxband .cbh { font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:1.6px;
+  text-transform:uppercase; color:var(--pink); margin-bottom:10px; display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+.ctxband .cbh span:last-child { color:var(--muted); letter-spacing:1px; }
+.ctxchips { display:flex; flex-wrap:wrap; gap:8px; }
+.ctxchip { background:rgba(0,0,0,.3); border:1px solid rgba(124,58,237,.35); border-radius:9px;
+  padding:8px 12px; min-width:150px; flex:1 1 150px; }
+.ctxchip .cc-t { font-family:'IBM Plex Mono',monospace; font-size:.74rem; color:var(--pink); margin-bottom:3px; }
+.ctxchip .cc-d { font-size:.72rem; color:var(--muted); line-height:1.4; }
+.ctxchip.soon { border-style:dashed; border-color:rgba(127,168,192,.3); }
+.ctxchip.soon .cc-t { color:var(--muted); }
+.restrains { text-align:center; font-family:'IBM Plex Mono',monospace; font-size:10px;
+  letter-spacing:2px; text-transform:uppercase; color:var(--pink); margin:6px 0 8px; }
+
+/* ═══ CICLO DE MUDANÇA ═══ */
+.cycle { display:flex; flex-wrap:wrap; align-items:stretch; justify-content:center; gap:8px; margin:8px 0 6px; }
+.cynode { flex:1 1 155px; min-width:155px; max-width:205px; background:var(--card); border:1px solid var(--border);
+  border-radius:12px; padding:11px 14px; }
+.cynode .cn { font-family:'IBM Plex Mono',monospace; font-size:9.5px; letter-spacing:1.5px; text-transform:uppercase; color:var(--cyan); margin-bottom:5px; }
+.cynode .ct { font-family:'Syne',sans-serif; font-weight:700; font-size:.85rem; line-height:1.25; margin-bottom:4px; }
+.cynode .cd { font-size:.73rem; color:var(--muted); line-height:1.45; }
+.cynode.start { border-color:rgba(124,58,237,.45); background:rgba(124,58,237,.07); } .cynode.start .cn { color:var(--pink); }
+.cynode.key { border-color:rgba(0,255,136,.4); background:rgba(0,255,136,.05); } .cynode.key .cn { color:var(--green); }
+.cyback { flex-basis:100%; text-align:center; font-family:'IBM Plex Mono',monospace; font-size:11px;
+  letter-spacing:1.5px; text-transform:uppercase; color:var(--pink); margin-top:6px; }
+
+/* ═══ ATIVIDADE ═══ */
+
+/* ═══ CAMADAS DAS QUATRO SIGLAS ═══ */
+.layers { display:flex; flex-direction:column; gap:8px; margin-bottom:16px; }
+.layer { display:grid; grid-template-columns:76px 1fr 1fr; gap:14px; align-items:center;
+  border-radius:12px; padding:13px 18px; border:1px solid var(--border); background:var(--card); }
+@media(max-width:680px){ .layer{ grid-template-columns:66px 1fr; } .layer .lx{ grid-column:1/-1; } }
+.layer .ln { font-family:'Syne',sans-serif; font-weight:800; font-size:1.02rem; }
+.layer .lq { font-size:.82rem; color:var(--text); line-height:1.45; }
+.layer .lx { font-size:.76rem; color:var(--muted); line-height:1.45; font-family:'IBM Plex Mono',monospace; }
+.layer.sdd { border-color:rgba(0,229,255,.4); background:rgba(0,229,255,.06); } .layer.sdd .ln { color:var(--cyan); }
+.layer.bdd { border-color:rgba(244,114,182,.35); } .layer.bdd .ln { color:var(--pink); }
+.layer.tdd { border-color:rgba(0,255,136,.35); } .layer.tdd .ln { color:var(--green); }
+.layer.ddd { border-color:rgba(255,107,53,.35); } .layer.ddd .ln { color:var(--orange); }
+
+/* ═══ ESCADA DE MATURIDADE ═══ */
+.ladder { display:flex; flex-direction:column; gap:7px; margin-bottom:14px; }
+.rung { display:grid; grid-template-columns:52px 1fr; gap:14px; align-items:stretch;
+  border:1px solid var(--border); border-radius:12px; background:var(--card); padding:12px 16px; position:relative; }
+.rung .rn { font-family:'Syne',sans-serif; font-weight:800; font-size:1.5rem; color:var(--muted); display:flex; align-items:center; justify-content:center; }
+.rung .rt { font-family:'Syne',sans-serif; font-weight:700; font-size:.94rem; margin-bottom:3px; }
+.rung .rd { font-size:.79rem; color:var(--muted); line-height:1.5; }
+.rung .rs { font-size:.74rem; color:var(--muted); margin-top:6px; font-style:italic; }
+.rung .rs b { color:var(--orange); font-style:normal; font-weight:500; }
+.rung.r0 { border-color:rgba(255,107,53,.3); } .rung.r0 .rn { color:var(--orange); }
+.rung.r1 { border-color:rgba(244,114,182,.3); } .rung.r1 .rn { color:var(--pink); }
+.rung.here { border-color:var(--green); background:rgba(0,255,136,.06); }
+.rung.here .rn, .rung.here .rt { color:var(--green); }
+.youhere { position:absolute; top:-9px; right:14px; font-family:'IBM Plex Mono',monospace; font-size:9px;
+  letter-spacing:1.5px; text-transform:uppercase; background:var(--green); color:var(--bg);
+  padding:2px 9px; border-radius:20px; }
+.rung.fut { border-color:rgba(124,58,237,.3); background:rgba(124,58,237,.04); } .rung.fut .rn { color:var(--purple); }
+.rung .rw { font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:1.4px; text-transform:uppercase;
+  color:var(--muted); border:1px solid var(--border); border-radius:20px; padding:2px 9px; margin-left:8px; }
+
+.scopetag { display:inline-flex; align-items:center; gap:8px; font-family:'IBM Plex Mono',monospace;
+  font-size:10px; letter-spacing:1.4px; text-transform:uppercase; color:var(--muted);
+  border:1px dashed rgba(127,168,192,.4); border-radius:8px; padding:5px 12px; margin-bottom:14px; }
+.scopetag::before { content:'⚑'; color:var(--orange); }
+
+</style>
+</head>
+<body>
+
+<canvas id="bg"></canvas>
+<div id="progress-bar"></div>
+
+<div id="topbar">
+  <span class="tb-label">⬡ Aula 07 — SDD, o conceito</span>
+  <span class="tb-title" id="slide-title-bar"></span>
+  <span class="tb-counter" id="slide-counter"></span>
+</div>
+
+<div id="nav-prev">←</div>
+<div id="nav-next">→</div>
+<div id="dots"></div>
+
+<div id="slides">
+
+<!-- ─── ABERTURA ─── -->
+<div class="slide active" data-title="Abertura">
+<div class="slide-inner">
+  <div class="badge">SDD: O CONCEITO · AULA 7</div>
+  <h1 class="hero-title">Vocês fizeram<br>SDD três vezes.<br><span style="color:var(--orange)">Nunca definiram<br>a palavra.</span></h1>
+  <p class="lead" style="max-width:780px;">Aulas 4 e 5: PRD, ADR, plano, execução. Aula 6: spec de funcionalidade num projeto que já existia. Na avaliação, sozinhos. E o nome só apareceu no penúltimo slide da aula passada, <strong style="color:var(--text)">depois</strong> de tudo já ter acontecido.</p>
+  <div class="hero-q">💭 Hoje é a única aula sem editor aberto. Na próxima vocês partem de um PRD e um repositório <strong style="font-style:normal;color:var(--text)">vazio</strong> — e lá não vai dar pra improvisar.</div>
+</div>
+</div>
+
+<!-- ─── A CADEIA EM UMA FRASE ─── -->
+<div class="slide" data-title="A cadeia em uma frase">
+<div class="slide-inner slide-scroll">
+  <span class="tag">se vocês guardarem uma coisa da aula, que seja esta</span>
+  <h2 class="sec-title">Quatro palavras,<br>nesta ordem</h2>
+
+  <div class="bigchain anim">
+    <div class="bcstep s1 ai" style="--d:.1s"><div class="bck">SPEC</div><div class="bcw">o quê</div><div class="bcd">O comportamento esperado. Decisões fechadas e critérios verificáveis.</div></div>
+    <div class="bcarr ai" style="--d:.4s">→</div>
+    <div class="bcstep s2 ai" style="--d:.55s"><div class="bck">PLAN</div><div class="bcw">como</div><div class="bcd">A estratégia técnica. Stack, camadas, contratos, ordem de ataque.</div></div>
+    <div class="bcarr ai" style="--d:.85s">→</div>
+    <div class="bcstep s3 ai" style="--d:1s"><div class="bck">TASKS</div><div class="bcw">passos</div><div class="bcd">Unidades pequenas e verificáveis. Cada uma cabe num commit.</div></div>
+    <div class="bcarr ai" style="--d:1.3s">→</div>
+    <div class="bcstep s4 ai" style="--d:1.45s"><div class="bck">CODE</div><div class="bcw">execução</div><div class="bcd">A realização, provada pelos testes que vieram dos critérios.</div></div>
+  </div>
+
+  <div style="text-align:center;margin:14px 0 20px;">
+    <button class="replay" onclick="replay(this)">▸ rodar de novo</button>
+  </div>
+
+  <div class="hero-q" style="max-width:960px;margin-bottom:16px;">
+    🎯 Cada seta é uma <strong style="font-style:normal;color:var(--text)">derivação</strong>: o de baixo sai do de cima e é conferido contra ele. Quando alguém pula uma etapa, não ganha velocidade — só devolve ao agente a decisão que a etapa anterior tinha acabado de tirar dele.
+  </div>
+
+  <div class="g2">
+    <div class="card" style="border-color:rgba(0,255,136,.3)">
+      <span class="gtag">vocês já fizeram isso</span>
+      <p style="color:var(--muted);font-size:.84rem;line-height:1.65;">Aula 6: briefing → <code>docs/specs/001-cupom/spec.md</code> → <code>plan.md</code> → tarefa 1 → commit. <strong style="color:var(--text)">Os nomes mudaram, a cadeia é a mesma.</strong></p>
+    </div>
+    <div class="card" style="border-color:rgba(124,58,237,.35)">
+      <span class="ptag">e os frameworks também</span>
+      <p style="color:var(--muted);font-size:.84rem;line-height:1.65;">Spec Kit nomeia como especificar, planejar, gerar tarefas e implementar. Kiro organiza em requisitos, design e tarefas. <strong style="color:var(--text)">Muda quem obriga e quem bloqueia, não a ordem.</strong></p>
+    </div>
+  </div>
+
+  <div class="warnbox">
+    <div class="wh">o resto da aula é o porquê disso</div>
+    <p>Essa frase é fácil de decorar e fácil de aplicar errado. As próximas quarenta e poucas telas existem para responder: por que a spec vem antes, o que faz uma spec ser spec, o que restringe essa cadeia de fora, e <strong>quando ela não vale a pena</strong>.</p>
+  </div>
+</div>
+</div>
+
+<!-- ─── A INVERSÃO E A DEFINIÇÃO ─── -->
+<div class="slide" data-title="A inversão e a definição">
+<div class="slide-inner slide-scroll">
+  <span class="tag">a definição forte</span>
+  <h2 class="sec-title">SDD não é<br>"documentar antes"</h2>
+  <p class="lead">É uma troca de <strong style="color:var(--text)">fonte de verdade sobre o comportamento</strong>. Repare em quem está piscando em cada fluxo: é o artefato que ganha a discussão quando os dois discordam sobre o que o sistema deve fazer.</p>
+
+  <div class="truth">
+    <div class="tcol a">
+      <h4>fluxo tradicional</h4>
+      <div class="chainrow">
+        <span class="cbox">intenção</span><span class="carr">→</span>
+        <span class="cbox truthsrc">código</span><span class="carr">→</span>
+        <span class="cbox">doc</span>
+      </div>
+      <div class="tnote">O documento é uma <strong>descrição</strong> do código, escrita depois. Envelhece sozinho e ninguém percebe.</div>
+    </div>
+    <div class="tcol b">
+      <h4>vibe coding sem estrutura</h4>
+      <div class="chainrow">
+        <span class="cbox">intenção</span><span class="carr">→</span>
+        <span class="cbox dead">chat</span><span class="carr">→</span>
+        <span class="cbox truthsrc">código</span>
+      </div>
+      <div class="tnote">A intenção existiu — dentro de uma conversa que <strong>morreu com a sessão</strong>. É a aula 3 de novo.</div>
+    </div>
+    <div class="tcol c">
+      <h4>spec-driven</h4>
+      <div class="chainrow">
+        <span class="cbox">intenção</span><span class="carr">→</span>
+        <span class="cbox truthsrc">spec</span><span class="carr">→</span>
+        <span class="cbox">código</span>
+      </div>
+      <div class="tnote">A spec é <strong>versionada</strong> e vem antes. Código e testes são a saída derivada dela.</div>
+    </div>
+  </div>
+
+  <div class="filebox">
+    <div class="filebox-head"><span class="fb-path">definição · versão técnica</span><button class="copybtn" onclick="cp(this)">copiar</button></div>
+    <pre>Spec-Driven Development é uma abordagem de desenvolvimento em que
+a intenção e o comportamento esperado do software são explicitados
+em especificações versionadas antes da implementação, e os
+artefatos posteriores — design, plano, tarefas, testes e código —
+são derivados e validados contra essas especificações.</pre>
+  </div>
+
+  <div class="filebox">
+    <div class="filebox-head"><span class="fb-path">definição · em português simples</span><button class="copybtn" onclick="cp(this)">copiar</button></div>
+    <pre>Antes de pedir para a IA decidir COMO construir, nós decidimos
+com precisão O QUE precisa ser construído.</pre>
+  </div>
+
+  <div class="hsec"><div class="hn">palavra 1</div><div class="ht">"versionadas"</div><div class="hd">Mora no repositório, tem histórico e passa por revisão. Spec num documento compartilhado onde ninguém sabe quem editou por último não cumpre a definição.</div></div>
+  <div class="hsec"><div class="hn">palavra 2</div><div class="ht">"antes da implementação"</div><div class="hd">Não é sobre ser lento — é sobre a ordem. Spec escrita depois pode até ser útil, mas é documentação: ela descreve, não governa.</div></div>
+  <div class="hsec"><div class="hn">palavra 3</div><div class="ht">"derivados e validados contra"</div><div class="hd">É a cadeia do slide anterior, dita em três palavras. Não basta a spec existir — plano, tarefas e testes precisam <strong style="color:var(--text)">sair dela</strong> e ser conferidos <strong style="color:var(--text)">contra ela</strong>.</div></div>
+
+  <span class="tag" style="margin-top:20px;">antes que alguém pergunte</span>
+  <h3 class="slide-h3">"Fonte de verdade" de quê?</h3>
+  <p style="color:var(--muted);font-size:.87rem;line-height:1.7;margin-bottom:12px;">A spec não é fonte de verdade de tudo. Cada artefato do repositório é autoridade sobre uma coisa diferente — e essa divisão é o que impede briga de artefato:</p>
+
+  <table class="tbl" style="margin-bottom:16px;">
+    <thead><tr><th>artefato</th><th>é autoridade sobre</th></tr></thead>
+    <tbody>
+      <tr><td><strong>princípios do projeto</strong></td><td>o que vale para qualquer feature</td></tr>
+      <tr><td><strong>ADR</strong></td><td>as decisões arquiteturais e o motivo delas</td></tr>
+      <tr style="background:rgba(0,255,136,.05)"><td><strong style="color:var(--green)">spec</strong></td><td><strong style="color:var(--text)">o comportamento esperado</strong></td></tr>
+      <tr><td><strong>plano / design</strong></td><td>como aquilo vai ser construído</td></tr>
+      <tr><td><strong>código</strong></td><td>a implementação que existe hoje</td></tr>
+      <tr><td><strong>testes</strong></td><td>a evidência verificável de que o comportamento está lá</td></tr>
+    </tbody>
+  </table>
+
+  <div class="hero-q" style="max-width:960px;margin-bottom:16px;">
+    💭 E daí sai a consequência prática, que é a única frase operacional da aula: <strong style="font-style:normal;color:var(--text)">mudou o comportamento? muda a spec primeiro, o código depois.</strong> Se a ordem for a inversa, não é SDD — é documentação com passos extras.
+  </div>
+
+  <div class="warnbox">
+    <div class="wh">o acordo que precisa estar escrito em algum lugar</div>
+    <p>Nada disso funciona se o time não combinar <strong>quem ganha a discussão</strong>. A regra é uma linha: <em>se a spec e o código discordarem sobre comportamento, a spec está certa até que alguém mude a spec.</em> Sem ela escrita, spec é sugestão — e volta a ser documentação no primeiro prazo apertado. <strong>Onde essa linha mora depende do seu projeto:</strong> no topo do AGENTS.md, num <code>docs/principios.md</code>, ou — se você usar Spec Kit — no <code>constitution.md</code> dele.</p>
+  </div>
+</div>
+</div>
+
+<!-- ─── POR QUE USAR SDD ─── -->
+<div class="slide" data-title="Por que usar SDD?">
+<div class="slide-inner slide-scroll">
+  <span class="gtag">a pergunta que o seu tech lead vai fazer</span>
+  <h2 class="sec-title">Então por que<br>usar SDD?</h2>
+  <p class="lead">Cinco dores concretas — todas vocês já sentiram em alguma das seis aulas anteriores — e o que muda em cada uma.</p>
+
+  <table class="tbl" style="margin-bottom:22px;">
+    <thead><tr><th style="width:50%">sem SDD</th><th>com SDD</th></tr></thead>
+    <tbody>
+      <tr><td>O agente interpreta a mesma tarefa de um jeito diferente a cada execução</td><td><strong>A intenção fica persistida</strong> — e vale igual na terça e na sexta</td></tr>
+      <tr><td>O requisito errado só aparece quando o código já está pronto</td><td><strong>Aparece na spec</strong>, enquanto ainda é um parágrafo</td></tr>
+      <tr><td>As decisões ficam no chat e na cabeça de quem estava na reunião</td><td><strong>Ficam versionadas</strong>, com histórico e revisão</td></tr>
+      <tr><td>A revisão começa quando já existe muito código para discutir</td><td><strong>Começa quando mudar ainda é barato</strong></td></tr>
+      <tr><td>Cada agente novo — e cada pessoa nova — reconstrói o contexto do zero</td><td><strong>Os artefatos carregam o contexto</strong> e sobrevivem à saída das pessoas</td></tr>
+    </tbody>
+  </table>
+
+  <span class="otag">o que está por trás das cinco linhas</span>
+  <h3 class="slide-h3" style="margin-bottom:14px;">Custo de corrigir a mesma decisão errada</h3>
+
+  <div class="costs anim">
+    <div class="costrow"><div class="cl">na spec</div><div class="bar b1" style="--w:14%;--d:.1s">editar uma linha</div></div>
+    <div class="costrow"><div class="cl">no plano</div><div class="bar b2" style="--w:30%;--d:.4s">refazer as tarefas</div></div>
+    <div class="costrow"><div class="cl">no código</div><div class="bar b3" style="--w:60%;--d:.7s">reimplementar e refazer testes</div></div>
+    <div class="costrow"><div class="cl">em produção</div><div class="bar b4" style="--w:100%;--d:1s">migrar dado, tratar incidente, recuperar confiança</div></div>
+  </div>
+
+  <div style="text-align:center;margin-bottom:16px;">
+    <button class="replay" onclick="replay(this)">▸ rodar de novo</button>
+  </div>
+
+  <div class="hero-q" style="max-width:960px;">
+    🎯 <strong style="font-style:normal;color:var(--text)">O ganho do SDD não é escrever mais documentos. É errar mais cedo, quando corrigir ainda é barato.</strong> Rastreabilidade, onboarding e convergência entre agentes são consequências de ter deslocado o erro para a esquerda dessa barra.
+  </div>
+
+  <div class="warnbox">
+    <div class="wh">e o custo que o SDD cobra</div>
+    <p>Ele não é grátis: pensar antes é mais lento no começo, e um artefato a mais é um artefato a mais para manter. A conta fecha quando a decisão errada custa caro — e não fecha quando você ainda está descobrindo o requisito por tentativa. Tem um slide inteiro sobre isso mais para a frente.</p>
+  </div>
+</div>
+</div>
+
+<!-- ─── DUAS HEURÍSTICAS ─── -->
+<div class="slide" data-title="Duas heurísticas para avaliar uma spec">
+<div class="slide-inner slide-scroll">
+  <span class="tag">como saber se a spec está boa</span>
+  <h2 class="sec-title">Duas heurísticas<br>para avaliar<br>uma spec</h2>
+  <p class="lead">Heurística, não teorema: servem para <strong style="color:var(--text)">levantar suspeita</strong>, não para dar veredicto. As duas funcionam melhor como pergunta feita em revisão do que como regra automática.</p>
+
+  <div class="hsec ok"><div class="hn">heurística 1 · reconstrução</div><div class="ht">Entrego esta spec, junto com as decisões já registradas do projeto, a outra pessoa ou agente. Ela reconstrói o mesmo comportamento observável sem inventar regra de negócio?</div><div class="hd">Repare no "junto com as decisões já registradas": a spec sozinha <strong style="color:var(--text)">não</strong> carrega stack, arquitetura nem estrutura de pastas — isso mora nos ADRs e no plano. O que ela precisa carregar inteiro é o <strong style="color:var(--text)">comportamento</strong>. Se quem for reconstruir precisa perguntar "e se o cupom for maior que o subtotal?", a spec tem um buraco no lugar exato dessa pergunta.</div></div>
+
+  <div class="hsec ok"><div class="hn">heurística 2 · divergência</div><div class="ht">Dois agentes partindo da mesma spec produzem código diferente e comportamento idêntico?</div><div class="hd">É a aula 4 ao contrário: lá a divergência mostrou que faltava contexto. Aqui, comportamento igual é <strong style="color:var(--text)">indício</strong> de que a ambiguidade foi fechada.</div></div>
+
+  <div class="warnbox">
+    <div class="wh">divergência é sinal, não prova</div>
+    <p>Dois agentes podem divergir por motivos que não têm nada a ver com a spec: modelo diferente, contexto carregado diferente, um ADR interpretado de outro jeito, ou simplesmente um erro de implementação. <strong>Quando divergirem, a pergunta certa não é "a spec está errada?" — é "existe alguma frase da spec que permite as duas leituras?"</strong> Às vezes existe, e você acabou de achar o buraco. Às vezes não existe, e o problema é outro.</p>
+  </div>
+
+  <div class="yn" style="margin-top:18px;">
+    <div class="yn-col yn-yes">
+      <h4>Comporta-se como spec</h4>
+      <li>Escrita <strong>antes</strong>, com decisão fechada</li>
+      <li>Critério verificável, com número</li>
+      <li>Diz o que fica <strong>de fora</strong></li>
+      <li>Quando discorda do código sobre comportamento, <strong>ela</strong> ganha</li>
+    </div>
+    <div class="yn-col yn-no">
+      <h4>Comporta-se como documentação</h4>
+      <li>Escrita depois, descrevendo o que existe</li>
+      <li>"O sistema calcula o desconto corretamente"</li>
+      <li>Silenciosa sobre o não decidido</li>
+      <li>Quando discorda do código, é ela que é corrigida</li>
+    </div>
+  </div>
+
+  <div class="warnbox">
+    <div class="wh">a diferença principal é de autoridade, não de conteúdo</div>
+    <p>O mesmo texto pode funcionar como spec num time e como documentação em outro. O que decide é <strong>quem ganha a discussão</strong> quando os dois discordam sobre comportamento. Isso não é propriedade do arquivo — é acordo do time, e por isso precisa estar escrito. Por isso a regra da autoridade precisa estar escrita em algum lugar do repositório — e não importa muito em qual arquivo, importa que exista.</p>
+  </div>
+</div>
+</div>
+
+<!-- ─── RAÍZES E IMPLEMENTAÇÕES ─── -->
+<div class="slide" data-title="Raízes e implementações atuais">
+<div class="slide-inner slide-scroll">
+  <span class="tag">de onde veio, e o que existe hoje</span>
+  <h2 class="sec-title">Nada disso foi<br>inventado em 2024</h2>
+  <p class="lead">Explicitar comportamento antes de construir tem décadas de literatura. O que mudou não foi a ideia — foi <strong style="color:var(--text)">aparecer um leitor que transforma o artefato em implementação</strong>. Vale separar o que influenciou do que é.</p>
+
+  <div class="roots">
+    <div class="rootcol old">
+      <h4>raízes · práticas que influenciaram</h4>
+      <div class="ritem"><span class="rmark">↢</span><span><b>Engenharia de requisitos</b><br>IEEE 830, casos de uso. Trouxe a ideia de explicitar comportamento antes — com leitor humano e uma única passagem.</span></div>
+      <div class="ritem"><span class="rmark">↢</span><span><b>BDD e especificação executável</b><br>Trouxe o exemplo concreto como forma de acordo entre negócio e engenharia.</span></div>
+      <div class="ritem"><span class="rmark">↢</span><span><b>DDD</b><br>Trouxe a linguagem ubíqua: as mesmas palavras na conversa, no documento e no código.</span></div>
+      <div class="ritem"><span class="rmark">↢</span><span><b>ADR</b><br>Trouxe a decisão como arquivo curto, datado e versionado junto do código.</span></div>
+      <div class="ritem"><span class="rmark">↢</span><span><b>Docs-as-code</b><br>Trouxe tratar documento como código: repositório, revisão, histórico.</span></div>
+    </div>
+    <div class="rootcol now">
+      <h4>implementações atuais · orientadas a agente</h4>
+      <div class="ritem"><span class="rmark">▸</span><span><b>Repo-nativo, à mão</b><br>Markdown no repositório, fases definidas pelo time. É o que vocês vêm fazendo desde a aula 4.</span></div>
+      <div class="ritem"><span class="rmark">▸</span><span><b>GitHub Spec Kit</b><br>Estrutura o processo em fases nomeadas por comando — especificar, planejar, gerar tarefas, implementar — mais uma constituição do projeto.</span></div>
+      <div class="ritem"><span class="rmark">▸</span><span><b>Kiro</b><br>Organiza a spec em requisitos, design e tarefas, dentro da própria IDE.</span></div>
+      <div class="ritem"><span class="rmark">▸</span><span><b>Outras</b><br>O espaço se move rápido. Quando alguém disser "usamos SDD", a pergunta útil é sempre <strong style="color:var(--text)">qual, e quais fases são obrigatórias</strong>.</span></div>
+    </div>
+  </div>
+
+  <div class="hero-q" style="max-width:960px;margin-bottom:16px;">
+    🎯 <strong style="font-style:normal;color:var(--text)">SDD não surgiu do nada.</strong> Ele combina práticas antigas de especificação com um consumidor novo: um agente capaz de transformar artefato em implementação.
+  </div>
+
+  <div class="warnbox">
+    <div class="wh">sobre o manifesto ágil</div>
+    <p>Ele nunca disse "não documente" — disse que software funcionando vale <strong>mais que</strong> documentação abrangente, o que é priorização, não proibição. O que aconteceu na prática é que documento pesado custava caro para escrever e quase ninguém abria depois; a conta raramente fechava. <strong>SDD é o que acontece quando essa conta muda.</strong></p>
+  </div>
+
+  <div class="bridge" style="margin-top:16px;">
+    <p style="color:var(--muted);font-size:.86rem;line-height:1.7;">📌 A gente começou pelo repo-nativo de propósito. Framework escondendo processo é fácil de operar e difícil de avaliar: quando ele fizer algo estranho, você precisa saber o que <em>deveria</em> ter acontecido. <strong style="color:var(--text)">É por isso que os frameworks vêm depois, não antes.</strong></p>
+  </div>
+</div>
+</div>
+
+<!-- ─── ANATOMIA DA SPEC ─── -->
+<div class="slide" data-title="Anatomia de uma spec">
+<div class="slide-inner slide-scroll">
+  <span class="tag">o formato</span>
+  <h2 class="sec-title">Seis seções,<br>e cada uma existe<br>por um motivo</h2>
+  <p class="lead">Vocês já escreveram uma spec na aula 6 e outra na avaliação. Este é o mesmo esqueleto com <strong style="color:var(--text)">uma novidade</strong> — e é ela que vai puxar tudo o que vem depois.</p>
+
+  <div class="filebox">
+    <div class="filebox-head"><span class="fb-path">docs/specs/&lt;NNN-funcionalidade&gt;/spec.md · template</span><button class="copybtn" onclick="cp(this)">copiar</button></div>
+    <pre># Spec — &lt;nome da funcionalidade&gt;
+
+## Objetivo
+Uma frase. O que a pessoa consegue fazer que não conseguia antes.
+
+## Vínculo
+PRD: seção X · ADRs que restringem: ADR-002, ADR-003
+(sem isso, ninguém sabe o que já foi decidido antes desta spec)
+
+## Regras
+Decisões fechadas, numeradas. Cada linha é uma ambiguidade morta.
+Sem "provavelmente", sem "idealmente", sem "o sistema deve ser
+capaz de".
+
+## Critérios de aceitação
+Verificáveis, com número, COM IDENTIFICADOR.
+
+- CA-01 · 10% sobre subtotal de R$ 19,99 gera desconto de 199 centavos
+- CA-02 · cupom de R$ 50,00 sobre subtotal de R$ 30,00 gera desconto
+         de 3000 centavos e total de 3000 + frete
+- CA-03 · subtotal de R$ 200,00 com 10% mantém o frete grátis
+
+## Fora de escopo / não decidido
+O que foi perguntado e ficou de fora. Explicitamente, com o motivo.
+
+## Contrato afetado
+Endpoint, tela ou tabela que muda. E o que NÃO pode mudar.</pre>
+  </div>
+
+  <div class="hsec star"><div class="hn">a novidade</div><div class="ht">O critério ganhou identificador: CA-01, CA-02, CA-03</div><div class="hd">Parece burocracia de cinco caracteres. É o que torna possível o teste citar o critério, o commit citar o teste e alguém perguntar <strong style="color:var(--text)">"o CA-07 tem prova?"</strong> sem abrir o código. Sem identificador, rastreabilidade é conversa. Com identificador, é <code>grep</code>.</div></div>
+
+  <div class="hsec"><div class="hn">seção mais ignorada</div><div class="ht">Fora de escopo / não decidido</div><div class="hd">É a única seção que protege você do agente <strong style="color:var(--text)">e</strong> do stakeholder. Do agente, porque ele preenche silêncio com invenção. Do stakeholder, porque "eu achei que estava incluído" é uma conversa que só termina com um arquivo datado.</div></div>
+
+  <div class="warnbox">
+    <div class="wh">tamanho</div>
+    <p>Se a spec não cabe numa sessão de trabalho, o problema não é a spec — é a <strong>funcionalidade</strong>. Quebre em duas. Spec de quarenta páginas tem a mesma taxa de leitura que documento nenhum, com custo de manutenção muito maior.</p>
+  </div>
+</div>
+</div>
+
+<!-- ─── EARS ─── -->
+<div class="slide" data-title="EARS — disciplinar a linguagem">
+<div class="slide-inner slide-scroll">
+  <span class="tag">quando "escrever direito" vira sintaxe</span>
+  <h2 class="sec-title">EARS: requisito<br>com gramática</h2>
+  <p class="lead">Vocês já sabem que critério precisa de número. O passo seguinte é disciplinar também a <strong style="color:var(--text)">forma da frase</strong>. EARS nasceu na engenharia aeroespacial da Rolls-Royce e foi redescoberto pelo SDD por um motivo prático: frase com padrão fixo reduz a variação de interpretação do agente.</p>
+
+  <div class="filebox">
+    <div class="filebox-head"><span class="fb-path">os cinco padrões EARS</span><button class="copybtn" onclick="cp(this)">copiar</button></div>
+    <pre>UBÍQUO          O sistema deve &lt;comportamento&gt;.
+                (vale sempre, sem condição)
+
+DIRIGIDO A      Quando &lt;gatilho&gt;, o sistema deve &lt;resposta&gt;.
+EVENTO
+
+DIRIGIDO A      Enquanto &lt;estado&gt;, o sistema deve &lt;resposta&gt;.
+ESTADO
+
+COMPORTAMENTO   Se &lt;condição indesejada&gt;, então o sistema deve
+INDESEJADO      &lt;resposta&gt;.
+
+OPCIONAL        Onde &lt;funcionalidade está presente&gt;, o sistema
+                deve &lt;resposta&gt;.
+
+COMPLEXO        combinação dos anteriores</pre>
+  </div>
+
+  <div class="g2" style="margin-bottom:16px;">
+    <div class="card" style="border-color:rgba(255,107,53,.3)">
+      <span class="otag">antes</span>
+      <p style="color:var(--muted);font-size:.86rem;line-height:1.65;">"O sistema deve controlar o limite de itens por pessoa."</p>
+      <p style="color:var(--muted);font-size:.78rem;line-height:1.6;margin-top:10px;">Quem controla? Em que momento? O que acontece quando estoura? Três perguntas escondidas numa frase que <em>parece</em> um requisito.</p>
+    </div>
+    <div class="card" style="border-color:rgba(0,255,136,.35)">
+      <span class="gtag">depois</span>
+      <p style="color:var(--muted);font-size:.86rem;line-height:1.65;"><strong style="color:var(--text)">Quando</strong> um colaborador solicita empréstimo <strong style="color:var(--text)">e</strong> já está com 3 itens, <strong style="color:var(--text)">o sistema deve</strong> recusar a solicitação e informar o limite.</p>
+      <p style="color:var(--muted);font-size:.78rem;line-height:1.6;margin-top:10px;">Gatilho, condição e resposta explícitos. Vira teste sem tradução — e o CA correspondente já está quase escrito.</p>
+    </div>
+  </div>
+
+  <div class="hsec ok"><div class="hn">o ganho não óbvio</div><div class="ht">Sintaxe fixa permite análise da própria spec</div><div class="hd">Com todos os requisitos no mesmo formato, dá para pedir ao agente que procure <strong style="color:var(--text)">conflito lógico</strong> antes de existir código: dois "Quando" com o mesmo gatilho e respostas opostas, um "Se" que contradiz um "Enquanto". É revisão de spec assistida — e é barata. Existe também o <strong style="color:var(--text)">GEARS</strong>, uma variação do EARS ajustada para os padrões de raciocínio dos modelos atuais.</div></div>
+
+  <div class="hsec"><div class="hn">e por que sempre markdown?</div><div class="ht">Não é estética</div><div class="hd">Markdown gasta bem menos token que JSON, XML ou YAML para a mesma informação; os cabeçalhos <code>#</code> criam uma hierarquia que o modelo usa para pesar a importância de cada seção; e ele mistura prosa, tabela, bloco de código e diagrama no mesmo arquivo. É o formato mais barato de manter que continua legível para gente.</div></div>
+
+  <div class="warnbox">
+    <div class="wh">EARS é um dial, não um dogma</div>
+    <p>Sintaxe rígida cobra esforço de escrita. Num time de três pessoas com regras simples, ela vira cerimônia. Ela paga onde <strong>a ambiguidade custa caro</strong>: regra financeira, compliance, contrato entre times, sistema auditável. Vocês não precisam adotar EARS inteiro — precisam saber que ele existe e reconhecer quando a frase está solta demais.</p>
+  </div>
+</div>
+</div>
+
+<!-- ─── QUANTO DETALHE ─── -->
+<div class="slide" data-title="Quanto detalhe é detalhe demais">
+<div class="slide-inner slide-scroll">
+  <span class="otag">a calibragem</span>
+  <h2 class="sec-title">Especificar demais<br>é tão ruim quanto<br>especificar de menos</h2>
+  <p class="lead">Esta é a pergunta que aparece na primeira spec que vocês escreverem sozinhos: <strong style="color:var(--text)">até onde eu desço?</strong> Errar para os dois lados custa — e custa de formas diferentes.</p>
+
+  <div class="g2" style="margin-bottom:18px;">
+    <div class="card" style="border-color:rgba(255,107,53,.3)">
+      <span class="otag">especificação insuficiente</span>
+      <h3 class="slide-h3" style="font-size:1rem;">O agente preenche o vazio</h3>
+      <p style="color:var(--muted);font-size:.84rem;line-height:1.65;">Onde a spec é vaga, ele completa com o padrão genérico que viu no treino — que não é o seu negócio. E completa <strong style="color:var(--text)">em silêncio</strong>: um humano ambíguo pergunta, o agente supõe. Cada suposição vira dívida invisível que só aparece no caso de borda.</p>
+    </div>
+    <div class="card" style="border-color:rgba(255,107,53,.3)">
+      <span class="otag">especificação excessiva</span>
+      <h3 class="slide-h3" style="font-size:1rem;">Você virou programador de português</h3>
+      <p style="color:var(--muted);font-size:.84rem;line-height:1.65;">Quando a spec desce a nível de pseudocódigo, você perde a única coisa que o modelo faz bem sozinho — escolher a solução técnica. Escrever o algoritmo em prosa é mais lento e mais propenso a erro do que escrevê-lo em código.</p>
+    </div>
+  </div>
+
+  <span class="gtag">a saída</span>
+  <h3 class="slide-h3" style="margin-bottom:14px;">Especificação em dois níveis</h3>
+
+  <div class="hsec ok"><div class="hn">nível 1 · rigoroso e inegociável</div><div class="ht">Intenção, regra de negócio, contrato de interface, restrição</div><div class="hd">Aqui você é obsessivo: número, borda, formato de resposta, o que não pode mudar. É o que a spec existe para fixar.</div></div>
+
+  <div class="hsec"><div class="hn">nível 2 · livre</div><div class="ht">Implementação interna</div><div class="hd">Qual algoritmo, qual estrutura de dados, qual biblioteca auxiliar, como organizar as funções por dentro. <strong style="color:var(--text)">O agente decide</strong>, desde que cumpra o nível 1. Se ele escolher diferente de você e o comportamento for idêntico, você não tem argumento — e não deveria querer ter.</div></div>
+
+  <div class="hero-q" style="max-width:960px;margin-top:16px;">
+    🎯 A régua prática: <strong style="font-style:normal;color:var(--text)">se a frase descreve algo que um usuário ou um auditor observaria, é nível 1 e vai para a spec. Se descreve algo que só quem abre o arquivo veria, é nível 2 e não vai.</strong>
+  </div>
+</div>
+</div>
+
+<!-- ─── O MAPA: CONTEXTO + CADEIA ─── -->
+<div class="slide" data-title="Spec não trabalha sozinha">
+<div class="slide-inner slide-scroll">
+  <span class="ptag">a cadeia da abertura, agora inteira</span>
+  <h2 class="sec-title">O que restringe<br>e o que deriva</h2>
+  <p class="lead">Spec → Plan → Tasks → Code é o miolo, mas não é tudo: a cadeia acontece <strong style="color:var(--text)">dentro de um contexto que já existe</strong> e produz coisas depois do código. Duas camadas diferentes na mesma tela — em cima, o que <em>restringe</em>; embaixo, o que <em>deriva</em>.</p>
+
+  <div class="anim">
+    <div class="ctxband ai" style="--d:.05s">
+      <div class="cbh"><span>camada permanente · não deriva de nada, restringe tudo</span><span>muda raramente</span></div>
+      <div class="ctxchips">
+        <div class="ctxchip"><div class="cc-t">princípios do projeto</div><div class="cc-d">o que é inegociável em qualquer feature · à mão costuma viver no topo do AGENTS.md; o Spec Kit chama de constitution.md</div></div>
+        <div class="ctxchip"><div class="cc-t">AGENTS.md</div><div class="cc-d">como se trabalha aqui</div></div>
+        <div class="ctxchip"><div class="cc-t">rules/</div><div class="cc-d">procedimento com gatilho</div></div>
+        <div class="ctxchip"><div class="cc-t">docs/adr/</div><div class="cc-d">decisões arquiteturais e o porquê</div></div>
+        <div class="ctxchip soon"><div class="cc-t">+ o que ainda vem</div><div class="cc-d">skills, subagentes e outras peças que a gente ainda vai ver entram <strong style="color:var(--text)">aqui</strong></div></div>
+      </div>
+    </div>
+
+    <div class="restrains ai" style="--d:.35s">↓ ↓ ↓ &nbsp; restringe cada etapa abaixo &nbsp; ↓ ↓ ↓</div>
+
+    <div class="flowbox">
+      <div class="ai" style="--d:.5s"><div class="fnode ask"><div class="fn-k">intenção · PRD</div><div class="fn-t">"Temos um problema ou uma oportunidade"</div><div class="fn-d">vem do negócio · pode ser ambíguo, é da natureza dele</div></div></div>
+      <div class="farrow ai" style="--d:.7s">↓ <span class="fbranch">a ambiguidade morre aqui</span></div>
+      <div class="ai" style="--d:.85s"><div class="fnode hub"><div class="fn-k">spec</div><div class="fn-t">"O sistema deve se comportar assim"</div><div class="fn-d">decisões fechadas + critérios de aceitação com ID</div></div></div>
+      <div class="farrow ai" style="--d:1.05s">↓ <span class="fbranch">agora sim entra o "como"</span></div>
+      <div class="ai" style="--d:1.2s"><div class="fnode"><div class="fn-k">design · plano</div><div class="fn-t">"Vamos construir desta maneira"</div><div class="fn-d">camadas, contratos, ordem — obedecendo os ADRs de cima</div></div></div>
+      <div class="farrow ai" style="--d:1.4s">↓ <span class="fbranch">fatiado em unidades verificáveis</span></div>
+      <div class="ai" style="--d:1.55s"><div class="fnode"><div class="fn-k">tarefas</div><div class="fn-t">"Vamos executar nestas unidades"</div><div class="fn-d">cada uma cabe num commit e diz como se verifica</div></div></div>
+      <div class="farrow ai" style="--d:1.75s">↓ <span class="fbranch">e volta para conferir contra a spec</span></div>
+      <div class="ai" style="--d:1.9s"><div class="fnode lock"><div class="fn-k">código + testes</div><div class="fn-t">"Esta é a realização verificável"</div><div class="fn-d">o teste é a evidência de que o critério foi atendido</div></div></div>
+      <div class="farrow ai" style="--d:2.1s">↓ <span class="fbranch">e o que sobrou de sessão</span></div>
+      <div class="ai" style="--d:2.25s"><div class="fnode"><div class="fn-k">handoff</div><div class="fn-t">"Onde eu parei e o que não deu certo"</div><div class="fn-d">efêmero · não é fonte de verdade de nada</div></div></div>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin:14px 0 16px;">
+    <button class="replay" onclick="replay(this)">▸ rodar de novo</button>
+  </div>
+
+  <div class="hero-q" style="max-width:960px;margin-bottom:16px;">
+    🎯 <strong style="font-style:normal;color:var(--text)">A caixa de cima não deriva de nada — ela restringe.</strong> A coluna de baixo é uma cadeia de derivação: cada peça sai da anterior. Confundir as duas é o erro que produz ADR escrito pelo agente no meio da implementação e regra de negócio enfiada no AGENTS.md.
+  </div>
+
+  <div class="warnbox">
+    <div class="wh">a confusão que este slide desfaz</div>
+    <p>Misturar as duas camadas é o erro que produz <strong>ADR escrito pelo agente no meio da implementação</strong> e <strong>regra de negócio enfiada no AGENTS.md</strong>. A pergunta que resolve: isto <em>deriva</em> de algo anterior, ou <em>vale para tudo</em>? Se vale para tudo, é camada de cima e quase nunca muda.</p>
+  </div>
+</div>
+</div>
+
+<!-- ─── ONDE O HUMANO ENTRA ─── -->
+<div class="slide" data-title="Onde o humano entra">
+<div class="slide-inner slide-scroll">
+  <span class="ptag">o que a cadeia faz pelo agente</span>
+  <h2 class="sec-title">Spec é o que dá<br>critério de parada<br>ao agente</h2>
+  <p class="lead">Um agente trabalha em ciclo: ele planeja, age, observa o resultado e decide se continua. A pergunta que quase ninguém faz é: <strong style="color:var(--text)">observa contra o quê?</strong></p>
+
+  <div class="g2" style="margin-bottom:18px;">
+    <div class="card" style="border-color:rgba(255,107,53,.3)">
+      <span class="otag">sem spec e sem tarefas</span>
+      <p style="color:var(--muted);font-size:.84rem;line-height:1.7;">O agente observa o <strong style="color:var(--text)">próprio output</strong>. O critério de parada vira "parece pronto" — e ele para quando <em>acha</em> que terminou. É literalmente o sintoma 3 da aula 6: sem ponto de parada, ninguém verificou nada no meio do caminho, porque não havia meio do caminho.</p>
+    </div>
+    <div class="card" style="border-color:rgba(0,255,136,.3)">
+      <span class="gtag">com spec e tarefas</span>
+      <p style="color:var(--muted);font-size:.84rem;line-height:1.7;">O critério de aceitação é <strong style="color:var(--text)">externo ao agente</strong>: o teste passa ou não passa. E a tarefa define onde o ciclo termina. <strong style="color:var(--text)">A cadeia da aula não é burocracia de documentação — é o que dá ao loop um alvo e uma borda.</strong></p>
+    </div>
+  </div>
+
+  <span class="tag">e o humano?</span>
+  <h3 class="slide-h3" style="margin-bottom:14px;">SDD não tira o humano do processo — muda onde ele fica</h3>
+  <p style="color:var(--muted);font-size:.87rem;line-height:1.7;margin-bottom:14px;">É a frase do fim da aula 6, e agora ela tem endereço. Antes, o humano entrava no fim, revisando o diff. Com a cadeia, ele entra em três momentos — todos <strong style="color:var(--text)">antes</strong> do diff:</p>
+
+  <div class="g3" style="margin-bottom:18px;">
+    <div class="card" style="border-color:rgba(124,58,237,.35)"><span class="ptag">momento 1</span><h3 class="slide-h3" style="font-size:.95rem;">Fechar a ambiguidade</h3><p style="color:var(--muted);font-size:.82rem;line-height:1.6;">As treze decisões do briefing saíram de uma pessoa. Nenhuma ferramenta produz isso — é o momento mais insubstituível dos três.</p></div>
+    <div class="card" style="border-color:rgba(124,58,237,.35)"><span class="ptag">momento 2</span><h3 class="slide-h3" style="font-size:.95rem;">Aprovar o plano</h3><p style="color:var(--muted);font-size:.82rem;line-height:1.6;">Barato de corrigir, e é onde se pega arquitetura errada antes de virar cinco arquivos.</p></div>
+    <div class="card" style="border-color:rgba(124,58,237,.35)"><span class="ptag">momento 3</span><h3 class="slide-h3" style="font-size:.95rem;">Verificar cada tarefa</h3><p style="color:var(--muted);font-size:.82rem;line-height:1.6;">Uma tarefa, uma parada, um commit. É o que impede a sessão de virar um diff de 900 linhas.</p></div>
+  </div>
+
+  <span class="tag" style="margin-top:20px;">como a spec chega até o modelo</span>
+  <h3 class="slide-h3" style="margin-bottom:14px;">Três camadas de contexto — e o "túnel" que elas criam</h3>
+  <p style="color:var(--muted);font-size:.87rem;line-height:1.7;margin-bottom:14px;">Os artefatos não são lidos uma vez: eles são injetados na janela de contexto <strong style="color:var(--text)">a cada turno</strong>. E a ordem importa, porque é ela que define o que o agente trata como inegociável.</p>
+
+  <div class="g3" style="margin-bottom:16px;">
+    <div class="card" style="border-color:rgba(124,58,237,.35)"><span class="ptag">camada 1 · fixa</span><h3 class="slide-h3" style="font-size:.95rem;">Persona e princípios</h3><p style="color:var(--muted);font-size:.82rem;line-height:1.6;">System prompt + os princípios do projeto. "Você segue estritamente estas regras e nunca supõe requisito que não está escrito."</p></div>
+    <div class="card" style="border-color:rgba(0,229,255,.3)"><span class="tag">camada 2 · estável</span><h3 class="slide-h3" style="font-size:.95rem;">Spec e plano</h3><p style="color:var(--muted);font-size:.82rem;line-height:1.6;">Com as janelas de hoje, cabe injetar a spec inteira. Como muda pouco entre turnos, é a parte que mais se beneficia de cache.</p></div>
+    <div class="card" style="border-color:rgba(0,255,136,.3)"><span class="gtag">camada 3 · variável</span><h3 class="slide-h3" style="font-size:.95rem;">A tarefa da vez</h3><p style="color:var(--muted);font-size:.82rem;line-height:1.6;">Uma tarefa do plano, por turno. É a única coisa que muda — e é isso que mantém o agente dentro do trilho.</p></div>
+  </div>
+
+  <div class="hsec ok"><div class="hn">o efeito</div><div class="ht">O agente fica sem espaço para considerar soluções que violem as camadas de cima</div><div class="hd">Não é que ele "obedeça" mais — é que o contexto dominante deixou de ser o que ele imaginou e passou a ser o que vocês escreveram. Repare que isso é literalmente a aula 2 e a aula 3 vistas de outro ângulo: <strong style="color:var(--text)">a hierarquia de arquivos que vocês montaram é uma hierarquia de contexto.</strong></div></div>
+
+  <div class="hsec"><div class="hn">um padrão que vem por aí</div><div class="ht">Agente construtor + agente verificador</div><div class="hd">Um agente implementa a tarefa; outro lê o resultado e confere <strong style="color:var(--text)">contra os critérios de aceitação e contra os princípios do projeto</strong>, devolvendo feedback específico se algo não bate. É multiagente, e a gente vê adiante — mas note o pré-requisito: <strong style="color:var(--text)">sem critério escrito, não existe o que o verificador verifique.</strong></div></div>
+
+  <div class="warnbox">
+    <div class="wh">o que dá para automatizar e o que não dá</div>
+    <p>Mais à frente no curso a gente automatiza parte da verificação — o gate confere mecanicamente se todo <code>CA-xx</code> tem teste, se a spec existe, se os checks passaram. <strong>Gate substitui conferência, nunca decisão.</strong> Nenhum pipeline vai decidir se o frete grátis é avaliado antes ou depois do desconto.</p>
+  </div>
+
+  <div class="bridge" style="margin-top:16px;">
+    <p style="color:var(--muted);font-size:.86rem;line-height:1.7;">📌 E quando forem <strong style="color:var(--text)">vários agentes</strong> trabalhando em paralelo — assunto de outra aula —, a spec vira a única coisa que eles compartilham. Sem ela, cada um inventa a sua interpretação e o conflito só aparece no merge. Com ela, a tarefa é a unidade de paralelismo e o critério de aceitação é o contrato entre eles.</p>
+  </div>
+</div>
+</div>
+
+<!-- ─── AS QUATRO SIGLAS ─── -->
+<div class="slide" data-title="SDD × BDD × TDD × DDD">
+<div class="slide-inner slide-scroll">
+  <span class="tag">as quatro siglas</span>
+  <h2 class="sec-title">Não competem.<br>Respondem<br>perguntas diferentes</h2>
+  <p class="lead">A confusão mais comum: achar que adotar SDD é abandonar TDD, ou que BDD é "SDD do pobre". Antes de comparar, vale a definição de cada uma — porque quase todo mundo usa as três siglas sem nunca ter lido a definição de nenhuma.</p>
+
+  <div class="g2" style="margin-bottom:14px;">
+    <div class="card" style="border-color:rgba(0,255,136,.35)">
+      <span class="gtag">TDD · test-driven development</span>
+      <p style="color:var(--muted);font-size:.84rem;line-height:1.65;">Popularizado por Kent Beck no fim dos anos 90. <strong style="color:var(--text)">O teste vem antes do código</strong>, num ciclo curto: escreve um teste que falha, faz passar com o mínimo necessário, refatora. É uma disciplina de <strong style="color:var(--text)">implementação</strong> — o teste guia o desenho do código de dentro para fora.</p>
+    </div>
+    <div class="card" style="border-color:rgba(244,114,182,.35)">
+      <span class="ptag">BDD · behavior-driven development</span>
+      <p style="color:var(--muted);font-size:.84rem;line-height:1.65;">Proposto por Dan North por volta de 2006, a partir do TDD. É uma <strong style="color:var(--text)">prática colaborativa</strong>: negócio e engenharia conversam sobre o comportamento esperado usando <strong style="color:var(--text)">exemplos concretos</strong>, e esses exemplos podem virar testes automatizados. O foco é entendimento compartilhado, não formato de arquivo.</p>
+    </div>
+    <div class="card" style="border-color:rgba(255,107,53,.35)">
+      <span class="otag">DDD · domain-driven design</span>
+      <p style="color:var(--muted);font-size:.84rem;line-height:1.65;">Eric Evans, 2003. Modelar o software <strong style="color:var(--text)">em torno do domínio do negócio</strong>, não da tecnologia. Traz a linguagem ubíqua (as mesmas palavras na conversa, no documento e no código) e as fronteiras explícitas entre partes do sistema.</p>
+    </div>
+    <div class="card" style="border-color:rgba(0,229,255,.4);background:rgba(0,229,255,.05)">
+      <span class="tag">SDD · spec-driven development</span>
+      <p style="color:var(--muted);font-size:.84rem;line-height:1.65;">A definição do começo da aula: <strong style="color:var(--text)">intenção e comportamento explicitados em spec versionada antes da implementação</strong>, com design, plano, tarefas, testes e código derivados dela e validados contra ela. É a única das quatro que nasceu por causa do agente.</p>
+    </div>
+  </div>
+
+  <p class="lead" style="margin-bottom:14px;">Postas lado a lado, fica claro que não competem — cada uma responde uma pergunta central diferente, num momento diferente:</p>
+
+  <div class="layers">
+    <div class="layer sdd"><div class="ln">SDD</div><div class="lq">O que deve ser construído, e qual intenção governa a implementação?</div><div class="lx">antes do código<br>→ spec versionada</div></div>
+    <div class="layer ddd"><div class="ln">DDD</div><div class="lq">Como modelamos o domínio e mantemos a linguagem dele dentro do software?</div><div class="lx">ao modelar<br>→ linguagem ubíqua</div></div>
+    <div class="layer bdd"><div class="ln">BDD</div><div class="lq">Conseguimos chegar a um entendimento compartilhado do comportamento, usando exemplos concretos?</div><div class="lx">na conversa entre negócio<br>e engenharia<br>→ exemplos acordados</div></div>
+    <div class="layer tdd"><div class="ln">TDD</div><div class="lq">Como faço a implementação evoluir com feedback rápido dos testes?</div><div class="lx">durante a implementação<br>→ teste que falha antes</div></div>
+  </div>
+
+  <div class="warnbox" style="margin-top:0;margin-bottom:16px;">
+    <div class="wh">o mal-entendido mais comum</div>
+    <p><strong>BDD não é Given/When/Then.</strong> BDD é uma prática colaborativa: negócio e engenharia descobrem, formulam e automatizam comportamento a partir de exemplos concretos. Gherkin é <strong>uma forma possível de registrar</strong> esses exemplos — não é o método. Dá para ter duzentos arquivos <code>.feature</code> e nenhum BDD acontecendo: se ninguém do negócio participou da conversa que gerou os exemplos, aquilo foi só um jeito diferente de escrever teste.</p>
+  </div>
+
+  <div class="g2" style="margin-bottom:16px;">
+    <div class="card" style="border-color:rgba(255,107,53,.3)">
+      <span class="otag">o que dá errado sozinho</span>
+      <p style="color:var(--muted);font-size:.83rem;line-height:1.7;"><strong style="color:var(--text)">SDD sem TDD:</strong> spec linda, zero prova. Ninguém sabe se o CA-05 foi implementado.<br><strong style="color:var(--text)">TDD sem SDD:</strong> código impecável para a pergunta errada.<br><strong style="color:var(--text)">BDD sem SDD:</strong> exemplos acordados e nenhuma visão de sistema.<br><strong style="color:var(--text)">DDD sozinho:</strong> vocabulário bonito, nenhum critério.</p>
+    </div>
+    <div class="card" style="border-color:rgba(0,255,136,.35)">
+      <span class="gtag">como se encaixam</span>
+      <p style="color:var(--muted);font-size:.83rem;line-height:1.7;">O <strong style="color:var(--text)">DDD</strong> dá as palavras. A <strong style="color:var(--text)">spec</strong> usa essas palavras para fixar comportamento e critério. O <strong style="color:var(--text)">BDD</strong> é a conversa que aterrissa o critério em exemplos que os dois lados reconhecem. O <strong style="color:var(--text)">TDD</strong> é o ritmo em que esses exemplos viram código.</p>
+    </div>
+  </div>
+
+  <div class="hero-q" style="max-width:960px;margin-bottom:16px;">
+    🎯 A frase pra guardar: <strong style="font-style:normal;color:var(--text)">TDD garante que o código faz o que o teste diz. SDD garante que o teste diz a coisa certa.</strong>
+  </div>
+
+  <div class="warnbox">
+    <div class="wh">por que SDD ficou urgente agora, e TDD não bastou</div>
+    <p>No mundo pré-agente, o gargalo era <strong>escrever código</strong> — e TDD ataca exatamente isso. Com agente, código virou a parte barata. O gargalo mudou de lugar: agora é <strong>decidir</strong>. SDD é a disciplina do gargalo novo. TDD não ficou obsoleto: deixou de ser onde o tempo é perdido.</p>
+  </div>
+</div>
+</div>
+
+<!-- ─── RASTREABILIDADE ─── -->
+<div class="slide" data-title="Rastreabilidade">
+<div class="slide-inner slide-scroll">
+  <span class="gtag">as quatro siglas num exemplo só</span>
+  <h2 class="sec-title">Uma decisão,<br>cinco artefatos,<br>o mesmo nome</h2>
+  <p class="lead">Domínio: a reserva recorrente da avaliação. Acompanhe uma única decisão de negócio atravessando a cadeia inteira.</p>
+
+  <div class="flowbox anim">
+    <div class="ai" style="--d:.05s"><div class="fnode ask"><div class="fn-k">negócio · decisão</div><div class="fn-t">"Se qualquer ocorrência conflita, nenhuma é criada"</div><div class="fn-d">sai da cabeça de uma pessoa · não sai do repositório</div></div></div>
+    <div class="farrow ai" style="--d:.3s">↓ <span class="fbranch">vira linha numerada</span></div>
+    <div class="ai" style="--d:.45s"><div class="fnode hub"><div class="fn-k">spec · SDD</div><div class="fn-t">CA-06</div><div class="fn-d">"Se a 4ª ocorrência conflita, nenhuma reserva é criada e a resposta lista a data da 4ª"</div></div></div>
+    <div class="farrow ai" style="--d:.7s">↓ <span class="fbranch">vira exemplo concreto</span></div>
+    <div class="ai" style="--d:.85s"><div class="fnode mono"><div class="fn-k">exemplo acordado · BDD</div><div class="fn-t">Dado uma reserva em 25/03<br>Quando crio série de 6 desde 04/03<br>Então nada é criado e a resposta cita 25/03</div><div class="fn-d">saiu de uma conversa com o negócio · o Gherkin é só o registro dela</div></div></div>
+    <div class="farrow ai" style="--d:1.1s">↓ <span class="fbranch">vira teste que falha primeiro</span></div>
+    <div class="ai" style="--d:1.25s"><div class="fnode mono lock"><div class="fn-k">teste · TDD</div><div class="fn-t">test_ca06_serie_com_conflito_nao_cria_nada()</div><div class="fn-d">o nome do teste carrega o ID do critério</div></div></div>
+    <div class="farrow ai" style="--d:1.5s">↓ <span class="fbranch">vira código com o nome do negócio</span></div>
+    <div class="ai" style="--d:1.65s"><div class="fnode mono lock"><div class="fn-k">domínio · DDD</div><div class="fn-t">Serie.validar_ocorrencias() → ConflitoDeSerie</div><div class="fn-d">"série", "ocorrência" e "conflito" são palavras do negócio, não do framework</div></div></div>
+    <div class="farrow ai" style="--d:1.9s">↓ <span class="fbranch">e fecha o círculo</span></div>
+    <div class="ai" style="--d:2.05s"><div class="fnode mono"><div class="fn-k">commit</div><div class="fn-t">feat: recusa série com conflito (CA-06)</div></div></div>
+  </div>
+
+  <div style="text-align:center;margin:14px 0 16px;">
+    <button class="replay" onclick="replay(this)">▸ rodar de novo</button>
+  </div>
+
+  <div class="hero-q" style="max-width:960px;">
+    💭 Procure por <code style="font-style:normal">CA-06</code> no repositório e você acha a decisão, o critério, o teste e o commit. <strong style="font-style:normal;color:var(--text)">Isso é rastreabilidade</strong> — e aqui ela custa cinco caracteres e nenhuma ferramenta. Mais à frente a gente automatiza o gate que checa se todo CA tem prova; hoje é só disciplina de nome.
+  </div>
+</div>
+</div>
+
+<!-- ─── MATURIDADE ─── -->
+<div class="slide" data-title="Níveis de maturidade">
+<div class="slide-inner slide-scroll">
+  <span class="tag">a escada</span>
+  <h2 class="sec-title">Seis degraus entre<br>o prompt e a<br>governança</h2>
+  <div class="scopetag">modelo didático desta disciplina — não é padrão da indústria</div>
+  <p class="lead">Se pesquisarem "níveis de maturidade de SDD" depois, vão achar outras classificações com outro número de degraus. Não há contradição: <strong style="color:var(--text)">esta escada é a nossa</strong>. E não é uma escala de bom para ótimo — é de <strong style="color:var(--text)">quanto do processo está fora da cabeça das pessoas</strong>. Cada degrau resolve uma dor e cobra um preço.</p>
+
+<div class="ladder anim">
+    <div class="rung r0 ai" style="--d:.05s"><div class="rn">0</div><div>
+      <div class="rt">Prompt <span class="rw">a intenção só existe no chat</span></div>
+      <div class="rd">Você descreve, ele faz, você corrige. Nada do que foi decidido sobrevive ao fechamento da aba.</div>
+      <div class="rs"><b>sintoma:</b> "ontem ele fez do jeito certo e hoje fez diferente."</div>
+    </div></div>
+    <div class="rung r1 ai" style="--d:.2s"><div class="rn">1</div><div>
+      <div class="rt">Contexto persistido <span class="rw">aulas 2 e 3</span></div>
+      <div class="rd">AGENTS.md, rules/, handoff. O <strong style="color:var(--text)">como se trabalha aqui</strong> virou arquivo. O <strong style="color:var(--text)">o que fazer</strong> continua no chat.</div>
+      <div class="rs"><b>sintoma:</b> o estilo do código é consistente, o comportamento não.</div>
+    </div></div>
+    <div class="rung here ai" style="--d:.35s"><span class="youhere">vocês estão aqui</span><div class="rn">2</div><div>
+      <div class="rt">Spec por funcionalidade <span class="rw">aula 6 + avaliação</span></div>
+      <div class="rd">O que a feature faz e como sei que funcionou viram arquivo, escritos antes e revisados por gente. As fases existem, mas informais.</div>
+      <div class="rs"><b>sintoma de que falta subir:</b> cada pessoa do time escreve spec num formato diferente.</div>
+    </div></div>
+    <div class="rung fut ai" style="--d:.5s"><div class="rn">3</div><div>
+      <div class="rt">Processo formal <span class="rw">frameworks</span></div>
+      <div class="rd">Fases nomeadas com template fixo, constituição do projeto, artefato obrigatório por fase. É onde os frameworks operam — e onde alguém novo entra sem precisar aprender o gosto de ninguém.</div>
+      <div class="rs"><b>preço:</b> menos flexibilidade. O template passa a valer até quando não deveria.</div>
+    </div></div>
+    <div class="rung fut ai" style="--d:.65s"><div class="rn">4</div><div>
+      <div class="rt">Gates automáticos <span class="rw">rastreabilidade verificada</span></div>
+      <div class="rd">O CI recusa PR sem spec vinculada e confere que todo <code>CA-xx</code> tem teste que o cite. O acordo deixa de depender de alguém lembrar na revisão.</div>
+      <div class="rs"><b>preço:</b> alguém mantém o gate. Gate que dá falso positivo é desativado em duas semanas.</div>
+    </div></div>
+    <div class="rung fut ai" style="--d:.8s"><div class="rn">5</div><div>
+      <div class="rt">Governança de specs <span class="rw">a spec vira ativo do time</span></div>
+      <div class="rd">Spec tem dono, versão, revisão por par e processo de descontinuação. Revisar spec pesa tanto quanto revisar código — e acontece antes.</div>
+      <div class="rs"><b>preço:</b> latência. Toda mudança passa por uma fila de revisão.</div>
+    </div></div>
+  </div>
+
+  <div style="text-align:center;margin-bottom:22px;">
+    <button class="replay" onclick="replay(this)">▸ rodar de novo</button>
+  </div>
+
+  <span class="otag">a parte que ninguém conta</span>
+  <h3 class="slide-h3">Subir degrau troca velocidade por previsibilidade</h3>
+  <p style="color:var(--muted);font-size:.87rem;line-height:1.7;margin-bottom:14px;">E essa troca pode ser péssima. <strong style="color:var(--text)">Nível 4 num time de três</strong> em descoberta vira imposto: a spec passa a ser escrita para o CI aceitar o PR, não para decidir nada — o pior artefato possível. <strong style="color:var(--text)">Nível 1 num time de trinta</strong> vira caos silencioso: cada squad decide a mesma regra de um jeito, e o custo aparece como retrabalho, não como reunião.</p>
+
+<table class="tbl" style="margin-bottom:16px;">
+    <thead><tr><th>a dor que você tem</th><th>o degrau que resolve</th></tr></thead>
+    <tbody>
+      <tr><td>O agente responde diferente a cada sessão</td><td><strong>1</strong> — contexto persistido</td></tr>
+      <tr><td>O código ficou certo, mas não era o que o negócio queria</td><td><strong>2</strong> — spec por funcionalidade</td></tr>
+      <tr><td>Cada pessoa escreve spec de um jeito; onboarding é oral</td><td><strong>3</strong> — processo formal</td></tr>
+      <tr><td>Existe spec, mas ninguém garante que virou teste</td><td><strong>4</strong> — gates automáticos</td></tr>
+      <tr><td>Duas specs se contradizem e ninguém é dono de nenhuma</td><td><strong>5</strong> — governança</td></tr>
+    </tbody>
+  </table>
+
+  <div class="hero-q" style="max-width:960px;margin-top:16px;">
+    🎯 Pular degrau costuma falhar. Time que vai do 0 direto pro 3 adota o framework, cumpre as fases por seis semanas e abandona — porque nunca sentiu a dor que cada fase resolve. <strong style="font-style:normal;color:var(--text)">Vocês subiram 0 → 1 → 2 em seis aulas sentindo cada dor no caminho.</strong> Foi de propósito.
+  </div>
+</div>
+</div>
+
+<!-- ─── UMA FEATURE = UMA PASTA ─── -->
+<div class="slide" data-title="Uma feature, uma pasta">
+<div class="slide-inner slide-scroll">
+  <span class="tag">organização · e é aqui que quase todo mundo tropeça</span>
+  <h2 class="sec-title">Uma feature =<br>uma spec, um plano,<br>suas tarefas</h2>
+  <p class="lead">Até agora vocês tinham uma <code>docs/spec/</code> plana e um <code>plan.md</code> único. Isso funciona na primeira funcionalidade e começa a ficar estranho na segunda. Na terceira, já dói.</p>
+
+  <div class="g2" style="margin-bottom:18px;">
+    <div class="card" style="border-color:rgba(255,107,53,.3)">
+      <span class="otag">o que não fazer</span>
+      <p style="color:var(--muted);font-size:.84rem;line-height:1.7;"><strong style="color:var(--text)">Sobrescrever o plano anterior:</strong> some o registro de como a feature passada foi construída, e o handoff da semana que vem aponta para o vazio.<br><br><strong style="color:var(--text)">Concatenar todos os planos num arquivo só:</strong> vira um documento gigante que ninguém lê inteiro — e que o agente carrega inteiro, gastando contexto com nove features que não têm nada a ver com a de hoje.</p>
+    </div>
+    <div class="card" style="border-color:rgba(0,255,136,.35)">
+      <span class="gtag">a regra</span>
+      <p style="color:var(--muted);font-size:.84rem;line-height:1.7;">Um diretório por funcionalidade, com os três artefatos derivados dentro dele. <strong style="color:var(--text)">Uma feature = uma spec → um plano → suas tarefas → implementação.</strong><br><br>O número na frente dá ordem cronológica e um identificador estável para referência cruzada: "ver <code>001-cupom</code>" não quebra quando alguém renomeia a pasta.</p>
+    </div>
+  </div>
+
+  <div class="filebox">
+    <div class="filebox-head"><span class="fb-path">estrutura recomendada</span><button class="copybtn" onclick="cp(this)">copiar</button></div>
+    <pre>docs/
+  specs/
+    001-cupom-de-desconto/
+      spec.md          # o quê + critérios de aceitação
+      plan.md          # como, para ESTA funcionalidade
+      tasks.md         # os passos, com [ ] e [x]
+    002-favoritos/
+      spec.md
+      plan.md
+      tasks.md
+    003-reserva-recorrente/
+      spec.md
+      plan.md
+      tasks.md
+  adr/
+    001-stack.md
+    002-arredondamento-de-desconto.md
+rules/
+  restrictions.md
+  tests.md
+AGENTS.md
+handoff.md</pre>
+  </div>
+
+  <div class="hsec ok"><div class="hn">repare no que ficou de fora de specs/</div><div class="ht">adr/, rules/, AGENTS.md e handoff.md</div><div class="hd">É o mapa de dois slides atrás, virando pasta. <code>adr/</code> e <code>rules/</code> são a <strong style="color:var(--text)">camada permanente</strong>: restringem todas as features, então não pertencem a nenhuma. E <code>handoff.md</code> é <strong style="color:var(--text)">efêmero</strong>: descreve uma sessão, não uma funcionalidade — por isso fica na raiz e é sobrescrito à vontade.</div></div>
+
+  <div class="hsec"><div class="hn">não é invenção nossa</div><div class="ht">É perto do que as ferramentas já fazem</div><div class="hd">O Spec Kit mantém os artefatos agrupados por funcionalidade; o Kiro cria uma pasta por spec com requisitos, design e tarefas dentro. <strong style="color:var(--text)">Adotar essa estrutura à mão agora significa que migrar para um framework depois é quase só renomear arquivo.</strong></div></div>
+
+  <div class="warnbox">
+    <div class="wh">precisa de um README dentro de specs/?</div>
+    <p>No começo, não. Índice de specs é organização útil quando a pasta cresce, mas é <strong>convenção de time ou da ferramenta</strong> — não é parte do método. Não comecem por ele.</p>
+  </div>
+</div>
+</div>
+
+<!-- ─── A SPEC NÃO TERMINA ─── -->
+<div class="slide" data-title="A spec não termina com a feature">
+<div class="slide-inner slide-scroll">
+  <span class="gtag">ciclo de vida</span>
+  <h2 class="sec-title">A feature acabou.<br>A spec, <span style="color:var(--green)">não</span>.</h2>
+  <p class="lead">O erro mais comum depois da primeira entrega é tratar spec como ticket: entregou, fecha, arquiva. Mas se o cupom foi implementado, testado e aceito, <strong style="color:var(--text)">a spec continua descrevendo o comportamento vigente do sistema</strong>. Ela é a resposta para "como isso funciona hoje?". Por isso não se apaga uma spec.</p>
+
+  <div class="g3" style="margin-bottom:18px;">
+    <div class="card" style="border-color:rgba(0,255,136,.3)"><span class="gtag">tasks</span><h3 class="slide-h3" style="font-size:.95rem;">Concluídas</h3><p style="color:var(--muted);font-size:.82rem;line-height:1.6;">Marcadas com <code>[x]</code>. São a única coisa que de fato "termina".</p></div>
+    <div class="card" style="border-color:rgba(0,229,255,.3)"><span class="tag">plan</span><h3 class="slide-h3" style="font-size:.95rem;">Executado e preservado</h3><p style="color:var(--muted);font-size:.82rem;line-height:1.6;">Não se apaga: é o registro de como aquela funcionalidade foi construída, e de por que daquele jeito.</p></div>
+    <div class="card" style="border-color:rgba(124,58,237,.35)"><span class="ptag">spec</span><h3 class="slide-h3" style="font-size:.95rem;">Continua vigente</h3><p style="color:var(--muted);font-size:.82rem;line-height:1.6;">Segue sendo a referência do comportamento atual — e o ponto de entrada da próxima mudança.</p></div>
+  </div>
+
+  <div class="filebox">
+    <div class="filebox-head"><span class="fb-path">a versão simples · cabeçalho da spec</span><button class="copybtn" onclick="cp(this)">copiar</button></div>
+    <pre># Spec — Cupom de desconto
+**Status:** Implementada</pre>
+  </div>
+
+  <div class="filebox">
+    <div class="filebox-head"><span class="fb-path">a versão com metadados · front matter</span><button class="copybtn" onclick="cp(this)">copiar</button></div>
+    <pre>---
+feature: cupom-de-desconto
+status: active
+implemented: true
+created: 2026-08-10
+implemented_at: 2026-08-15
+---</pre>
+  </div>
+
+  <div class="warnbox">
+    <div class="wh">por que não status: completed</div>
+    <p>Porque "completed" sugere que a spec <strong>morreu</strong> — e é justamente isso que não aconteceu. Separe as duas informações: <code>status: active</code> diz que ela ainda descreve o sistema; <code>implemented: true</code> diz que a construção terminou. Uma spec só sai de <code>active</code> quando o comportamento que ela descreve <strong>deixa de existir</strong> no produto.</p>
+  </div>
+
+  <span class="tag" style="margin-top:24px;">e daqui a seis meses, quando a regra mudar?</span>
+  <h3 class="slide-h3" style="margin-bottom:12px;">Duas convenções, e a escolha é do time</h3>
+
+  <div class="g2" style="margin-bottom:18px;">
+    <div class="card" style="border-color:rgba(0,255,136,.35)">
+      <span class="gtag">living spec</span>
+      <p style="color:var(--muted);font-size:.84rem;line-height:1.7;">A spec é um contrato vivo. A regra mudou? <strong style="color:var(--text)">Altera a spec primeiro</strong>, revisa o impacto no plano, gera as tarefas novas, e só então o código. A pasta <code>001-cupom/</code> continua sendo a verdade sobre cupom — atualizada.<br><br><strong style="color:var(--text)">Use quando:</strong> é evolução do mesmo comportamento.</p>
+    </div>
+    <div class="card" style="border-color:rgba(124,58,237,.4)">
+      <span class="ptag">flow-forward</span>
+      <p style="color:var(--muted);font-size:.84rem;line-height:1.7;">A pasta concluída fica preservada como <strong style="color:var(--text)">registro histórico</strong>, e a mudança ganha um diretório novo que referencia o anterior.<br><br><strong style="color:var(--text)">Use quando:</strong> a mudança é grande o suficiente para redefinir o assunto — <code>001-cupom/</code> vira <code>014-campanhas-promocionais/</code>, com cupons acumuláveis e regras de campanha.</p>
+    </div>
+  </div>
+
+  <div class="hero-q" style="max-width:960px;margin-bottom:20px;">
+    💭 O caso concreto: hoje o <strong style="font-style:normal;color:var(--text)">CA-04</strong> diz "somente um cupom pode ser aplicado ao carrinho". Daqui a seis meses o negócio pede dois. <strong style="font-style:normal;color:var(--text)">Isso é evolução do mesmo comportamento — não crie <code style="font-style:normal">004-alteracao-cupom</code>. Altere o CA-04 da spec que já existe.</strong> Criar pasta nova para cada ajuste é como criar um arquivo novo a cada bug corrigido.
+  </div>
+
+  <span class="tag">o percurso da mudança, em qualquer um dos dois modelos</span>
+  <h3 class="slide-h3" style="margin-bottom:10px;">A cadeia roda de novo — e a mudança entra sempre pelo mesmo lugar</h3>
+
+<div class="cycle anim">
+    <div class="cynode start ai" style="--d:.05s"><div class="cn">gatilho</div><div class="ct">Mudança de intenção</div><div class="cd">o negócio muda de ideia, ou o mundo muda por ele</div></div>
+    <div class="cynode key ai" style="--d:.3s"><div class="cn">passo 1</div><div class="ct">Atualizar a spec</div><div class="cd">a regra e o critério mudam <strong style="color:var(--text)">aqui</strong>, antes de qualquer código</div></div>
+    <div class="cynode ai" style="--d:.55s"><div class="cn">passo 2</div><div class="ct">Revisar o impacto</div><div class="cd">que outros critérios e specs essa mudança contradiz?</div></div>
+    <div class="cynode ai" style="--d:.8s"><div class="cn">passo 3</div><div class="ct">Atualizar plano e tarefas</div><div class="cd">só o que a mudança tocou · não é replanejar tudo</div></div>
+    <div class="cynode ai" style="--d:1.05s"><div class="cn">passo 4</div><div class="ct">O teste falha</div><div class="cd">e a falha é boa notícia: mostra exatamente onde o código diverge</div></div>
+    <div class="cynode ai" style="--d:1.3s"><div class="cn">passo 5</div><div class="ct">Implementar e validar</div><div class="cd">o código volta a concordar com a spec vigente</div></div>
+    <div class="cyback ai" style="--d:1.55s">↻ e a spec vigente é o ponto de partida da próxima mudança</div>
+  </div>
+
+  <div style="text-align:center;margin:12px 0 16px;">
+    <button class="replay" onclick="replay(this)">▸ rodar de novo</button>
+  </div>
+
+  <div class="g2">
+    <div class="card" style="border-color:rgba(255,107,53,.3)">
+      <span class="otag">"mas isso não é waterfall?"</span>
+      <p style="color:var(--muted);font-size:.84rem;line-height:1.65;">Seria, se a spec precisasse estar completa para <strong style="color:var(--text)">o produto inteiro</strong> antes de começar, se a fase terminasse com assinatura, e se voltar atrás fosse tratado como falha de planejamento.</p>
+    </div>
+    <div class="card" style="border-color:rgba(0,255,136,.3)">
+      <span class="gtag">por que não é</span>
+      <p style="color:var(--muted);font-size:.84rem;line-height:1.65;">A spec é de <strong style="color:var(--text)">uma funcionalidade</strong>, o ciclo é curto, e voltar atrás é o funcionamento normal — só que a volta começa pela spec, não pelo código.</p>
+    </div>
+  </div>
+
+  <div class="warnbox">
+    <div class="wh">nenhum dos dois modelos é "o certo"</div>
+    <p>Living spec e flow-forward são <strong>convenções de time</strong> — o próprio Spec Kit diz isso. O que não é convenção, e vale nos dois: <strong>a mudança de comportamento entra pela spec, e os artefatos derivados são revisados a partir dela.</strong> Se a mudança entrar pelo código, tanto faz qual modelo vocês escolheram.</p>
+  </div>
+</div>
+</div>
+
+<!-- ─── QUANDO USAR E QUANDO NÃO ─── -->
+<div class="slide" data-title="Quando usar e quando não">
+<div class="slide-inner slide-scroll">
+  <span class="tag">a parte que separa engenheiro de evangelista</span>
+  <h2 class="sec-title">SDD nem sempre<br>compensa —<br>e tudo bem</h2>
+  <p class="lead">O objetivo do curso não é vocês aplicarem SDD em tudo. É vocês <strong style="color:var(--text)">saberem decidir</strong>. A conta é a mesma da barra de custo: SDD paga quando errar tarde sai caro.</p>
+
+  <div class="yn" style="margin-bottom:18px;">
+    <div class="yn-col yn-yes">
+      <h4>Tende a pagar bem quando…</h4>
+      <li>A feature tem <strong>regra de negócio</strong> — não é só encanamento</li>
+      <li>Existem <strong>ambiguidades reais</strong>, do tipo que gera reunião</li>
+      <li>O trabalho vai <strong>atravessar várias sessões</strong></li>
+      <li>Mais de uma pessoa — ou mais de um agente — vai encostar nisso</li>
+      <li>Errar custa caro: dinheiro, dado, contrato, reputação</li>
+      <li>Há <strong>integração</strong> entre componentes ou entre times</li>
+      <li>O comportamento precisa ser <strong>auditável</strong> depois</li>
+      <li>O código vai viver bastante tempo</li>
+    </div>
+    <div class="yn-col yn-no">
+      <h4>Pode ser exagero quando…</h4>
+      <li>É um <strong>spike descartável</strong> — vai pro lixo na sexta</li>
+      <li>É um script de vinte linhas que roda uma vez</li>
+      <li>Você está <strong>explorando uma API</strong> para saber o que ela faz</li>
+      <li>É protótipo cujo objetivo é justamente <strong>descobrir o requisito</strong></li>
+      <li>A mudança é trivial e óbvia, e ninguém vai discordar dela</li>
+      <li>É o notebook de análise que só você vai abrir</li>
+    </div>
+  </div>
+
+  <div class="hero-q" style="max-width:960px;margin-bottom:16px;">
+    🎯 A coluna da direita não é "código ruim permitido". É <strong style="font-style:normal;color:var(--text)">contexto onde a ambiguidade é o produto</strong>: num protótipo de descoberta, fechar a decisão cedo é justamente o erro. Escrever spec ali é decidir antes de aprender.
+  </div>
+
+  <div class="warnbox">
+    <div class="wh">o caso que engana</div>
+    <p>"Vai ser só um protótipo" é a frase mais cara da engenharia de software. Se o protótipo tem chance de virar produção — e ele quase sempre tem — a pergunta muda: não é "vale a pena escrever spec para isso?", é <strong>"em que momento eu paro e escrevo?"</strong>. Uma resposta honesta: quando alguém que não é você começar a depender daquilo.</p>
+  </div>
+
+  <div class="bridge" style="margin-top:16px;">
+    <p style="color:var(--muted);font-size:.86rem;line-height:1.7;">📌 Isso conversa direto com a escada: <strong style="color:var(--text)">o nível certo é o mais baixo que resolve a dor de hoje</strong>, e a dor depende do trabalho. O mesmo time pode operar no nível 2 para a feature de cobrança e no nível 0 para o script de investigação da terça-feira. Não é incoerência — é julgamento.</p>
+  </div>
+</div>
+</div>
+
+<!-- ─── ARMADILHAS ─── -->
+<div class="slide" data-title="Armadilhas do SDD">
+<div class="slide-inner slide-scroll">
+  <span class="otag">as seis formas de fazer errado</span>
+  <h2 class="sec-title">Onde SDD<br>costuma morrer</h2>
+
+  <div class="hsec star"><div class="hn">1 · teatro de spec</div><div class="ht">O arquivo existe, ninguém lê, o código andou por fora</div><div class="hd">Sintoma: a spec e o código discordam e <strong style="color:var(--text)">ninguém corrigiu nenhum dos dois</strong>. É o estado mais perigoso, porque o repositório parece maduro.</div></div>
+
+  <div class="hsec star"><div class="hn">2 · spec escrita pelo agente e aprovada sem leitura</div><div class="ht">A lista de perguntas dele é ótimo começo e péssimo checklist</div><div class="hd">Frase da aula 6, e continua valendo. Ele pergunta o que é comum perguntar — não o que é caro esquecer. As decisões continuam saindo de gente.</div></div>
+
+  <div class="hsec star"><div class="hn">3 · spec congelada</div><div class="ht">A regra mudou e ninguém atualizou o arquivo</div><div class="hd">Agora ela <strong style="color:var(--text)">mente</strong> — e o agente vai acreditar nela com total convicção. Contexto errado é pior que contexto ausente: é a aula 3 cobrando juros. É também o motivo de <code>status: active</code> não ser enfeite: spec vigente é spec que alguém se comprometeu a manter verdadeira.</div></div>
+
+  <div class="hsec star"><div class="hn">4 · spec grande demais</div><div class="ht">A funcionalidade é que estava errada</div><div class="hd">Spec que não cabe numa sessão não é lida inteira por ninguém — nem por você, nem pelo agente, que vai priorizar o começo e o fim.</div></div>
+
+  <div class="hero-q" style="max-width:960px;margin-top:14px;">
+    🎯 Repare que <strong style="font-style:normal;color:var(--text)">nenhuma das quatro é erro de escrita — todas são erro de acordo.</strong> O que salva não é um template melhor: é alguém do time responder "se a spec e o código discordarem, quem ganha?" antes de a pergunta aparecer num prazo apertado.
+  </div>
+</div>
+</div>
+
+<!-- ─── PRÓXIMA AULA + TAREFA ─── -->
+<div class="slide" data-title="Próxima aula e tarefa">
+<div class="slide-inner slide-scroll">
+  <span class="gtag">próxima aula</span>
+  <h2 class="sec-title">Um PRD.<br>Um repositório vazio.<br><span style="color:var(--green)">Nada mais.</span></h2>
+
+  <div class="g3" style="margin-bottom:18px;">
+    <div class="card" style="border-color:rgba(0,229,255,.3)"><span class="tag">o que muda</span><p style="color:var(--muted);font-size:.84rem;line-height:1.65;">Pela primeira vez tem <strong style="color:var(--text)">front e banco de dados</strong>. Contrato entre camadas, migração, dado de partida — e um <code>.env</code>.</p></div>
+    <div class="card" style="border-color:rgba(0,255,136,.3)"><span class="gtag">o que já está decidido</span><p style="color:var(--muted);font-size:.84rem;line-height:1.65;">O banco é <strong style="color:var(--text)">PostgreSQL</strong>. Só isso. <strong style="color:var(--text)">Todo o resto da stack é decisão de vocês</strong>, e vira o ADR-001 na frente da turma.</p></div>
+    <div class="card" style="border-color:rgba(124,58,237,.35)"><span class="ptag">o que não muda</span><p style="color:var(--muted);font-size:.84rem;line-height:1.65;">Continua sem framework de SDD. O método é o de vocês, feito à mão — e agora com nome e ordem.</p></div>
+  </div>
+
+  <span class="tag">o produto</span>
+  <h3 class="slide-h3">O PRD, na íntegra</h3>
+  <p style="color:var(--muted);font-size:.86rem;line-height:1.7;margin-bottom:12px;">Escrito por Operações, do jeito que um PRD chega na vida real: curto, útil e <strong style="color:var(--text)">incompleto</strong>.</p>
+
+<div class="filebox">
+    <div class="filebox-head"><span class="fb-path">docs/PRD.md</span><button class="copybtn" onclick="cp(this)">copiar</button></div>
+    <pre># PRD — Empréstimo de Equipamentos Internos
+Versão 1 · escrito pelo time de Operações
+
+## Problema
+O controle de quem pegou qual equipamento (notebooks, monitores,
+cabos, câmeras) é feito hoje numa planilha compartilhada. Ninguém
+sabe o que está disponível, itens somem, e a devolução só é
+registrada se alguém lembrar de atualizar a linha.
+
+## Quem usa
+- Colaborador: vê o catálogo, pede um item emprestado, devolve.
+- Operações: cadastra equipamentos, vê quem está com o quê e
+  registra devolução no balcão.
+
+## O que precisa existir na primeira versão
+1. Login. Cada pessoa vê os próprios empréstimos.
+2. Catálogo de equipamentos com a situação de cada um.
+3. Solicitar empréstimo de um item disponível.
+4. Devolver um item que está comigo.
+5. Tela de Operações com todos os empréstimos em aberto.
+
+## Regras que Operações já decidiu
+- Cada pessoa pode estar com no máximo 3 itens ao mesmo tempo.
+- O prazo padrão de devolução é de 14 dias.
+- Quem tem item em atraso não pode pegar outro emprestado.
+- Equipamento em manutenção não aparece como disponível.
+
+## O que NÃO entra nesta versão
+- Reserva com data futura.
+- Notificação por e-mail.
+- Importação da planilha atual.
+
+## Como saberemos que deu certo
+Operações consegue abandonar a planilha depois de duas semanas
+de uso.</pre>
+  </div>
+
+  <span class="gtag" style="margin-top:22px;">tarefa · entrega 1</span>
+  <h3 class="slide-h3">Cinco perguntas que o PRD não responde</h3>
+
+<div class="filebox">
+    <div class="filebox-head"><span class="fb-path">entrega 1 · formato</span><button class="copybtn" onclick="cp(this)">copiar</button></div>
+    <pre>1. &lt;a pergunta&gt;
+   tipo: [ negócio | técnica | fora de escopo ]
+   por que importa: &lt;uma linha&gt;
+
+... 5 no total.
+
+"Negócio" é o que só uma pessoa de Operações pode responder.
+"Técnica" é o que vira ADR.
+"Fora de escopo" é o que você já sabe que não vai fazer agora —
+e que precisa estar escrito para não ser feito por engano.</pre>
+  </div>
+
+  <span class="gtag" style="margin-top:22px;">tarefa · entrega 2</span>
+  <h3 class="slide-h3">O rascunho do ADR-001 — a stack</h3>
+  <p style="color:var(--muted);font-size:.86rem;line-height:1.7;margin-bottom:12px;">Uma decisão já está tomada: <strong style="color:var(--text)">o banco é PostgreSQL</strong>. Todo o resto do que faz uma aplicação web simples funcionar é de vocês. Uma proposta por item — e nenhuma pode ser justificada só com "é o que eu uso".</p>
+
+<div class="filebox">
+    <div class="filebox-head"><span class="fb-path">entrega 2 · docs/adr/001-stack.md (rascunho)</span><button class="copybtn" onclick="cp(this)">copiar</button></div>
+    <pre># ADR-001 — Stack do projeto (rascunho para a aula)
+
+JÁ DECIDIDO PELO TIME: banco de dados = PostgreSQL.
+
+Para cada item abaixo, traga:
+  ESCOLHA · UMA linha de justificativa · UMA alternativa descartada
+  e o motivo de ter descartado.
+
+ 1. Linguagem e runtime do backend
+ 2. Framework do backend
+ 3. Estilo e formato da API (REST? outra coisa? JSON?)
+ 4. Front-end: framework com build, ou HTML/CSS/JS sem build?
+ 5. Como o front é servido: mesmo processo do backend ou separado?
+ 6. Autenticação: o que identifica a pessoa, e onde a sessão vive
+ 7. Autorização: como o sistema distingue colaborador de Operações
+ 8. Acesso ao banco: ORM, query builder ou SQL direto?
+ 9. Migrations: como o schema nasce e como evolui
+10. Testes: framework, e o que conta como "passou"
+11. Execução local: como alguém sobe isso do zero na máquina
+12. Configuração e segredos: o que vai no .env.example
+
+Critério de qualidade da sua resposta: um colega que discorda da
+sua escolha consegue entender POR QUE você escolheu, sem
+precisar te perguntar nada.</pre>
+  </div>
+
+  <div class="warnbox">
+    <div class="wh">o aviso que vai abrir a próxima aula</div>
+    <p>Segredo <strong>nunca</strong> entra na spec, no PRD, no AGENTS.md ou no chat. O que entra no repositório é <code>.env.example</code>. E "não inventar credencial, não commitar <code>.env</code>, não subir chave" é linha de <code>rules/restrictions.md</code> escrita <strong>antes</strong> da primeira sessão — é o erro mais caro que um agente comete em terreno limpo.</p>
+  </div>
+
+  <div class="hero-q" style="max-width:960px;">
+    🎯 Repare no que a entrega 2 é: <strong style="font-style:normal;color:var(--text)">vocês vão escrever o primeiro artefato do projeto antes de existir uma linha de código.</strong> Em greenfield, a primeira coisa que se escreve não é código nem stack — é acordo. A stack é o ADR-001, e ela chega depois.
+  </div>
+</div>
+</div>
+
+<!-- ─── O QUE VOCÊS LEVAM ─── -->
+<div class="slide" data-title="O que vocês levam">
+<div class="slide-inner slide-scroll">
+  <span class="gtag">antes de sair</span>
+  <h2 class="sec-title">O que vocês<br>levam de hoje</h2>
+
+  <div class="checklist" style="margin-bottom:18px;">
+    <div class="chk" onclick="this.classList.toggle('on')"><span class="box"></span><span><strong>Spec → Plan → Tasks → Code</strong>: o quê, como, passos, execução</span></div>
+    <div class="chk" onclick="this.classList.toggle('on')"><span class="box"></span><span>A spec é fonte de verdade <strong>do comportamento</strong> — não de arquitetura</span></div>
+    <div class="chk" onclick="this.classList.toggle('on')"><span class="box"></span><span>O ganho é <strong>errar mais cedo</strong>, quando corrigir ainda é barato</span></div>
+    <div class="chk" onclick="this.classList.toggle('on')"><span class="box"></span><span>Mudou o comportamento? <strong>Spec primeiro, código depois</strong></span></div>
+    <div class="chk" onclick="this.classList.toggle('on')"><span class="box"></span><span>Duas heurísticas: <strong>reconstrução</strong> e <strong>divergência</strong> — sinal, não prova</span></div>
+    <div class="chk" onclick="this.classList.toggle('on')"><span class="box"></span><span>Camada permanente <strong>restringe</strong>; a cadeia da feature <strong>deriva</strong></span></div>
+    <div class="chk" onclick="this.classList.toggle('on')"><span class="box"></span><span>SDD não é a spec: é <strong>intenção → spec → plano → tarefas → código</strong></span></div>
+    <div class="chk" onclick="this.classList.toggle('on')"><span class="box"></span><span>A spec é <strong>viva</strong>: a mudança entra por ela, e não pelo código</span></div>
+    <div class="chk" onclick="this.classList.toggle('on')"><span class="box"></span><span>Uma feature = <strong>uma pasta</strong> com spec, plano e tarefas</span></div>
+    <div class="chk" onclick="this.classList.toggle('on')"><span class="box"></span><span>Tasks terminam; plano é preservado; <strong>a spec continua vigente</strong></span></div>
+    <div class="chk" onclick="this.classList.toggle('on')"><span class="box"></span><span>Spec e tarefas dão ao agente <strong>alvo e borda</strong> — critério de parada</span></div>
+    <div class="chk" onclick="this.classList.toggle('on')"><span class="box"></span><span>Critério de aceitação tem <strong>entrada, saída e identificador</strong></span></div>
+    <div class="chk" onclick="this.classList.toggle('on')"><span class="box"></span><span>EARS dá gramática ao requisito: <strong>gatilho, condição, resposta</strong></span></div>
+    <div class="chk" onclick="this.classList.toggle('on')"><span class="box"></span><span>Nível 1 (contrato) rigoroso; <strong>nível 2 (implementação) livre</strong></span></div>
+    <div class="chk" onclick="this.classList.toggle('on')"><span class="box"></span><span>BDD é conversa com exemplos; <strong>Gherkin é só o registro</strong></span></div>
+    <div class="chk" onclick="this.classList.toggle('on')"><span class="box"></span><span>Seis degraus — o certo é o <strong>menor que resolve a dor de hoje</strong></span></div>
+    <div class="chk" onclick="this.classList.toggle('on')"><span class="box"></span><span>Saber <strong>quando não usar</strong> vale tanto quanto saber usar</span></div>
+    <div class="chk" onclick="this.classList.toggle('on')"><span class="box"></span><span>A regra da autoridade precisa estar <strong>escrita</strong> — em algum arquivo, qualquer um</span></div>
+  </div>
+
+  <div class="hero-q" style="max-width:960px;margin-bottom:20px;">
+    💭 A frase da aula, se for pra levar só uma: <strong style="font-style:normal;color:var(--text)">com agente, escrever código ficou barato — e o gargalo virou decidir.</strong> Spec é o lugar onde se decide. Todo o resto de hoje é consequência disso.
+  </div>
+
+  <span class="tag">se quiserem ir além</span>
+  <h3 class="slide-h3">Para aprofundar</h3>
+  <div class="hsec"><div class="hn">série em português</div><div class="ht">Spec-Driven Development na era dos agentes de IA — Data Science Academy</div><div class="hd">Cinco partes, no blog da DSA. A <strong style="color:var(--text)">parte 2</strong> é a mais útil para hoje: anatomia da spec, EARS/GEARS e por que markdown. A parte 4 trata de injeção de contexto e agente verificador; a 5, de código descartável e do papel do engenheiro.</div></div>
+  <div class="hsec"><div class="hn">antes da aula de frameworks</div><div class="ht">"Understanding Spec-Driven Development: Kiro, spec-kit e Tessl" — martinfowler.com</div><div class="hd">Mostra que cada ferramenta nomeia as mesmas fases de um jeito diferente.</div></div>
+  <div class="hsec"><div class="hn">os originais das outras três siglas</div><div class="ht">Vale ler a fonte, não o resumo</div><div class="hd">TDD: <em>Test-Driven Development by Example</em>, Kent Beck. BDD: os textos de Dan North e a documentação do Cucumber, que insiste que BDD é muito mais do que a ferramenta. DDD: <em>Domain-Driven Design</em>, Eric Evans.</div></div>
+  <div class="warnbox">
+    <div class="wh">um aviso sobre bibliografia de SDD</div>
+    <p>É assunto de 2024 em diante e envelhece rápido — ferramentas mudam de comando entre versões. Leiam pela <strong>ideia</strong>, não pelo passo a passo. E desconfiem de texto que apresente SDD como solução para tudo: vocês já têm um slide inteiro sobre quando ele não compensa.</p>
+  </div>
+</div>
+</div>
+
+</div><!-- /slides -->
+
+<script>
+// ══════════════════════════ BG CANVAS ══════════════════════════
+const bgCanvas = document.getElementById('bg');
+const bgCtx = bgCanvas.getContext('2d');
+let BW, BH, nodes = [];
+function resizeBg() { BW = bgCanvas.width = window.innerWidth; BH = bgCanvas.height = window.innerHeight; }
+resizeBg(); window.addEventListener('resize', () => { resizeBg(); initNodes(); });
+function initNodes() {
+  nodes = [];
+  const n = Math.floor((BW * BH) / 18000);
+  for (let i = 0; i < n; i++) nodes.push({ x:Math.random()*BW, y:Math.random()*BH, vx:(Math.random()-.5)*.4, vy:(Math.random()-.5)*.4, r:Math.random()*2+1 });
+}
+initNodes();
+function drawBg() {
+  bgCtx.clearRect(0, 0, BW, BH);
+  nodes.forEach(n => { n.x += n.vx; n.y += n.vy; if(n.x<0||n.x>BW)n.vx*=-1; if(n.y<0||n.y>BH)n.vy*=-1; });
+  for (let i = 0; i < nodes.length; i++) for (let j = i+1; j < nodes.length; j++) {
+    const dx=nodes[i].x-nodes[j].x, dy=nodes[i].y-nodes[j].y, d=Math.sqrt(dx*dx+dy*dy);
+    if (d < 120) { bgCtx.beginPath(); bgCtx.moveTo(nodes[i].x,nodes[i].y); bgCtx.lineTo(nodes[j].x,nodes[j].y); bgCtx.strokeStyle='rgba(124,58,237,'+(.15*(1-d/120))+')'; bgCtx.lineWidth=.5; bgCtx.stroke(); }
+  }
+  nodes.forEach(n => { bgCtx.beginPath(); bgCtx.arc(n.x,n.y,n.r,0,Math.PI*2); bgCtx.fillStyle='rgba(0,229,255,.5)'; bgCtx.fill(); });
+  requestAnimationFrame(drawBg);
+}
+drawBg();
+
+// ══════════════════════════ SLIDE ENGINE ══════════════════════════
+const slideEls = Array.from(document.querySelectorAll('.slide'));
+const TOTAL = slideEls.length;
+let current = 0;
+
+const progressBar = document.getElementById('progress-bar');
+const counter     = document.getElementById('slide-counter');
+const titleBar    = document.getElementById('slide-title-bar');
+const navPrev     = document.getElementById('nav-prev');
+const navNext     = document.getElementById('nav-next');
+const dotsEl      = document.getElementById('dots');
+
+slideEls.forEach((_, i) => {
+  const d = document.createElement('div'); d.className = 'dot'; d.onclick = () => goTo(i);
+  dotsEl.appendChild(d);
+});
+
+// Dispara as animações do slide que acabou de entrar.
+// Remover .run, forçar reflow e recolocar reinicia todas as keyframes.
+function runAnims(slide) {
+  slide.querySelectorAll('.anim').forEach(box => {
+    box.classList.remove('run');
+    void box.offsetWidth;
+    box.classList.add('run');
+  });
+}
+
+function goTo(n) {
+  if (n < 0 || n >= TOTAL) return;
+  slideEls.forEach((s, i) => {
+    s.classList.remove('active', 'prev');
+    if (i < n) s.classList.add('prev');
+    if (i !== n) s.querySelectorAll('.anim').forEach(b => b.classList.remove('run'));
+  });
+  slideEls[n].classList.add('active');
+  slideEls[n].scrollTop = 0;
+  const sc = slideEls[n].querySelector('.slide-scroll');
+  if (sc) sc.scrollTop = 0;
+  current = n;
+  updateUI();
+  runAnims(slideEls[n]);
+}
+
+function updateUI() {
+  progressBar.style.width = ((current + 1) / TOTAL * 100) + '%';
+  counter.textContent = (current + 1) + ' / ' + TOTAL;
+  titleBar.textContent = slideEls[current].dataset.title || '';
+  navPrev.classList.toggle('disabled', current === 0);
+  navNext.classList.toggle('disabled', current === TOTAL - 1);
+  document.querySelectorAll('.dot').forEach((d,i) => d.classList.toggle('active', i === current));
+}
+
+navPrev.onclick = () => goTo(current - 1);
+navNext.onclick = () => goTo(current + 1);
+document.addEventListener('keydown', e => {
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') goTo(current + 1);
+  if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   goTo(current - 1);
+});
+requestAnimationFrame(() => goTo(0));
+
+// ══════════════════════════ COPIAR ══════════════════════════
+function cp(btn) {
+  const box = btn.closest('.filebox');
+  const txt = box.querySelector('pre').innerText;
+  navigator.clipboard.writeText(txt).then(() => {
+    btn.textContent = 'copiado ✓'; btn.classList.add('done');
+    setTimeout(() => { btn.textContent = 'copiar'; btn.classList.remove('done'); }, 1800);
+  }).catch(() => { btn.textContent = 'erro'; setTimeout(() => btn.textContent = 'copiar', 1500); });
+}
+
+// ══════════════════════════ REPLAY ══════════════════════════
+function replay(btn) {
+  btn.closest('.slide-inner').querySelectorAll('.anim').forEach(box => {
+    box.classList.remove('run');
+    void box.offsetWidth;
+    box.classList.add('run');
+  });
+}
+</script>
+</body>
+</html>
