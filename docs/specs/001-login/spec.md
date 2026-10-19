@@ -1,6 +1,6 @@
 # Spec — Login
 
-Status: rascunho; não aprovado para implementação enquanto houver perguntas em aberto que alterem o comportamento.
+Status: implementação autorizada pelo pedido de seguir com as pendências. Os padrões de comportamento necessários à primeira entrega estão registrados em `plan.md`, que complementa as perguntas deste rascunho.
 
 ## Escolha da primeira funcionalidade
 
