@@ -1,0 +1,91 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: dark;
+  --page: #05070f;
+  --background: #080c1a;
+  --foreground: #e6eaf6;
+  --surface: #0e1530;
+  --sunken: #0b1128;
+  --muted: #8a93b2;
+  --dim: #7c86a2;
+  --faint: #5e6884;
+  --border: #2b3450;
+  --border-soft: #1a2340;
+  --border-frame: #222c4a;
+  --accent: #5b7fe0;
+  --accent-text: #b4c6f6;
+  --accent-hover: #eef2fe;
+  --accent-icon: #8aa6ee;
+  --accent-deep: #001449;
+  --accent-border: #25408f;
+  --error: #f0a0a5;
+  --gradient-login: linear-gradient(
+    160deg,
+    #001449 0%,
+    #00102f 60%,
+    #080c1a 100%
+  );
+  --gradient-rule: linear-gradient(to right, #3c5dbe, rgba(60, 93, 190, 0));
+  --gradient-divider: linear-gradient(
+    to right,
+    transparent,
+    #222c4a 48px,
+    #222c4a calc(100% - 48px),
+    transparent
+  );
+}
+
+@theme inline {
+  --font-sans: var(--font-open-sans);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-sunken: var(--sunken);
+  --color-muted: var(--muted);
+  --color-dim: var(--dim);
+  --color-faint: var(--faint);
+  --color-border: var(--border);
+  --color-border-soft: var(--border-soft);
+  --color-border-frame: var(--border-frame);
+  --color-accent: var(--accent);
+  --color-accent-text: var(--accent-text);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-icon: var(--accent-icon);
+  --color-accent-deep: var(--accent-deep);
+  --color-accent-border: var(--accent-border);
+  --color-error: var(--error);
+  --radius-control: 8px;
+}
+
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-open-sans), system-ui, sans-serif;
+}
+button,
+input {
+  font: inherit;
+}
+button {
+  cursor: pointer;
+}
+button:disabled {
+  cursor: wait;
+}
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+p {
+  text-wrap: pretty;
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0ms !important;
+    animation-duration: 0ms !important;
+  }
+}

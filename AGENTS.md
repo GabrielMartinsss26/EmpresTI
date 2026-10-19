@@ -30,7 +30,31 @@ O documento de negócio está em `docs/PRD.md` e a stack aprovada está em
 
 ## Estado atual do projeto
 
-O repositório ainda não possui código da aplicação. Não existem comandos de build,
-teste ou execução que possam ser documentados e verificados hoje. Esta seção deve
-ser substituída por comandos e um mapa das pastas reais depois da conclusão do
-andar zero.
+O pedido de seguir com todas as pendências autoriza executar as etapas de
+`docs/specs/001-login/plan.md` em sequência, verificando cada uma antes da próxima.
+Commit e push continuam sendo responsabilidade do usuário.
+
+## Estrutura
+
+- `src/app` — rotas Next e endpoint tRPC.
+- `src/components` — interface e componentes locais.
+- `src/server` — configuração, identidade, contexto tRPC e services.
+- `prisma` — schema, migrations e seed.
+- `tests/unit`, `tests/db`, `tests/e2e` — validação, PostgreSQL real e navegador.
+
+## Comandos do plano autorizado
+
+- `npm install` — dependências; depois do lockfile, `npm ci`.
+- `npm run dev` — execução local.
+- `npm run db:generate` — geração do cliente Prisma.
+- `npx prisma migrate diff --from-empty --to-schema-datamodel prisma/schema.prisma --script --output prisma/migrations/202610190001_initial/migration.sql` — geração inicial; SQL de segurança complementado na mesma migration.
+- `npm run db:deploy` — aplicação de migrations no destino configurado.
+- `npm run db:seed` — seed idempotente.
+- `npm run test:db` — banco local descartável via Testcontainers; nunca usa o banco remoto.
+- `npm test` — testes unitários.
+- `npm run lint`, `npm run typecheck`, `npm run build` — verificação da aplicação.
+- `npm run format:check` — formatação; `npx prettier --write` para formatar os arquivos de implementação.
+- `npx playwright install chromium`, `npm run test:e2e` — instalação do navegador e E2E local.
+- `npm run start` — execução do build de produção.
+
+O deploy remoto depende das verificações locais. Credenciais nunca são impressas.
