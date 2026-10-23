@@ -1,0 +1,201 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+enum Role {
+  COLLABORATOR
+  OPERATIONS
+  ADMIN
+}
+
+enum OperationalStatus {
+  AVAILABLE
+  MAINTENANCE
+  OUT_OF_SERVICE
+}
+
+enum RequestStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+model Tenant {
+  id             String              @id @default(uuid()) @db.Uuid
+  slug           String              @unique
+  name           String
+  deactivated_at DateTime?           @db.Timestamptz(6)
+  created_at     DateTime            @default(now()) @db.Timestamptz(6)
+  updated_at     DateTime            @updatedAt @db.Timestamptz(6)
+  memberships    Membership[]
+  categories     EquipmentCategory[]
+  equipment      Equipment[]
+  requests       LoanRequest[]
+  loans          Loan[]
+  audits         AuditLog[]
+
+  @@map("tenants")
+}
+
+model Profile {
+  id             String       @id @db.Uuid
+  full_name      String
+  department     String?
+  deactivated_at DateTime?    @db.Timestamptz(6)
+  created_at     DateTime     @default(now()) @db.Timestamptz(6)
+  updated_at     DateTime     @updatedAt @db.Timestamptz(6)
+  memberships    Membership[]
+
+  @@map("profiles")
+}
+
+model Membership {
+  id             String        @id @default(uuid()) @db.Uuid
+  tenant_id      String        @db.Uuid
+  user_id        String        @db.Uuid
+  role           Role
+  deactivated_at DateTime?     @db.Timestamptz(6)
+  created_at     DateTime      @default(now()) @db.Timestamptz(6)
+  updated_at     DateTime      @updatedAt @db.Timestamptz(6)
+  tenant         Tenant        @relation(fields: [tenant_id], references: [id], onDelete: Restrict)
+  profile        Profile       @relation(fields: [user_id], references: [id], onDelete: Restrict)
+  requests       LoanRequest[] @relation("requester")
+  decisions      LoanRequest[] @relation("decider")
+  borrowed       Loan[]        @relation("borrower")
+  approved       Loan[]        @relation("approver")
+  returned       Loan[]        @relation("returner")
+  audits         AuditLog[]
+
+  @@unique([id, tenant_id])
+  @@unique([tenant_id, user_id])
+  @@index([user_id])
+  @@index([tenant_id, role])
+  @@map("memberships")
+}
+
+model EquipmentCategory {
+  id             String      @id @default(uuid()) @db.Uuid
+  tenant_id      String      @db.Uuid
+  name           String
+  description    String?
+  deactivated_at DateTime?   @db.Timestamptz(6)
+  created_at     DateTime    @default(now()) @db.Timestamptz(6)
+  updated_at     DateTime    @updatedAt @db.Timestamptz(6)
+  tenant         Tenant      @relation(fields: [tenant_id], references: [id], onDelete: Restrict)
+  equipment      Equipment[]
+
+  @@unique([id, tenant_id])
+  @@unique([tenant_id, name])
+  @@map("equipment_categories")
+}
+
+model Equipment {
+  id                 String            @id @default(uuid()) @db.Uuid
+  tenant_id          String            @db.Uuid
+  category_id        String            @db.Uuid
+  name               String
+  asset_tag          String
+  serial_number      String?
+  pickup_location    String
+  description        String?
+  operational_status OperationalStatus @default(AVAILABLE)
+  deactivated_at     DateTime?         @db.Timestamptz(6)
+  created_at         DateTime          @default(now()) @db.Timestamptz(6)
+  updated_at         DateTime          @updatedAt @db.Timestamptz(6)
+  tenant             Tenant            @relation(fields: [tenant_id], references: [id], onDelete: Restrict)
+  category           EquipmentCategory @relation(fields: [category_id, tenant_id], references: [id, tenant_id], onDelete: Restrict)
+  requests           LoanRequest[]
+  loans              Loan[]
+
+  @@unique([id, tenant_id])
+  @@unique([tenant_id, asset_tag])
+  @@unique([tenant_id, serial_number])
+  @@index([tenant_id, operational_status])
+  @@map("equipment")
+}
+
+model LoanRequest {
+  id                       String        @id @default(uuid()) @db.Uuid
+  tenant_id                String        @db.Uuid
+  equipment_id             String        @db.Uuid
+  requester_membership_id  String        @db.Uuid
+  status                   RequestStatus @default(PENDING)
+  requested_at             DateTime      @default(now()) @db.Timestamptz(6)
+  decided_at               DateTime?     @db.Timestamptz(6)
+  decided_by_membership_id String?       @db.Uuid
+  rejection_reason         String?
+  created_at               DateTime      @default(now()) @db.Timestamptz(6)
+  updated_at               DateTime      @updatedAt @db.Timestamptz(6)
+  tenant                   Tenant        @relation(fields: [tenant_id], references: [id], onDelete: Restrict)
+  equipment                Equipment     @relation(fields: [equipment_id, tenant_id], references: [id, tenant_id], onDelete: Restrict)
+  requester                Membership    @relation("requester", fields: [requester_membership_id, tenant_id], references: [id, tenant_id], onDelete: Restrict)
+  decider                  Membership?   @relation("decider", fields: [decided_by_membership_id, tenant_id], references: [id, tenant_id], onDelete: Restrict)
+  loan                     Loan?
+
+  @@unique([id, tenant_id])
+  @@index([tenant_id, status, requested_at])
+  @@index([tenant_id, requester_membership_id])
+  @@map("loan_requests")
+}
+
+model Loan {
+  id                        String      @id @default(uuid()) @db.Uuid
+  tenant_id                 String      @db.Uuid
+  loan_request_id           String      @unique @db.Uuid
+  equipment_id              String      @db.Uuid
+  borrower_membership_id    String      @db.Uuid
+  approved_by_membership_id String      @db.Uuid
+  checked_out_at            DateTime    @db.Timestamptz(6)
+  due_at                    DateTime    @db.Timestamptz(6)
+  return_requested_at       DateTime?   @db.Timestamptz(6)
+  returned_at               DateTime?   @db.Timestamptz(6)
+  returned_by_membership_id String?     @db.Uuid
+  created_at                DateTime    @default(now()) @db.Timestamptz(6)
+  updated_at                DateTime    @updatedAt @db.Timestamptz(6)
+  tenant                    Tenant      @relation(fields: [tenant_id], references: [id], onDelete: Restrict)
+  request                   LoanRequest @relation(fields: [loan_request_id, tenant_id], references: [id, tenant_id], onDelete: Restrict)
+  equipment                 Equipment   @relation(fields: [equipment_id, tenant_id], references: [id, tenant_id], onDelete: Restrict)
+  borrower                  Membership  @relation("borrower", fields: [borrower_membership_id, tenant_id], references: [id, tenant_id], onDelete: Restrict)
+  approver                  Membership  @relation("approver", fields: [approved_by_membership_id, tenant_id], references: [id, tenant_id], onDelete: Restrict)
+  returner                  Membership? @relation("returner", fields: [returned_by_membership_id, tenant_id], references: [id, tenant_id], onDelete: Restrict)
+
+  @@unique([loan_request_id, tenant_id])
+  @@index([tenant_id, borrower_membership_id, returned_at])
+  @@index([tenant_id, returned_at, due_at])
+  @@map("loans")
+}
+
+model AuditLog {
+  id                  String      @id @default(uuid()) @db.Uuid
+  tenant_id           String      @db.Uuid
+  actor_membership_id String?     @db.Uuid
+  action              String
+  resource_type       String
+  resource_id         String?     @db.Uuid
+  metadata            Json        @default("{}")
+  created_at          DateTime    @default(now()) @db.Timestamptz(6)
+  tenant              Tenant      @relation(fields: [tenant_id], references: [id], onDelete: Restrict)
+  actor               Membership? @relation(fields: [actor_membership_id, tenant_id], references: [id, tenant_id], onDelete: Restrict)
+
+  @@index([tenant_id, created_at])
+  @@map("audit_logs")
+}
+
+model RateLimitBucket {
+  id           String   @id @default(uuid()) @db.Uuid
+  scope        String
+  subject_hash String
+  window_start DateTime @db.Timestamptz(6)
+  count        Int      @default(0)
+  expires_at   DateTime @db.Timestamptz(6)
+
+  @@unique([scope, subject_hash, window_start])
+  @@index([expires_at])
+  @@map("rate_limit_buckets")
+}

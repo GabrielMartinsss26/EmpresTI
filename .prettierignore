@@ -1,0 +1,9 @@
+node_modules
+.next
+package-lock.json
+docs
+Aulas
+rules
+coverage
+test-results
+playwright-report
