@@ -71,5 +71,5 @@ Permitir que uma pessoa provisionada pelo administrador entre com e-mail e senha
 - Banco, migration, seed, RLS e policies existem; não se aplica mais a descrição antiga de projeto sem código.
 - Seis testes de banco descartável, 11 testes unitários e dois E2E passaram na última verificação.
 - Os E2E de credenciais inválidas interceptam a resposta e provam a interface; não são evidência de autenticação real.
-- O fechamento do cadastro público no Supabase continua pendente e impede considerar CA-05 integralmente atendido.
+- CA-05 atendido: sem ação de autocadastro na interface e cadastro público fechado pelo usuário no Supabase; `/auth/v1/settings` conferido em 05/nov/2026 com HTTP 200 e `disable_signup: true`.
 - Falta completar o mapeamento de todos os critérios aos testes; não declarar todos como automatizados.

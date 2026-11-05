@@ -11,7 +11,7 @@
 - Teste real em Chromium no domínio público confirmou login ADMIN, cookie `httpOnly` e `secure`, persistência após recarregar, logout e bloqueio de rota após sair.
 - Antes do deploy passaram 11 testes unitários, seis testes de banco local descartável, dois E2E, lint, tipos e formatação. O build remoto terminou com sucesso.
 - Publicação feita por CLI a partir da pasta local. Código dos ajustes registrado no commit local `ea86780`; nenhum push executado. Commits locais estão autorizados em `rules/operacao.md`.
-- O fechamento do cadastro público no Supabase Auth continua pendente; não foi alterado por esta publicação.
+- O usuário fechou o cadastro público no painel Supabase Auth após a publicação. Conferência em 05/nov/2026: `/auth/v1/settings` respondeu HTTP 200 com `disable_signup: true`. A verificação foi somente de leitura, sem criar contas.
 - As seções de publicação visual abaixo registram entregas anteriores, não o modo atual de produção.
 
 ## Integração local com Supabase — 04/nov/2026

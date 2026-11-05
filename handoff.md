@@ -12,12 +12,12 @@
 - Login ADMIN, sessão persistente, cookies protegidos e logout já verificados no domínio público.
 - Supabase: migration inicial e seed aplicados; nove tabelas com policies.
 - Dev e produção ainda usam o mesmo Supabase; nenhum banco adicional criado.
-- Cadastro público não existe na interface; fechamento no provedor ainda depende do painel Supabase.
-- Usuário consultado sobre desativar “Allow new users to sign up”; não registrar como concluído sem conferir.
+- Cadastro público fechado pelo usuário no painel Supabase; conferido HTTP 200 e `disable_signup: true` em 05/nov/2026.
+- T5/CA-05 concluídos; verificação somente de leitura, sem criar contas ou alterar schema.
 - Autocadastro cancelado em `docs/specs/003-cadastro/`; convites ficam para versão futura.
 - Spec de login reconciliada com implementação; pendências em `docs/specs/001-login/tasks.md`.
 - Catálogo completo, gestão de equipamentos, solicitações, aprovação e devolução ainda pendentes.
 - Skills, MCP do projeto e verificador independente ainda pendentes.
-- Próximo passo: confirmar fechamento do cadastro e preparar spec/plano da próxima funcionalidade.
+- Próximo passo: preparar spec/plano da próxima funcionalidade; rastreabilidade e revisão do login em T6/T7.
 - Arquivos não rastreados em `Aulas/` pertencem ao usuário e não entraram nos commits.
 - Nenhum arquivo real de ambiente incluído no Git ou no upload da Vercel.
