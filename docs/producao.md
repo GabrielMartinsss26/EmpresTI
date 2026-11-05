@@ -3,13 +3,14 @@
 ## Produção conectada — 05/nov/2026
 
 - Publicado em https://empresti-mauve.vercel.app/; login em `/login`.
-- Deploy `dpl_CsAq3f6AyKVY5WTQndQjCBozePgv`, estado `READY`, destino `production`.
+- Deploy atual `dpl_73nD7wLbW4nRYkuGojwWAHX67YMw`, estado `READY`, destino `production`.
+- Inclui o login sem rolagem nas resoluções desktop verificadas e o link do ícone/nome EmpresTI para a landing. Conferência no domínio público: 1440×820, 1366×768 e 1280×720, inclusive após validação do formulário vazio; clique no link retornou a `/`.
 - Cadastradas na Vercel, em Production, as variáveis `DATABASE_URL`, `DIRECT_URL`, `NEXT_PUBLIC_SUPABASE_URL` e `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`. Connection strings foram armazenadas como secrets. A chave administrativa não foi enviada.
 - O modo `showcase` não está habilitado nesta publicação. Arquivos reais de ambiente são excluídos do upload por `.vercelignore`.
 - Landing e login responderam HTTP 200; `/health` retornou HTTP 200 com `status: ok`; catálogo sem sessão redirecionou ao login.
 - Teste real em Chromium no domínio público confirmou login ADMIN, cookie `httpOnly` e `secure`, persistência após recarregar, logout e bloqueio de rota após sair.
 - Antes do deploy passaram 11 testes unitários, seis testes de banco local descartável, dois E2E, lint, tipos e formatação. O build remoto terminou com sucesso.
-- Publicação feita por CLI a partir da pasta local, sem commit ou push. A sincronização do código no Git continua pendente com o usuário.
+- Publicação feita por CLI a partir da pasta local. Código dos ajustes registrado no commit local `ea86780`; nenhum push executado. Commits locais estão autorizados em `rules/operacao.md`.
 - O fechamento do cadastro público no Supabase Auth continua pendente; não foi alterado por esta publicação.
 - As seções de publicação visual abaixo registram entregas anteriores, não o modo atual de produção.
 

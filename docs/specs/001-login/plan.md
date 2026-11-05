@@ -1,6 +1,6 @@
 # Plano de implementação — primeira página e banco
 
-## Publicação visual autorizada
+## Histórico da publicação visual autorizada
 
 O pedido posterior autoriza publicar somente a página inicial sem variáveis de banco. A Vercel usará `APP_MODE=showcase`, sem credenciais de Supabase ou PostgreSQL. Neste modo, o login é uma demonstração visual, com envio desabilitado e aviso explícito; rotas protegidas redirecionam ao login, API de autenticação responde 503 e `/health` informa somente o modo visual. A aplicação completa continua exigindo as variáveis quando este modo não estiver ativado.
 
@@ -11,7 +11,7 @@ O pedido de seguir com todas as pendências autoriza a execução sequencial des
 ## Ambiguidades e padrões adotados nesta execução
 
 - Entrada válida leva a `/catalogo`; inicialmente essa rota é uma área protegida com estado vazio real, sem inventário fictício.
-- `/` redireciona para `/login`; uma pessoa autenticada em `/login` segue para `/catalogo`.
+- `/` apresenta a landing, conforme spec 002; uma pessoa autenticada em `/login` segue para `/catalogo`.
 - Rotas protegidas sem sessão voltam ao login; não há redirecionamento para URL enviada pelo cliente.
 - Erro de credencial: “E-mail ou senha inválidos.”; usuário desativado ou sem vínculo: “Seu acesso não está ativo. Fale com Operações.”.
 - Durante o envio, botão e campos ficam desabilitados e o texto passa para “Entrando…”.
@@ -34,12 +34,7 @@ O pedido de seguir com todas as pendências autoriza a execução sequencial des
 
 ## Critérios adicionais
 
-- CA-10: credenciais inválidas produzem a mensagem genérica e não criam sessão.
-- CA-11: autenticação ocorre no servidor; cookie de sessão é `httpOnly`, `sameSite=lax` e `secure` em produção.
-- CA-12: usuário sem perfil/vínculo ativo não acessa a área protegida.
-- CA-13: limite de tentativas retorna mensagem de nova tentativa em 15 minutos.
-- CA-14: sair invalida a sessão e volta ao login.
-- CA-15: banco vazio recebe todas as tabelas e o seed idempotente, com isolamento e auditoria verificados localmente.
+Os critérios CA-10 a CA-15 foram consolidados em `spec.md`, fonte vigente do comportamento. A situação por tarefa está em `tasks.md`.
 
 ## Limite desta entrega
 

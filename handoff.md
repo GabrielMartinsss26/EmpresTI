@@ -1,0 +1,23 @@
+# Handoff — 05/nov/2026
+
+- Branch `dev`; remoto `GabrielMartinsss26/EmpresTI`.
+- Commit local `ea86780`: login conectado, navegação desktop e regras de operação.
+- Commits locais autorizados em `rules/operacao.md`; push não executado.
+- Vercel publicada: https://empresti-mauve.vercel.app/.
+- Deploy `dpl_73nD7wLbW4nRYkuGojwWAHX67YMw`, READY.
+- Produção: sem scroll em 1440×820, 1366×768 e 1280×720, inclusive com erros do formulário.
+- Produção: logo retorna à landing; health 200; catálogo sem sessão redireciona ao login.
+- Checks anteriores do código: 11 unitários, dois E2E, lint, tipos, formatação e build passaram.
+- Seis testes de migration passaram em PostgreSQL local descartável.
+- Login ADMIN, sessão persistente, cookies protegidos e logout já verificados no domínio público.
+- Supabase: migration inicial e seed aplicados; nove tabelas com policies.
+- Dev e produção ainda usam o mesmo Supabase; nenhum banco adicional criado.
+- Cadastro público não existe na interface; fechamento no provedor ainda depende do painel Supabase.
+- Usuário consultado sobre desativar “Allow new users to sign up”; não registrar como concluído sem conferir.
+- Autocadastro cancelado em `docs/specs/003-cadastro/`; convites ficam para versão futura.
+- Spec de login reconciliada com implementação; pendências em `docs/specs/001-login/tasks.md`.
+- Catálogo completo, gestão de equipamentos, solicitações, aprovação e devolução ainda pendentes.
+- Skills, MCP do projeto e verificador independente ainda pendentes.
+- Próximo passo: confirmar fechamento do cadastro e preparar spec/plano da próxima funcionalidade.
+- Arquivos não rastreados em `Aulas/` pertencem ao usuário e não entraram nos commits.
+- Nenhum arquivo real de ambiente incluído no Git ou no upload da Vercel.

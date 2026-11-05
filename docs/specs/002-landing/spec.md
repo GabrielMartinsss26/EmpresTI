@@ -16,7 +16,7 @@ O pedido de criar e publicar uma landing page autoriza esta entrega na mesma ses
 - CA-L01: `/` responde com a landing e apresenta título, marca, como funciona e regras.
 - CA-L02: ações “Acessar sistema” e “Entrar” levam a `/login`; links de seção levam aos respectivos conteúdos.
 - CA-L03: a composição não cria rolagem horizontal em 1440px ou 390px.
-- CA-L04: a publicação permanece visual, sem depender de banco; o formulário continua indicando que o login ainda não está disponível.
+- CA-L04: a landing permanece pública sem consultar dados de inventário. Em `APP_MODE=showcase`, o login é desabilitado; na produção conectada, o formulário usa a autenticação da spec 001.
 - CA-L05: a URL de produção mantém a landing na raiz e o login em `/login`.
 
 ## Precedência e limites
