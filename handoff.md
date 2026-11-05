@@ -19,6 +19,7 @@
 - Catálogo completo, gestão de equipamentos, solicitações, aprovação e devolução ainda pendentes.
 - Skills, MCP do projeto e verificador independente ainda pendentes.
 - Revisão pré-ZIP: base das aulas 7–9 presente; skills/MCP (10) e verificador (11) incompletos; sem exceção documental para leitura de ambiente.
-- Próximo passo: empacotar sem ambientes reais, `.git`, dependências, builds e resultados locais; ZIP ainda não criado.
+- ZIP de acompanhamento criado com código, documentação, testes e cinco aulas; integridade conferida (84 arquivos).
+- Pacote exclui ambientes reais, `.git`, `.vercel`, dependências, builds e resultados locais; não altera produção.
+- Próximo passo: enviar ao professor o ZIP de acompanhamento.
 - Arquivos não rastreados em `Aulas/` pertencem ao usuário e não entraram nos commits.
-- Nenhum arquivo real de ambiente incluído no Git ou no upload da Vercel.
