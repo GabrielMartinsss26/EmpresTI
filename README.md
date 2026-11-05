@@ -27,7 +27,7 @@ A integração completa exige as variáveis do `.env.example`, migrations aplica
 
 A versão conectada foi publicada pela CLI em 05/nov/2026, com as quatro variáveis necessárias cadastradas em Production. Não configurar `APP_MODE=showcase` em produção conectada. Evidências, ID do deploy e pendências estão em [docs/producao.md](docs/producao.md).
 
-O deploy enviou a pasta local; não criou commit nem push. O usuário ainda precisa versionar e enviar as alterações para que uma publicação futura pelo Git contenha a mesma versão.
+O deploy enviou a pasta local. Os ajustes estão registrados em commits locais na branch `dev`; o push ainda não foi executado. As permissões de Git estão em `rules/operacao.md`.
 
 ## Futuro deploy com banco
 

@@ -18,6 +18,7 @@
 - Spec de login reconciliada com implementação; pendências em `docs/specs/001-login/tasks.md`.
 - Catálogo completo, gestão de equipamentos, solicitações, aprovação e devolução ainda pendentes.
 - Skills, MCP do projeto e verificador independente ainda pendentes.
-- Próximo passo: preparar spec/plano da próxima funcionalidade; rastreabilidade e revisão do login em T6/T7.
+- Revisão pré-ZIP: base das aulas 7–9 presente; skills/MCP (10) e verificador (11) incompletos; sem exceção documental para leitura de ambiente.
+- Próximo passo: empacotar sem ambientes reais, `.git`, dependências, builds e resultados locais; ZIP ainda não criado.
 - Arquivos não rastreados em `Aulas/` pertencem ao usuário e não entraram nos commits.
 - Nenhum arquivo real de ambiente incluído no Git ou no upload da Vercel.
