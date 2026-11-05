@@ -11,6 +11,7 @@ O documento de negócio está em `docs/PRD.md` e a stack aprovada está em
 - `docs/layout.md` — descreve a referência visual e os fluxos das telas.
 - `rules/restrictions.md` — deve ser lido antes de qualquer tarefa.
 - `docs/specs/<NNN-funcionalidade>/` — local previsto para spec, plano e tarefas de cada funcionalidade.
+- `rules/operacao.md`, `rules/tests.md`, `rules/handoff.md` e `rules/spec-flow.md` — contrato, testes, continuidade e ciclo de funcionalidades; carregar conforme o gatilho de cada arquivo.
 
 ## Precedência
 
@@ -25,14 +26,14 @@ O documento de negócio está em `docs/PRD.md` e a stack aprovada está em
 - Antes de implementar, liste os requisitos ambíguos encontrados.
 - Uma decisão estrutural nova precisa ser aprovada e registrada em ADR antes do código.
 - Execute somente uma tarefa aprovada por vez e pare após verificá-la.
-- Não execute `git commit` nem `git push`. Todos os commits e pushes são feitos pelo usuário.
+- Commit e push seguem `rules/operacao.md`; commits locais de tarefas autorizadas são permitidos.
 - Não configure, publique ou altere recursos externos do Supabase, GitHub ou Vercel sem pedido explícito do usuário.
 
 ## Estado atual do projeto
 
 O pedido de seguir com todas as pendências autoriza executar as etapas de
 `docs/specs/001-login/plan.md` em sequência, verificando cada uma antes da próxima.
-Commit e push continuam sendo responsabilidade do usuário.
+As permissões vigentes de Git estão em `rules/operacao.md`.
 
 ## Estrutura
 
@@ -58,3 +59,13 @@ Commit e push continuam sendo responsabilidade do usuário.
 - `npm run start` — execução do build de produção.
 
 O deploy remoto depende das verificações locais. Credenciais nunca são impressas.
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+## This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->

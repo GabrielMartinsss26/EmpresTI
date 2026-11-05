@@ -6,7 +6,7 @@ O pedido posterior autoriza publicar somente a página inicial sem variáveis de
 
 Alterações: condicionais nos pontos de entrada, imports de servidor adiados até o uso autenticado, propriedade de disponibilidade no formulário, `.vercelignore` para excluir arquivos de ambiente e teste de navegador desse modo. Nenhuma migration será aplicada nesta publicação.
 
-O pedido de seguir com todas as pendências autoriza a execução sequencial deste plano na mesma sessão. Cada etapa será verificada antes da seguinte. Commit e push continuam com o usuário.
+O pedido de seguir com todas as pendências autoriza a execução sequencial deste plano na mesma sessão. Cada etapa será verificada antes da seguinte. Permissões de Git seguem `rules/operacao.md`.
 
 ## Ambiguidades e padrões adotados nesta execução
 

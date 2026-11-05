@@ -6,7 +6,7 @@
 - Não contrarie o que está em `docs/adr/`. Se for necessário contrariar, pare e informe o conflito.
 - Não responda por conta própria o que o PRD deixou ambíguo. Liste as perguntas e espere a resposta.
 - Não escolha biblioteca que não esteja autorizada pelo ADR-001. Proponha a inclusão e espere aprovação.
-- Não execute `git commit`, `git push`, crie tags ou altere o histórico. Essas ações pertencem ao usuário.
+- Não execute `git push`, crie tags ou reescreva o histórico sem pedido explícito. Commits locais das tarefas autorizadas seguem `operacao.md`.
 - Não crie, publique ou altere recursos externos sem solicitação explícita do usuário.
 
 ## Escopo

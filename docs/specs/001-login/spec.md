@@ -42,8 +42,10 @@ Permitir que uma pessoa convidada entre no EmpresTI com e-mail e senha e seja id
 
 ## Critérios de aceitação
 
+- CA-16 · No login, clicar no ícone ou nome EmpresTI leva à landing em `/`; o link também pode ser acionado pelo teclado e tem foco visível.
 - CA-01 · Ao abrir o sistema sem sessão autenticada, a pessoa vê a tela de login como tela inicial.
 - CA-02 · Em uma viewport desktop de 1440 × 820, a tela apresenta o split de 560px para o hero e o restante para o formulário, sem rolagem horizontal.
+- CA-02a · O login acompanha a altura da janela e não apresenta rolagem horizontal ou vertical em desktop de 1440 × 820, 1366 × 768 e 1280 × 720, inclusive com erros de validação visíveis. Janelas menores ou zoom podem rolar para manter os campos acessíveis.
 - CA-03 · O hero apresenta a marca EmpresTI, os indicadores “3 itens por pessoa” e “14 dias de prazo” e o rodapé “Operações · v1”.
 - CA-04 · O formulário apresenta os campos de e-mail e senha, o botão “Entrar” e a nota de suporte; o campo de senha não exibe os caracteres digitados.
 - CA-05 · A tela não apresenta ação de cadastro, reserva futura, notificação por e-mail ou importação de planilha.

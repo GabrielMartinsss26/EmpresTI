@@ -54,5 +54,5 @@ inesperadas. Sucesso parcial não é conclusão.
 - Não repita a mesma tentativa de correção depois de uma falha sem antes mostrar
   o erro e explicar o que será alterado na próxima tentativa.
 - Não rode teste contra o banco remoto.
-- Não execute `git commit`, `git push`, crie tags ou altere o histórico.
+- Não faça commit de arquivos alheios à tarefa, credenciais ou alterações sem verificação. Publicação e histórico seguem `operacao.md` e `restrictions.md`.
 - Não esconda, resuma como sucesso ou ignore a saída de um check que falhou.

@@ -1,4 +1,5 @@
 import { redirect } from "next/navigation";
+import Link from "next/link";
 import { Brand } from "@/components/brand";
 import { LoginForm } from "@/components/login-form";
 
@@ -15,12 +16,18 @@ export default async function LoginPage() {
     if (user && (await getActiveMembership(user.id))) redirect("/catalogo");
   }
   return (
-    <main className="grid min-h-screen min-w-[1024px] grid-cols-[560px_1fr]">
+    <main className="grid min-h-dvh min-w-[1024px] grid-cols-[560px_1fr]">
       <section
         aria-label="Sobre o EmpresTI"
-        className="flex min-h-[820px] flex-col justify-between gap-14 bg-(image:--gradient-login) p-14"
+        className="flex min-h-0 flex-col justify-between gap-7 bg-(image:--gradient-login) p-14"
       >
-        <Brand />
+        <Link
+          href="/"
+          aria-label="EmpresTI — voltar à página inicial"
+          className="w-fit rounded-control"
+        >
+          <Brand />
+        </Link>
         <div className="flex flex-col gap-7">
           <div className="flex flex-col gap-[18px]">
             <span className="text-[11px] tracking-[0.12em] text-accent-icon uppercase">

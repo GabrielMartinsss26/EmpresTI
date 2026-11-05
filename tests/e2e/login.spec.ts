@@ -32,8 +32,35 @@ test("entrada desktop, validação e proteção de rota", async ({ page }) => {
     .getByRole("region", { name: "Sobre o EmpresTI" })
     .boundingBox();
   expect(hero?.width).toBe(560);
+  for (const viewport of [
+    { width: 1440, height: 820 },
+    { width: 1366, height: 768 },
+    { width: 1280, height: 720 },
+  ]) {
+    await page.setViewportSize(viewport);
+    expect(
+      await page.evaluate(
+        () =>
+          document.documentElement.scrollHeight <= window.innerHeight &&
+          document.documentElement.scrollWidth <= window.innerWidth,
+      ),
+    ).toBe(true);
+    await expect(
+      page.getByRole("button", { name: "Entrar", exact: true }),
+    ).toBeInViewport();
+  }
   await page.goto("/catalogo");
   await expect(page).toHaveURL(/\/login$/);
+  const home = page.getByRole("link", {
+    name: "EmpresTI — voltar à página inicial",
+  });
+  await expect(home).toHaveAttribute("href", "/");
+  await home.locator("span").first().click();
+  await expect(page).toHaveURL(/:\d+\/$/);
+  await page.goto("/login");
+  await home.focus();
+  await page.keyboard.press("Enter");
+  await expect(page).toHaveURL(/:\d+\/$/);
 });
 test("credenciais inválidas exibem erro e estado de envio", async ({
   page,
