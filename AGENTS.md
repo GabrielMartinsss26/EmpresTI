@@ -43,6 +43,8 @@ Depois foi autorizada a primeira etapa: D01, infraestrutura do verificador. Sua 
 
 D02 também foi autorizada e verificada: skill local de imagens conforme ADR-005, sem upload. Evidências em `docs/verificacoes/imagens/`. Selecionar/revisar fotos reais, popular dados e criar conta seguem nas tarefas seguintes; não confundir a aprovação da ferramenta com a spec 004 pronta.
 
+D03 foi autorizada ao pedir a próxima tarefa: seleção local em andamento, dez fotos aceitas e duas lacunas em docs/verificacoes/imagens/d03-parcial.json. O responsável autorizou refinamento e apenas inscrições técnicas de fábrica; ADR-005/spec 004 registram a exceção. D04 e escritas externas não fazem parte dessa autorização.
+
 ## Skills
 
 Skills do projeto ficam em `skills/<nome>/SKILL.md`. Para descobrir capacidades, ler apenas name/description do frontmatter; carregar o corpo somente quando a tarefa casar e referências somente quando indicadas. `imagens-equipamentos` prepara fotos do inventário da prática pelo Pixabay; não altera logo/landing nem faz upload. Rules e ADRs prevalecem sobre a skill. Há uma única cópia versionada em `skills/imagens-equipamentos/`.

@@ -1,0 +1,1037 @@
+{
+  "task": "D03",
+  "status": "PARCIAL — 10/12; pacote final não preparado",
+  "recordedAt": "2026-11-06T12:53:11.901Z",
+  "reviewer": "Codex — inspeção visual dos originais; não aprovação atribuída ao usuário",
+  "exception": "Responsável autorizou apenas inscrições técnicas de fábrica em 06/nov/2026; marcas/logos, pessoas, texto acrescentado e telas com conteúdo seguem proibidos.",
+  "published": false,
+  "entries": [
+    {
+      "id": 2425303,
+      "author": "Engin_Akyurt",
+      "authorId": 3656355,
+      "pageURL": "https://pixabay.com/photos/coffee-caffeine-beverage-table-2425303/",
+      "downloadURL": "https://pixabay.com/get/ge4dadf66d85e34bdceb7158e1f425f60380ac1e9a6899892e0059e095bdfd831f20783e58a5e344c6f94fd0dd2cc5b5dbc76d90cb5996fe0e30e4ed561d97ec7_1280.jpg",
+      "assetTag": "TI-0001",
+      "sourceSha256": "da0aa345794ae6097ae347d66c0ec68cbbfd0077a678aa6ea2a9c77c3e5f5543",
+      "decision": "approved",
+      "reason": "Notebook com tela preta sem conteúdo; apenas letras de teclas de fábrica, permitidas pelo responsável. Sem pessoa ou marca/logo legível.",
+      "preview": {
+        "sha256": "41158b15f87a55c0f8fec5cd5c3ba237aeafde3e93dd0759fae40cf248e18858",
+        "width": 800,
+        "height": 600,
+        "format": "webp",
+        "bytes": 44190
+      }
+    },
+    {
+      "id": 791032,
+      "author": "kaboompics",
+      "authorId": 1013994,
+      "pageURL": "https://pixabay.com/photos/technology-laptop-computer-netbook-791032/",
+      "downloadURL": "https://pixabay.com/get/gb1a7178832c67c84c8f0f0560138c1cd717440f665e86ff5d798b172f28416cb5324497aabf388d38373887d3b14a18780f29afb959a3625db9d960ac9639763_1280.jpg",
+      "assetTag": "TI-0002",
+      "sourceSha256": "19f8016847c26a17621a159b4f016a4183c83fa24a429ddc43ac4fa943f175b4",
+      "decision": "approved",
+      "reason": "Original mostra notebook de perfil, sem pessoa, logo ou texto legível; tela oculta. Foto ilustrativa, sem comprovar dimensão física em polegadas.",
+      "preview": {
+        "sha256": "59bfa9dac9b9e7ec9d7763be0a502dc1577f9972888cf3f6e94b62ebd13041b6",
+        "width": 800,
+        "height": 600,
+        "format": "webp",
+        "bytes": 26854
+      }
+    },
+    {
+      "id": 865091,
+      "author": "picjumbo_com",
+      "authorId": 2130229,
+      "pageURL": "https://pixabay.com/photos/office-desk-smartphone-modern-865091/",
+      "downloadURL": "https://pixabay.com/get/g72417fd2cb986b623caeaa7ade3bae8f64d1e1afea0cc85f7f9f41d7536a6c9e7bc68f316a6e2b9da7a97434b4e3b63698da935b4afeaf8afe1396b95590592b_1280.jpg",
+      "assetTag": "TI-0003",
+      "sourceSha256": "c2da09db8a8943212cb4b137e13e93acd9f8536b04a74fc0148328bcc539f6d8",
+      "decision": "approved",
+      "reason": "Detalhe do notebook com teclas de fábrica, permitido pelo responsável. Sem pessoa, marca/logo legível ou conteúdo em tela.",
+      "preview": {
+        "sha256": "a863ce18e51a61d8627d9b6a3c1d99ef0e5e8cc3a1af0babd5ababb327634c7e",
+        "width": 800,
+        "height": 600,
+        "format": "webp",
+        "bytes": 23842
+      }
+    },
+    {
+      "id": 4337524,
+      "author": "rupixen",
+      "authorId": 11154019,
+      "pageURL": "https://pixabay.com/photos/pen-notebook-notepad-diary-4337524/",
+      "downloadURL": "https://pixabay.com/get/gd518036780b1d381b73a58fcc34575081aa4852f9481ffeace847c9ca657fe55372130b18b4f7bbf293153a79c4e35a8ff978dcdc8e19802c2465b027c67ee32_1280.jpg",
+      "assetTag": "TI-0004",
+      "sourceSha256": "1d8f3e491f99fa348c386629196871bba9c80cd600666ee1654db74b3febc74f",
+      "decision": "approved",
+      "reason": "Detalhe do notebook e objetos sem marcas legíveis; letras técnicas do teclado permitidas. Sem pessoa ou conteúdo na tela.",
+      "preview": {
+        "sha256": "770202d4d14316659841c9049c9d47c313faf606401e562a6a78b838f997b5bc",
+        "width": 800,
+        "height": 600,
+        "format": "webp",
+        "bytes": 42684
+      }
+    },
+    {
+      "id": 17768,
+      "author": "PublicDomainPictures",
+      "authorId": 14,
+      "pageURL": "https://pixabay.com/photos/blank-business-computer-desktop-17768/",
+      "downloadURL": "https://pixabay.com/get/gaf3d83049abade07f9686dfa5de56246a644a69477668621b8a8c31bc63903e430f5395e0ec3c1c67580b65c567824ee_1280.jpg",
+      "assetTag": "TI-0005",
+      "sourceSha256": "285756bd9b2611ab5a736aa6040590b4d0159896dc12143d6d284c9ec3116c07",
+      "decision": "approved",
+      "reason": "Monitor isolado com tela sem conteúdo, sem pessoas ou marca/texto editorial legível; símbolos de controle são inscrições técnicas. Foto ilustrativa.",
+      "preview": {
+        "sha256": "9006e55c56d5f7bef305f7174576c56e947194908135d976173a95e450ce3d6c",
+        "width": 800,
+        "height": 600,
+        "format": "webp",
+        "bytes": 6928
+      }
+    },
+    {
+      "id": 17894,
+      "author": "PublicDomainPictures",
+      "authorId": 14,
+      "pageURL": "https://pixabay.com/photos/blank-business-computer-desktop-17894/",
+      "downloadURL": "https://pixabay.com/get/g37d8533501df827ea1e86b165ef4834b6fb461ab0e95cfdb2c26137c239c6336ff6c40e9cec810679b85e31106fa1368_1280.jpg",
+      "assetTag": "TI-0006",
+      "sourceSha256": "226e20e608be75acd82428405d48aee47232ca819dec222892373dfe1468b140",
+      "decision": "approved",
+      "reason": "Monitor com painel vazio e sem pessoa ou marca/texto editorial legível. Foto distinta da outra perspectiva, com ID e bytes próprios; imagem ilustrativa.",
+      "preview": {
+        "sha256": "56ed40743d4a67158741d73cd8519fd38dfcd61a5ea240576829f98adbcfd0ec",
+        "width": 800,
+        "height": 600,
+        "format": "webp",
+        "bytes": 5866
+      }
+    },
+    {
+      "id": 407134,
+      "author": "SplitShire",
+      "authorId": 364019,
+      "pageURL": "https://pixabay.com/photos/apple-imac-iphone-keyboard-407134/",
+      "downloadURL": "https://pixabay.com/get/gb45309686239640f4aeb5013dce8fdbef786b43a2077fef7a672af7f1f333f808846bc9ae1fc252e2481918f14d32c8df6dabf3ad9cb1588965a04dadf25459d_1280.jpg",
+      "assetTag": "TI-0007",
+      "sourceSha256": "088636158a9a3cf51e80276ca86eac2c1911286e98cba2865a2843db0d26776e",
+      "decision": "rejected",
+      "reason": "Logo Apple legível na frente do monitor.",
+      "preview": null
+    },
+    {
+      "id": 1827,
+      "author": "PublicDomainPictures",
+      "authorId": 14,
+      "pageURL": "https://pixabay.com/photos/high-definition-multimedia-1827/",
+      "downloadURL": "https://pixabay.com/get/g053051c9458771705fa3ab687d128ecf636e95dfc87f90e052cb7f2e440104313993c5e1e2a6ae256875cf625d50b107_1280.jpg",
+      "assetTag": "TI-0008",
+      "sourceSha256": "419bcc42e9ad77433474b588a7da559ae4bdcad96535fa5d2da5617cbcddf433",
+      "decision": "approved",
+      "reason": "Original mostra conector HDMI e cabo, sem pessoa, marca ou texto legível. Fotografia ilustrativa.",
+      "preview": {
+        "sha256": "686e577c42f4409f3cf5224197bcb84a310ac5bb637e08641d15e135407ed63c",
+        "width": 800,
+        "height": 600,
+        "format": "webp",
+        "bytes": 32154
+      }
+    },
+    {
+      "id": 4498745,
+      "author": "tomekwalecki",
+      "authorId": 13027968,
+      "pageURL": "https://pixabay.com/photos/cable-wire-technology-plug-4498745/",
+      "downloadURL": "https://pixabay.com/get/g6da601e59ff3d41583f590121ade6cd29fde238452f490b9f2a29bc9187834dea1ffc644ececa6617b31c4a746f32bce980d9923696baf4e41afd29527692f14_1280.jpg",
+      "assetTag": "TI-0009",
+      "sourceSha256": "23dbd49858f20a182a9ebe2d30f321fc1f0532c948a40d7b2dcfab6773790da4",
+      "decision": "approved",
+      "reason": "Original mostra conector USB-C isolado, sem pessoas, marca legível ou conteúdo textual editorial.",
+      "preview": {
+        "sha256": "db3e71ebf87611b8676c78a5fde119563afc4b22f99a4e36c31416009bb7b735",
+        "width": 800,
+        "height": 600,
+        "format": "webp",
+        "bytes": 11046
+      }
+    },
+    {
+      "id": 494648,
+      "author": "blickpixel",
+      "authorId": 52945,
+      "pageURL": "https://pixabay.com/photos/network-cable-network-plug-cable-494648/",
+      "downloadURL": "https://pixabay.com/get/g3df7804c6bfff777727ed4b298cc6f0090caf28ca20b6b805045bedb1cc463d4518b22ced976c4eacb09cf8249d5ea9953d9cc8c7049c58f7b021e694c931638_1280.jpg",
+      "assetTag": "TI-0010",
+      "sourceSha256": "061d962b59047fb0f2dd426f632857bb570172649aaa14f0478ddcec7617acba",
+      "decision": "approved",
+      "reason": "Original mostra conectores RJ45 em fundo branco, sem pessoas, logos ou inscrições legíveis. Fotografia ilustrativa de cabos de rede.",
+      "preview": {
+        "sha256": "529999bb2257b5190c3e916f1fb270447d1d3e516b7151537f13873742335547",
+        "width": 800,
+        "height": 600,
+        "format": "webp",
+        "bytes": 25576
+      }
+    },
+    {
+      "id": 4607652,
+      "author": "Curious_Collectibles",
+      "authorId": 11004713,
+      "pageURL": "https://pixabay.com/photos/cam-camera-live-streaming-hd-4607652/",
+      "downloadURL": "https://pixabay.com/get/g58035838bd16dace06d77d64b079b8cc358b6fd0d96286b0254ca9b573c332877a6fc5eb760a6217a70098b862576798e7da3a1cdc4e38e4710788fae6f205c5_1280.jpg",
+      "assetTag": "TI-0011",
+      "sourceSha256": "fa88156048e819e15de5c4405c0254a2d58f88c156249bb4ac357e479fd4d1ad",
+      "decision": "approved",
+      "reason": "Webcam com inscrição técnica HD1080p de fábrica; exceção autorizada. Sem pessoa, marca/logo legível ou tela com conteúdo.",
+      "preview": {
+        "sha256": "d09d9439ab687a91b5ae6dcd9f51642891acbe7d01d5272737a53bc73bf7d614",
+        "width": 800,
+        "height": 600,
+        "format": "webp",
+        "bytes": 25404
+      }
+    },
+    {
+      "id": 219958,
+      "author": "PublicDomainPictures",
+      "authorId": 14,
+      "pageURL": "https://pixabay.com/photos/camera-film-vintage-film-camera-219958/",
+      "downloadURL": "https://pixabay.com/get/g7e39165b7ae16218117aef9c554bf401fd36e957d384dd81714fb69c6aed3d3affa5a82a177635b24dd1e203d974d172f71f766d4875fcb6d5a95613404dbb54_1280.jpg",
+      "assetTag": "TI-0012",
+      "sourceSha256": "cc3988adc3cc3549a5264cc032c211e57d4d155cb7dfb5272ab7a3f7f56e4e60",
+      "decision": "rejected",
+      "reason": "Marcas/nomes comerciais legíveis na lente e câmera de fole, inadequada à câmera compacta.",
+      "preview": null
+    }
+  ],
+  "decisions": [
+    {
+      "assetTag": "TI-0001",
+      "candidateId": 2982270,
+      "sourceSha256": "466f8dcfbcbefe9d443e469be9595ea3c103e35a77ab8326ad3b079dffc1cbd8",
+      "decision": "rejected",
+      "reviewer": "Codex — inspeção visual do arquivo original",
+      "reviewedAt": "2026-11-06T12:26:16.288Z",
+      "reason": "Original mostra marcas legíveis no notebook, na câmera e no mouse (ASUS, Nikon e Logitech), além de inscrições no teclado."
+    },
+    {
+      "assetTag": "TI-0002",
+      "candidateId": 791032,
+      "sourceSha256": "19f8016847c26a17621a159b4f016a4183c83fa24a429ddc43ac4fa943f175b4",
+      "decision": "approved",
+      "reviewer": "Codex — inspeção visual do arquivo original",
+      "reviewedAt": "2026-11-06T12:26:16.288Z",
+      "reason": "Original mostra notebook de perfil, sem pessoa, logo ou texto legível; tela oculta. Foto ilustrativa, sem comprovar dimensão física em polegadas."
+    },
+    {
+      "assetTag": "TI-0003",
+      "candidateId": 6801339,
+      "sourceSha256": "508f19647b66626411d6bc57f0f7314d1c322c53156ec562a81e24dce69969e4",
+      "decision": "rejected",
+      "reviewer": "Codex — inspeção visual do arquivo original",
+      "reviewedAt": "2026-11-06T12:26:16.288Z",
+      "reason": "Original contém inscrições legíveis em teclas e um celular sobre notebooks; procurar composição sem texto."
+    },
+    {
+      "assetTag": "TI-0004",
+      "candidateId": 593327,
+      "sourceSha256": "cc58cd32a829777f03601d4a10938f43f11ea2d51fc78085459a8d937532a03b",
+      "decision": "rejected",
+      "reviewer": "Codex — inspeção visual do arquivo original",
+      "reviewedAt": "2026-11-06T12:26:16.288Z",
+      "reason": "Original contém texto legível na caneta (PRECISE V5); não atende ao requisito sem texto."
+    },
+    {
+      "assetTag": "TI-0008",
+      "candidateId": 1827,
+      "sourceSha256": "419bcc42e9ad77433474b588a7da559ae4bdcad96535fa5d2da5617cbcddf433",
+      "decision": "approved",
+      "reviewer": "Codex — inspeção visual do arquivo original",
+      "reviewedAt": "2026-11-06T12:26:16.288Z",
+      "reason": "Original mostra conector HDMI e cabo, sem pessoa, marca ou texto legível. Fotografia ilustrativa."
+    },
+    {
+      "assetTag": "TI-0010",
+      "candidateId": 1494790,
+      "sourceSha256": "254010167b9dd6313104a0f4aab93ca1eb693748f611804cfc0375e29b21e5bd",
+      "decision": "rejected",
+      "reviewer": "Codex — inspeção visual do arquivo original",
+      "reviewedAt": "2026-11-06T12:26:16.288Z",
+      "reason": "Há inscrição visível no revestimento do cabo. Buscar candidata sem inscrição para cumprir interpretação estrita do enunciado."
+    },
+    {
+      "assetTag": "TI-0011",
+      "candidateId": 1219748,
+      "sourceSha256": "429a93a193f6988b4be7bc3ab560395bc23ccf7ee488a193084e90688b8f6194",
+      "decision": "rejected",
+      "reviewer": "Codex — inspeção visual do arquivo original",
+      "reviewedAt": "2026-11-06T12:26:16.288Z",
+      "reason": "Original contém texto legível na lente, como 1.3 MEGA PIXELS e medidas; não atende ao requisito sem texto."
+    },
+    {
+      "assetTag": "TI-0001",
+      "candidateId": 1734485,
+      "sourceSha256": "9dedd28001041805ece8d45941255308f70d505cdef65cc8b83846acda414950",
+      "decision": "rejected",
+      "reviewer": "Codex — inspeção visual do arquivo original",
+      "reviewedAt": "2026-11-06T12:34:38.569Z",
+      "reason": "Logo Apple identificável no original da tampa; refinamento não permite marcas."
+    },
+    {
+      "assetTag": "TI-0003",
+      "candidateId": 5109166,
+      "sourceSha256": "19ccf198e69b1fa872bf7d34a4847755d17980759213b48e51fea97a06ad52ab",
+      "decision": "rejected",
+      "reviewer": "Codex — inspeção visual do arquivo original",
+      "reviewedAt": "2026-11-06T12:34:38.570Z",
+      "reason": "Logo Apple identificável no original; teclado permitido pela nova decisão não elimina o problema do logo."
+    },
+    {
+      "assetTag": "TI-0005",
+      "candidateId": 17768,
+      "sourceSha256": "285756bd9b2611ab5a736aa6040590b4d0159896dc12143d6d284c9ec3116c07",
+      "decision": "approved",
+      "reviewer": "Codex — inspeção visual do arquivo original",
+      "reviewedAt": "2026-11-06T12:34:38.570Z",
+      "reason": "Monitor isolado com tela sem conteúdo, sem pessoas ou marca/texto editorial legível; símbolos de controle são inscrições técnicas. Foto ilustrativa."
+    },
+    {
+      "assetTag": "TI-0006",
+      "candidateId": 17894,
+      "sourceSha256": "226e20e608be75acd82428405d48aee47232ca819dec222892373dfe1468b140",
+      "decision": "approved",
+      "reviewer": "Codex — inspeção visual do arquivo original",
+      "reviewedAt": "2026-11-06T12:34:38.570Z",
+      "reason": "Monitor com painel vazio e sem pessoa ou marca/texto editorial legível. Foto distinta da outra perspectiva, com ID e bytes próprios; imagem ilustrativa."
+    },
+    {
+      "assetTag": "TI-0009",
+      "candidateId": 4498745,
+      "sourceSha256": "23dbd49858f20a182a9ebe2d30f321fc1f0532c948a40d7b2dcfab6773790da4",
+      "decision": "approved",
+      "reviewer": "Codex — inspeção visual do arquivo original",
+      "reviewedAt": "2026-11-06T12:34:38.570Z",
+      "reason": "Original mostra conector USB-C isolado, sem pessoas, marca legível ou conteúdo textual editorial."
+    },
+    {
+      "assetTag": "TI-0010",
+      "candidateId": 494648,
+      "sourceSha256": "061d962b59047fb0f2dd426f632857bb570172649aaa14f0478ddcec7617acba",
+      "decision": "approved",
+      "reviewer": "Codex — inspeção visual do arquivo original",
+      "reviewedAt": "2026-11-06T12:34:38.570Z",
+      "reason": "Original mostra conectores RJ45 em fundo branco, sem pessoas, logos ou inscrições legíveis. Fotografia ilustrativa de cabos de rede."
+    },
+    {
+      "assetTag": "TI-0001",
+      "candidateId": 2425303,
+      "sourceSha256": "da0aa345794ae6097ae347d66c0ec68cbbfd0077a678aa6ea2a9c77c3e5f5543",
+      "decision": "approved",
+      "reviewer": "Codex — inspeção visual do arquivo original",
+      "reviewedAt": "2026-11-06T12:50:55.658Z",
+      "reason": "Notebook com tela preta sem conteúdo; apenas letras de teclas de fábrica, permitidas pelo responsável. Sem pessoa ou marca/logo legível."
+    },
+    {
+      "assetTag": "TI-0003",
+      "candidateId": 1282241,
+      "sourceSha256": "445ea7d07ec9b37aef5bc6749ac239396d9f852434457d6b94dd2e544df2f4cb",
+      "decision": "rejected",
+      "reviewer": "Codex — inspeção visual do arquivo original",
+      "reviewedAt": "2026-11-06T12:50:55.659Z",
+      "reason": "Tampa de lente com marca Canon legível no cenário."
+    },
+    {
+      "assetTag": "TI-0004",
+      "candidateId": 1846056,
+      "sourceSha256": "cd87f06c49d064a55722424c6be035fd6c673b288768178d7d5e5c8841d92ded",
+      "decision": "rejected",
+      "reviewer": "Codex — inspeção visual do arquivo original",
+      "reviewedAt": "2026-11-06T12:50:55.660Z",
+      "reason": "Receptor USB com marca Logitech legível."
+    },
+    {
+      "assetTag": "TI-0011",
+      "candidateId": 4607652,
+      "sourceSha256": "fa88156048e819e15de5c4405c0254a2d58f88c156249bb4ac357e479fd4d1ad",
+      "decision": "approved",
+      "reviewer": "Codex — inspeção visual do arquivo original",
+      "reviewedAt": "2026-11-06T12:50:55.661Z",
+      "reason": "Webcam com inscrição técnica HD1080p de fábrica; exceção autorizada. Sem pessoa, marca/logo legível ou tela com conteúdo."
+    },
+    {
+      "assetTag": "TI-0012",
+      "candidateId": 272263,
+      "sourceSha256": "adbeb8938f1bc25e2cc88a1d95d44d33616029db764cf4675a48a55bd187bc07",
+      "decision": "rejected",
+      "reviewer": "Codex — inspeção visual do arquivo original",
+      "reviewedAt": "2026-11-06T12:50:55.661Z",
+      "reason": "Marca Samsung legível na lente/corpo."
+    },
+    {
+      "assetTag": "TI-0003",
+      "candidateId": 1846277,
+      "sourceSha256": "516bb2d63ba8836f3c32f20dd6b3c496680a0fb10fa14ce1a176a98f399a0478",
+      "decision": "rejected",
+      "reviewer": "Codex — inspeção visual do arquivo original",
+      "reviewedAt": "2026-11-06T12:50:55.662Z",
+      "reason": "Pessoa desfocada no fundo superior direito."
+    },
+    {
+      "assetTag": "TI-0004",
+      "candidateId": 4337524,
+      "sourceSha256": "1d8f3e491f99fa348c386629196871bba9c80cd600666ee1654db74b3febc74f",
+      "decision": "approved",
+      "reviewer": "Codex — inspeção visual do arquivo original",
+      "reviewedAt": "2026-11-06T12:50:55.662Z",
+      "reason": "Detalhe do notebook e objetos sem marcas legíveis; letras técnicas do teclado permitidas. Sem pessoa ou conteúdo na tela."
+    },
+    {
+      "assetTag": "TI-0012",
+      "candidateId": 8246764,
+      "sourceSha256": "ba0e3bc79e75cad7ee5e18a3ffda6c33a08ed4030446f347e6ffd68962003989",
+      "decision": "rejected",
+      "reviewer": "Codex — inspeção visual do arquivo original",
+      "reviewedAt": "2026-11-06T12:50:55.663Z",
+      "reason": "Inscrição FED/ФЭД na lente é marca, não especificação técnica."
+    },
+    {
+      "assetTag": "TI-0003",
+      "candidateId": 865091,
+      "sourceSha256": "c2da09db8a8943212cb4b137e13e93acd9f8536b04a74fc0148328bcc539f6d8",
+      "decision": "approved",
+      "reviewer": "Codex — inspeção visual do arquivo original",
+      "reviewedAt": "2026-11-06T12:50:55.664Z",
+      "reason": "Detalhe do notebook com teclas de fábrica, permitido pelo responsável. Sem pessoa, marca/logo legível ou conteúdo em tela."
+    },
+    {
+      "assetTag": "TI-0007",
+      "candidateId": 1140699,
+      "sourceSha256": "de57410d193ea0c84cae5651cb8a5452aed39e5ef07877f9f4f886bcb5c321d7",
+      "decision": "rejected",
+      "reviewer": "Codex — inspeção visual do arquivo original",
+      "reviewedAt": "2026-11-06T12:50:55.664Z",
+      "reason": "Logo Apple legível no monitor e mouse."
+    },
+    {
+      "assetTag": "TI-0012",
+      "candidateId": 820018,
+      "sourceSha256": "f1f4bb0521707931454bc672cec2a9292915e5b6c2f9cbe2319b87f06b99071f",
+      "decision": "rejected",
+      "reviewer": "Codex — inspeção visual do arquivo original",
+      "reviewedAt": "2026-11-06T12:50:55.665Z",
+      "reason": "Marca FED/ФЭД legível na câmera."
+    },
+    {
+      "assetTag": "TI-0007",
+      "candidateId": 2565478,
+      "sourceSha256": "75c8733d1486e0a80db4468066bb94131b280eba7d715ad14d02301afefff276",
+      "decision": "rejected",
+      "reviewer": "Codex — inspeção visual do arquivo original",
+      "reviewedAt": "2026-11-06T12:50:55.665Z",
+      "reason": "Logo Apple legível na frente do monitor."
+    },
+    {
+      "assetTag": "TI-0012",
+      "candidateId": 272270,
+      "sourceSha256": "1ccd8d1ce1186e77704fb8cd176ce9b8d0612e92183306a125196251cefa7ef8",
+      "decision": "rejected",
+      "reviewer": "Codex — inspeção visual do arquivo original",
+      "reviewedAt": "2026-11-06T12:50:55.666Z",
+      "reason": "Marca Samsung visível no topo da moldura; não liberada pela exceção de inscrições técnicas."
+    },
+    {
+      "assetTag": "TI-0007",
+      "candidateId": 407134,
+      "sourceSha256": "088636158a9a3cf51e80276ca86eac2c1911286e98cba2865a2843db0d26776e",
+      "decision": "rejected",
+      "reviewer": "Codex — inspeção visual do arquivo original",
+      "reviewedAt": "2026-11-06T12:50:55.667Z",
+      "reason": "Logo Apple legível na frente do monitor."
+    },
+    {
+      "assetTag": "TI-0012",
+      "candidateId": 1720488,
+      "sourceSha256": "9abef01c378cf1d01eeab2576c60e968584738bbb8d17966934851a4040b61f4",
+      "decision": "rejected",
+      "reviewer": "Codex — inspeção visual do arquivo original",
+      "reviewedAt": "2026-11-06T12:50:55.667Z",
+      "reason": "Marca Canon legível no corpo e embalagem ao fundo."
+    },
+    {
+      "assetTag": "TI-0012",
+      "candidateId": 4063450,
+      "sourceSha256": "bdec6b6d3aa950080bdd36c095cc6e4a10037e8d6e9f92707b746455d7d19b92",
+      "decision": "rejected",
+      "reviewer": "Codex — inspeção visual do arquivo original",
+      "reviewedAt": "2026-11-06T12:50:55.668Z",
+      "reason": "Marca Minolta legível na frente e lente."
+    },
+    {
+      "assetTag": "TI-0012",
+      "candidateId": 6835351,
+      "sourceSha256": "5f885f911ec9630d1068fc1e5edf58daa5f106c20e86347b5fbdc5845d7668e8",
+      "decision": "rejected",
+      "reviewer": "Codex — inspeção visual do arquivo original",
+      "reviewedAt": "2026-11-06T12:50:55.669Z",
+      "reason": "Câmera reflex de cintura com cena no visor e marca de fábrica; não representa câmera compacta adequada."
+    },
+    {
+      "assetTag": "TI-0012",
+      "candidateId": 219958,
+      "sourceSha256": "cc3988adc3cc3549a5264cc032c211e57d4d155cb7dfb5272ab7a3f7f56e4e60",
+      "decision": "rejected",
+      "reviewer": "Codex — inspeção visual do arquivo original",
+      "reviewedAt": "2026-11-06T12:50:55.670Z",
+      "reason": "Marcas/nomes comerciais legíveis na lente e câmera de fole, inadequada à câmera compacta."
+    }
+  ],
+  "searches": [
+    {
+      "query": "laptop closeup keyboard",
+      "page": 1,
+      "category": null,
+      "count": 8
+    },
+    {
+      "query": "digital compact camera",
+      "page": 2,
+      "category": null,
+      "count": 8
+    },
+    {
+      "query": "monitor",
+      "page": 2,
+      "category": "computer",
+      "count": 8
+    },
+    {
+      "query": "monitor black background",
+      "page": 2,
+      "category": null,
+      "count": 8
+    },
+    {
+      "query": "camera lens",
+      "page": 2,
+      "category": null,
+      "count": 8
+    },
+    {
+      "query": "usb webcam",
+      "page": 1,
+      "category": null,
+      "count": 8
+    },
+    {
+      "query": "monitor isolated",
+      "page": 1,
+      "category": null,
+      "count": 8
+    },
+    {
+      "query": "monitor isolated",
+      "page": 3,
+      "category": null,
+      "count": 8
+    },
+    {
+      "query": "webcam",
+      "page": 1,
+      "category": null,
+      "count": 8
+    },
+    {
+      "query": "lcd",
+      "page": 1,
+      "category": "computer",
+      "count": 8
+    },
+    {
+      "query": "camera closeup",
+      "page": 3,
+      "category": "computer",
+      "count": 8
+    },
+    {
+      "query": "camera rear",
+      "page": 3,
+      "category": "computer",
+      "count": 8
+    },
+    {
+      "query": "crt",
+      "page": 1,
+      "category": "computer",
+      "count": 8
+    },
+    {
+      "query": "digital compact camera",
+      "page": 3,
+      "category": null,
+      "count": 8
+    },
+    {
+      "query": "tft monitor",
+      "page": 2,
+      "category": null,
+      "count": 8
+    },
+    {
+      "query": "screen",
+      "page": 2,
+      "category": "computer",
+      "count": 8
+    },
+    {
+      "query": "webcam",
+      "page": 3,
+      "category": "computer",
+      "count": 8
+    },
+    {
+      "query": "ethernet cable",
+      "page": 1,
+      "category": null,
+      "count": 8
+    },
+    {
+      "query": "monitor screen office desk",
+      "page": 1,
+      "category": null,
+      "count": 8
+    },
+    {
+      "query": "closed laptop on table",
+      "page": 1,
+      "category": null,
+      "count": 8
+    },
+    {
+      "query": "camera silhouette",
+      "page": 3,
+      "category": "computer",
+      "count": 8
+    },
+    {
+      "query": "computer monitor",
+      "page": 2,
+      "category": "computer",
+      "count": 8
+    },
+    {
+      "query": "screen",
+      "page": 3,
+      "category": "computer",
+      "count": 8
+    },
+    {
+      "query": "laptop",
+      "page": 1,
+      "category": "computer",
+      "count": 8
+    },
+    {
+      "query": "screen blank",
+      "page": 1,
+      "category": null,
+      "count": 8
+    },
+    {
+      "query": "webcam",
+      "page": 2,
+      "category": "computer",
+      "count": 8
+    },
+    {
+      "query": "monitor",
+      "page": 3,
+      "category": "computer",
+      "count": 8
+    },
+    {
+      "query": "computer monitor isolated",
+      "page": 1,
+      "category": null,
+      "count": 8
+    },
+    {
+      "query": "computer monitor on desk",
+      "page": 1,
+      "category": null,
+      "count": 8
+    },
+    {
+      "query": "monitor",
+      "page": 1,
+      "category": "computer",
+      "count": 8
+    },
+    {
+      "query": "computer monitor",
+      "page": 3,
+      "category": "computer",
+      "count": 8
+    },
+    {
+      "query": "crt",
+      "page": 2,
+      "category": "computer",
+      "count": 7
+    },
+    {
+      "query": "monitor screen off",
+      "page": 1,
+      "category": null,
+      "count": 8
+    },
+    {
+      "query": "laptop lid",
+      "page": 1,
+      "category": null,
+      "count": 8
+    },
+    {
+      "query": "camera rear",
+      "page": 1,
+      "category": "computer",
+      "count": 8
+    },
+    {
+      "query": "screen",
+      "page": 1,
+      "category": "computer",
+      "count": 8
+    },
+    {
+      "query": "camera closeup",
+      "page": 1,
+      "category": "computer",
+      "count": 8
+    },
+    {
+      "query": "camera black background",
+      "page": 3,
+      "category": null,
+      "count": 8
+    },
+    {
+      "query": "camera silhouette",
+      "page": 2,
+      "category": "computer",
+      "count": 8
+    },
+    {
+      "query": "tft monitor",
+      "page": 3,
+      "category": null,
+      "count": 8
+    },
+    {
+      "query": "lcd",
+      "page": 2,
+      "category": "computer",
+      "count": 8
+    },
+    {
+      "query": "camera closeup",
+      "page": 2,
+      "category": "computer",
+      "count": 8
+    },
+    {
+      "query": "camera black background",
+      "page": 1,
+      "category": null,
+      "count": 8
+    },
+    {
+      "query": "camera black background",
+      "page": 2,
+      "category": null,
+      "count": 8
+    },
+    {
+      "query": "camera",
+      "page": 2,
+      "category": null,
+      "count": 8
+    },
+    {
+      "query": "monitor black background",
+      "page": 3,
+      "category": null,
+      "count": 8
+    },
+    {
+      "query": "lcd monitor blank",
+      "page": 1,
+      "category": null,
+      "count": 8
+    },
+    {
+      "query": "camera silhouette",
+      "page": 1,
+      "category": "computer",
+      "count": 8
+    },
+    {
+      "query": "camera",
+      "page": 1,
+      "category": null,
+      "count": 8
+    },
+    {
+      "query": "lcd",
+      "page": 3,
+      "category": "computer",
+      "count": 0
+    },
+    {
+      "query": "usb cable white background",
+      "page": 1,
+      "category": null,
+      "count": 8
+    },
+    {
+      "query": "monitor black background",
+      "page": 1,
+      "category": null,
+      "count": 8
+    },
+    {
+      "query": "digital camera back",
+      "page": 3,
+      "category": null,
+      "count": 8
+    },
+    {
+      "query": "lcd",
+      "page": 2,
+      "category": null,
+      "count": 8
+    },
+    {
+      "query": "digital camera back",
+      "page": 1,
+      "category": null,
+      "count": 8
+    },
+    {
+      "query": "computer screen isolated",
+      "page": 1,
+      "category": null,
+      "count": 8
+    },
+    {
+      "query": "lcd",
+      "page": 3,
+      "category": null,
+      "count": 8
+    },
+    {
+      "query": "closed laptop",
+      "page": 1,
+      "category": null,
+      "count": 8
+    },
+    {
+      "query": "screen blank",
+      "page": 2,
+      "category": null,
+      "count": 8
+    },
+    {
+      "query": "open laptop minimal desk",
+      "page": 1,
+      "category": null,
+      "count": 8
+    },
+    {
+      "query": "digital compact camera",
+      "page": 1,
+      "category": null,
+      "count": 8
+    },
+    {
+      "query": "lcd",
+      "page": 1,
+      "category": null,
+      "count": 8
+    },
+    {
+      "query": "monitor isolated",
+      "page": 2,
+      "category": null,
+      "count": 8
+    },
+    {
+      "query": "laptop",
+      "page": 3,
+      "category": "computer",
+      "count": 8
+    },
+    {
+      "query": "camera",
+      "page": 3,
+      "category": null,
+      "count": 8
+    },
+    {
+      "query": "compact camera isolated",
+      "page": 1,
+      "category": null,
+      "count": 8
+    },
+    {
+      "query": "digital camera back",
+      "page": 2,
+      "category": null,
+      "count": 8
+    },
+    {
+      "query": "compact camera",
+      "page": 3,
+      "category": null,
+      "count": 8
+    },
+    {
+      "query": "rj45 cable",
+      "page": 1,
+      "category": null,
+      "count": 8
+    },
+    {
+      "query": "computer monitor",
+      "page": 1,
+      "category": "computer",
+      "count": 8
+    },
+    {
+      "query": "tft monitor",
+      "page": 1,
+      "category": null,
+      "count": 8
+    },
+    {
+      "query": "laptop",
+      "page": 2,
+      "category": "computer",
+      "count": 8
+    },
+    {
+      "query": "laptop on white desk",
+      "page": 1,
+      "category": null,
+      "count": 8
+    },
+    {
+      "query": "compact camera",
+      "page": 2,
+      "category": null,
+      "count": 8
+    },
+    {
+      "query": "compact camera isolated",
+      "page": 2,
+      "category": null,
+      "count": 8
+    },
+    {
+      "query": "digicam",
+      "page": 1,
+      "category": null,
+      "count": 0
+    },
+    {
+      "query": "laptop black screen",
+      "page": 1,
+      "category": null,
+      "count": 8
+    },
+    {
+      "query": "camera lens",
+      "page": 1,
+      "category": null,
+      "count": 8
+    },
+    {
+      "query": "hdmi cable",
+      "page": 1,
+      "category": null,
+      "count": 8
+    },
+    {
+      "query": "compact camera on table",
+      "page": 1,
+      "category": null,
+      "count": 8
+    },
+    {
+      "query": "compact camera isolated",
+      "page": 3,
+      "category": null,
+      "count": 8
+    },
+    {
+      "query": "computer screen isolated",
+      "page": 3,
+      "category": null,
+      "count": 8
+    },
+    {
+      "query": "compact camera",
+      "page": 1,
+      "category": null,
+      "count": 8
+    },
+    {
+      "query": "camera lens",
+      "page": 3,
+      "category": null,
+      "count": 8
+    },
+    {
+      "query": "computer screen isolated",
+      "page": 2,
+      "category": null,
+      "count": 8
+    },
+    {
+      "query": "screen blank",
+      "page": 3,
+      "category": null,
+      "count": 8
+    },
+    {
+      "query": "black computer screen",
+      "page": 1,
+      "category": null,
+      "count": 8
+    },
+    {
+      "query": "camera rear",
+      "page": 2,
+      "category": "computer",
+      "count": 8
+    },
+    {
+      "query": "usb c connector",
+      "page": 1,
+      "category": null,
+      "count": 8
+    },
+    {
+      "query": "webcam",
+      "page": 1,
+      "category": "computer",
+      "count": 8
+    }
+  ]
+}

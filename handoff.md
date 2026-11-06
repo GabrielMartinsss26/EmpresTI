@@ -1,25 +1,25 @@
 # Handoff — 06/nov/2026
 
-- Branch `dev`; remoto `GabrielMartinsss26/EmpresTI`.
-- D01 e D02 executadas: verificador e skill de imagens; fontes/evidências em docs/verificador.md e docs/verificacoes/imagens/.
-- Commits locais autorizados em `rules/operacao.md`; push não executado.
-- Vercel publicada: https://empresti-mauve.vercel.app/.
-- Deploy `dpl_73nD7wLbW4nRYkuGojwWAHX67YMw`, READY.
-- Produção: logo retorna à landing; health 200; catálogo sem sessão redireciona ao login.
-- Checks D02: nove de imagens, sete do verificador, 11 unitários, lint, tipos, formatação e build passaram; sem mudança de UI.
-- Login ADMIN, sessão persistente, cookies protegidos e logout já verificados no domínio público.
-- Supabase: migration inicial e seed aplicados; nove tabelas com policies.
-- Dev e produção ainda usam o mesmo Supabase; nenhum banco adicional criado.
-- Cadastro público fechado pelo usuário no painel Supabase; conferido HTTP 200 e `disable_signup: true` em 05/nov/2026.
-- Autocadastro cancelado em `docs/specs/003-cadastro/`; convites ficam para versão futura.
-- Spec de login reconciliada com implementação; pendências em `docs/specs/001-login/tasks.md`.
-- Catálogo completo, gestão de equipamentos, solicitações, aprovação e devolução ainda pendentes.
-- Skill Pixabay pronta (ferramenta); busca real retornou 96 candidatas para 12 itens; nenhuma foto real aprovada ou publicada.
-- Decisões 06/nov: manter aprovação; cinco ativos; 14 dias úteis seg–sex sem feriados, após aprovação, horário São Paulo.
-- ADR-004 substitui parcialmente ADR-003; PRD revisado; TI-0004/TI-0007/TI-0010 em manutenção.
-- Specs/planos/tarefas 004 e 005 criados como rascunhos; ENTREGA.md contém decisões e pendências, sem evidências inventadas.
-- Prova em fixture: f26262e plantou erro/ausência de teste; 27b503f restaurou; filho reprovou e depois aprovou só a fixture.
-- Banco, dados, Auth e produção não alterados; specs 004/005 ainda NÃO PRONTAS. Escrita de prática em produção é do operador.
-- Local: http://127.0.0.1:3000/login, npm run start após build; HTTP 200. Build inicial EPERM resolvido parando a instância dev.
-- Próximo passo: D03, selecionar/inspecionar 12 fotos com a skill; Storage/banco/conta continuam para tarefas próprias.
-- Arquivos não rastreados em `Aulas/` pertencem ao usuário e não entraram nos commits.
+- Branch dev; remoto GabrielMartinsss26/EmpresTI; commits locais autorizados, push não executado.
+- Produção continua https://empresti-mauve.vercel.app/; nenhuma publicação nesta etapa.
+- Login pronto; autocadastro cancelado e fechado no Supabase; convites futuros.
+- Catálogo, solicitações, aprovação mínima e Meus empréstimos ainda pendentes (spec 005).
+- Dev/prod continuam no mesmo Supabase; nove tabelas/migration inicial já existentes, sem novas escritas nesta prática.
+- ADR-004: aprovação mantida, cinco ativos, 14 dias úteis seg–sex sem feriados, horário São Paulo; três itens em manutenção.
+- D01/D02 concluídas; verificador e skill local, evidências em docs/verificacoes/.
+- D03 autorizada e parcial: dez fotos aceitas; TI-0007/TI-0012 ainda sem imagem válida; tarefa não marcada concluída.
+- Responsável permitiu apenas inscrições técnicas de fábrica; pessoas, marcas/logos, texto acrescentado e telas com conteúdo proibidos.
+- Refinar buscas foi autorizado; decisão registrada no ADR-005, spec 004 e skill.
+- Histórico de inspeção real, hashes, origem e dez prévias 800×600 em docs/verificacoes/imagens/d03-parcial.json.
+- Originais, cache e prévias em .local/imagens-equipamentos/, ignorados; não expor a raiz do projeto por HTTP.
+- Galeria local http://127.0.0.1:3002/ mostra dez aceitas e duas lacunas; candidatas.html contém buscas/recusas.
+- Regenerar com node skills/imagens-equipamentos/scripts/galeria.mjs após novas revisões.
+- Preparar recusou conjunto incompleto corretamente; manifesto final de 12 não criado, nada no Storage/banco/Auth.
+- Checks: dez de imagens, sete do verificador, lint, Prettier e diff passaram; galeria 10 aceitas/2 lacunas; login local HTTP 200.
+- Sem mudança de UI/dependência/schema; build da aplicação já verificado em D02, não repetido nesta etapa.
+- Local aplicação: http://127.0.0.1:3000/login, npm run start; galeria Python serve só preview/ na porta 3002.
+- Próximo passo executável: continuar D03 procurando monitor/câmera sem marcas, baixar e inspecionar originais; registrar decisão/hash.
+- Com 12 válidas, rodar preparar/verificar, conferir manifesto e unicidade; somente depois concluir D03.
+- D04 exige apresentar/aprovar DDL; política de conflitos e contas existentes continuam não decididas.
+- Produção da prática é executada pelo operador; specs 004/005 NÃO PRONTAS, verificador final ainda pendente.
+- Arquivos não rastreados em Aulas/ pertencem ao usuário e ficam fora do commit desta tarefa.

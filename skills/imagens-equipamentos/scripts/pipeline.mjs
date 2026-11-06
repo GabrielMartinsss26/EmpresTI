@@ -89,15 +89,21 @@ export async function search(
   query,
   key,
   workdir,
-  { fetcher = fetch, now = Date.now() } = {},
+  { fetcher = fetch, now = Date.now(), page = 1, category } = {},
 ) {
   key = requireKey(key);
+  z.number().int().min(1).max(3).parse(page);
+  z.enum(["computer"]).optional().parse(category);
   const term = z.string().trim().min(1).max(100).parse(query);
-  const cacheFile = path.join(workdir, "cache", hash(term) + ".json");
+  const cacheKey =
+    page === 1 && !category ? term : JSON.stringify({ term, page, category });
+  const cacheFile = path.join(workdir, "cache", hash(cacheKey) + ".json");
   const cached = await loadJSON(cacheFile, null);
   if (
     cached &&
     cached.query === term &&
+    (cached.page ?? 1) === page &&
+    cached.category === category &&
     now - cached.fetchedAt >= 0 &&
     now - cached.fetchedAt < TTL
   ) {
@@ -112,8 +118,10 @@ export async function search(
     min_width: "800",
     min_height: "600",
     per_page: "8",
+    page: String(page),
   }))
     url.searchParams.set(name, value);
+  if (category) url.searchParams.set("category", category);
   let response, body;
   try {
     response = await fetcher(url, {
@@ -151,7 +159,13 @@ export async function search(
       downloadURL: hit.largeImageURL,
     }),
   );
-  await saveJSON(cacheFile, { query: term, fetchedAt: now, candidates });
+  await saveJSON(cacheFile, {
+    query: term,
+    page,
+    category,
+    fetchedAt: now,
+    candidates,
+  });
   return candidates;
 }
 

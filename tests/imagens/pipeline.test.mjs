@@ -111,6 +111,39 @@ test("CA-D03/D07: cache 24h, filtros de foto e sanitização sem chave no disco"
   });
 });
 
+test("D03: página e categoria têm caches distintos e paginação inválida não chama a rede", async () => {
+  await tempCase(async (dir) => {
+    const calls = [];
+    const fetcher = async (input) => {
+      const url = new URL(input);
+      calls.push([
+        url.searchParams.get("page"),
+        url.searchParams.get("category"),
+      ]);
+      return Response.json({ hits: [] });
+    };
+    await search("monitor", "ficticia", dir, { fetcher });
+    await search("monitor", "ficticia", dir, { fetcher, page: 2 });
+    await search("monitor", "ficticia", dir, { fetcher, category: "computer" });
+    await search("monitor", "ficticia", dir, { fetcher, page: 2 });
+    assert.deepEqual(calls, [
+      ["1", null],
+      ["2", null],
+      ["1", "computer"],
+    ]);
+    assert.equal((await readdir(path.join(dir, "cache"))).length, 3);
+    for (const page of [0, 4, 1.5]) {
+      await assert.rejects(
+        search("monitor", "ficticia", dir, { fetcher, page }),
+      );
+    }
+    await assert.rejects(
+      search("monitor", "ficticia", dir, { fetcher, category: "outra" }),
+    );
+    assert.equal(calls.length, 3);
+  });
+});
+
 test("CA-D07: download bloqueia origem externa, redirect externo e conteúdo excessivo", async () => {
   let calls = 0;
   await assert.rejects(
