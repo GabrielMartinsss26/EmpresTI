@@ -119,20 +119,26 @@ test("D03: página e categoria têm caches distintos e paginação inválida nã
       calls.push([
         url.searchParams.get("page"),
         url.searchParams.get("category"),
+        url.searchParams.get("order"),
       ]);
       return Response.json({ hits: [] });
     };
     await search("monitor", "ficticia", dir, { fetcher });
     await search("monitor", "ficticia", dir, { fetcher, page: 2 });
+    await search("monitor", "ficticia", dir, { fetcher, order: "latest" });
+    await search("monitor", "ficticia", dir, { fetcher, order: "latest" });
     await search("monitor", "ficticia", dir, { fetcher, category: "computer" });
     await search("monitor", "ficticia", dir, { fetcher, page: 2 });
     assert.deepEqual(calls, [
-      ["1", null],
-      ["2", null],
-      ["1", "computer"],
+      ["1", null, "popular"],
+      ["2", null, "popular"],
+      ["1", null, "latest"],
+      ["1", "computer", "popular"],
     ]);
-    assert.equal((await readdir(path.join(dir, "cache"))).length, 3);
-    for (const page of [0, 4, 1.5]) {
+    assert.equal((await readdir(path.join(dir, "cache"))).length, 4);
+    await search("monitor", "ficticia", dir, { fetcher, page: 10 });
+    assert.equal(calls.at(-1)[0], "10");
+    for (const page of [0, 11, 1.5]) {
       await assert.rejects(
         search("monitor", "ficticia", dir, { fetcher, page }),
       );
@@ -140,7 +146,10 @@ test("D03: página e categoria têm caches distintos e paginação inválida nã
     await assert.rejects(
       search("monitor", "ficticia", dir, { fetcher, category: "outra" }),
     );
-    assert.equal(calls.length, 3);
+    await assert.rejects(
+      search("monitor", "ficticia", dir, { fetcher, order: "invalid" }),
+    );
+    assert.equal(calls.length, 5);
   });
 });
 

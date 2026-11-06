@@ -44,6 +44,6 @@ Endpoint `https://pixabay.com/api/`, chave privada de configuração, cache de b
 
 ## Critério para concluir a documentação
 
-D03 em andamento: dez fotos aceitas na inspeção visual dos originais; faltam TI-0007 e TI-0012. Refinamento no Pixabay autorizado pelo responsável; a leitura inicial de “sem texto” passou a permitir apenas inscrições técnicas de fábrica, conforme ADR-005. Evidências e recusas em docs/verificacoes/imagens/d03-parcial.json. Galeria local em http://127.0.0.1:3002/; nenhum pacote de 12 imagens ou upload foi concluído.
+D03 concluída localmente: 12 imagens distintas em WebP 800×600; preparar/verificar e reexecução passaram. TI-0003/TI-0004 substituídos por foco no notebook. Responsável confirmou foto de câmera de ação compacta para TI-0012 e ilustração só para TI-0007; conjunto de 11 fotografias e uma ilustração. ADR-005/spec 004 registram as exceções. Evidências em docs/verificacoes/imagens/d03-final.md e d03-manifesto.json; parcial preservado como histórico. Galeria http://127.0.0.1:3002/ atualizada; nenhum upload.
 
 Specs com critérios identificados, planos e tarefas; histórico das escolhas visível; lacunas marcadas sem inventar decisões; nenhum comportamento implementado declarado como pronto. ENTREGA.md permanece rascunho até conter evidências reais.

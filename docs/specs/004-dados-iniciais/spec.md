@@ -18,7 +18,7 @@ Preparar os 12 equipamentos da prática com imagens do Pixabay e a conta do prof
 2. Local de retirada dos 12 itens: `Operações`. Número de série não informado permanece opcional, sem valor inventado.
 3. Criar exatamente o conjunto inicial abaixo, sem criar empréstimos. Três itens em manutenção e nove disponíveis.
 4. Preparar uma imagem distinta por patrimônio pela skill imagens-equipamentos, cuja única fonte será a API Pixabay. Nenhuma foto reprovada por pessoa, marca/logo legível, texto acrescentado ou tela com conteúdo será publicada. Em 06/nov/2026, durante D03, o responsável autorizou apenas inscrições técnicas de fábrica (letras das teclas, especificações da lente/conector). É uma exceção registrada ao texto estrito do enunciado; não autoriza marca/logo legível nem texto promocional/editorial.
-5. Todas as imagens finais têm 800×600 reais, verificadas no arquivo; não basta aplicar dimensão no CSS. Guardar ID e URL de origem, autor, licença e vínculo ao patrimônio. Não repetir ID nem arquivo idêntico entre itens.
+5. Todas as imagens finais têm 800×600 reais, verificadas no arquivo; não basta aplicar dimensão no CSS. Guardar ID e URL de origem, autor, licença e vínculo ao patrimônio. Não repetir ID nem arquivo idêntico entre itens. Na revisão de D03, o responsável pediu substituir TI-0003/TI-0004 por fotos com o notebook como foco, reconhecível no enquadramento, em vez de apenas um canto do teclado.
 6. Destino previsto: bucket público do Supabase Storage, com leitura pública e escrita restrita. ADR-005 define WebP 800×600, foto inteira com bordas e manifesto local com destino equipamentos / suporte_ti/patrimonio.webp. Modelo de metadados no banco e policies concretas: não decidido; nenhum bucket foi criado por esta etapa.
 7. Reexecução não duplica equipamentos, categorias, fotos, perfis nem vínculos. Comportamento diante de dados existentes alterados/inativos: não decidido; não sobrescrever silenciosamente.
 8. Conta do professor: `marcelo.grilo@institutojef.org.br`, nome `Marcelo Grilo`, papel `COLLABORATOR` em `suporte_ti`, com login funcional e zero empréstimos. A senha da turma será fornecida pelo operador por configuração não versionada; nunca literal no seed.
@@ -43,6 +43,10 @@ Preparar os 12 equipamentos da prática com imagens do Pixabay e a conta do prof
 | TI-0012 | Câmera compacta | camera | disponível | compact camera on table |
 
 TI-0010 é o cabo de rede Ethernet para conexão cabeada. Ele consta da prática; a divergência está na situação, não na presença do equipamento. O responsável escolheu a lista de três em manutenção.
+
+Em D03 o responsável confirmou que TI-0012 pode ser ilustrado pela foto de uma câmera de ação compacta. O nome e a categoria acima são preservados; não se afirma que a foto retrata o patrimônio físico.
+
+Exceção confirmada em D03: somente TI-0007 pode usar a ilustração Pixabay ID 313011, apresentada ao responsável antes da aprovação. Portanto, são 12 imagens distintas, com 11 fotografias e essa ilustração. A exceção diverge da exigência inicial de fotos e fica registrada no ADR-005; demais critérios visuais são mantidos.
 
 ## Critérios de aceitação
 

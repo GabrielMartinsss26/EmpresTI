@@ -7,19 +7,19 @@
 - Dev/prod continuam no mesmo Supabase; nove tabelas/migration inicial já existentes, sem novas escritas nesta prática.
 - ADR-004: aprovação mantida, cinco ativos, 14 dias úteis seg–sex sem feriados, horário São Paulo; três itens em manutenção.
 - D01/D02 concluídas; verificador e skill local, evidências em docs/verificacoes/.
-- D03 autorizada e parcial: dez fotos aceitas; TI-0007/TI-0012 ainda sem imagem válida; tarefa não marcada concluída.
+- D03 concluída localmente: 12 imagens (11 fotografias e uma ilustração); sem publicação.
 - Responsável permitiu apenas inscrições técnicas de fábrica; pessoas, marcas/logos, texto acrescentado e telas com conteúdo proibidos.
-- Refinar buscas foi autorizado; decisão registrada no ADR-005, spec 004 e skill.
-- Histórico de inspeção real, hashes, origem e dez prévias 800×600 em docs/verificacoes/imagens/d03-parcial.json.
+- Ampliação da busca autorizada; TI-0003/TI-0004 substituídos; câmera de ação TI-0012 e ilustração só TI-0007 confirmadas no ADR-005/spec 004.
+- Histórico e provas atuais em docs/verificacoes/imagens/d03-final.md, d03-final.json e d03-manifesto.json; parcial preservado.
 - Originais, cache e prévias em .local/imagens-equipamentos/, ignorados; não expor a raiz do projeto por HTTP.
-- Galeria local http://127.0.0.1:3002/ mostra dez aceitas e duas lacunas; candidatas.html contém buscas/recusas.
+- Galeria local http://127.0.0.1:3002/ mostra 12 imagens aceitas; candidatas.html contém buscas/recusas.
 - Regenerar com node skills/imagens-equipamentos/scripts/galeria.mjs após novas revisões.
-- Preparar recusou conjunto incompleto corretamente; manifesto final de 12 não criado, nada no Storage/banco/Auth.
-- Checks: dez de imagens, sete do verificador, lint, Prettier e diff passaram; galeria 10 aceitas/2 lacunas; login local HTTP 200.
+- Preparar/verificar e reexecução passaram: 12 WebP 800×600, IDs/hashes distintos; pacote em .local/imagens-equipamentos/preparadas/.
+- Checks: dez de imagens, sete do verificador, lint, Prettier e diff passaram; galeria HTTP 200 com 12 aceitas e zero pendentes.
 - Sem mudança de UI/dependência/schema; build da aplicação já verificado em D02, não repetido nesta etapa.
-- Local aplicação: http://127.0.0.1:3000/login, npm run start; galeria Python serve só preview/ na porta 3002.
-- Próximo passo executável: continuar D03 procurando monitor/câmera sem marcas, baixar e inspecionar originais; registrar decisão/hash.
-- Com 12 válidas, rodar preparar/verificar, conferir manifesto e unicidade; somente depois concluir D03.
+- Aplicação /login na porta 3000 não respondeu no fechamento; nenhuma mudança de UI. Galeria Python confirmada HTTP 200 na porta 3002.
+- Próximo passo: apresentar DDL e decisões pendentes de D04; não executar migration externa.
+- Manifesto versionado é evidência local; operador ainda publicará imagens/dados/conta em tarefa própria.
 - D04 exige apresentar/aprovar DDL; política de conflitos e contas existentes continuam não decididas.
 - Produção da prática é executada pelo operador; specs 004/005 NÃO PRONTAS, verificador final ainda pendente.
 - Arquivos não rastreados em Aulas/ pertencem ao usuário e ficam fora do commit desta tarefa.

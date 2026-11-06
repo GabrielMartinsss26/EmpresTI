@@ -14,6 +14,7 @@ Status: aprovado pelo responsável ao autorizar a proposta da próxima etapa em 
 | Reexecução | Caminho estável por patrimônio, sem cópias numeradas |
 | Crédito | Manifesto com autor, ID, origem e licença; link discreto de créditos no catálogo futuro |
 | Inscrições nas fotos | Permitir apenas inscrições técnicas de fábrica, conforme resposta do responsável em D03 em 06/nov/2026 |
+| Tipo de imagem | Fotografias; exceção aprovada somente para TI-0007: ilustração Pixabay ID 313011 |
 
 ## Justificativas
 
@@ -25,6 +26,7 @@ Status: aprovado pelo responsável ao autorizar a proposta da próxima etapa em 
 - Reexecução: usar o patrimônio mantém o mesmo destino ao repetir o processo.
 - Crédito: manter origem e autoria permite conferir de onde veio cada foto.
 - Inscrições: o responsável permitiu letras das teclas e especificações de fábrica; marcas, logos, texto acrescentado e telas com conteúdo continuam proibidos.
+- Tipo: depois da busca ampliada, o responsável permitiu a ilustração mostrada para TI-0007; os outros itens continuam com fotografias.
 
 ## Alternativas descartadas
 
@@ -42,6 +44,12 @@ Fica mais fácil verificar dimensões, formato, repetição e origem com scripts
 O script usará WebP qualidade 85, bordas no fundo do design system `#0B1128`, limite técnico de 12 MiB por download e 1 MiB por saída. Destino proposto no manifesto: bucket `equipamentos`, objeto `suporte_ti/<patrimonio>.webp`. Esses parâmetros são locais; não criam bucket, policy ou referência no banco.
 
 Em D03 o responsável também autorizou refinar os termos no Pixabay, mantendo os mesmos 12 patrimônios e requisitos. As consultas podem usar até três páginas de oito resultados por termo, com cache separado por termo/página/categoria. Apenas candidatas selecionadas são baixadas. A exceção de inscrições diverge da leitura estrita inicial do enunciado e fica explícita para a correção; não altera recusas por marcas ou pessoas.
+
+Na revisão seguinte de D03, o responsável pediu ampliar novamente a busca e trocar TI-0003/TI-0004 por fotos com foco no notebook. A paginação local foi ampliada de três para até dez páginas de oito resultados por termo, com ordenação popular ou recente e cache separado também por ordenação. A ampliação mantém download seletivo e os critérios visuais; não libera fotos com marcas ou outro provedor.
+
+Para TI-0012, o responsável aprovou usar a foto de uma câmera de ação compacta como ilustração do item, sem mudar seu nome ou categoria no inventário. A confirmação foi solicitada porque “câmera compacta” poderia significar especificamente uma câmera convencional.
+
+Para TI-0007, as fotografias inspecionadas não atenderam aos critérios visuais. O responsável viu e aprovou a ilustração do Pixabay ID 313011 como exceção única à exigência de fotografia. O conjunto final local tem 11 fotografias e uma ilustração; essa divergência fica explícita para a correção da prática. Não altera os critérios de marcas, pessoas ou conteúdo nas telas, nem autoriza ilustrações para outros itens.
 
 ## O que este ADR NÃO decide
 

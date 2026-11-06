@@ -87,7 +87,7 @@ for (const group of groups) {
   const title = `${esc(group.assetTag)} — ${esc(names[Number(group.assetTag.slice(3)) - 1])}`;
   if (review?.decision !== "approved") {
     cards.push(
-      `<article class="card rejected"><h2>${title}</h2><p>Falta encontrar foto adequada. Última candidata reprovada: ${esc(review?.reason ?? "inspeção pendente")}</p></article>`,
+      `<article class="card rejected"><h2>${title}</h2><p>Falta concluir uma foto adequada. ${review?.decision === "rejected" ? "Última candidata reprovada" : "Candidata pendente"}: ${esc(review?.reason || "inspeção/decisão pendente")}</p></article>`,
     );
     continue;
   }
@@ -110,7 +110,7 @@ for (const group of groups) {
     `<article class="card approved"><h2>${title}</h2><a href="${esc(filename)}"><img src="${esc(filename)}" alt="${title}"></a><p>ID ${selected.id} · ${esc(selected.author)}</p><p>${esc(review.reason)}</p><a href="${esc(selected.pageURL)}" target="_blank" rel="noreferrer">Origem no Pixabay</a></article>`,
   );
 }
-const selectionHTML = `<!doctype html><html lang="pt-BR"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>EmpresTI — seleção atual</title>${html.slice(html.indexOf("<style>"), html.indexOf("</style>") + 8)}<header><h1>Seleção atual: ${accepted} de ${groups.length} fotos aceitas na inspeção</h1><p>Inspeção pelo Codex dos originais, sem atribuir aprovação ao usuário. Prévias locais 800×600, sem corte. Nada publicado no catálogo.</p><p>Permitidas apenas inscrições técnicas de fábrica. Pessoas, marcas/logos legíveis, texto acrescentado e telas com conteúdo continuam proibidos.</p><a href="candidatas.html">Ver todas as candidatas e recusas</a></header><main class="grid">${cards.join("")}</main><footer>Ilustrações para a prática; não comprovam modelo, medidas ou condição dos patrimônios reais. Estas prévias não são o pacote final: preparar/verificar exigem as 12 fotos aprovadas.</footer></html>`;
+const selectionHTML = `<!doctype html><html lang="pt-BR"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>EmpresTI — seleção atual</title>${html.slice(html.indexOf("<style>"), html.indexOf("</style>") + 8)}<header><h1>Seleção atual: ${accepted} de ${groups.length} imagens aceitas na inspeção</h1><p>Inspeção pelo Codex dos originais. Prévias locais 800×600, sem corte. Nada publicado no catálogo.</p><p>Permitidas apenas inscrições técnicas de fábrica. Pessoas, marcas/logos legíveis, texto acrescentado e telas com conteúdo continuam proibidos. TI-0007 usa ilustração por exceção aprovada pelo responsável; os demais itens usam fotografias.</p><a href="candidatas.html">Ver todas as candidatas e recusas</a></header><main class="grid">${cards.join("")}</main><footer>Imagens para a prática; não comprovam modelo, medidas ou condição dos patrimônios reais. Estas prévias não substituem a validação do pacote pelos comandos preparar/verificar.</footer></html>`;
 await writeFile(path.join(workdir, "preview", "index.html"), selectionHTML);
 console.log(
   `Galeria local: ${accepted}/${groups.length} aceitas; pacote final ainda depende de preparar/verificar. Servir somente .local/imagens-equipamentos/preview em 127.0.0.1, sem expor a raiz do projeto.`,

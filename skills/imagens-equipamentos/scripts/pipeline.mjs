@@ -89,14 +89,25 @@ export async function search(
   query,
   key,
   workdir,
-  { fetcher = fetch, now = Date.now(), page = 1, category } = {},
+  {
+    fetcher = fetch,
+    now = Date.now(),
+    page = 1,
+    category,
+    order = "popular",
+  } = {},
 ) {
   key = requireKey(key);
-  z.number().int().min(1).max(3).parse(page);
+  z.number().int().min(1).max(10).parse(page);
   z.enum(["computer"]).optional().parse(category);
+  z.enum(["popular", "latest"]).parse(order);
   const term = z.string().trim().min(1).max(100).parse(query);
   const cacheKey =
-    page === 1 && !category ? term : JSON.stringify({ term, page, category });
+    order !== "popular"
+      ? JSON.stringify({ term, page, category, order })
+      : page === 1 && !category
+        ? term
+        : JSON.stringify({ term, page, category });
   const cacheFile = path.join(workdir, "cache", hash(cacheKey) + ".json");
   const cached = await loadJSON(cacheFile, null);
   if (
@@ -104,6 +115,7 @@ export async function search(
     cached.query === term &&
     (cached.page ?? 1) === page &&
     cached.category === category &&
+    (cached.order ?? "popular") === order &&
     now - cached.fetchedAt >= 0 &&
     now - cached.fetchedAt < TTL
   ) {
@@ -119,6 +131,7 @@ export async function search(
     min_height: "600",
     per_page: "8",
     page: String(page),
+    order,
   }))
     url.searchParams.set(name, value);
   if (category) url.searchParams.set("category", category);
@@ -163,6 +176,7 @@ export async function search(
     query: term,
     page,
     category,
+    order,
     fetchedAt: now,
     candidates,
   });

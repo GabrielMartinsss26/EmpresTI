@@ -1,0 +1,528 @@
+{
+  "task": "D03",
+  "status": "PACOTE LOCAL VALIDADO — 12 imagens; não publicado",
+  "recordedAt": "2026-11-06T13:33:38.080Z",
+  "counts": {
+    "images": 12,
+    "photos": 11,
+    "illustrations": 1
+  },
+  "exceptions": {
+    "TI-0007": "Responsável autorizou especificamente a ilustração Pixabay 313011 após apresentação; API retornou type=illustration.",
+    "TI-0012": "Responsável autorizou fotografia de câmera de ação compacta."
+  },
+  "notebookReplacements": {
+    "TI-0003": {
+      "from": 865091,
+      "to": 925806
+    },
+    "TI-0004": {
+      "from": 4337524,
+      "to": 1868510
+    }
+  },
+  "files": [
+    {
+      "assetTag": "TI-0001",
+      "type": "photo",
+      "bytes": 44190,
+      "sha256": "41158b15f87a55c0f8fec5cd5c3ba237aeafde3e93dd0759fae40cf248e18858"
+    },
+    {
+      "assetTag": "TI-0002",
+      "type": "photo",
+      "bytes": 26854,
+      "sha256": "59bfa9dac9b9e7ec9d7763be0a502dc1577f9972888cf3f6e94b62ebd13041b6"
+    },
+    {
+      "assetTag": "TI-0003",
+      "type": "photo",
+      "bytes": 23094,
+      "sha256": "11b1685f0c13cc8b417822006fbd43e8b93602c8d03cb2e243d757aa3d57422f"
+    },
+    {
+      "assetTag": "TI-0004",
+      "type": "photo",
+      "bytes": 49066,
+      "sha256": "3a4af3e2445dfcf377caa470aed29f3c0aeb3343bf65df60a81d1109e6f2d7c0"
+    },
+    {
+      "assetTag": "TI-0005",
+      "type": "photo",
+      "bytes": 6928,
+      "sha256": "9006e55c56d5f7bef305f7174576c56e947194908135d976173a95e450ce3d6c"
+    },
+    {
+      "assetTag": "TI-0006",
+      "type": "photo",
+      "bytes": 5866,
+      "sha256": "56ed40743d4a67158741d73cd8519fd38dfcd61a5ea240576829f98adbcfd0ec"
+    },
+    {
+      "assetTag": "TI-0007",
+      "type": "illustration",
+      "bytes": 2800,
+      "sha256": "fccd9e4089f389f4f306f501c25f46e3a90b3d211cc1062243e2b287541a1272"
+    },
+    {
+      "assetTag": "TI-0008",
+      "type": "photo",
+      "bytes": 32154,
+      "sha256": "686e577c42f4409f3cf5224197bcb84a310ac5bb637e08641d15e135407ed63c"
+    },
+    {
+      "assetTag": "TI-0009",
+      "type": "photo",
+      "bytes": 11046,
+      "sha256": "db3e71ebf87611b8676c78a5fde119563afc4b22f99a4e36c31416009bb7b735"
+    },
+    {
+      "assetTag": "TI-0010",
+      "type": "photo",
+      "bytes": 25576,
+      "sha256": "529999bb2257b5190c3e916f1fb270447d1d3e516b7151537f13873742335547"
+    },
+    {
+      "assetTag": "TI-0011",
+      "type": "photo",
+      "bytes": 25404,
+      "sha256": "d09d9439ab687a91b5ae6dcd9f51642891acbe7d01d5272737a53bc73bf7d614"
+    },
+    {
+      "assetTag": "TI-0012",
+      "type": "photo",
+      "bytes": 16422,
+      "sha256": "ea77f74a6ee096124517fa370bf115da76d5929ce848988933394528f4eb619a"
+    }
+  ],
+  "decisions": [
+    {
+      "assetTag": "TI-0001",
+      "candidateId": 2982270,
+      "sourceSha256": "466f8dcfbcbefe9d443e469be9595ea3c103e35a77ab8326ad3b079dffc1cbd8",
+      "decision": "rejected",
+      "reviewer": "Codex — inspeção visual do arquivo original",
+      "reviewedAt": "2026-11-06T12:26:16.288Z",
+      "reason": "Original mostra marcas legíveis no notebook, na câmera e no mouse (ASUS, Nikon e Logitech), além de inscrições no teclado."
+    },
+    {
+      "assetTag": "TI-0002",
+      "candidateId": 791032,
+      "sourceSha256": "19f8016847c26a17621a159b4f016a4183c83fa24a429ddc43ac4fa943f175b4",
+      "decision": "approved",
+      "reviewer": "Codex — inspeção visual do arquivo original",
+      "reviewedAt": "2026-11-06T12:26:16.288Z",
+      "reason": "Original mostra notebook de perfil, sem pessoa, logo ou texto legível; tela oculta. Foto ilustrativa, sem comprovar dimensão física em polegadas."
+    },
+    {
+      "assetTag": "TI-0003",
+      "candidateId": 6801339,
+      "sourceSha256": "508f19647b66626411d6bc57f0f7314d1c322c53156ec562a81e24dce69969e4",
+      "decision": "rejected",
+      "reviewer": "Codex — inspeção visual do arquivo original",
+      "reviewedAt": "2026-11-06T12:26:16.288Z",
+      "reason": "Original contém inscrições legíveis em teclas e um celular sobre notebooks; procurar composição sem texto."
+    },
+    {
+      "assetTag": "TI-0004",
+      "candidateId": 593327,
+      "sourceSha256": "cc58cd32a829777f03601d4a10938f43f11ea2d51fc78085459a8d937532a03b",
+      "decision": "rejected",
+      "reviewer": "Codex — inspeção visual do arquivo original",
+      "reviewedAt": "2026-11-06T12:26:16.288Z",
+      "reason": "Original contém texto legível na caneta (PRECISE V5); não atende ao requisito sem texto."
+    },
+    {
+      "assetTag": "TI-0008",
+      "candidateId": 1827,
+      "sourceSha256": "419bcc42e9ad77433474b588a7da559ae4bdcad96535fa5d2da5617cbcddf433",
+      "decision": "approved",
+      "reviewer": "Codex — inspeção visual do arquivo original",
+      "reviewedAt": "2026-11-06T12:26:16.288Z",
+      "reason": "Original mostra conector HDMI e cabo, sem pessoa, marca ou texto legível. Fotografia ilustrativa."
+    },
+    {
+      "assetTag": "TI-0010",
+      "candidateId": 1494790,
+      "sourceSha256": "254010167b9dd6313104a0f4aab93ca1eb693748f611804cfc0375e29b21e5bd",
+      "decision": "rejected",
+      "reviewer": "Codex — inspeção visual do arquivo original",
+      "reviewedAt": "2026-11-06T12:26:16.288Z",
+      "reason": "Há inscrição visível no revestimento do cabo. Buscar candidata sem inscrição para cumprir interpretação estrita do enunciado."
+    },
+    {
+      "assetTag": "TI-0011",
+      "candidateId": 1219748,
+      "sourceSha256": "429a93a193f6988b4be7bc3ab560395bc23ccf7ee488a193084e90688b8f6194",
+      "decision": "rejected",
+      "reviewer": "Codex — inspeção visual do arquivo original",
+      "reviewedAt": "2026-11-06T12:26:16.288Z",
+      "reason": "Original contém texto legível na lente, como 1.3 MEGA PIXELS e medidas; não atende ao requisito sem texto."
+    },
+    {
+      "assetTag": "TI-0001",
+      "candidateId": 1734485,
+      "sourceSha256": "9dedd28001041805ece8d45941255308f70d505cdef65cc8b83846acda414950",
+      "decision": "rejected",
+      "reviewer": "Codex — inspeção visual do arquivo original",
+      "reviewedAt": "2026-11-06T12:34:38.569Z",
+      "reason": "Logo Apple identificável no original da tampa; refinamento não permite marcas."
+    },
+    {
+      "assetTag": "TI-0003",
+      "candidateId": 5109166,
+      "sourceSha256": "19ccf198e69b1fa872bf7d34a4847755d17980759213b48e51fea97a06ad52ab",
+      "decision": "rejected",
+      "reviewer": "Codex — inspeção visual do arquivo original",
+      "reviewedAt": "2026-11-06T12:34:38.570Z",
+      "reason": "Logo Apple identificável no original; teclado permitido pela nova decisão não elimina o problema do logo."
+    },
+    {
+      "assetTag": "TI-0005",
+      "candidateId": 17768,
+      "sourceSha256": "285756bd9b2611ab5a736aa6040590b4d0159896dc12143d6d284c9ec3116c07",
+      "decision": "approved",
+      "reviewer": "Codex — inspeção visual do arquivo original",
+      "reviewedAt": "2026-11-06T12:34:38.570Z",
+      "reason": "Monitor isolado com tela sem conteúdo, sem pessoas ou marca/texto editorial legível; símbolos de controle são inscrições técnicas. Foto ilustrativa."
+    },
+    {
+      "assetTag": "TI-0006",
+      "candidateId": 17894,
+      "sourceSha256": "226e20e608be75acd82428405d48aee47232ca819dec222892373dfe1468b140",
+      "decision": "approved",
+      "reviewer": "Codex — inspeção visual do arquivo original",
+      "reviewedAt": "2026-11-06T12:34:38.570Z",
+      "reason": "Monitor com painel vazio e sem pessoa ou marca/texto editorial legível. Foto distinta da outra perspectiva, com ID e bytes próprios; imagem ilustrativa."
+    },
+    {
+      "assetTag": "TI-0009",
+      "candidateId": 4498745,
+      "sourceSha256": "23dbd49858f20a182a9ebe2d30f321fc1f0532c948a40d7b2dcfab6773790da4",
+      "decision": "approved",
+      "reviewer": "Codex — inspeção visual do arquivo original",
+      "reviewedAt": "2026-11-06T12:34:38.570Z",
+      "reason": "Original mostra conector USB-C isolado, sem pessoas, marca legível ou conteúdo textual editorial."
+    },
+    {
+      "assetTag": "TI-0010",
+      "candidateId": 494648,
+      "sourceSha256": "061d962b59047fb0f2dd426f632857bb570172649aaa14f0478ddcec7617acba",
+      "decision": "approved",
+      "reviewer": "Codex — inspeção visual do arquivo original",
+      "reviewedAt": "2026-11-06T12:34:38.570Z",
+      "reason": "Original mostra conectores RJ45 em fundo branco, sem pessoas, logos ou inscrições legíveis. Fotografia ilustrativa de cabos de rede."
+    },
+    {
+      "assetTag": "TI-0001",
+      "candidateId": 2425303,
+      "sourceSha256": "da0aa345794ae6097ae347d66c0ec68cbbfd0077a678aa6ea2a9c77c3e5f5543",
+      "decision": "approved",
+      "reviewer": "Codex — inspeção visual do arquivo original",
+      "reviewedAt": "2026-11-06T12:50:55.658Z",
+      "reason": "Notebook com tela preta sem conteúdo; apenas letras de teclas de fábrica, permitidas pelo responsável. Sem pessoa ou marca/logo legível."
+    },
+    {
+      "assetTag": "TI-0003",
+      "candidateId": 1282241,
+      "sourceSha256": "445ea7d07ec9b37aef5bc6749ac239396d9f852434457d6b94dd2e544df2f4cb",
+      "decision": "rejected",
+      "reviewer": "Codex — inspeção visual do arquivo original",
+      "reviewedAt": "2026-11-06T12:50:55.659Z",
+      "reason": "Tampa de lente com marca Canon legível no cenário."
+    },
+    {
+      "assetTag": "TI-0004",
+      "candidateId": 1846056,
+      "sourceSha256": "cd87f06c49d064a55722424c6be035fd6c673b288768178d7d5e5c8841d92ded",
+      "decision": "rejected",
+      "reviewer": "Codex — inspeção visual do arquivo original",
+      "reviewedAt": "2026-11-06T12:50:55.660Z",
+      "reason": "Receptor USB com marca Logitech legível."
+    },
+    {
+      "assetTag": "TI-0011",
+      "candidateId": 4607652,
+      "sourceSha256": "fa88156048e819e15de5c4405c0254a2d58f88c156249bb4ac357e479fd4d1ad",
+      "decision": "approved",
+      "reviewer": "Codex — inspeção visual do arquivo original",
+      "reviewedAt": "2026-11-06T12:50:55.661Z",
+      "reason": "Webcam com inscrição técnica HD1080p de fábrica; exceção autorizada. Sem pessoa, marca/logo legível ou tela com conteúdo."
+    },
+    {
+      "assetTag": "TI-0012",
+      "candidateId": 272263,
+      "sourceSha256": "adbeb8938f1bc25e2cc88a1d95d44d33616029db764cf4675a48a55bd187bc07",
+      "decision": "rejected",
+      "reviewer": "Codex — inspeção visual do arquivo original",
+      "reviewedAt": "2026-11-06T12:50:55.661Z",
+      "reason": "Marca Samsung legível na lente/corpo."
+    },
+    {
+      "assetTag": "TI-0003",
+      "candidateId": 1846277,
+      "sourceSha256": "516bb2d63ba8836f3c32f20dd6b3c496680a0fb10fa14ce1a176a98f399a0478",
+      "decision": "rejected",
+      "reviewer": "Codex — inspeção visual do arquivo original",
+      "reviewedAt": "2026-11-06T12:50:55.662Z",
+      "reason": "Pessoa desfocada no fundo superior direito."
+    },
+    {
+      "assetTag": "TI-0004",
+      "candidateId": 4337524,
+      "sourceSha256": "1d8f3e491f99fa348c386629196871bba9c80cd600666ee1654db74b3febc74f",
+      "decision": "approved",
+      "reviewer": "Codex — inspeção visual do arquivo original",
+      "reviewedAt": "2026-11-06T12:50:55.662Z",
+      "reason": "Detalhe do notebook e objetos sem marcas legíveis; letras técnicas do teclado permitidas. Sem pessoa ou conteúdo na tela."
+    },
+    {
+      "assetTag": "TI-0012",
+      "candidateId": 8246764,
+      "sourceSha256": "ba0e3bc79e75cad7ee5e18a3ffda6c33a08ed4030446f347e6ffd68962003989",
+      "decision": "rejected",
+      "reviewer": "Codex — inspeção visual do arquivo original",
+      "reviewedAt": "2026-11-06T12:50:55.663Z",
+      "reason": "Inscrição FED/ФЭД na lente é marca, não especificação técnica."
+    },
+    {
+      "assetTag": "TI-0003",
+      "candidateId": 865091,
+      "sourceSha256": "c2da09db8a8943212cb4b137e13e93acd9f8536b04a74fc0148328bcc539f6d8",
+      "decision": "approved",
+      "reviewer": "Codex — inspeção visual do arquivo original",
+      "reviewedAt": "2026-11-06T12:50:55.664Z",
+      "reason": "Detalhe do notebook com teclas de fábrica, permitido pelo responsável. Sem pessoa, marca/logo legível ou conteúdo em tela."
+    },
+    {
+      "assetTag": "TI-0007",
+      "candidateId": 1140699,
+      "sourceSha256": "de57410d193ea0c84cae5651cb8a5452aed39e5ef07877f9f4f886bcb5c321d7",
+      "decision": "rejected",
+      "reviewer": "Codex — inspeção visual do arquivo original",
+      "reviewedAt": "2026-11-06T12:50:55.664Z",
+      "reason": "Logo Apple legível no monitor e mouse."
+    },
+    {
+      "assetTag": "TI-0012",
+      "candidateId": 820018,
+      "sourceSha256": "f1f4bb0521707931454bc672cec2a9292915e5b6c2f9cbe2319b87f06b99071f",
+      "decision": "rejected",
+      "reviewer": "Codex — inspeção visual do arquivo original",
+      "reviewedAt": "2026-11-06T12:50:55.665Z",
+      "reason": "Marca FED/ФЭД legível na câmera."
+    },
+    {
+      "assetTag": "TI-0007",
+      "candidateId": 2565478,
+      "sourceSha256": "75c8733d1486e0a80db4468066bb94131b280eba7d715ad14d02301afefff276",
+      "decision": "rejected",
+      "reviewer": "Codex — inspeção visual do arquivo original",
+      "reviewedAt": "2026-11-06T12:50:55.665Z",
+      "reason": "Logo Apple legível na frente do monitor."
+    },
+    {
+      "assetTag": "TI-0012",
+      "candidateId": 272270,
+      "sourceSha256": "1ccd8d1ce1186e77704fb8cd176ce9b8d0612e92183306a125196251cefa7ef8",
+      "decision": "rejected",
+      "reviewer": "Codex — inspeção visual do arquivo original",
+      "reviewedAt": "2026-11-06T12:50:55.666Z",
+      "reason": "Marca Samsung visível no topo da moldura; não liberada pela exceção de inscrições técnicas."
+    },
+    {
+      "assetTag": "TI-0007",
+      "candidateId": 407134,
+      "sourceSha256": "088636158a9a3cf51e80276ca86eac2c1911286e98cba2865a2843db0d26776e",
+      "decision": "rejected",
+      "reviewer": "Codex — inspeção visual do arquivo original",
+      "reviewedAt": "2026-11-06T12:50:55.667Z",
+      "reason": "Logo Apple legível na frente do monitor."
+    },
+    {
+      "assetTag": "TI-0012",
+      "candidateId": 1720488,
+      "sourceSha256": "9abef01c378cf1d01eeab2576c60e968584738bbb8d17966934851a4040b61f4",
+      "decision": "rejected",
+      "reviewer": "Codex — inspeção visual do arquivo original",
+      "reviewedAt": "2026-11-06T12:50:55.667Z",
+      "reason": "Marca Canon legível no corpo e embalagem ao fundo."
+    },
+    {
+      "assetTag": "TI-0012",
+      "candidateId": 4063450,
+      "sourceSha256": "bdec6b6d3aa950080bdd36c095cc6e4a10037e8d6e9f92707b746455d7d19b92",
+      "decision": "rejected",
+      "reviewer": "Codex — inspeção visual do arquivo original",
+      "reviewedAt": "2026-11-06T12:50:55.668Z",
+      "reason": "Marca Minolta legível na frente e lente."
+    },
+    {
+      "assetTag": "TI-0012",
+      "candidateId": 6835351,
+      "sourceSha256": "5f885f911ec9630d1068fc1e5edf58daa5f106c20e86347b5fbdc5845d7668e8",
+      "decision": "rejected",
+      "reviewer": "Codex — inspeção visual do arquivo original",
+      "reviewedAt": "2026-11-06T12:50:55.669Z",
+      "reason": "Câmera reflex de cintura com cena no visor e marca de fábrica; não representa câmera compacta adequada."
+    },
+    {
+      "assetTag": "TI-0012",
+      "candidateId": 219958,
+      "sourceSha256": "cc3988adc3cc3549a5264cc032c211e57d4d155cb7dfb5272ab7a3f7f56e4e60",
+      "decision": "rejected",
+      "reviewer": "Codex — inspeção visual do arquivo original",
+      "reviewedAt": "2026-11-06T12:50:55.670Z",
+      "reason": "Marcas/nomes comerciais legíveis na lente e câmera de fole, inadequada à câmera compacta."
+    },
+    {
+      "assetTag": "TI-0003",
+      "candidateId": 865091,
+      "sourceSha256": "c2da09db8a8943212cb4b137e13e93acd9f8536b04a74fc0148328bcc539f6d8",
+      "decision": "rejected",
+      "reason": "Responsável pediu substituir: notebook aparece só como detalhe, sem ser o foco.",
+      "reviewer": "Codex — inspeção visual do arquivo original e retorno do responsável",
+      "reviewedAt": "2026-11-06T13:29:30.055Z"
+    },
+    {
+      "assetTag": "TI-0004",
+      "candidateId": 4337524,
+      "sourceSha256": "1d8f3e491f99fa348c386629196871bba9c80cd600666ee1654db74b3febc74f",
+      "decision": "rejected",
+      "reason": "Responsável pediu substituir: notebook aparece só como detalhe, sem ser o foco.",
+      "reviewer": "Codex — inspeção visual do arquivo original e retorno do responsável",
+      "reviewedAt": "2026-11-06T13:29:30.058Z"
+    },
+    {
+      "assetTag": "TI-0003",
+      "candidateId": 925806,
+      "sourceSha256": "56e8511c8834cc3f79cc30caa8e62321c9a1b9ac88e3a6c641603196e1c6a119",
+      "decision": "approved",
+      "reason": "Notebook em primeiro plano e como foco, com tela preta sem conteúdo; sem pessoa ou marca/logo legível. A caneca encobre parte da lateral; foto ilustrativa, com teclas de fábrica permitidas.",
+      "reviewer": "Codex — inspeção visual do arquivo original e retorno do responsável",
+      "reviewedAt": "2026-11-06T13:29:30.059Z"
+    },
+    {
+      "assetTag": "TI-0004",
+      "candidateId": 1868510,
+      "sourceSha256": "95ebd266db3d4898438b1616135d1cb6710a4749688552ebce7042686f1fd22c",
+      "decision": "approved",
+      "reason": "Notebook inteiro como único equipamento e foco na mesa; tela apagada, teclas de fábrica permitidas, sem pessoas, marcas/logos legíveis ou conteúdo acrescentado.",
+      "reviewer": "Codex — inspeção visual do arquivo original e retorno do responsável",
+      "reviewedAt": "2026-11-06T13:29:30.059Z"
+    },
+    {
+      "assetTag": "TI-0003",
+      "candidateId": 599475,
+      "sourceSha256": "a46111546849a3825a6040873ca3298e9b4857e775f81432f1763c036521477c",
+      "decision": "rejected",
+      "reason": "Nome comercial na moldura e marca no porta-canetas; enquadramento também corta o topo do notebook.",
+      "reviewer": "Codex — inspeção visual do arquivo original e retorno do responsável",
+      "reviewedAt": "2026-11-06T13:29:30.060Z"
+    },
+    {
+      "assetTag": "TI-0003",
+      "candidateId": 1185626,
+      "sourceSha256": "5a8021fe03fe38a8f39687023d838cc8060838fc5ac3222f990de5762fb30e10",
+      "decision": "rejected",
+      "reason": "Pessoa usando notebook e conteúdo em tela.",
+      "reviewer": "Codex — inspeção visual do arquivo original e retorno do responsável",
+      "reviewedAt": "2026-11-06T13:29:30.061Z"
+    },
+    {
+      "assetTag": "TI-0007",
+      "candidateId": 7520773,
+      "sourceSha256": "9908dd422a3b1ae226091cdd757a32003eebb79be1d074f935db21adb42066d0",
+      "decision": "rejected",
+      "reason": "Pessoa em primeiro plano e tela com conteúdo.",
+      "reviewer": "Codex — inspeção visual do arquivo original e retorno do responsável",
+      "reviewedAt": "2026-11-06T13:29:30.061Z"
+    },
+    {
+      "assetTag": "TI-0007",
+      "candidateId": 4996834,
+      "sourceSha256": "c0e596fe228fcc6707ae8fef0b26e1d514fead8b6d9a72af8b8fa95f1c0120f7",
+      "decision": "rejected",
+      "reason": "Pessoa em frente ao monitor e conteúdo na tela.",
+      "reviewer": "Codex — inspeção visual do arquivo original e retorno do responsável",
+      "reviewedAt": "2026-11-06T13:29:30.061Z"
+    },
+    {
+      "assetTag": "TI-0007",
+      "candidateId": 1749577,
+      "sourceSha256": "d6f0b1c1f5981d234943b4a5bf42f38d80ab6564eeca32a27badba354bb73f44",
+      "decision": "rejected",
+      "reason": "Aparelho de pressão em pessoa; resultado não é monitor de computador.",
+      "reviewer": "Codex — inspeção visual do arquivo original e retorno do responsável",
+      "reviewedAt": "2026-11-06T13:29:30.062Z"
+    },
+    {
+      "assetTag": "TI-0007",
+      "candidateId": 1207834,
+      "sourceSha256": "25eea1a6f90c73814eaa7acfc96a4afa359ba3d507a1bc0e8a67723b5510cfcc",
+      "decision": "rejected",
+      "reason": "Logo Apple legível e monitor fora do foco.",
+      "reviewer": "Codex — inspeção visual do arquivo original e retorno do responsável",
+      "reviewedAt": "2026-11-06T13:29:30.063Z"
+    },
+    {
+      "assetTag": "TI-0007",
+      "candidateId": 242665,
+      "sourceSha256": "266f6a1e577847b207910b5b4d456e4d719ecaab01259352e21c0a311d9514cd",
+      "decision": "rejected",
+      "reason": "Marca Elo TouchSystems legível e símbolo comercial na lateral.",
+      "reviewer": "Codex — inspeção visual do arquivo original e retorno do responsável",
+      "reviewedAt": "2026-11-06T13:29:30.063Z"
+    },
+    {
+      "assetTag": "TI-0007",
+      "candidateId": 5989150,
+      "sourceSha256": "4ec09cc3ef3246f6568bce79ba122ead3c9ea0a3b7797d8addbabb743ce37806",
+      "decision": "rejected",
+      "reason": "Imagem representa notebook, não monitor independente; inclui material com texto editorial.",
+      "reviewer": "Codex — inspeção visual do arquivo original e retorno do responsável",
+      "reviewedAt": "2026-11-06T13:29:30.064Z"
+    },
+    {
+      "assetTag": "TI-0012",
+      "candidateId": 9341083,
+      "sourceSha256": "54fc6b9c7e3787120de8dd66d771f4c3669c2cca68cc85c0811ef4c3822fd391",
+      "decision": "rejected",
+      "reason": "Inscrição comercial de lente/câmera antiga; não é a câmera de ação compacta posteriormente confirmada pelo responsável.",
+      "reviewer": "Codex — inspeção visual do arquivo original e retorno do responsável",
+      "reviewedAt": "2026-11-06T13:29:30.065Z"
+    },
+    {
+      "assetTag": "TI-0012",
+      "candidateId": 2598507,
+      "sourceSha256": "7296a2c8e4927d06adee38e67dc2eeeab3f46d08a32731e777f33731f76fc0de",
+      "decision": "rejected",
+      "reason": "Câmera antiga de perfil, com inscrições comerciais na lente; inadequada à representação adotada para o item.",
+      "reviewer": "Codex — inspeção visual do arquivo original e retorno do responsável",
+      "reviewedAt": "2026-11-06T13:29:30.066Z"
+    },
+    {
+      "assetTag": "TI-0012",
+      "candidateId": 2125547,
+      "sourceSha256": "ed1ec1590e11cbac22fc6a5fe3de99b8f96eaac9ef23b9b7581eef1a204fde4a",
+      "decision": "approved",
+      "reason": "Câmera de ação compacta como foco, sem pessoas, marca/logo legível ou conteúdo em tela. Responsável confirmou esse tipo de câmera como ilustração de TI-0012 no chat.",
+      "reviewer": "Codex — inspeção visual do arquivo original e retorno do responsável",
+      "reviewedAt": "2026-11-06T13:29:30.067Z"
+    },
+    {
+      "assetTag": "TI-0007",
+      "candidateId": 313011,
+      "sourceSha256": "465774117cf51c2a19bbf90623922f321700b1091670ec4d388bcf2876957340",
+      "decision": "approved",
+      "reason": "Ilustração Pixabay, não fotografia. Exceção autorizada pelo responsável somente para TI-0007 após ver esta candidata. Monitor inteiro sem pessoa, marca/logo legível, texto acrescentado ou conteúdo na tela; apenas símbolo técnico de ligar.",
+      "reviewer": "Codex — inspeção visual do original; exceção confirmada pelo responsável no chat",
+      "reviewedAt": "2026-11-06T13:32:04.525Z"
+    }
+  ],
+  "idempotence": {
+    "manifestSha256": "47b7ec509a49d8094ac2df136a405225668d9ab6393be29c731d23412c5d5c5b",
+    "identicalAfterSecondPreparation": true
+  },
+  "published": false
+}

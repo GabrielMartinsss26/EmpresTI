@@ -43,7 +43,7 @@ Depois foi autorizada a primeira etapa: D01, infraestrutura do verificador. Sua 
 
 D02 também foi autorizada e verificada: skill local de imagens conforme ADR-005, sem upload. Evidências em `docs/verificacoes/imagens/`. Selecionar/revisar fotos reais, popular dados e criar conta seguem nas tarefas seguintes; não confundir a aprovação da ferramenta com a spec 004 pronta.
 
-D03 foi autorizada ao pedir a próxima tarefa: seleção local em andamento, dez fotos aceitas e duas lacunas em docs/verificacoes/imagens/d03-parcial.json. O responsável autorizou refinamento e apenas inscrições técnicas de fábrica; ADR-005/spec 004 registram a exceção. D04 e escritas externas não fazem parte dessa autorização.
+D03 concluída localmente: 12 imagens distintas 800×600, preparar/verificar e reexecução passaram. Evidências em docs/verificacoes/imagens/d03-final.md e d03-manifesto.json. TI-0003/TI-0004 substituídos; responsável confirmou foto de câmera de ação para TI-0012 e ilustração exclusivamente para TI-0007 (ADR-005/spec 004). D04 e escritas externas não fazem parte dessa autorização.
 
 ## Skills
 
