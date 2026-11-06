@@ -17,7 +17,7 @@
 - Preparar/verificar e reexecução passaram: 12 WebP 800×600, IDs/hashes distintos; pacote em .local/imagens-equipamentos/preparadas/.
 - Checks: dez de imagens, sete do verificador, lint, Prettier e diff passaram; galeria HTTP 200 com 12 aceitas e zero pendentes.
 - Sem mudança de UI/dependência/schema; build da aplicação já verificado em D02, não repetido nesta etapa.
-- Aplicação /login na porta 3000 não respondeu no fechamento; nenhuma mudança de UI. Galeria Python confirmada HTTP 200 na porta 3002.
+- Servidores locais reiniciados após interrupção: /login porta 3000 (npm run start) e galeria Python porta 3002 confirmados HTTP 200.
 - Próximo passo: apresentar DDL e decisões pendentes de D04; não executar migration externa.
 - Manifesto versionado é evidência local; operador ainda publicará imagens/dados/conta em tarefa própria.
 - D04 exige apresentar/aprovar DDL; política de conflitos e contas existentes continuam não decididas.
