@@ -44,6 +44,10 @@ O formato identifica cada CA na ordem, estado, arquivo/linha, teste/resultado e 
 
 Recibos e tabelas versionados ficam em `docs/verificacoes/verificador/`. Eventos brutos locais ficam em `test-results/verificador/`, ignorados pelo Git. A prova plantada deve ocorrer somente nessa fixture, sem banco, usuário real ou produção.
 
+Prova realizada em 06/nov/2026: configuração `e56b9ad`, erro plantado `f26262e`, restauração `27b503f`. `plantado.md` reprovou CA-V01 e marcou CA-V02 SEM TESTE; `restaurado.md` aprovou ambos após execução local do principal. Os arquivos `delegacao-*.json` registram do runtime a chamada spawn_agent, agent_type, fork_turns=none, sessões pai/filho e sandbox read-only/approval never. Os eventos do CLI não mostram todos os detalhes de delegação; por isso o principal conferiu também os registros locais dessas sessões, guardando somente os metadados necessários, sem prompts ou configuração pessoal.
+
+Calibração real anterior: `calibracao.md` recusou o recibo `baseline.json` após formatação mudar o hash do teste. O recibo foi preservado como evidência histórica dessa reprovação, não como teste vigente. A nova execução identificada e compatível está em `restaurado.json`.
+
 ## Fontes e versão
 
 Consulta de 06/nov/2026 e CLI instalado `0.167.0-alpha.3.2`:

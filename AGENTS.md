@@ -39,6 +39,8 @@ As permissões vigentes de Git estão em `rules/operacao.md`.
 
 Em 06/nov/2026 foram solicitadas as specs e a documentação da prática. As regras de negócio confirmadas estão no ADR-004. Os planos 004/005 são propostas para revisão; essa solicitação documental não autoriza implementação, migration ou escrita externa. Pendências e sequência em `docs/pratica.md`.
 
+Depois foi autorizada a primeira etapa: D01, infraestrutura do verificador. Sua demonstração local está em `docs/verificacoes/verificador/`; não autoriza as demais tarefas das specs 004/005. O verificador não usa terminal; os checks e recibos pertencem ao principal.
+
 ## Subagentes
 
 Para conferir uma spec, usar `npm run verify:spec -- <caminho-da-spec> [caminho-das-evidencias]`, conforme `docs/verificador.md`. O lançador exige delegação real para `verificador-spec` em sessão separada com ferramentas de leitura. Não lançar este papel por herança da sessão de implementação irrestrita. Se o CLI/papel não estiver disponível, reportar BLOQUEADO e não simular verificação independente. Correções e gravação de relatórios pertencem ao principal; gatilho obrigatório em `rules/spec-flow.md`.

@@ -1,9 +1,9 @@
 # Tarefas 004 — Dados iniciais
 
-Todas pendentes. Os itens abaixo são plano de trabalho, não evidência de execução.
+Implementação de dados/imagens pendente. D01 concluída separadamente por autorização explícita; evidência abaixo não aprova a funcionalidade inteira.
 
 - [ ] D00 · Fechar biblioteca, formato/recorte, Storage, reexecução e contas existentes. Pré-requisito de CA-D02/D03/D05/D06/D07.
-- [ ] D01 · Configurar e provar verificador isolado, com saída estável por critério. CA-D08.
+- [x] D01 · Configurar e provar verificador isolado, com saída estável por critério. Pré-requisito de CA-D08: sessão separada, contexto limpo, MCP de leitura e seis testes locais; fixture reprovada em f26262e e restaurada em 27b503f. Tabelas/recibos em docs/verificacoes/verificador/. CA-D08 completo ainda depende da verificação da spec 004 implementada em D07.
 - [ ] D02 · Criar skill e scripts locais de busca/preparação Pixabay. CA-D03/D07.
 - [ ] D03 · Selecionar e revisar as 12 imagens; registrar rejeições reais e manifesto. CA-D03/D04.
 - [ ] D04 · Apresentar e aprovar DDL; criar migration de imagens/policies se necessária e verificá-la do zero. CA-D01/D03/D05.

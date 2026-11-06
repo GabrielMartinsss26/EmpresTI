@@ -17,7 +17,7 @@ Status: rascunho iniciado em 06/nov/2026. Não é declaração de entrega conclu
 | 14 dias úteis | ADR-003 e constraint de 14 corridos | Adotar 14 úteis após aprovação | Responsável considera mais adequado que corridos | ADR-004; CA-E07/E12 | Nova migration pendente |
 | Somente TI-0004/TI-0007 em manutenção | Lista do mesmo enunciado também marca TI-0010 | Manter os três em manutenção | Responsável escolheu a lista completa | Spec 004, inventário e CA-D01 | População pendente |
 | Pexels como única fonte | Alteração de orientação pelo responsável | Usar Pixabay como única fonte | Nova orientação para a prática | docs/pratica.md; spec 004 | Skill ainda não criada |
-| Verificador corrige teste | Independência exigida no próprio enunciado | Proposta: só verificar; principal corrige | Correção própria elimina independência da conferência | docs/pratica.md, etapa 1 | Proposta; configuração pendente |
+| Verificador corrige teste | Independência exigida no próprio enunciado | Só verificar; principal corrige | Correção própria elimina independência da conferência | docs/verificador.md; papel TOML | Demonstrado na fixture: f26262e → 27b503f |
 | Senha literal no script | rules/secrets.md e regra geral da prática | Não copiar credencial ao seed; operador fornece por configuração | Manter segredo fora do código/histórico | docs/pratica.md; regra 8 da spec 004 | Provisionamento pendente |
 | Instalar sharp diretamente | ADR-001 e regra de aprovação de dependências | Apresentar proposta antes de instalar | Nome no briefing não equivale à aprovação da stack | docs/pratica.md, lacunas | Não decidido; nada instalado |
 | Catálogo sem crédito × crédito exigido na seção de fotos | Contradição interna e mudança de provedor | Avaliar condições Pixabay antes de fechar interface | Não transportar automaticamente a condição atribuída ao Pexels | docs/pratica.md, lacunas | Não decidido |
@@ -35,7 +35,7 @@ Status: rascunho iniciado em 06/nov/2026. Não é declaração de entrega conclu
 
 ## 2. Onde o agente tentou decidir por você
 
-Não registrar um exemplo inventado. A análise apresentou conflitos e opções; o responsável reconsiderou a proposta inicial de empréstimo imediato e confirmou aprovação, cinco ativos e dias úteis. Um episódio real de suposição indevida, se ocorrer, será documentado com evidência; requisito ainda pendente.
+Na calibração do verificador, o principal forneceu um recibo de execução anterior à formatação do teste, assumindo que serviria para a versão atual. O filho comparou hashes e devolveu SEM TESTE/NÃO PRONTA em vez de aceitar essa afirmação. O principal gerou uma nova execução compatível, sem alterar o teste para enfraquecer a regra. Evidências em docs/verificacoes/verificador/calibracao.md, baseline.json e restaurado.json. É um erro real de evidência, não um episódio inventado de decisão de negócio. A escolha de aprovação/limite/prazo foi feita pelo responsável, conforme ADR-004.
 
 ## 3. Uma decisão que merece (ou não) um ADR
 
@@ -47,11 +47,21 @@ Pendente: criar skill, decidir biblioteca/formato/recorte, separar roteiro/refer
 
 ## 5. O subagente verificador
 
-Pendente: configurar no harness, conectar gatilho obrigatório ao fluxo e comprovar restrições. Deve receber caminhos da spec/plan/tasks e ler as fontes, sem herdar a conversa de implementação. Não corrige testes/código; texto sozinho não comprova bloqueio de credenciais/comandos externos.
+Configurado em `.codex/agents/verificador-spec.toml`, sem cópia Markdown concorrente. O gatilho de fechamento da spec fica em rules/spec-flow.md; AGENTS aponta para o lançador. Este abre sessão CLI separada com sandbox de leitura, sem configuração pessoal, terminal, apps/plugins ou memória, e exige filho com contexto limpo. O filho lê as fontes por MCP local de duas operações: lista e leitura. Caminhos de ambiente, externos, traversal e junctions são recusados por código. Sem ferramenta de execução, ele inspeciona testes e recibos do principal, comparando SHA-256 independente dos arquivos atuais. Não executa os testes nem grava/corrige relatórios.
+
+O monolito tem um único verificador para front/backend/banco, com evidência por camada. Falta testar/verificar as implementações 004/005 quando existirem. A restrição não é alegada a partir de texto no TOML: seis testes locais exercitam o MCP, e os metadados das sessões registram read-only no pai e no filho. Em sessão principal irrestrita, esse papel não deve ser lançado diretamente por herança.
 
 ## 6. O verificador em ação
 
-Não executado. Histórico real de reprovações, tabelas por critério e commits de erro plantado/restaurado serão registrados aqui. Tabelas finais das specs 004 e 005: pendentes. Não usar os testes anteriores do login como evidência destas funcionalidades.
+Prova do mecanismo, em fixture isolada, concluída em 06/nov/2026:
+
+| Rodada | Resultado | Evidência |
+|---|---|---|
+| Calibração | Recibo antigo não validou o teste atual; dois SEM TESTE | docs/verificacoes/verificador/calibracao.md e baseline.json |
+| Erro plantado — f26262e | Limite 4 em vez de 5: CA-V01 NÃO ATENDE; teste de aprovação removido: CA-V02 SEM TESTE; NÃO PRONTA | docs/verificacoes/verificador/plantado.md e plantado.json |
+| Restauração pelo principal — 27b503f | Limite 5 e teste de aprovação restaurados; ambos ATENDE após dois testes locais passarem; PRONTA somente para a fixture | docs/verificacoes/verificador/restaurado.md e restaurado.json |
+
+Delegação nativa, contexto limpo e permissões foram conferidos pelo principal nos registros das sessões, com resumo em delegacao-plantado.json e delegacao-restaurado.json. O verificador não alterou os arquivos; a correção consta do commit do principal. Tabelas finais das specs 004 e 005 continuam pendentes: a demonstração não substitui sua implementação ou seus testes.
 
 ## 7. Uma regra sua que esta prática pôs à prova
 
@@ -59,4 +69,4 @@ O contrato anterior permitia operações externas mediante pedido explícito. A 
 
 ## 8. O que ficou de fora e o que faria diferente
 
-Nesta etapa só foram preparados documentos. Código, migrations, skill, verificador, imagens, conta, testes das novas specs e publicação ainda não foram executados. Devolução, cadastro por interface, tela completa de Operações, convites e autocadastro ficam fora do recorte confirmado. Tag entrega-pratica e push ainda não executados; só marcar a entrega depois das evidências reais.
+Documentos e infraestrutura do verificador foram preparados e sua prova foi executada em fixture. Migrations, skill, imagens, conta, dados e funcionalidades das novas specs e publicação ainda não foram executados. Devolução, cadastro por interface, tela completa de Operações, convites e autocadastro ficam fora do recorte confirmado. Tag entrega-pratica e push ainda não executados; só marcar a entrega depois das evidências reais.

@@ -1,6 +1,6 @@
 # Planejamento da prática — 06/nov/2026
 
-Status: documentação inicial. Decisões confirmadas estão no PRD e ADR-004; planos de implementação ainda aguardam revisão. Nenhum código, schema, conta ou recurso externo foi alterado nesta etapa.
+Status: D01 (infraestrutura do verificador) concluída e demonstrada em 06/nov/2026; evidências em `docs/verificacoes/verificador/`. Decisões de negócio estão no PRD e ADR-004; planos de dados/empréstimos ainda aguardam revisão. Nenhum schema, conta ou recurso de produção foi alterado por esta etapa.
 
 ## Fontes e histórico
 
@@ -35,7 +35,7 @@ Senha da conta de correção e chave Pixabay não entram em código, fixture, ma
 | Provisionamento de conta já existente ou inativa | Não decidido; não redefinir senha/reativar silenciosamente |
 | Política de reexecução sobre equipamentos modificados/em uso | Não decidido; não resetar manutenção, empréstimos ou dados alterados silenciosamente |
 | DDL de prazo e preservação de empréstimos existentes | Não decidido; SQL e impacto devem ser aprovados antes da migration |
-| Configuração efetiva do verificador e seus comandos permitidos | Não decidido; não lançar subagente com credenciais remotas por herança |
+| Configuração efetiva do verificador e seus comandos permitidos | Definida e provada em D01: lançador separado, sem terminal, MCP com lista/leitura; detalhes em docs/verificador.md |
 
 ## Fontes do Pixabay consultadas
 
