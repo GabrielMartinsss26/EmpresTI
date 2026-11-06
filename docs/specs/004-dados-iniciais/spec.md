@@ -69,4 +69,6 @@ Scripts de preparação/provisionamento e dados iniciais; possível migration pa
 
 ## Pendências e decisões
 
+A proposta de modelo, policies, DDL e testes locais está em [proposta-d04.md](proposta-d04.md), preparada a pedido do responsável. É uma recomendação pendente de aprovação; a existência desse documento não muda os pontos “não decidido” desta spec nem autoriza executar a migration.
+
 Biblioteca/processamento/crédito foram aprovados no ADR-005 para a tarefa D02. Storage, política de reexecução de dados e contas existentes seguem a tabela de `docs/pratica.md` e continuam bloqueando as tarefas dependentes. Provas da skill não aprovam a população, fotos reais, conta ou publicação; CA-D01–D08 integrais continuam pendentes.

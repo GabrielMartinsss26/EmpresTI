@@ -77,4 +77,6 @@ O contrato anterior permitia operações externas mediante pedido explícito. A 
 
 ## 8. O que ficou de fora e o que faria diferente
 
+Proposta D04 preparada em docs/specs/004-dados-iniciais/proposta-d04.md, a pedido do responsável: tabela de metadados opcional por equipamento, DDL, proteção do Storage, impactos e testes propostos. As recomendações não foram aprovadas como decisões nem implementadas. Nenhum ADR novo, schema, migration ou recurso externo foi alterado por essa etapa documental.
+
 Documentos, infraestrutura do verificador e scripts da skill foram preparados; houve prova em fixture, testes de imagens sintéticas e busca real de candidatas. D03 e manifesto local concluídos; migrations, conta, dados, funcionalidades das novas specs e publicação seguem pendentes. Devolução, cadastro por interface, tela completa de Operações, convites e autocadastro ficam fora do recorte confirmado. Tag entrega-pratica e push ainda não executados; só marcar a entrega depois das evidências reais.

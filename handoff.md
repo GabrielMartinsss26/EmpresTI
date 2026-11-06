@@ -18,8 +18,8 @@
 - Checks: dez de imagens, sete do verificador, lint, Prettier e diff passaram; galeria HTTP 200 com 12 aceitas e zero pendentes.
 - Sem mudança de UI/dependência/schema; build da aplicação já verificado em D02, não repetido nesta etapa.
 - Servidores locais reiniciados após interrupção: /login porta 3000 (npm run start) e galeria Python porta 3002 confirmados HTTP 200.
-- Próximo passo: apresentar DDL e decisões pendentes de D04; não executar migration externa.
+- D04: proposta pronta em docs/specs/004-dados-iniciais/proposta-d04.md; tabela/relações, DDL, guard Storage e comando novo aguardam aprovação; nenhum schema/migration alterado.
 - Manifesto versionado é evidência local; operador ainda publicará imagens/dados/conta em tarefa própria.
-- D04 exige apresentar/aprovar DDL; política de conflitos e contas existentes continuam não decididas.
+- Próximo passo: responsável revisar/aprovar proposta D04; depois registrar ADR/decisões e implementar/testar migration só em banco descartável. Conflitos/contas existentes continuam não decididos.
 - Produção da prática é executada pelo operador; specs 004/005 NÃO PRONTAS, verificador final ainda pendente.
 - Arquivos não rastreados em Aulas/ pertencem ao usuário e ficam fora do commit desta tarefa.

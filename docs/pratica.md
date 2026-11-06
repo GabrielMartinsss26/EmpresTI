@@ -1,6 +1,6 @@
 # Planejamento da prática — 06/nov/2026
 
-Status: D01 (verificador) e D02 (skill local de imagens) concluídas em 06/nov/2026; evidências em `docs/verificacoes/verificador/` e `docs/verificacoes/imagens/`. Houve busca real de candidatas; seleção/revisão de fotos é D03 e continua pendente. Nenhum schema, conta ou recurso de produção foi alterado. Dados/empréstimos ainda aguardam suas tarefas e revisões.
+Status: D01 (verificador), D02 (skill) e D03 (12 imagens locais) concluídas em 06/nov/2026; evidências em `docs/verificacoes/verificador/` e `docs/verificacoes/imagens/`. A [proposta D04](specs/004-dados-iniciais/proposta-d04.md) foi preparada a pedido do responsável e aguarda aprovação para implementação local. Nenhum schema, conta ou recurso de produção foi alterado nesta prática. Dados/empréstimos ainda aguardam suas tarefas e revisões.
 
 ## Fontes e histórico
 
@@ -30,7 +30,7 @@ Senha da conta de correção e chave Pixabay não entram em código, fixture, ma
 |---|---|
 | Biblioteca de processamento | sharp 0.35.5 direto de desenvolvimento, aprovado na proposta da skill; ADR-005 |
 | Formato final e enquadramento | WebP 800×600, foto inteira com bordas; parâmetros em ADR-005 |
-| Bucket, caminhos, metadados e policies de Storage | Manifesto local prevê equipamentos / suporte_ti/patrimonio.webp; banco e policies concretas ainda pendentes; nada criado externamente |
+| Bucket, caminhos, metadados e policies de Storage | Manifesto local prevê equipamentos / suporte_ti/patrimonio.webp; modelo, DDL e guard de Storage propostos em specs/004-dados-iniciais/proposta-d04.md, ainda não aprovados; nada criado externamente |
 | Crédito visível no catálogo com Pixabay | Link discreto de créditos aprovado na proposta; manifesto registra autor/origem/licença; implementação visual na spec 005 |
 | Provisionamento de conta já existente ou inativa | Não decidido; não redefinir senha/reativar silenciosamente |
 | Política de reexecução sobre equipamentos modificados/em uso | Não decidido; não resetar manutenção, empréstimos ou dados alterados silenciosamente |

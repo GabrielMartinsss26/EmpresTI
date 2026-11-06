@@ -45,6 +45,8 @@ D02 também foi autorizada e verificada: skill local de imagens conforme ADR-005
 
 D03 concluída localmente: 12 imagens distintas 800×600, preparar/verificar e reexecução passaram. Evidências em docs/verificacoes/imagens/d03-final.md e d03-manifesto.json. TI-0003/TI-0004 substituídos; responsável confirmou foto de câmera de ação para TI-0012 e ilustração exclusivamente para TI-0007 (ADR-005/spec 004). D04 e escritas externas não fazem parte dessa autorização.
 
+O pedido seguinte autorizou somente montar a proposta D04, disponível em docs/specs/004-dados-iniciais/proposta-d04.md. A aprovação para mudar schema, gerar/aplicar migration e adotar as escolhas estruturais continua pendente, conforme rules/migration.md. Não tratar o SQL em Markdown como migration executada.
+
 ## Skills
 
 Skills do projeto ficam em `skills/<nome>/SKILL.md`. Para descobrir capacidades, ler apenas name/description do frontmatter; carregar o corpo somente quando a tarefa casar e referências somente quando indicadas. `imagens-equipamentos` prepara fotos do inventário da prática pelo Pixabay; não altera logo/landing nem faz upload. Rules e ADRs prevalecem sobre a skill. Há uma única cópia versionada em `skills/imagens-equipamentos/`.
