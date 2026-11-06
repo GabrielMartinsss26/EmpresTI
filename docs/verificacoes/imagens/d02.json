@@ -1,0 +1,67 @@
+{
+  "scope": "D02: ferramenta e testes sintéticos; não aprova fotos reais/população/publicação",
+  "executor": "principal",
+  "checks": [
+    {
+      "command": "quick_validate.py skills/imagens-equipamentos",
+      "exitCode": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "command": "node scripts/auditar-skill-imagens.mjs",
+      "exitCode": 0,
+      "outputFile": "docs/verificacoes/imagens/auditoria.json"
+    },
+    {
+      "command": "node --test tests/imagens/pipeline.test.mjs",
+      "exitCode": 0,
+      "output": "✔ CA-D07: chave ausente falha antes da rede; erro do provedor não expõe segredo (14.2871ms)\n✔ CA-D03/D07: cache 24h, filtros de foto e sanitização sem chave no disco (66.1593ms)\n✔ CA-D07: download bloqueia origem externa, redirect externo e conteúdo excessivo (2.2381ms)\n✔ CA-D03/D04: selecionar não aprova a foto, não duplica ID e reutiliza original local (45.773ms)\n✔ CA-D03: WebP 800×600 sem cortar foto panorâmica ou retrato; rejeita arquivo falso (126.6671ms)\n✔ CA-D03/D04: pacote requer revisão atual, rejeita conjunto incompleto e arquivo alterado (35.7122ms)\n✔ CA-D04: aprovação sem revisor, motivo ou data válida não autoriza pacote (30.5768ms)\n✔ CA-D03: detecta mesma foto por ID e por bytes, mesmo com outro ID (116.1844ms)\n✔ CA-D02/D03: 12 arquivos idempotentes, créditos íntegros e pacote invalidado por revisão posterior (1543.4155ms)\nℹ tests 9\nℹ suites 0\nℹ pass 9\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 2531.5971\n"
+    },
+    {
+      "command": "node --test tests/verificador/seguranca.test.mjs",
+      "exitCode": 0,
+      "output": "✔ CA-D08: transporte stdio inicializa e recusa ferramenta de escrita (119.4603ms)\n✔ CA-D08: MCP expõe somente lista e leitura; execução/escrita/rede não existem (0.7536ms)\n✔ CA-I07: exemplo público retorna só metadados e não aceita caminho arbitrário (20.4218ms)\n✔ CA-D08: leitura nega ambientes, traversal e caminhos absolutos antes de abrir (1.16ms)\n✔ CA-D08: descoberta filtra segredos e leitura bloqueia junction externa (18.1644ms)\nℹ tests 5\nℹ suites 0\nℹ pass 5\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 282.5245\n"
+    }
+  ],
+  "realSearch": {
+    "command": "npm run imagens -- buscar",
+    "observedExitCode": 0,
+    "assets": 12,
+    "candidates": 96,
+    "source": "Pixabay API; cache local ignorado pelo Git",
+    "visualReview": "pendente",
+    "upload": "não executado"
+  },
+  "envExample": {
+    "name": "PIXABAY_API_KEY",
+    "value": "vazio"
+  },
+  "sha256": {
+    "skills/imagens-equipamentos/SKILL.md": "3816120f92c0040a2149d703eeda55ee5a392c6049b4bd7f5ebbfd353957f479",
+    "skills/imagens-equipamentos/assets/inventario.json": "dc7a795ca23036bf1ff0ac60dec3c33e394947464192535a4b99b63d7a3eda74",
+    "skills/imagens-equipamentos/references/pipeline.md": "6abb350ce2e2df3edaeca5cec7e668fb5bb3db4cf6a83e326aca581b3edc683c",
+    "skills/imagens-equipamentos/references/pixabay.md": "ea87bb10510b6f077c5e5182907fc4e739a1b84bc49c1c712fb790b800246c26",
+    "skills/imagens-equipamentos/scripts/cli.mjs": "9219004e32108c0c50b4ce1889a901fd2091c4c47f29339c65a0fc44624ea3d0",
+    "skills/imagens-equipamentos/scripts/pipeline.mjs": "134420ab7d041e0a1b3109a495cbee36276a2e6535c31927cbfd7e257d7d2d71",
+    "tests/imagens/pipeline.test.mjs": "7a5d7f32aa6405276bb0f8e51ae2e771f5c872c1918cdc5372920850bce9cb4c",
+    "docs/specs/004-dados-iniciais/skill.md": "a3452c3b87b034a7aafae6dffae3a8faf22904993c07f558a9d5237f91eec21f",
+    ".gitignore": "4ec938df814e91f18c143955053929c69c4114df4aaf3c713beb276c96489f1b",
+    ".vercelignore": "250679ebb2bee26c5f1025113015ee33393a8315e6839d5b61b5aaf854b001cf",
+    "package.json": "08676741ff74a5d8a13ff0902d0ecf22bf8a1e874ab26b63c19f7b2432cf41a8",
+    "docs/adr/005-imagens-equipamentos.md": "e5c3276250a8893d901c31753c2bcbea4dae9d6236b53a37d30aa055ff7bc57f",
+    "scripts/auditar-skill-imagens.mjs": "92db7dde0f66bb055b10898d83b303a9e97275bc09bee1d6f05d6b57b38bcfd1",
+    "docs/verificacoes/imagens/auditoria.json": "491569247312a6872fff82b468a2f03c060f0b0c4717647dfcc6f6d728bdac81",
+    "scripts/verificador-mcp.mjs": "30c297e9371ae5db5c6c5761287ba5a0c2d1de4a02af6186cff4fc43d0db612e",
+    "tests/verificador/seguranca.test.mjs": "15f900d07812a0161987801dea847ae3196c26b753b81e10a0c7164e8c940a29",
+    ".codex/config.toml": "6d625107b17ecd37abb8259e8cf15b7f6a918daa787ce04713580e48079e1aa2",
+    ".codex/agents/verificador-spec.toml": "b074303f16d613cf94f1342c6ae10f3993746053bbe3f989f4a9d441ab9dd860",
+    "docs/verificador.md": "fb0e8f5c71721b945402a457feac79c317a5d16e84b5e3a56bd3209bbc42b965"
+  },
+  "hostValidator": {
+    "name": "skill-creator/scripts/quick_validate.py",
+    "sha256": "5347a0a09cfb546bba1c0d1a30dae0a233d9a05f57bd4e7877155c588bcdabf7",
+    "command": "python <host-skill-creator>/scripts/quick_validate.py skills/imagens-equipamentos",
+    "version": "identificada pelo SHA-256 do arquivo instalado"
+  },
+  "additionalEvidence": "docs/verificacoes/imagens/auditoria.json"
+}

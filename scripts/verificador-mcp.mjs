@@ -12,9 +12,12 @@ const roots = new Set([
   "tests",
   "rules",
   "scripts",
+  "skills",
   ".codex",
 ]);
 const rootFiles = new Set([
+  ".gitignore",
+  ".vercelignore",
   "AGENTS.md",
   "README.md",
   "ENTREGA.md",
@@ -50,7 +53,7 @@ function permitted(relative) {
     !relative.includes("\\") &&
     !relative.includes(":") &&
     (roots.has(parts[0]) || (parts.length === 1 && rootFiles.has(relative))) &&
-    extensions.has(path.extname(relative))
+    (extensions.has(path.extname(relative)) || rootFiles.has(relative))
   );
 }
 
@@ -118,7 +121,47 @@ export async function listProjectFiles(root = projectRoot) {
   return result.sort();
 }
 
+// Metadados do exemplo público; nunca devolve valor e nunca abre ambiente real.
+export async function inspectPublicEnvExample(root = projectRoot) {
+  const canonicalRoot = await realpath(root);
+  const expected = path.join(canonicalRoot, ".env.example");
+  const target = await realpath(expected);
+  if (target !== expected)
+    throw new Error("Exemplo público não pode ser link.");
+  const info = await stat(target);
+  if (!info.isFile() || info.size > 100_000)
+    throw new Error("Exemplo público fora do limite.");
+  const bytes = await readFile(target);
+  const lines = bytes
+    .toString("utf8")
+    .split(/\r?\n/)
+    .filter((line) => /^PIXABAY_API_KEY=/.test(line));
+  return {
+    path: ".env.example",
+    sha256: createHash("sha256").update(bytes).digest("hex"),
+    variable: "PIXABAY_API_KEY",
+    occurrences: lines.length,
+    exists: lines.length === 1,
+    empty: lines.length === 1 && lines[0] === "PIXABAY_API_KEY=",
+  };
+}
+
 export const tools = [
+  {
+    name: "inspect_public_env_example",
+    description:
+      "Confere somente existência e valor vazio de PIXABAY_API_KEY no exemplo público fixo .env.example e devolve SHA-256. Não retorna conteúdo/valores; não recebe caminho e não acessa ambiente real.",
+    inputSchema: {
+      type: "object",
+      properties: {},
+      additionalProperties: false,
+    },
+    annotations: {
+      readOnlyHint: true,
+      destructiveHint: false,
+      openWorldHint: false,
+    },
+  },
   {
     name: "list_files",
     description:
@@ -169,13 +212,15 @@ export async function handle(request) {
   const { name, arguments: args = {} } = request.params ?? {};
   if (!tools.some((tool) => tool.name === name))
     throw new Error("Ferramenta não permitida.");
-  const allowedKeys = name === "list_files" ? [] : ["path", "start", "count"];
+  const allowedKeys = name === "read_file" ? ["path", "start", "count"] : [];
   if (Object.keys(args).some((key) => !allowedKeys.includes(key)))
     throw new Error("Argumento não permitido.");
   const output =
-    name === "list_files"
-      ? await listProjectFiles()
-      : await readProjectFile(args.path, args.start, args.count);
+    name === "inspect_public_env_example"
+      ? await inspectPublicEnvExample()
+      : name === "list_files"
+        ? await listProjectFiles()
+        : await readProjectFile(args.path, args.start, args.count);
   return { content: [{ type: "text", text: JSON.stringify(output) }] };
 }
 

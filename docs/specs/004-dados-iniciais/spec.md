@@ -19,7 +19,7 @@ Preparar os 12 equipamentos da prática com imagens do Pixabay e a conta do prof
 3. Criar exatamente o conjunto inicial abaixo, sem criar empréstimos. Três itens em manutenção e nove disponíveis.
 4. Preparar uma imagem distinta por patrimônio pela skill imagens-equipamentos, cuja única fonte será a API Pixabay. Nenhuma foto reprovada por pessoa, marca/logo legível, texto ou tela com conteúdo será publicada.
 5. Todas as imagens finais têm 800×600 reais, verificadas no arquivo; não basta aplicar dimensão no CSS. Guardar ID e URL de origem, autor, licença e vínculo ao patrimônio. Não repetir ID nem arquivo idêntico entre itens.
-6. Destino previsto: bucket público do Supabase Storage, com leitura pública e escrita restrita. Bucket, caminhos, formato, recorte e modelo de metadados: não decidido.
+6. Destino previsto: bucket público do Supabase Storage, com leitura pública e escrita restrita. ADR-005 define WebP 800×600, foto inteira com bordas e manifesto local com destino equipamentos / suporte_ti/patrimonio.webp. Modelo de metadados no banco e policies concretas: não decidido; nenhum bucket foi criado por esta etapa.
 7. Reexecução não duplica equipamentos, categorias, fotos, perfis nem vínculos. Comportamento diante de dados existentes alterados/inativos: não decidido; não sobrescrever silenciosamente.
 8. Conta do professor: `marcelo.grilo@institutojef.org.br`, nome `Marcelo Grilo`, papel `COLLABORATOR` em `suporte_ti`, com login funcional e zero empréstimos. A senha da turma será fornecida pelo operador por configuração não versionada; nunca literal no seed.
 9. Não usar a conta do professor para operações de empréstimo. Testes usam identidade própria ou fixtures locais descartáveis. Conta existente/inativa: tratamento não decidido.
@@ -65,4 +65,4 @@ Scripts de preparação/provisionamento e dados iniciais; possível migration pa
 
 ## Pendências e decisões
 
-Biblioteca, processamento visual, Storage, política de reexecução e contas existentes seguem a tabela de `docs/pratica.md`. A spec não está pronta para implementação enquanto esses contratos estiverem abertos. Não há resultados de testes/verificador desta funcionalidade ainda.
+Biblioteca/processamento/crédito foram aprovados no ADR-005 para a tarefa D02. Storage, política de reexecução de dados e contas existentes seguem a tabela de `docs/pratica.md` e continuam bloqueando as tarefas dependentes. Provas da skill não aprovam a população, fotos reais, conta ou publicação; CA-D01–D08 integrais continuam pendentes.

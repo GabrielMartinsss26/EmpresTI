@@ -1,8 +1,8 @@
 # Plano 004 — Dados iniciais
 
-Status: proposta documental; aguarda revisão antes do código.
+Status: D01 e D02 autorizadas e executadas como etapas independentes; contrato local da skill em skill.md e ADR-005. Demais tarefas aguardam as decisões/revisões próprias, sem autorização de produção.
 
-1. Resolver lacunas da spec e registrar alternativas; apresentar modelo de metadados/policies/DDL e biblioteca de imagens. Não instalar sharp por estar citado no enunciado.
+1. Resolver lacunas da spec e registrar alternativas; apresentar modelo de metadados/policies/DDL. Biblioteca e processamento foram aprovados na proposta da skill e registrados no ADR-005; sharp não foi instalado por mera menção no enunciado.
 2. Preparar verificador e skill conforme `docs/pratica.md`, com restrição efetiva de produção. Respeitar ADR-001 e ADR-002; skill não cria paleta nem altera landing.
 3. Preparar busca Pixabay, cache, seleção, download e transformação local. Separar roteiro da skill, referências do provedor e scripts determinísticos. Validar dimensão, duplicação, origem e revisão visual.
 4. Implementar referências de imagem aprovadas via Prisma Migrate e SQL de proteção versionado. Testar do zero em PostgreSQL descartável, sem editar migration inicial.

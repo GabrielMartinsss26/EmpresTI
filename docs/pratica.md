@@ -1,6 +1,6 @@
 # Planejamento da prática — 06/nov/2026
 
-Status: D01 (infraestrutura do verificador) concluída e demonstrada em 06/nov/2026; evidências em `docs/verificacoes/verificador/`. Decisões de negócio estão no PRD e ADR-004; planos de dados/empréstimos ainda aguardam revisão. Nenhum schema, conta ou recurso de produção foi alterado por esta etapa.
+Status: D01 (verificador) e D02 (skill local de imagens) concluídas em 06/nov/2026; evidências em `docs/verificacoes/verificador/` e `docs/verificacoes/imagens/`. Houve busca real de candidatas; seleção/revisão de fotos é D03 e continua pendente. Nenhum schema, conta ou recurso de produção foi alterado. Dados/empréstimos ainda aguardam suas tarefas e revisões.
 
 ## Fontes e histórico
 
@@ -13,7 +13,7 @@ Status: D01 (infraestrutura do verificador) concluída e demonstrada em 06/nov/2
 ## Ordem e entregas
 
 1. Preparar o verificador de specs no harness: contexto limpo, saída comparável por critério, sem corrigir código/testes e sem acesso de escrita em produção. Conectar descoberta no AGENTS e obrigação no spec-flow; não declarar isso configurado antes da prova.
-2. Criar a skill imagens-equipamentos: Pixabay, 12 fotos distintas, revisão visual, 800×600 comprovado, manifesto de créditos e preparação local para Storage. Repetir não duplica arquivos nem imagens. Biblioteca, recorte, formato e bucket ainda não decididos.
+2. Criar a skill imagens-equipamentos conforme ADR-005: Pixabay, 12 fotos distintas, revisão visual, WebP 800×600 com bordas, manifesto de créditos e preparação local para Storage. Repetir não duplica arquivos nem imagens. Preparação não autoriza criar bucket ou publicar.
 3. Executar a spec 004: preparar imagens, provisionamento e população idempotente local; o operador publica os dados e imagens após os checks.
 4. Executar a spec 005: catálogo, solicitação pendente, aprovação/rejeição mínima e Meus empréstimos; concorrência, isolamento e autorização testados em banco descartável.
 5. Registrar rodadas reais e erro plantado/restaurado em commits distintos; preencher ENTREGA.md com evidências. Tag e push somente na entrega autorizada pelo responsável, não por existir um comando no enunciado.
@@ -28,10 +28,10 @@ Senha da conta de correção e chave Pixabay não entram em código, fixture, ma
 
 | Ponto | Situação |
 |---|---|
-| Biblioteca de processamento (`sharp` sugerida) | Não decidido; apresentar inclusão antes de instalar |
-| Formato final, recorte/padding e tamanho máximo do arquivo | Não decidido |
-| Bucket, caminhos, metadados e policies de Storage | Não decidido; apresentar proposta sem criar recurso externo |
-| Crédito visível no catálogo com Pixabay | Não decidido; não copiar a alegação de exigência do Pexels. Manter registro de autoria/licença por foto |
+| Biblioteca de processamento | sharp 0.35.5 direto de desenvolvimento, aprovado na proposta da skill; ADR-005 |
+| Formato final e enquadramento | WebP 800×600, foto inteira com bordas; parâmetros em ADR-005 |
+| Bucket, caminhos, metadados e policies de Storage | Manifesto local prevê equipamentos / suporte_ti/patrimonio.webp; banco e policies concretas ainda pendentes; nada criado externamente |
+| Crédito visível no catálogo com Pixabay | Link discreto de créditos aprovado na proposta; manifesto registra autor/origem/licença; implementação visual na spec 005 |
 | Provisionamento de conta já existente ou inativa | Não decidido; não redefinir senha/reativar silenciosamente |
 | Política de reexecução sobre equipamentos modificados/em uso | Não decidido; não resetar manutenção, empréstimos ou dados alterados silenciosamente |
 | DDL de prazo e preservação de empréstimos existentes | Não decidido; SQL e impacto devem ser aprovados antes da migration |

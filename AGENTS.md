@@ -41,6 +41,12 @@ Em 06/nov/2026 foram solicitadas as specs e a documentação da prática. As reg
 
 Depois foi autorizada a primeira etapa: D01, infraestrutura do verificador. Sua demonstração local está em `docs/verificacoes/verificador/`; não autoriza as demais tarefas das specs 004/005. O verificador não usa terminal; os checks e recibos pertencem ao principal.
 
+D02 também foi autorizada e verificada: skill local de imagens conforme ADR-005, sem upload. Evidências em `docs/verificacoes/imagens/`. Selecionar/revisar fotos reais, popular dados e criar conta seguem nas tarefas seguintes; não confundir a aprovação da ferramenta com a spec 004 pronta.
+
+## Skills
+
+Skills do projeto ficam em `skills/<nome>/SKILL.md`. Para descobrir capacidades, ler apenas name/description do frontmatter; carregar o corpo somente quando a tarefa casar e referências somente quando indicadas. `imagens-equipamentos` prepara fotos do inventário da prática pelo Pixabay; não altera logo/landing nem faz upload. Rules e ADRs prevalecem sobre a skill. Há uma única cópia versionada em `skills/imagens-equipamentos/`.
+
 ## Subagentes
 
 Para conferir uma spec, usar `npm run verify:spec -- <caminho-da-spec> [caminho-das-evidencias]`, conforme `docs/verificador.md`. O lançador exige delegação real para `verificador-spec` em sessão separada com ferramentas de leitura. Não lançar este papel por herança da sessão de implementação irrestrita. Se o CLI/papel não estiver disponível, reportar BLOQUEADO e não simular verificação independente. Correções e gravação de relatórios pertencem ao principal; gatilho obrigatório em `rules/spec-flow.md`.
@@ -65,6 +71,8 @@ Para conferir uma spec, usar `npm run verify:spec -- <caminho-da-spec> [caminho-
 - `npm test` — testes unitários.
 - `npm run test:verificador` — testes locais de bloqueio do MCP e fixture do verificador, sem banco ou rede.
 - `npm run verify:spec -- <spec.md> [evidencias.json]` — delegação independente de leitura; não executa a implementação.
+- `npm run imagens -- buscar|baixar|preparar|verificar` — pipeline local da skill; argumentos em `skills/imagens-equipamentos/references/pipeline.md`. Não tem upload.
+- `npm run test:imagens` — imagens sintéticas e respostas de API simuladas, sem Supabase ou chave real.
 - `npm run lint`, `npm run typecheck`, `npm run build` — verificação da aplicação.
 - `npm run format:check` — formatação; `npx prettier --write` para formatar os arquivos de implementação.
 - `npx playwright install chromium`, `npm run test:e2e` — instalação do navegador e E2E local.

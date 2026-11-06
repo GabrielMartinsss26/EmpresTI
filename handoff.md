@@ -1,13 +1,12 @@
 # Handoff — 06/nov/2026
 
 - Branch `dev`; remoto `GabrielMartinsss26/EmpresTI`.
-- Etapa D01 executada: verificador e MCP de leitura; configuração e provas em docs/verificador.md.
+- D01 e D02 executadas: verificador e skill de imagens; fontes/evidências em docs/verificador.md e docs/verificacoes/imagens/.
 - Commits locais autorizados em `rules/operacao.md`; push não executado.
 - Vercel publicada: https://empresti-mauve.vercel.app/.
 - Deploy `dpl_73nD7wLbW4nRYkuGojwWAHX67YMw`, READY.
-- Produção: sem scroll em 1440×820, 1366×768 e 1280×720, inclusive com erros do formulário.
 - Produção: logo retorna à landing; health 200; catálogo sem sessão redireciona ao login.
-- Checks desta etapa: 11 unitários, seis do verificador, lint, tipos, formatação e build passaram; E2E não repetido (UI inalterada).
+- Checks D02: nove de imagens, sete do verificador, 11 unitários, lint, tipos, formatação e build passaram; sem mudança de UI.
 - Login ADMIN, sessão persistente, cookies protegidos e logout já verificados no domínio público.
 - Supabase: migration inicial e seed aplicados; nove tabelas com policies.
 - Dev e produção ainda usam o mesmo Supabase; nenhum banco adicional criado.
@@ -15,11 +14,12 @@
 - Autocadastro cancelado em `docs/specs/003-cadastro/`; convites ficam para versão futura.
 - Spec de login reconciliada com implementação; pendências em `docs/specs/001-login/tasks.md`.
 - Catálogo completo, gestão de equipamentos, solicitações, aprovação e devolução ainda pendentes.
-- Skill Pixabay e MCP de banco seguem pendentes; MCP local do verificador só permite lista/leitura.
+- Skill Pixabay pronta (ferramenta); busca real retornou 96 candidatas para 12 itens; nenhuma foto real aprovada ou publicada.
 - Decisões 06/nov: manter aprovação; cinco ativos; 14 dias úteis seg–sex sem feriados, após aprovação, horário São Paulo.
 - ADR-004 substitui parcialmente ADR-003; PRD revisado; TI-0004/TI-0007/TI-0010 em manutenção.
 - Specs/planos/tarefas 004 e 005 criados como rascunhos; ENTREGA.md contém decisões e pendências, sem evidências inventadas.
 - Prova em fixture: f26262e plantou erro/ausência de teste; 27b503f restaurou; filho reprovou e depois aprovou só a fixture.
 - Banco, dados, Auth e produção não alterados; specs 004/005 ainda NÃO PRONTAS. Escrita de prática em produção é do operador.
-- Próximo passo: fechar biblioteca/processamento/Storage e preparar skill Pixabay; referências e lacunas em docs/pratica.md.
+- Local: http://127.0.0.1:3000/login, npm run start após build; HTTP 200. Build inicial EPERM resolvido parando a instância dev.
+- Próximo passo: D03, selecionar/inspecionar 12 fotos com a skill; Storage/banco/conta continuam para tarefas próprias.
 - Arquivos não rastreados em `Aulas/` pertencem ao usuário e não entraram nos commits.

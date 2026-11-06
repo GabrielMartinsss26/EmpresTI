@@ -21,8 +21,9 @@ Não delegar a partir desta sessão de implementação com acesso irrestrito: su
 
 ## Limites efetivos
 
-- O MCP expõe somente `list_files` e `read_file`; não há ferramenta de escrita, comando, rede, SQL, upload ou deploy.
+- O MCP expõe lista/leitura de fontes e `inspect_public_env_example`, acrescentada em D02 para conferir apenas existência, vazio e SHA-256 da variável PIXABAY_API_KEY no exemplo público fixo. Não há ferramenta de escrita, comando, rede, SQL, upload ou deploy. A consulta de metadados não aceita caminho ou variável arbitrária e nunca devolve valores.
 - Leitura limitada a fontes/documentos e configurações públicas do projeto; nega todo `.env*` (inclusive exemplo), `.git`, `.vercel`, dependências, resultados locais e diretórios pessoais. Caminhos absolutos, traversal e escapes por links/junctions são recusados antes de leitura.
+- A negativa acima se aplica à leitura textual. A consulta de metadados do exemplo é a única exceção delimitada: rejeita link e tamanho excessivo, abre somente .env.example e retorna flags/hash, sem conteúdo. Ambientes reais continuam inacessíveis.
 - O MCP não recebe nem lê variáveis reais do projeto; o lançador encaminha ambiente mínimo ao cliente. O servidor não abre sockets, não importa clientes de banco e não executa programas.
 - O sandbox de leitura da sessão dedicada é uma camada adicional para ferramentas nativas; não é alegado que um campo no arquivo do subagente substitui as permissões do pai.
 - Relatórios são devolvidos ao principal. Só o principal grava evidências e corrige arquivos. Nenhuma ferramenta de escrita é adicionada para salvar relatório.

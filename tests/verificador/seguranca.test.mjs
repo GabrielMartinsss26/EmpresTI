@@ -9,6 +9,7 @@ import {
   listProjectFiles,
   handle,
   tools,
+  inspectPublicEnvExample,
 } from "../../scripts/verificador-mcp.mjs";
 
 test("CA-D08: transporte stdio inicializa e recusa ferramenta de escrita", () => {
@@ -60,7 +61,7 @@ test("CA-D08: transporte stdio inicializa e recusa ferramenta de escrita", () =>
   );
   assert.deepEqual(
     replies[1].result.tools.map((tool) => tool.name),
-    ["list_files", "read_file"],
+    ["inspect_public_env_example", "list_files", "read_file"],
   );
   assert.equal(replies[2].error.code, -32602);
   assert.equal(replies[3].error.code, -32602);
@@ -69,7 +70,7 @@ test("CA-D08: transporte stdio inicializa e recusa ferramenta de escrita", () =>
 test("CA-D08: MCP expõe somente lista e leitura; execução/escrita/rede não existem", async () => {
   assert.deepEqual(
     tools.map((tool) => tool.name),
-    ["list_files", "read_file"],
+    ["inspect_public_env_example", "list_files", "read_file"],
   );
   for (const name of [
     "write_file",
@@ -92,6 +93,35 @@ test("CA-D08: MCP expõe somente lista e leitura; execução/escrita/rede não e
       },
     }),
   );
+});
+
+test("CA-I07: exemplo público retorna só metadados e não aceita caminho arbitrário", async () => {
+  const temp = await mkdtemp(path.join(os.tmpdir(), "empresti-exemplo-test-"));
+  try {
+    await writeFile(
+      path.join(temp, ".env.example"),
+      "PIXABAY_API_KEY=valor-ficticio-que-nao-pode-vazar\n",
+    );
+    const metadata = await inspectPublicEnvExample(temp);
+    assert.equal(metadata.exists, true);
+    assert.equal(metadata.empty, false);
+    assert.equal(typeof metadata.sha256, "string");
+    assert.ok(!JSON.stringify(metadata).includes("valor-ficticio"));
+    await writeFile(path.join(temp, ".env.example"), "PIXABAY_API_KEY=\n");
+    assert.equal((await inspectPublicEnvExample(temp)).empty, true);
+    await assert.rejects(
+      handle({
+        method: "tools/call",
+        params: {
+          name: "inspect_public_env_example",
+          arguments: { path: ".env" },
+        },
+      }),
+    );
+  } finally {
+    assert.equal(path.dirname(temp), os.tmpdir());
+    await rm(temp, { recursive: true, force: true });
+  }
 });
 
 test("CA-D08: leitura nega ambientes, traversal e caminhos absolutos antes de abrir", async () => {
