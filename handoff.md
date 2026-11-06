@@ -12,7 +12,7 @@
 - Ampliação da busca autorizada; TI-0003/TI-0004 substituídos; câmera de ação TI-0012 e ilustração só TI-0007 confirmadas no ADR-005/spec 004.
 - Histórico e provas atuais em docs/verificacoes/imagens/d03-final.md, d03-final.json e d03-manifesto.json; parcial preservado.
 - Originais, cache e prévias em .local/imagens-equipamentos/, ignorados; não expor a raiz do projeto por HTTP.
-- Galeria local http://127.0.0.1:3002/ mostra 12 imagens aceitas; candidatas.html contém buscas/recusas.
+- Galeria local http://127.0.0.1:3002/ mostra 12 imagens aceitas; prévias em 4:3 com fundo do cartão, sem faixas brancas de CSS. Conferência visual, ESLint e Prettier passaram; candidatas.html contém buscas/recusas.
 - Regenerar com node skills/imagens-equipamentos/scripts/galeria.mjs após novas revisões.
 - Preparar/verificar e reexecução passaram: 12 WebP 800×600, IDs/hashes distintos; pacote em .local/imagens-equipamentos/preparadas/.
 - Checks: dez de imagens, sete do verificador, lint, Prettier e diff passaram; galeria HTTP 200 com 12 aceitas e zero pendentes.
