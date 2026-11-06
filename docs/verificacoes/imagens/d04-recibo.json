@@ -1,0 +1,85 @@
+{
+  "task": "D04",
+  "date": "2026-11-06",
+  "reporter": "principal; não verificação independente da spec completa",
+  "authorization": {
+    "proposalCommit": "c2f4b28",
+    "scope": "implementação e testes locais aprovados explicitamente no chat após a proposta",
+    "adr": "docs/adr/006-metadados-imagens-storage.md"
+  },
+  "database": {
+    "provider": "PostgreSQL 16 por Testcontainers",
+    "migrations": [
+      "202610190001_initial",
+      "202611060001_equipment_images"
+    ],
+    "fixtures": [
+      "auth.users",
+      "storage.objects com RLS",
+      "roles anon/authenticated sem bypass"
+    ],
+    "testFiles": 2,
+    "passed": 48,
+    "failed": 0,
+    "finalRunSeconds": 41.81,
+    "logSha256": "17643f4c097ee727726e4524458a015d5455f3694248ddf0f8dbe7ff126de1dc",
+    "remoteUsed": false
+  },
+  "checks": [
+    {
+      "command": "npm run db:generate",
+      "exitCode": 0
+    },
+    {
+      "command": "npx prisma format",
+      "exitCode": 0
+    },
+    {
+      "command": "npm run test:db",
+      "exitCode": 0,
+      "passed": 48
+    },
+    {
+      "command": "npm test",
+      "exitCode": 0,
+      "passed": 11
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0
+    },
+    {
+      "command": "npm run typecheck",
+      "exitCode": 0
+    },
+    {
+      "command": "npm run format:check",
+      "exitCode": 0
+    },
+    {
+      "command": "npm run test:verificador",
+      "exitCode": 0,
+      "passed": 7
+    },
+    {
+      "command": "npm run test:imagens",
+      "exitCode": 0,
+      "passed": 10
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0
+    }
+  ],
+  "files": {
+    "prisma/schema.prisma": "6972fec4d2a624d49248dd7ae52d5c2d3684dd34ec05e361ebd7c36bcbe8ba77",
+    "prisma/migrations/202610190001_initial/migration.sql": "38333361e345e711c68d1c5590bf480547e58c731a0acba4f504c9d60a71f20c",
+    "prisma/migrations/202611060001_equipment_images/migration.sql": "3d3b0611708ee4d2e4652c5f57a685f4f47339749421b6cf4c0a8cd2908cc73a",
+    "tests/db/setup.ts": "2aa75b95e4024b2ebebb5a9e4b7378d43193f8cb236e0f3b590b1956a15dddad",
+    "tests/db/migration.test.ts": "63065154da9264b4647fb5bdfa5de27b062d328850757b6dd56760e0a62fc399",
+    "tests/db/equipment-images.test.ts": "e9fda9388b842bc7cf091ccf88c7a53b10e74f9198e3f8c32b148afa1a231fb6"
+  },
+  "productionWrites": false,
+  "published": false,
+  "fullSpecReady": false
+}

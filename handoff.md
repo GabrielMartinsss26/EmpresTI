@@ -4,9 +4,9 @@
 - Produção continua https://empresti-mauve.vercel.app/; nenhuma publicação nesta etapa.
 - Login pronto; autocadastro cancelado e fechado no Supabase; convites futuros.
 - Catálogo, solicitações, aprovação mínima e Meus empréstimos ainda pendentes (spec 005).
-- Dev/prod continuam no mesmo Supabase; nove tabelas/migration inicial já existentes, sem novas escritas nesta prática.
+- Dev/prod continuam no mesmo Supabase com a migration inicial; D04 criou/testou uma décima tabela só em containers descartáveis, sem migration remota.
 - ADR-004: aprovação mantida, cinco ativos, 14 dias úteis seg–sex sem feriados, horário São Paulo; três itens em manutenção.
-- D01/D02 concluídas; verificador e skill local, evidências em docs/verificacoes/.
+- D01–D04 concluídas localmente; evidências da D04 em docs/verificacoes/imagens/d04-execucao.md e d04-recibo.json.
 - D03 concluída localmente: 12 imagens (11 fotografias e uma ilustração); sem publicação.
 - Responsável permitiu apenas inscrições técnicas de fábrica; pessoas, marcas/logos, texto acrescentado e telas com conteúdo proibidos.
 - Ampliação da busca autorizada; TI-0003/TI-0004 substituídos; câmera de ação TI-0012 e ilustração só TI-0007 confirmadas no ADR-005/spec 004.
@@ -15,11 +15,11 @@
 - Galeria local http://127.0.0.1:3002/ mostra 12 imagens aceitas; prévias em 4:3 com fundo do cartão, sem faixas brancas de CSS. Conferência visual, ESLint e Prettier passaram; candidatas.html contém buscas/recusas.
 - Regenerar com node skills/imagens-equipamentos/scripts/galeria.mjs após novas revisões.
 - Preparar/verificar e reexecução passaram: 12 WebP 800×600, IDs/hashes distintos; pacote em .local/imagens-equipamentos/preparadas/.
-- Checks: dez de imagens, sete do verificador, lint, Prettier e diff passaram; galeria HTTP 200 com 12 aceitas e zero pendentes.
-- Sem mudança de UI/dependência/schema; build da aplicação já verificado em D02, não repetido nesta etapa.
+- Checks D04: 48 de banco, 11 unitários, dez de imagens, sete do verificador, lint, tipos, formatação e build passaram.
+- Schema `EquipmentImage` e migration 202611060001_equipment_images adicionados; migration inicial intacta; sem mudança de UI ou dependência.
 - Servidores locais reiniciados após interrupção: /login porta 3000 (npm run start) e galeria Python porta 3002 confirmados HTTP 200.
-- D04: proposta pronta em docs/specs/004-dados-iniciais/proposta-d04.md; tabela/relações, DDL, guard Storage e comando novo aguardam aprovação; nenhum schema/migration alterado.
+- Passos D04: proposta c2f4b28, aprovação explícita no chat, ADR-006 antes do código, execução/testes locais; não registrar execução anterior à proposta.
 - Manifesto versionado é evidência local; operador ainda publicará imagens/dados/conta em tarefa própria.
-- Próximo passo: responsável revisar/aprovar proposta D04; depois registrar ADR/decisões e implementar/testar migration só em banco descartável. Conflitos/contas existentes continuam não decididos.
+- Próximo passo: D05, após decidir conflitos com equipamentos/imagens existentes alterados/inativos; contas existentes/inativas continuam para D06.
 - Produção da prática é executada pelo operador; specs 004/005 NÃO PRONTAS, verificador final ainda pendente.
 - Arquivos não rastreados em Aulas/ pertencem ao usuário e ficam fora do commit desta tarefa.

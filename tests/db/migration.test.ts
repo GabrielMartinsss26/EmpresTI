@@ -1,30 +1,18 @@
 import { beforeAll, afterAll, describe, expect, it } from "vitest";
-import {
-  PostgreSqlContainer,
-  type StartedPostgreSqlContainer,
-} from "@testcontainers/postgresql";
+import { type StartedPostgreSqlContainer } from "@testcontainers/postgresql";
 import { PrismaClient } from "@prisma/client";
 import { execFileSync } from "node:child_process";
 import { randomUUID } from "node:crypto";
 import { readFileSync } from "node:fs";
+import { startTestDatabase } from "./setup";
 
 let container: StartedPostgreSqlContainer;
 let db: PrismaClient;
 beforeAll(async () => {
-  container = await new PostgreSqlContainer("postgres:16-alpine").start();
-  const url = container.getConnectionUri();
-  db = new PrismaClient({ datasourceUrl: url });
-  // Infraestrutura externa do Supabase simulada somente no PostgreSQL local.
-  await db.$executeRawUnsafe("CREATE SCHEMA auth");
-  await db.$executeRawUnsafe("CREATE TABLE auth.users (id uuid PRIMARY KEY)");
-  execFileSync(
-    process.execPath,
-    ["node_modules/prisma/build/index.js", "migrate", "deploy"],
-    {
-      env: { ...process.env, DATABASE_URL: url, DIRECT_URL: url },
-      stdio: "pipe",
-    },
-  );
+  const started = await startTestDatabase();
+  container = started.container;
+  db = started.db;
+  const url = started.url;
   execFileSync(
     process.execPath,
     ["node_modules/tsx/dist/cli.mjs", "prisma/seed.ts"],
@@ -47,18 +35,18 @@ afterAll(async () => {
   await container?.stop();
 });
 
-describe("migration inicial em banco vazio", () => {
-  it("seed é idempotente e todas as nove tabelas têm RLS e policy", async () => {
+describe("migrations em banco vazio", () => {
+  it("seed é idempotente e todas as dez tabelas têm RLS e policy", async () => {
     expect(await db.tenant.count({ where: { slug: "suporte_ti" } })).toBe(1);
     const tables = await db.$queryRaw<
       { relname: string; relrowsecurity: boolean }[]
     >`SELECT relname, relrowsecurity FROM pg_class JOIN pg_namespace n ON n.oid = relnamespace WHERE n.nspname = 'public' AND relkind = 'r' AND relname <> '_prisma_migrations'`;
-    expect(tables).toHaveLength(9);
+    expect(tables).toHaveLength(10);
     expect(tables.every((table) => table.relrowsecurity)).toBe(true);
     const policies = await db.$queryRaw<
       { tablename: string }[]
     >`SELECT tablename FROM pg_policies WHERE schemaname = 'public'`;
-    expect(policies).toHaveLength(9);
+    expect(policies).toHaveLength(10);
   });
 
   it("bloqueia leitura e escrita direta para role sem privilégio de owner", async () => {

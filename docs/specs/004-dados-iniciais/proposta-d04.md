@@ -1,6 +1,6 @@
 # Proposta D04 — Referências de imagem e acesso ao Storage
 
-Status: proposta para revisão, solicitada em 06/nov/2026. Nenhuma escolha nova deste documento está aprovada. Não é uma migration; o SQL abaixo não foi executado. D04 permanece aberta.
+Status: proposta apresentada no commit `c2f4b28` e depois aprovada explicitamente pelo responsável para implementação e testes locais em 06/nov/2026. Decisão no ADR-006. Este documento preserva o desenho apresentado; o SQL executável é a nova migration, não este bloco Markdown. A aprovação não inclui produção.
 
 ## Resultado proposto
 
@@ -18,9 +18,9 @@ Critérios atendidos quando houver implementação e testes: estrutura para CA-D
 - D03: 12 imagens locais distintas; 11 fotografias e uma ilustração autorizada somente para TI-0007. A foto da câmera de ação foi aceita para TI-0012. Manifesto em [d03-manifesto.json](../../verificacoes/imagens/d03-manifesto.json).
 - Escritas de produção da prática pertencem ao operador, conforme [planejamento](../../pratica.md).
 
-## Escolhas novas propostas, ainda não decididas
+## Escolhas apresentadas e aprovadas
 
-| Ponto | Recomendação para aprovação | Motivo |
+| Ponto | Escolha aprovada | Motivo |
 |---|---|---|
 | Local dos metadados | Tabela `equipment_images` | Não espalhar campos de licença e revisão no cadastro do equipamento |
 | Quantidade | Zero ou uma imagem principal por equipamento | Atende a prática e preserva equipamentos existentes sem imagem |
@@ -30,7 +30,7 @@ Critérios atendidos quando houver implementação e testes: estrutura para CA-D
 | Conteúdo permitido no bucket | `image/webp`, até 1.048.576 bytes por objeto | Corresponde ao pacote local já preparado |
 | Vínculo com Storage | Guardar bucket/caminho, sem FK para tabelas internas do Storage | O ciclo de vida dos objetos pertence à API do Storage |
 
-As recomendações não substituem a aprovação. Depois dela, registrar a decisão estrutural em ADR antes de modificar o schema. Não foi criado um ADR novo por iniciativa do agente.
+O responsável aprovou este pacote depois da apresentação. A decisão foi registrada no ADR-006 antes da alteração do schema. Pendências de outras tarefas continuam não decididas.
 
 ## Entidade, campos e relacionamentos
 
@@ -62,7 +62,7 @@ Não proponho unicidade global de ID Pixabay/hash no banco: a ausência de repet
 
 ## DDL de referência para revisão
 
-Este bloco é uma proposta legível do resultado pretendido. A migration definitiva será gerada a partir do schema Prisma aprovado e complementada com constraints, RLS e trigger na mesma migration. Não copiar este bloco para o SQL Editor de produção.
+Este bloco preserva o DDL de referência apresentado. A migration definitiva foi gerada do schema aprovado e complementada com checks, RLS e trigger em `prisma/migrations/202611060001_equipment_images/migration.sql`. Ela inclui a unicidade composta exigida pelo Prisma e usa um único bloco atômico `DO`, conforme a nota técnica do ADR-006. Não copiar o rascunho abaixo para o SQL Editor de produção.
 
 ```sql
 BEGIN;
@@ -217,13 +217,13 @@ Não haverá FK de `equipment_images` para `storage.objects` nem colunas do Stor
 | Bucket privado e URLs assinadas | Contraria a leitura pública já escolhida no ADR-005 |
 | Policy permissiva de negação isolada no Storage | Uma outra policy permissiva pode conceder acesso pelo OR |
 
-São alternativas da proposta, não decisões descartadas já aprovadas pelo responsável.
+As alternativas da proposta e a escolha aprovada estão registradas no ADR-006.
 
 ## Execução posterior à aprovação
 
 1. Registrar a decisão estrutural aprovada em ADR e atualizar spec/plano; manter pendências que não foram respondidas.
 2. Registrar no AGENTS o comando novo de geração aprovado. Criar snapshot local do schema atual em `.local/d04-schema-before.prisma` antes de modificá-lo; criar o diretório futuro `prisma/migrations/202611060001_equipment_images/`. A migration inicial permanece intacta.
-3. Acrescentar o modelo/relações ao Prisma. Comando proposto de geração offline, ainda não executado nem autorizado como comando vigente:
+3. Acrescentar o modelo/relações ao Prisma. Comando de geração offline aprovado e executado na implementação, agora documentado no AGENTS:
 
    ```powershell
    npx prisma migrate diff --from-schema-datamodel .local/d04-schema-before.prisma --to-schema-datamodel prisma/schema.prisma --script --output prisma/migrations/202611060001_equipment_images/migration.sql
@@ -244,10 +244,10 @@ Depois, D08 exige evidência separada do operador: GET público sem login, escri
 
 Política sobre equipamentos/imagens existentes alterados ou inativos, conflitos de reexecução, auditoria exata da população, conta já existente/inativa do professor e preservação de prazos antigos: não decidido. D05/D06 e a migration de prazo da spec 005 precisam dessas decisões antes de implementar suas partes. Nenhuma dependência nova, upload por interface, exclusão remota ou publicação pelo agente foi proposta como já autorizada.
 
-## Revisão solicitada
+## Registro da revisão e aprovação
 
-Conferência documental desta etapa: campos e FKs comparados ao schema versionado; compatibilidade dos 12 registros de origem/dimensões conferida no manifesto; links locais e blocos Markdown conferidos; `git diff --check` sem erros. Nenhum teste de migration, execução do SQL, consulta ao banco remoto ou publicação foi realizado. A aprovação da proposta não deve ser confundida com prova de que o SQL já foi aplicado ou testado.
+Na etapa original da proposta, campos/FKs, manifesto, links e Markdown foram conferidos; não houve execução de SQL naquele momento. A implementação posterior é registrada separadamente em `docs/verificacoes/imagens/d04-execucao.md`. Não houve consulta ao banco remoto ou publicação nesta etapa local.
 
-Aprovar ou ajustar o pacote proposto: tabela separada com uma imagem principal opcional; campos/constraints/índices acima; metadados fechados para acesso direto; guard de Storage com escrita administrativa somente pelo operador; comando de geração e testes locais descritos. Criar o bucket/publicar em produção não faz parte dessa aprovação de implementação local.
+Pacote aprovado: tabela separada com uma imagem principal opcional; campos/constraints/índices acima; metadados fechados para acesso direto; guard de Storage com escrita administrativa somente pelo operador; comando de geração e testes locais descritos. Criar o bucket/publicar em produção não faz parte dessa aprovação de implementação local.
 
-A exigência de parar antes de alterar o schema vem de [rules/migration.md](../../../rules/migration.md), passo 2: “Antes de alterar o schema, apresente as entidades, campos, tipos, relacionamentos, constraints, índices e efeitos esperados. Pare e aguarde aprovação.” A proposta documental está preparada; schema, migrations e ambientes continuam sem alteração.
+A exigência de apresentar a mudança antes de alterar o schema vem de [rules/migration.md](../../../rules/migration.md), passo 2: “Antes de alterar o schema, apresente as entidades, campos, tipos, relacionamentos, constraints, índices e efeitos esperados. Pare e aguarde aprovação.” A aprovação foi obtida nesta conversa após `c2f4b28`; não é necessário solicitá-la novamente para concluir a D04 local autorizada.

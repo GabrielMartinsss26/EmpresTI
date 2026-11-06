@@ -45,7 +45,9 @@ D02 também foi autorizada e verificada: skill local de imagens conforme ADR-005
 
 D03 concluída localmente: 12 imagens distintas 800×600, preparar/verificar e reexecução passaram. Evidências em docs/verificacoes/imagens/d03-final.md e d03-manifesto.json. TI-0003/TI-0004 substituídos; responsável confirmou foto de câmera de ação para TI-0012 e ilustração exclusivamente para TI-0007 (ADR-005/spec 004). D04 e escritas externas não fazem parte dessa autorização.
 
-O pedido seguinte autorizou somente montar a proposta D04, disponível em docs/specs/004-dados-iniciais/proposta-d04.md. A aprovação para mudar schema, gerar/aplicar migration e adotar as escolhas estruturais continua pendente, conforme rules/migration.md. Não tratar o SQL em Markdown como migration executada.
+O pedido seguinte produziu a proposta D04 no commit c2f4b28. Depois o responsável aprovou explicitamente a implementação e os testes locais; decisões no ADR-006. Está autorizada somente D04: modelo/relações, nova migration e provas em PostgreSQL descartável. Nenhuma autorização de produção, D05/D06 ou push. Registrar a sequência real, sem afirmar execução anterior à proposta.
+
+D04 implementada e testada localmente: `202611060001_equipment_images`, 48 testes de banco; recibo e ajustes técnicos em docs/verificacoes/imagens/d04-execucao.md. A migration exige infraestrutura Storage/roles já provisionada; testes simulam apenas essas tabelas no container e não provam Storage HTTP real. Tarefas posteriores/publicação continuam pendentes.
 
 ## Skills
 
@@ -68,7 +70,9 @@ Para conferir uma spec, usar `npm run verify:spec -- <caminho-da-spec> [caminho-
 - `npm install` — dependências; depois do lockfile, `npm ci`.
 - `npm run dev` — execução local.
 - `npm run db:generate` — geração do cliente Prisma.
+- `npx prisma format` — formatação do schema Prisma local; não aplica mudanças ao banco.
 - `npx prisma migrate diff --from-empty --to-schema-datamodel prisma/schema.prisma --script --output prisma/migrations/202610190001_initial/migration.sql` — geração inicial; SQL de segurança complementado na mesma migration.
+- `npx prisma migrate diff --from-schema-datamodel .local/d04-schema-before.prisma --to-schema-datamodel prisma/schema.prisma --script --output prisma/migrations/202611060001_equipment_images/migration.sql` — geração offline da D04 aprovada; snapshot anterior à edição; complementar checks/policies/trigger na mesma migration. Sem introspecção remota.
 - `npm run db:deploy` — aplicação de migrations no destino configurado.
 - `npm run db:seed` — seed idempotente.
 - `npm run test:db` — banco local descartável via Testcontainers; nunca usa o banco remoto.
