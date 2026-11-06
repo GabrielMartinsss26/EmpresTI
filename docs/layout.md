@@ -2,6 +2,8 @@
 
 Documento de referência do front-end do EmpresTI (empréstimo de equipamentos internos).
 Base visual: design system **Nocturne** adaptado à primária `#001449`.
+
+Atualização de negócio em 06/nov/2026: menções abaixo a três itens/segmentos ou prazo de 14 dias sem qualificação preservam a referência anterior. Para a prática, prevalecem cinco empréstimos ativos e 14 dias úteis do ADR-004. Atualização visual/código pendente na spec 005, tarefa E09; demais tokens e composição permanecem.
 **Somente modo escuro.** Não existe modo claro, nem alternador de tema.
 
 ---

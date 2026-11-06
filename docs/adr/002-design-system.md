@@ -1,5 +1,7 @@
 # ADR-002: Design system
 
+Nota de revisão em 06/nov/2026: números de itens e prazos abaixo refletem a regra original. O ADR-004 passa a reger limite de cinco e prazo de 14 dias úteis; a representação deve acompanhar essa regra sem alterar os tokens. Código e referências visuais serão sincronizados em E09 da spec 005.
+
 ## Contexto
 
 `docs/layout.md` define a referência visual Nocturne do EmpresTI, mas mistura decisões visuais, composição de páginas e instruções originadas de um protótipo estático. A implementação precisa preservar o resultado visual sem contrariar o ADR-001, que escolhe Tailwind CSS, shadcn/ui, CSP sem `unsafe-inline` e Next.js.

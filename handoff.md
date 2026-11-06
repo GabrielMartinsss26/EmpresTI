@@ -1,14 +1,13 @@
-# Handoff — 05/nov/2026
+# Handoff — 06/nov/2026
 
 - Branch `dev`; remoto `GabrielMartinsss26/EmpresTI`.
-- Commit local `ea86780`: login conectado, navegação desktop e regras de operação.
+- Commit `0d548fc`: enunciado em novas-orientacoes; tarefa atual: documentação da prática.
 - Commits locais autorizados em `rules/operacao.md`; push não executado.
 - Vercel publicada: https://empresti-mauve.vercel.app/.
 - Deploy `dpl_73nD7wLbW4nRYkuGojwWAHX67YMw`, READY.
 - Produção: sem scroll em 1440×820, 1366×768 e 1280×720, inclusive com erros do formulário.
 - Produção: logo retorna à landing; health 200; catálogo sem sessão redireciona ao login.
 - Checks anteriores do código: 11 unitários, dois E2E, lint, tipos, formatação e build passaram.
-- Seis testes de migration passaram em PostgreSQL local descartável.
 - Login ADMIN, sessão persistente, cookies protegidos e logout já verificados no domínio público.
 - Supabase: migration inicial e seed aplicados; nove tabelas com policies.
 - Dev e produção ainda usam o mesmo Supabase; nenhum banco adicional criado.
@@ -18,8 +17,9 @@
 - Spec de login reconciliada com implementação; pendências em `docs/specs/001-login/tasks.md`.
 - Catálogo completo, gestão de equipamentos, solicitações, aprovação e devolução ainda pendentes.
 - Skills, MCP do projeto e verificador independente ainda pendentes.
-- Revisão pré-ZIP: base das aulas 7–9 presente; skills/MCP (10) e verificador (11) incompletos; sem exceção documental para leitura de ambiente.
-- ZIP de acompanhamento criado com código, documentação, testes e cinco aulas; integridade conferida (84 arquivos).
-- Pacote exclui ambientes reais, `.git`, `.vercel`, dependências, builds e resultados locais; não altera produção.
-- Próximo passo: enviar ao professor o ZIP de acompanhamento.
+- Decisões 06/nov: manter aprovação; cinco ativos; 14 dias úteis seg–sex sem feriados, após aprovação, horário São Paulo.
+- ADR-004 substitui parcialmente ADR-003; PRD revisado; TI-0004/TI-0007/TI-0010 em manutenção.
+- Specs/planos/tarefas 004 e 005 criados como rascunhos; ENTREGA.md contém decisões e pendências, sem evidências inventadas.
+- Skill, verificador, código, banco, dados e produção não alterados nesta etapa; escrita de prática em produção é do operador.
+- Próximo passo: revisar planos e lacunas em docs/pratica.md antes do código; biblioteca, Storage e DDL ainda não decididos.
 - Arquivos não rastreados em `Aulas/` pertencem ao usuário e não entraram nos commits.

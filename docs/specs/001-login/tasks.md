@@ -10,6 +10,8 @@
 
 ## Pendentes
 
+- [ ] T8 · Sincronizar CA-03 com ADR-004: cinco itens e 14 dias úteis. Execução agrupada em E09 da spec 005; não tratar a evidência anterior de texto como validação da nova regra.
+
 - [ ] T6 · Completar rastreabilidade automatizada: CA-03, CA-06, CA-07, CA-08, CA-09 e identificação dos demais testes por critério. Conferir cobertura real, sem renomear teste como se provasse comportamento que não exercita.
 - [ ] T7 · Revisão independente contra a spec após configurar o verificador. Sem agente configurado, não afirmar que essa revisão ocorreu.
 

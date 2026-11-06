@@ -9,6 +9,7 @@ O documento de negócio está em `docs/PRD.md` e a stack aprovada está em
 - `docs/PRD.md` — descreve o problema, os usuários e o escopo do produto; não é uma spec.
 - `docs/adr/` — contém as decisões técnicas já tomadas e suas justificativas.
 - `docs/layout.md` — descreve a referência visual e os fluxos das telas.
+- `docs/pratica.md` — planejamento da prática, entregas, lacunas e restrição de escrita em produção; decisões revisadas no ADR-004 e specs 004/005.
 - `rules/restrictions.md` — deve ser lido antes de qualquer tarefa.
 - `docs/specs/<NNN-funcionalidade>/` — local previsto para spec, plano e tarefas de cada funcionalidade.
 - `rules/operacao.md`, `rules/tests.md`, `rules/handoff.md` e `rules/spec-flow.md` — contrato, testes, continuidade e ciclo de funcionalidades; carregar conforme o gatilho de cada arquivo.
@@ -34,6 +35,8 @@ O documento de negócio está em `docs/PRD.md` e a stack aprovada está em
 O pedido de seguir com todas as pendências autoriza executar as etapas de
 `docs/specs/001-login/plan.md` em sequência, verificando cada uma antes da próxima.
 As permissões vigentes de Git estão em `rules/operacao.md`.
+
+Em 06/nov/2026 foram solicitadas as specs e a documentação da prática. As regras de negócio confirmadas estão no ADR-004. Os planos 004/005 são propostas para revisão; essa solicitação documental não autoriza implementação, migration ou escrita externa. Pendências e sequência em `docs/pratica.md`.
 
 ## Estrutura
 

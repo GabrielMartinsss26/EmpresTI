@@ -1,6 +1,6 @@
 # PRD — Empréstimo de Equipamentos Internos
 
-Versão 1 — escrito pelo time de Operações
+Versão 2 — regras revisadas pelo responsável pelo projeto em 06/nov/2026 para a prática. O texto original foi escrito pelo time de Operações; histórico das mudanças no ADR-004.
 
 ## Problema
 
@@ -24,8 +24,9 @@ lembra de atualizar a linha.
 
 ## Regras já decididas por Operações
 
-- Cada pessoa pode estar com, no máximo, três itens ao mesmo tempo.
-- O prazo padrão de devolução é de 14 dias.
+- Cada pessoa pode estar com, no máximo, cinco empréstimos ativos ao mesmo tempo.
+- Solicitar cria um pedido pendente; Operações ou Admin aprova antes de criar o empréstimo. Não há empréstimo imediato por autoatendimento.
+- O prazo de devolução é de 14 dias úteis a partir da aprovação: segunda a sexta, sem descontar feriados, começando no dia seguinte e mantendo o horário no fuso de São Paulo.
 - Quem tem item em atraso não pode pegar outro item emprestado.
 - Equipamento em manutenção não aparece como disponível.
 
@@ -38,3 +39,7 @@ lembra de atualizar a linha.
 ## Como saberemos que deu certo
 
 Operações consegue abandonar a planilha depois de duas semanas de uso.
+
+## Histórico da revisão para a prática
+
+O limite anterior era de três itens, e o ADR-003 detalhava o prazo como 14 dias corridos. A revisão adota cinco empréstimos e 14 dias úteis do briefing, mas mantém a aprovação já decidida no projeto. Essa escolha é do responsável pelo projeto, não uma decisão do agente. Detalhes e alternativas no ADR-004; implementação nas specs 004 e 005. A atualização documental não significa que o fluxo já esteja implementado ou publicado.

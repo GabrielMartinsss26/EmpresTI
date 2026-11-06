@@ -1,0 +1,14 @@
+# Tarefas 004 — Dados iniciais
+
+Todas pendentes. Os itens abaixo são plano de trabalho, não evidência de execução.
+
+- [ ] D00 · Fechar biblioteca, formato/recorte, Storage, reexecução e contas existentes. Pré-requisito de CA-D02/D03/D05/D06/D07.
+- [ ] D01 · Configurar e provar verificador isolado, com saída estável por critério. CA-D08.
+- [ ] D02 · Criar skill e scripts locais de busca/preparação Pixabay. CA-D03/D07.
+- [ ] D03 · Selecionar e revisar as 12 imagens; registrar rejeições reais e manifesto. CA-D03/D04.
+- [ ] D04 · Apresentar e aprovar DDL; criar migration de imagens/policies se necessária e verificá-la do zero. CA-D01/D03/D05.
+- [ ] D05 · Preparar dados idempotentes e teste de reexecução/conflitos em banco descartável. CA-D01/D02.
+- [ ] D06 · Preparar provisionamento seguro e testes locais de perfil/vínculo, duplicação e conflitos. CA-D06/D07.
+- [ ] D07 · Rodar checks e verificador; registrar erro plantado e restauração sem executar contra produção. CA-D08.
+- [ ] D08 · Operador publica imagens, dados e conta; anexar evidências de URLs públicas, proteção de escrita, repetição e login com zero empréstimos. CA-D05/D06.
+- [ ] D09 · Atualizar ENTREGA.md com caminhos/linhas, commits e tabelas reais. CA-D08.

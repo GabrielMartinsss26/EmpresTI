@@ -13,6 +13,7 @@ Durante qualquer tarefa do projeto.
 3. Mudança de schema segue `migration.md`; dependência nova ou decisão estrutural segue `restrictions.md`.
 4. Escrita em serviço externo depende de pedido explícito com o destino e a ação definidos.
 5. A escolha de modelo e raciocínio por fase pertence ao operador; ainda não existe matriz de modelos aprovada.
+6. Na prática de `novas-orientacoes/`, aplicar o limite de execução externa e os cuidados de isolamento definidos em `docs/pratica.md`, seção “Produção e segredos nesta prática”.
 
 ## Verificação
 
