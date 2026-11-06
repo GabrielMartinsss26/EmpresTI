@@ -11,6 +11,8 @@
     "typecheck": "tsc --noEmit",
     "format:check": "prettier --check src prisma tests *.json *.ts *.mjs",
     "test": "vitest run",
+    "test:verificador": "node --test tests/verificador/seguranca.test.mjs tests/verificador/fixture.test.mjs",
+    "verify:spec": "node scripts/verificar-spec.mjs",
     "test:db": "vitest run --config vitest.db.config.ts",
     "test:e2e": "playwright test",
     "db:generate": "prisma generate",

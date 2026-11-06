@@ -10,6 +10,7 @@ O documento de negócio está em `docs/PRD.md` e a stack aprovada está em
 - `docs/adr/` — contém as decisões técnicas já tomadas e suas justificativas.
 - `docs/layout.md` — descreve a referência visual e os fluxos das telas.
 - `docs/pratica.md` — planejamento da prática, entregas, lacunas e restrição de escrita em produção; decisões revisadas no ADR-004 e specs 004/005.
+- `docs/verificador.md` — execução isolada e provas do verificador; papel em `.codex/agents/verificador-spec.toml`.
 - `rules/restrictions.md` — deve ser lido antes de qualquer tarefa.
 - `docs/specs/<NNN-funcionalidade>/` — local previsto para spec, plano e tarefas de cada funcionalidade.
 - `rules/operacao.md`, `rules/tests.md`, `rules/handoff.md` e `rules/spec-flow.md` — contrato, testes, continuidade e ciclo de funcionalidades; carregar conforme o gatilho de cada arquivo.
@@ -38,7 +39,11 @@ As permissões vigentes de Git estão em `rules/operacao.md`.
 
 Em 06/nov/2026 foram solicitadas as specs e a documentação da prática. As regras de negócio confirmadas estão no ADR-004. Os planos 004/005 são propostas para revisão; essa solicitação documental não autoriza implementação, migration ou escrita externa. Pendências e sequência em `docs/pratica.md`.
 
-## Estrutura
+## Subagentes
+
+Para conferir uma spec, usar `npm run verify:spec -- <caminho-da-spec> [caminho-das-evidencias]`, conforme `docs/verificador.md`. O lançador exige delegação real para `verificador-spec` em sessão separada com ferramentas de leitura. Não lançar este papel por herança da sessão de implementação irrestrita. Se o CLI/papel não estiver disponível, reportar BLOQUEADO e não simular verificação independente. Correções e gravação de relatórios pertencem ao principal; gatilho obrigatório em `rules/spec-flow.md`.
+
+## Estrutura do código
 
 - `src/app` — rotas Next e endpoint tRPC.
 - `src/components` — interface e componentes locais.
@@ -56,6 +61,8 @@ Em 06/nov/2026 foram solicitadas as specs e a documentação da prática. As reg
 - `npm run db:seed` — seed idempotente.
 - `npm run test:db` — banco local descartável via Testcontainers; nunca usa o banco remoto.
 - `npm test` — testes unitários.
+- `npm run test:verificador` — testes locais de bloqueio do MCP e fixture do verificador, sem banco ou rede.
+- `npm run verify:spec -- <spec.md> [evidencias.json]` — delegação independente de leitura; não executa a implementação.
 - `npm run lint`, `npm run typecheck`, `npm run build` — verificação da aplicação.
 - `npm run format:check` — formatação; `npx prettier --write` para formatar os arquivos de implementação.
 - `npx playwright install chromium`, `npm run test:e2e` — instalação do navegador e E2E local.
