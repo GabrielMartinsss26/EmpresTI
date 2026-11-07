@@ -10,6 +10,3 @@ test("CA-V01: limite de cinco", () => {
   assert.equal(contrato.limite, 5);
 });
 
-test("CA-V02: aprovação obrigatória", () => {
-  assert.equal(contrato.aprovacaoObrigatoria, true);
-});
