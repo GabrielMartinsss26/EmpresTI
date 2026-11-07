@@ -53,6 +53,8 @@ Em 07/nov/2026 o responsável autorizou D05 e confirmou interrupção do lote in
 
 D06 autorizada depois, em 07/nov/2026, após esclarecer e aprovar reutilização de conta ativa compatível sem trocar senha. Implementada/testada localmente com identidade simulada e domínio em PostgreSQL real: 23 testes D06/96 de banco totais; checks gerais/build passaram. Regra 9 e plano da spec 004; evidências em docs/verificacoes/imagens/d06-execucao.md. Não há adaptador HTTP de administração remoto; não foi provado login real. Próximo: D07, com verificador independente e erro plantado/restaurado; D08 continua com operador. Não publicar nem executar push com base nesta etapa.
 
+D07 autorizada/executada em 07/nov/2026, com registro contínuo pedido pelo responsável. Checks passaram; prova isolada plantada em 4e3c16b e restaurada em 80ddf07, com reprovação/aprovação independentes. Parecer integral docs/verificacoes/verificador/d07-integral.md: CA-D01/D02/D03/D04/D08 ATENDE; CA-D05/D06 SEM TESTE no destino real; CA-D07 BLOQUEADO por isolamento global não comprovado. Auditoria limitada não elimina esse bloqueio. Spec NÃO PRONTA; proposta-isolamento-d07.md aguarda decisão estrutural antes de configuração/ADR. Não afirmar que limitar os executores ou o verificador isola toda a sessão principal; nenhuma autorização de produção/push.
+
 ## Skills
 
 Skills do projeto ficam em `skills/<nome>/SKILL.md`. Para descobrir capacidades, ler apenas name/description do frontmatter; carregar o corpo somente quando a tarefa casar e referências somente quando indicadas. `imagens-equipamentos` prepara fotos do inventário da prática pelo Pixabay; não altera logo/landing nem faz upload. Rules e ADRs prevalecem sobre a skill. Há uma única cópia versionada em `skills/imagens-equipamentos/`.
@@ -84,6 +86,7 @@ Para conferir uma spec, usar `npm run verify:spec -- <caminho-da-spec> [caminho-
 - `npm run conta:local` — D06: identidade simulada e perfil/vínculo em container próprio; reexecução sem alterar senha/IDs/timestamps, sem aceitar destino remoto; recibo `.local/d06-local.json`. Não comprova login real no Supabase.
 - `npm test` — testes unitários.
 - `npm run test:verificador` — testes locais de bloqueio do MCP e fixture do verificador, sem banco ou rede.
+- `node --test tests/verificador/fixture.test.mjs` — demonstração D07 isolada, com falha proposital/restauração e recibos distintos; não usar contra a aplicação ou produção.
 - `npm run verify:spec -- <spec.md> [evidencias.json]` — delegação independente de leitura; não executa a implementação.
 - `npm run imagens -- buscar|baixar|preparar|verificar` — pipeline local da skill; argumentos em `skills/imagens-equipamentos/references/pipeline.md`. Não tem upload.
 - `npm run test:imagens` — imagens sintéticas e respostas de API simuladas, sem Supabase ou chave real.

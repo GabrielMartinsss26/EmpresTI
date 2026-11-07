@@ -47,6 +47,8 @@ Recibos e tabelas versionados ficam em `docs/verificacoes/verificador/`. Eventos
 
 Prova realizada em 06/nov/2026: configuração `e56b9ad`, erro plantado `f26262e`, restauração `27b503f`. `plantado.md` reprovou CA-V01 e marcou CA-V02 SEM TESTE; `restaurado.md` aprovou ambos após execução local do principal. Os arquivos `delegacao-*.json` registram do runtime a chamada spawn_agent, agent_type, fork_turns=none, sessões pai/filho e sandbox read-only/approval never. Os eventos do CLI não mostram todos os detalhes de delegação; por isso o principal conferiu também os registros locais dessas sessões, guardando somente os metadados necessários, sem prompts ou configuração pessoal.
 
+Em D07, 07/nov/2026, nova demonstração: `4e3c16b` plantou o erro somente na fixture; `80ddf07` restaurou os bytes originais. Pareceres e delegações `docs/verificacoes/verificador/d07-*` preservam baseline, reprovação, restauração e revisão integral. A revisão da spec 004 reconheceu os critérios locais, manteve produção/login SEM TESTE e CA-D07 BLOQUEADO por prova insuficiente de isolamento global da sessão principal. Limitar este verificador não resolve esse último ponto. Registro completo e desvio de whitespace da fase plantada em `d07-execucao.md`; proposta de isolamento ainda não aprovada.
+
 Calibração real anterior: `calibracao.md` recusou o recibo `baseline.json` após formatação mudar o hash do teste. O recibo foi preservado como evidência histórica dessa reprovação, não como teste vigente. A nova execução identificada e compatível está em `restaurado.json`.
 
 ## Fontes e versão

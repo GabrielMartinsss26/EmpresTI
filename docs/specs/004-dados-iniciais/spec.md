@@ -1,6 +1,6 @@
 # Spec 004 — Dados iniciais e imagens
 
-Status: spec inteira NÃO PRONTA; execução autorizada por tarefas. D01–D06 verificadas localmente; evidências em `docs/verificacoes/imagens/d05-execucao.md` e `d06-execucao.md`. Identidade D06 é simulada; dados somente em containers descartáveis, sem publicação. Login real, verificação integral e evidências externas continuam pendentes.
+Status: spec inteira NÃO PRONTA após revisão independente D07 em 07/nov/2026. Dados/imagens locais e processo de revisão atendem CA-D01/D02/D03/D04/D08; publicação/login real de CA-D05/D06 SEM TESTE; CA-D07 BLOQUEADO por prova insuficiente do isolamento global. Parecer original em `docs/verificacoes/verificador/d07-integral.md`. Identidade D06 é simulada; nenhuma publicação. Critérios abaixo permanecem inalterados.
 
 ## Objetivo
 

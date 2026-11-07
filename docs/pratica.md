@@ -1,6 +1,6 @@
 # Planejamento da prática — 06/nov/2026
 
-Status: D01–D06 concluídas localmente até 07/nov/2026. A proposta D04 foi apresentada em c2f4b28 e depois aprovada; ADR-006 e nova migration de imagens/proteção implementados. D05 preparou o inventário; D06 preparou perfil/vínculo com identidade simulada e recuperação de falhas, sem reset de senha. 96 testes de banco totais passaram. Evidências em `docs/verificacoes/verificador/` e `docs/verificacoes/imagens/d06-execucao.md`. Nenhum schema remoto, conta ou recurso de produção foi alterado nesta prática. Verificação integral, publicação/login real e empréstimos ainda aguardam suas tarefas.
+Status: D01–D07 executadas localmente até 07/nov/2026. Checks, demonstração plantada/restaurada e revisão independente integral concluídos; parecer `docs/verificacoes/verificador/d07-integral.md`: spec 004 NÃO PRONTA. Dados/imagens locais atendem; publicação/login real sem teste e isolamento global CA-D07 BLOQUEADO. Auditoria adicional não encontrou os padrões pesquisados no escopo local, mas não prova isolamento. Proposta pendente em `docs/specs/004-dados-iniciais/proposta-isolamento-d07.md`. Nenhum schema remoto, conta ou recurso de produção alterado; sem push.
 
 ## Fontes e histórico
 

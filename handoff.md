@@ -1,25 +1,24 @@
 # Handoff — 07/nov/2026
 
-- Branch dev; remoto GabrielMartinsss26/EmpresTI; commits locais autorizados; sem push/publicação nesta etapa.
-- Produção https://empresti-mauve.vercel.app/; dev/prod no mesmo Supabase; nenhuma migration remota na prática.
-- Login pronto; cadastro fechado; UI de catálogo/empréstimos ainda na spec 005.
-- ADR-004: aprovação, cinco ativos, 14 dias úteis seg–sex sem feriados/São Paulo; três em manutenção.
-- Prazo no banco ainda é 14 dias corridos; alterar somente via proposta/migration na spec 005.
-- D00–D06 concluídas localmente; spec 004 inteira NÃO PRONTA; D07–D09 pendentes.
-- D04: EquipmentImage/migration 202611060001_equipment_images só em containers; schema/migrations intactos em D05/D06.
-- D05: quatro categorias, 12 equipamentos, 12 referências; reexecução sem alterações; evidências docs/verificacoes/imagens/d05-*.
-- Política D05: qualquer conflito aborta lote; preservar dados não informados; regra 7 da spec 004.
-- D06 autorizada após esclarecimento/aprovação: criar ausentes/reutilizar ativos compatíveis sem trocar senha; regra 9.
-- D06 código prisma/conta-correcao.ts; fixture em tests/db/auth-fixture.ts; suíte conta-correcao.test.ts; executor d06-local.ts.
-- npm run conta:local cria container próprio, não aceita destino/credencial remota; segredo efêmero em memória, sem .env.
-- Resultado D06: uma identidade simulada/perfil/vínculo COLLABORATOR; segunda execução zero novos; senha/IDs/timestamps preservados.
-- D06 testa conflitos e recuperação de falha parcial: Auth não participa da transação do domínio; nunca apagar identidade ou redefinir senha.
-- Sem Supabase Auth/GoTrue HTTP; não foi provado login real; somente operador D08 cria/confirma a conta real e verifica login.
-- CORRECTION_ACCOUNT_PASSWORD: nome em .env.example, segredo futuro do operador; não usado pelo login/Vercel nem exigido por conta:local.
-- Checks D06: 96 de banco (23 novos), 11 unitários, dez de imagens, sete do verificador, lint/tipos/formatação/build passaram.
-- Evidências D06 em docs/verificacoes/imagens/d06-execucao.md e d06-recibo.json; recibo bruto ignorado .local/d06-local.json.
-- D03: 12 imagens ignoradas em .local/imagens-equipamentos/; exceções TI-0007/TI-0012 documentadas em ADR-005/spec 004.
-- Servidor local reiniciado após build na porta 3000; galeria tem diretório .local/imagens-equipamentos/preview, porta habitual 3002.
-- Próximo D07: checks, verificador independente integral e erro plantado/restaurado em commits distintos; manter pendências externas explícitas.
-- D08 publicação somente operador; D09 ENTREGA.md; seed permanece tenant-only; não há adaptador HTTP administrativo remoto nesta etapa.
-- Três HTMLs não rastreados em Aulas/ pertencem ao usuário; fora do commit.
+- Branch dev; remoto GabrielMartinsss26/EmpresTI; commits locais autorizados; sem push/publicação na prática.
+- Produção https://empresti-mauve.vercel.app/; dev/prod no mesmo Supabase; nenhuma migration remota nesta prática.
+- Login pronto; autocadastro fechado; catálogo/empréstimos ainda na spec 005, sem alterações visuais em D07.
+- ADR-004: aprovação, cinco ativos, 14 dias úteis seg–sex/São Paulo; três em manutenção. Banco ainda exige prazo antigo; spec 005 mudará.
+- D00–D07 executadas localmente; spec 004 NÃO PRONTA após parecer independente D07.
+- D05/D06: inventário preparado e conta simulada; reexecução preserva dados/senha; evidências docs/verificacoes/imagens/d05-* e d06-*.
+- D07 autorizada com pedido de registrar mudanças/criações/decisões; plano atualizado antes da execução.
+- Demonstração somente na fixture: commit 4e3c16b plantou limite errado e removeu teste de aprovação; falha esperada.
+- Verificador marcou CA-V01 NÃO ATENDE/CA-V02 SEM TESTE; principal restaurou em 80ddf07 e nova rodada aprovou a fixture.
+- Whitespace indevido no commit plantado foi preservado no histórico, registrado e removido na restauração; checks finais limpos.
+- Quatro rodadas reais: baseline, plantada, restaurada e integral; pareceres/delegações em docs/verificacoes/verificador/d07-*.
+- Recibo d07-evidencias.json identifica 11 comandos, saídas/códigos e 89 fontes/evidências por SHA; snapshot d07-spec-revisada.md preserva a spec avaliada.
+- Checks: 96 de banco, 11 unitários, dez de imagens, sete do verificador; imagens reais/execuções D05/D06, lint/tipos/formatação/build passaram.
+- Parecer integral: CA-D01/D02/D03/D04/D08 ATENDE; CA-D05/D06 SEM TESTE no destino real; CA-D07 BLOQUEADO por isolamento global não comprovado.
+- Auditoria adicional d07-auditoria.json: 267 blobs históricos e quatro logs dedicados, sem padrões encontrados no escopo; não prova ausência de todo segredo nem isolamento.
+- Não reclassificar CA-D07 pelo limite dos scripts/MCP: a sessão principal tem ferramentas amplas. Proposta estrutural pendente em docs/specs/004-dados-iniciais/proposta-isolamento-d07.md.
+- Próximo passo: decidir/provar ambiente separado com controle externo efetivo; não instalar/configurar nem escrever ADR antes de aprovação.
+- Depois obter evidências de publicação/login real D08 pelo operador; não alterar critérios para obter aprovação. D09 ENTREGA.md segue pendente.
+- Recibos/pareceres históricos intactos; cabeçalhos/continuidade atualizados depois da revisão, sem mudar os critérios.
+- Logs brutos em test-results/verificador/d07-*-events.log; auxiliares/backups/checks ignorados em .local/d07-*.
+- Servidor local reiniciado após build, /login porta 3000 HTTP 200; galeria em .local/imagens-equipamentos/preview, porta habitual 3002.
+- Três HTMLs não rastreados em Aulas/ pertencem ao usuário; fora dos commits. Sem credenciais em relatórios/handoff.

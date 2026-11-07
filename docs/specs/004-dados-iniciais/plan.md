@@ -1,6 +1,6 @@
 # Plano 004 — Dados iniciais
 
-Status: D01–D06 executadas localmente. A proposta D04 foi apresentada em c2f4b28 e depois aprovada explicitamente para implementação e testes; decisão no ADR-006 e resultados em docs/verificacoes/imagens/d04-execucao.md. D05/D06 autorizadas e verificadas em 07/nov/2026, com políticas das regras 7/9 aprovadas antes do código. D06 usa identidade simulada e não comprova login real; evidências em docs/verificacoes/imagens/d06-execucao.md. Próxima tarefa: D07. Nenhuma autorização de produção.
+Status: D01–D07 executadas localmente. Parecer D07 em docs/verificacoes/verificador/d07-integral.md: NÃO PRONTA; CA-D05/D06 SEM TESTE no destino real e CA-D07 BLOQUEADO por prova insuficiente do isolamento global. Demonstração isolada plantada/restaurada e checks concluídos. Próximo passo é decidir/provar o isolamento, conforme proposta-isolamento-d07.md, e obter evidências de D08 pelo operador. Nenhuma autorização de produção; critérios e decisões anteriores preservados.
 
 1. Resolver lacunas da spec e registrar alternativas; apresentar modelo de metadados/policies/DDL. Biblioteca e processamento foram aprovados na proposta da skill e registrados no ADR-005; sharp não foi instalado por mera menção no enunciado.
 2. Preparar verificador e skill conforme `docs/pratica.md`, com restrição efetiva de produção. Respeitar ADR-001 e ADR-002; skill não cria paleta nem altera landing.
@@ -32,3 +32,16 @@ Validação completa do pacote antes da transação; dentro dela, conferir todos
 Pré-validar tenant ativo, identidade compatível e dados existentes antes de criar. Apenas perfil/membership compartilham transação serializável: Auth e domínio não possuem transação distribuída. Se criar identidade e a etapa de domínio falhar, informar estado parcial sem apagar a identidade ou trocar senha; reexecução consulta o estado e completa somente os ausentes após nova validação. Falha ambígua de criação exige nova consulta, nunca criar de novo às cegas. Erros externos não propagam payload, causa, senha ou URL; relatórios contêm somente etapa, estado e contagens.
 
 Senha de nova identidade entra por configuração explícita de servidor; reexecução com identidade existente não exige senha nem a compara/atualiza. O comando local gera segredo efêmero em memória e não carrega `.env`. A senha real da turma e o login real permanecem em D08, por operador, sem SQL direto de criação em tabelas internas do Auth. Não apresentar a fixture como autenticação Supabase validada.
+
+## Recorte de execução D07
+
+Autorizado pelo responsável em 07/nov/2026: manter registro das mudanças, criações e decisões. Não muda regras do produto ou autoriza publicação.
+
+1. Executar checks e preparar recibos atuais com comando, saída, código de saída, revisão e hashes das fontes; conferir pacote D03 e executores locais D05/D06.
+2. Conferir o lançador isolado com a fixture íntegra. Não substituir delegação indisponível pela revisão do principal.
+3. Plantar somente em `tests/verificador/`: limite incorreto no contrato e ausência do teste de aprovação, preservando o requisito na spec. Registrar falha esperada e commit explicitamente de demonstração; esta é a exceção controlada de teste vermelho exigida pela prática, não entrega de funcionalidade quebrada.
+4. Executar verificador independente e guardar tabela/delegação reais. Restaurar pelo principal em commit separado, executar novamente testes e revisão da fixture; nunca alterar spec para aceitar o erro.
+5. Executar revisão independente da spec 004 inteira com os recibos atuais; corrigir somente achados locais dentro do escopo, sem inventar prova de produção. Guardar todos os critérios/limitações e eventuais rodadas, mesmo reprovadas.
+6. Registrar evidências em `docs/verificacoes/verificador/d07-*` e atualizar tarefas/handoff. Logs brutos ficam em `test-results/verificador/`; auxiliares/recibos transitórios em `.local/`. Não tocar nos HTMLs de Aulas/ do usuário.
+
+CA-D05 e a parte remota de CA-D06 continuam dependentes de D08. Qualquer SEM TESTE/BLOQUEADO/NÃO ATENDE mantém a spec NÃO PRONTA; concluir a execução da D07 não significa publicar ou aprovar a spec inteira.
