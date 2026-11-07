@@ -1,6 +1,6 @@
 # Spec 004 — Dados iniciais e imagens
 
-Status: rascunho para revisão; implementação não autorizada por este documento. Decisões confirmadas em 06/nov/2026; lacunas abertas abaixo. Nenhum dado desta spec foi populado.
+Status: spec inteira NÃO PRONTA; execução autorizada por tarefas. D01–D05 verificadas localmente; D05 autorizada em 07/nov/2026, evidências em `docs/verificacoes/imagens/d05-execucao.md`. Dados da D05 somente em containers descartáveis, sem publicação. Lacunas de conta e evidências externas continuam abaixo.
 
 ## Objetivo
 
@@ -20,7 +20,7 @@ Preparar os 12 equipamentos da prática com imagens do Pixabay e a conta do prof
 4. Preparar uma imagem distinta por patrimônio pela skill imagens-equipamentos, cuja única fonte será a API Pixabay. Nenhuma foto reprovada por pessoa, marca/logo legível, texto acrescentado ou tela com conteúdo será publicada. Em 06/nov/2026, durante D03, o responsável autorizou apenas inscrições técnicas de fábrica (letras das teclas, especificações da lente/conector). É uma exceção registrada ao texto estrito do enunciado; não autoriza marca/logo legível nem texto promocional/editorial.
 5. Todas as imagens finais têm 800×600 reais, verificadas no arquivo; não basta aplicar dimensão no CSS. Guardar ID e URL de origem, autor, licença e vínculo ao patrimônio. Não repetir ID nem arquivo idêntico entre itens. Na revisão de D03, o responsável pediu substituir TI-0003/TI-0004 por fotos com o notebook como foco, reconhecível no enquadramento, em vez de apenas um canto do teclado.
 6. Destino previsto: bucket público do Supabase Storage, com leitura pública e escrita restrita. ADR-005 define WebP 800×600, foto inteira com bordas e manifesto local com destino equipamentos / suporte_ti/patrimonio.webp. ADR-006 aprova `equipment_images`, zero/uma principal por equipamento, FK composta por tenant, créditos/revisão/hashes e desativação sem DELETE físico. RLS/privilégios negam acesso direto aos metadados; guard restritivo bloqueia `anon`/`authenticated` no bucket. Upload/configuração de produção continuam com o operador; nenhum bucket é criado pela migration.
-7. Reexecução não duplica equipamentos, categorias, fotos, perfis nem vínculos. Comportamento diante de dados existentes alterados/inativos: não decidido; não sobrescrever silenciosamente.
+7. Reexecução não duplica equipamentos, categorias, fotos, perfis nem vínculos. Política D05 confirmada em 07/nov/2026: criar ausentes e reutilizar registros ativos idênticos preservando IDs e timestamps. Qualquer divergência em campos definidos pela prática, desativação, pedido pendente ou empréstimo ativo de um dos equipamentos interrompe o lote inteiro, sem alterações parciais, e informa os conflitos. Não reativar nem corrigir silenciosamente. Série e descrições existentes, não informadas pela prática, ficam preservadas. A política de contas continua em D06.
 8. Conta do professor: `marcelo.grilo@institutojef.org.br`, nome `Marcelo Grilo`, papel `COLLABORATOR` em `suporte_ti`, com login funcional e zero empréstimos. A senha da turma será fornecida pelo operador por configuração não versionada; nunca literal no seed.
 9. Não usar a conta do professor para operações de empréstimo. Testes usam identidade própria ou fixtures locais descartáveis. Conta existente/inativa: tratamento não decidido.
 10. Preparação e testes pelo agente são locais; publicação de dados, imagens e conta pelo operador conforme `docs/pratica.md`.
@@ -69,6 +69,6 @@ Scripts de preparação/provisionamento e dados iniciais; modelo/referências de
 
 ## Pendências e decisões
 
-A proposta de modelo, policies, DDL e testes locais está em [proposta-d04.md](proposta-d04.md), criada em c2f4b28 e depois aprovada explicitamente para implementação/testes locais. ADR-006 registra a decisão antes do código. Conflitos de reexecução, contas existentes e publicação continuam em tarefas próprias.
+A proposta de modelo, policies, DDL e testes locais está em [proposta-d04.md](proposta-d04.md), criada em c2f4b28 e depois aprovada explicitamente para implementação/testes locais. ADR-006 registra a decisão antes do código. A política de reexecução foi resolvida na regra 7; contas existentes e publicação continuam em tarefas próprias.
 
-Biblioteca/processamento/crédito foram aprovados no ADR-005; metadados e proteção do Storage no ADR-006, implementados/testados somente em banco descartável em D04. Provisionamento do bucket e publicação continuam com o operador. Política de reexecução de dados e contas existentes seguem não decididas, bloqueando suas tarefas dependentes. Provas locais não aprovam a população, conta ou publicação; CA-D01–D08 integrais continuam pendentes.
+Biblioteca/processamento/crédito foram aprovados no ADR-005; metadados e proteção do Storage no ADR-006, implementados/testados somente em banco descartável em D04. D05 autorizada em 07/nov/2026, com política de conflitos confirmada na regra 7. Provisionamento do bucket e publicação continuam com o operador. Contas existentes seguem não decididas, bloqueando D06. Provas locais não aprovam conta ou publicação; CA-D01–D08 integrais continuam pendentes.

@@ -1,6 +1,6 @@
 # Planejamento da prática — 06/nov/2026
 
-Status: D01–D04 concluídas localmente em 06/nov/2026. A proposta D04 foi apresentada em c2f4b28 e depois aprovada; ADR-006 e nova migration de imagens/proteção implementados, com 48 testes de banco descartável e checks gerais/build aprovados. Evidências em `docs/verificacoes/verificador/` e `docs/verificacoes/imagens/`. Nenhum schema remoto, conta ou recurso de produção foi alterado nesta prática. População, conta e empréstimos ainda aguardam suas tarefas e revisões.
+Status: D01–D05 concluídas localmente até 07/nov/2026. A proposta D04 foi apresentada em c2f4b28 e depois aprovada; ADR-006 e nova migration de imagens/proteção implementados. D05 criou quatro categorias, 12 equipamentos e 12 referências em container descartável, com reexecução sem mudanças; 73 testes de banco totais e checks gerais/build passaram. Evidências em `docs/verificacoes/verificador/` e `docs/verificacoes/imagens/d05-execucao.md`. Nenhum schema remoto, conta ou recurso de produção foi alterado nesta prática. Conta, publicação e empréstimos ainda aguardam suas tarefas e revisões.
 
 ## Fontes e histórico
 
@@ -33,7 +33,7 @@ Senha da conta de correção e chave Pixabay não entram em código, fixture, ma
 | Bucket, caminhos, metadados e policies de Storage | ADR-006 aprovado e D04 implementada/testada localmente: `equipment_images` e guard restritivo de Storage; manifesto mantém equipamentos / suporte_ti/patrimonio.webp. Bucket/publicação de produção continuam com o operador; nada criado externamente |
 | Crédito visível no catálogo com Pixabay | Link discreto de créditos aprovado na proposta; manifesto registra autor/origem/licença; implementação visual na spec 005 |
 | Provisionamento de conta já existente ou inativa | Não decidido; não redefinir senha/reativar silenciosamente |
-| Política de reexecução sobre equipamentos modificados/em uso | Não decidido; não resetar manutenção, empréstimos ou dados alterados silenciosamente |
+| Política de reexecução sobre equipamentos modificados/em uso | Confirmada em 07/nov/2026: qualquer conflito interrompe o lote inteiro; criar ausentes e reutilizar ativos idênticos, preservando IDs, timestamps e campos não informados; detalhes na regra 7 da spec 004 |
 | DDL de prazo e preservação de empréstimos existentes | Não decidido; SQL e impacto devem ser aprovados antes da migration |
 | Configuração efetiva do verificador e seus comandos permitidos | Definida e provada em D01: lançador separado, sem terminal, MCP com lista/leitura; detalhes em docs/verificador.md |
 
