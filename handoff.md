@@ -1,24 +1,25 @@
 # Handoff — 07/nov/2026
 
 - Branch dev; remoto GabrielMartinsss26/EmpresTI; commits locais autorizados; sem push/publicação nesta etapa.
-- Produção https://empresti-mauve.vercel.app/; dev/prod usam o mesmo Supabase, sem migration remota nesta prática.
-- Login pronto; autocadastro cancelado/fechado; convites futuros. UI de catálogo/empréstimos ainda na spec 005.
-- ADR-004: aprovação, cinco ativos, 14 dias úteis seg–sex sem feriados/São Paulo; três itens em manutenção.
-- Migration inicial ainda exige 14 dias corridos; alteração de prazo somente na spec 005, com proposta antes do SQL.
-- D01–D05 concluídas localmente; spec 004 inteira NÃO PRONTA. D06–D09 pendentes.
-- D04: EquipmentImage e migration 202611060001_equipment_images; dez tabelas somente em containers. Sem alteração de schema em D05.
-- D05 autorizada em 07/nov; responsável aprovou parar o lote inteiro por conflito antes do código; regra 7 da spec 004.
-- D05: criar ausentes/reutilizar ativos idênticos; preservar IDs/timestamps/série/descrições; sem reset ou reativação.
-- Código em prisma/dados-pratica.ts; testes em tests/db/dados-pratica.test.ts; executor em tests/db/d05-local.ts.
-- npm run dados:local cria seu próprio container, confere pacote real D03, importa duas vezes e encerra; não aceita URL.
-- Resultado: quatro categorias, 12 equipamentos, 12 imagens; nove disponíveis/três manutenção; zero identidades/pedidos/empréstimos.
-- Segunda execução criou zero registros; IDs/timestamps iguais; recibo ignorado em .local/d05-local.json.
-- Evidências versionadas em docs/verificacoes/imagens/d05-execucao.md e d05-recibo.json; seed continua tenant-only.
-- Checks D05: 73 de banco (25 novos), 11 unitários, dez de imagens, sete do verificador, lint/tipos/formatação/build passaram.
-- Testes usam PostgreSQL real descartável com fixtures Auth/Storage; sem Storage HTTP, upload ou autenticação real da conta de correção.
-- D03: 12 imagens locais, 11 fotografias + ilustração TI-0007 aprovada; câmera de ação TI-0012 aprovada; inscrições técnicas permitidas.
-- Pacote D03 ignorado em .local/imagens-equipamentos/; manifesto/prova versionados em docs/verificacoes/imagens/d03-*.
-- Aplicação local reiniciada após build na porta 3000; galeria tem diretório .local/imagens-equipamentos/preview, porta habitual 3002.
-- Próximo: D06, decidir conta existente/inativa, aprovar plano e preparar provisionamento apenas descartável; não redefinir senha silenciosamente.
-- D07 exige verificador independente integral e erro plantado/restaurado; produção D08 somente operador; ENTREGA.md em D09.
-- Três HTMLs não rastreados em Aulas/ pertencem ao usuário; fora do commit. Não registrar credenciais no handoff.
+- Produção https://empresti-mauve.vercel.app/; dev/prod no mesmo Supabase; nenhuma migration remota na prática.
+- Login pronto; cadastro fechado; UI de catálogo/empréstimos ainda na spec 005.
+- ADR-004: aprovação, cinco ativos, 14 dias úteis seg–sex sem feriados/São Paulo; três em manutenção.
+- Prazo no banco ainda é 14 dias corridos; alterar somente via proposta/migration na spec 005.
+- D00–D06 concluídas localmente; spec 004 inteira NÃO PRONTA; D07–D09 pendentes.
+- D04: EquipmentImage/migration 202611060001_equipment_images só em containers; schema/migrations intactos em D05/D06.
+- D05: quatro categorias, 12 equipamentos, 12 referências; reexecução sem alterações; evidências docs/verificacoes/imagens/d05-*.
+- Política D05: qualquer conflito aborta lote; preservar dados não informados; regra 7 da spec 004.
+- D06 autorizada após esclarecimento/aprovação: criar ausentes/reutilizar ativos compatíveis sem trocar senha; regra 9.
+- D06 código prisma/conta-correcao.ts; fixture em tests/db/auth-fixture.ts; suíte conta-correcao.test.ts; executor d06-local.ts.
+- npm run conta:local cria container próprio, não aceita destino/credencial remota; segredo efêmero em memória, sem .env.
+- Resultado D06: uma identidade simulada/perfil/vínculo COLLABORATOR; segunda execução zero novos; senha/IDs/timestamps preservados.
+- D06 testa conflitos e recuperação de falha parcial: Auth não participa da transação do domínio; nunca apagar identidade ou redefinir senha.
+- Sem Supabase Auth/GoTrue HTTP; não foi provado login real; somente operador D08 cria/confirma a conta real e verifica login.
+- CORRECTION_ACCOUNT_PASSWORD: nome em .env.example, segredo futuro do operador; não usado pelo login/Vercel nem exigido por conta:local.
+- Checks D06: 96 de banco (23 novos), 11 unitários, dez de imagens, sete do verificador, lint/tipos/formatação/build passaram.
+- Evidências D06 em docs/verificacoes/imagens/d06-execucao.md e d06-recibo.json; recibo bruto ignorado .local/d06-local.json.
+- D03: 12 imagens ignoradas em .local/imagens-equipamentos/; exceções TI-0007/TI-0012 documentadas em ADR-005/spec 004.
+- Servidor local reiniciado após build na porta 3000; galeria tem diretório .local/imagens-equipamentos/preview, porta habitual 3002.
+- Próximo D07: checks, verificador independente integral e erro plantado/restaurado em commits distintos; manter pendências externas explícitas.
+- D08 publicação somente operador; D09 ENTREGA.md; seed permanece tenant-only; não há adaptador HTTP administrativo remoto nesta etapa.
+- Três HTMLs não rastreados em Aulas/ pertencem ao usuário; fora do commit.

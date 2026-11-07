@@ -1,0 +1,55 @@
+{
+  "task": "D06",
+  "recordedAt": "2026-11-07T19:41:22.974Z",
+  "database": "PostgreSQL 16 descartável",
+  "identityProvider": "fixture local; sem Supabase Auth/GoTrue HTTP",
+  "first": {
+    "identities": 1,
+    "profiles": 1,
+    "memberships": 1
+  },
+  "second": {
+    "identities": 0,
+    "profiles": 0,
+    "memberships": 0
+  },
+  "role": "COLLABORATOR",
+  "loans": 0,
+  "requests": 0,
+  "unchangedIdsTimestampsAndPasswordHash": true,
+  "productionWrites": false,
+  "realLoginVerified": false,
+  "fullSpecReady": false,
+  "baseRevision": "ab05b7b2b4d11187d3dc0c1c64fb2c6329d0819f",
+  "checks": {
+    "database": 96,
+    "d06Database": 23,
+    "unit": 11,
+    "images": 10,
+    "verifierTests": 7,
+    "typecheck": "PASSOU",
+    "lint": "PASSOU",
+    "format": "PASSOU",
+    "build": "PASSOU",
+    "independentFullSpecVerifier": "PENDENTE D07"
+  },
+  "files": {
+    "prisma/conta-correcao.ts": "e4a523208ad42cb19ee77f807c4f42713d981bb39e8aeca29717cf056dfa78d8",
+    "tests/db/auth-fixture.ts": "5346b207b3815521f9136db188fa7cf032265486c541db5645524ba8accabd05",
+    "tests/db/conta-correcao.test.ts": "3d82ee817015598d91b047033bafd92c1f219f0208b006cc3638a92164ddfa91",
+    "tests/db/d06-local.ts": "b01a68669da647c77b70f2190d1374fdafbc42d1b1596aa25e296de046136db2",
+    "tests/db/setup.ts": "2aa75b95e4024b2ebebb5a9e4b7378d43193f8cb236e0f3b590b1956a15dddad",
+    "prisma/schema.prisma": "6972fec4d2a624d49248dd7ae52d5c2d3684dd34ec05e361ebd7c36bcbe8ba77",
+    "prisma/seed.ts": "91058997d883b5907cd2f88aab537b519c568f96098474b0443861dec939a567",
+    "prisma/migrations/202610190001_initial/migration.sql": "38333361e345e711c68d1c5590bf480547e58c731a0acba4f504c9d60a71f20c",
+    "prisma/migrations/202611060001_equipment_images/migration.sql": "3d3b0611708ee4d2e4652c5f57a685f4f47339749421b6cf4c0a8cd2908cc73a",
+    "package.json": "e871fc772d858d96244ecce22c193ce15511e7a7a6e8dc9e2688cc55095c99ca"
+  },
+  "databaseLogSha256": "73f34cd52ab44f5c8575943cd2467e5e23f5872dc258d646d3ec4dbb0f294039",
+  "databaseRun": {
+    "files": 4,
+    "tests": 96,
+    "durationSeconds": 111.78
+  },
+  "checksRecordedAt": "2026-11-07T19:44:28.642Z"
+}
