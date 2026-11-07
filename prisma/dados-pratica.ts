@@ -186,8 +186,30 @@ function same(a: unknown, b: unknown) {
     : a === b;
 }
 
-/** Sem conexão implícita: os únicos executores desta etapa criam containers. */
-export async function populatePractice(db: PrismaClient, bundle: Package) {
+type PopulationResult = {
+  tenantId: string;
+  created: {
+    tenants: number;
+    categories: number;
+    equipment: number;
+    images: number;
+  };
+};
+export function populatePractice(
+  db: PrismaClient,
+  bundle: Package,
+): Promise<PopulationResult>;
+export function populatePractice(
+  db: PrismaClient,
+  bundle: Package,
+  options: { dryRun: true },
+): Promise<Omit<PopulationResult, "tenantId"> & { tenantId: string | null }>;
+/** Conexão sempre explícita; publicação remota somente na exceção D08/ADR-007. */
+export async function populatePractice(
+  db: PrismaClient,
+  bundle: Package,
+  options: { dryRun?: true } = {},
+) {
   if (bundle[validated] !== true || bundle.images.size !== 12)
     throw new Error("Pacote não validado.");
   return db.$transaction(
@@ -272,6 +294,21 @@ export async function populatePractice(db: PrismaClient, bundle: Package) {
           conflicts.push(`${tag}: destino de imagem ocupado`);
       }
       if (conflicts.length) throw new PopulationConflict(conflicts);
+
+      if (options.dryRun)
+        return {
+          tenantId: tenant?.id ?? null,
+          created: {
+            tenants: tenant ? 0 : 1,
+            categories: categoryNames.filter(
+              (name) => !categories.some((c) => c.name === name),
+            ).length,
+            equipment: inventory.length - equipment.length,
+            images: inventory.filter(
+              ([tag]) => !equipment.find((e) => e.asset_tag === tag)?.image,
+            ).length,
+          },
+        };
 
       const target =
         tenant ??

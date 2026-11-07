@@ -1,6 +1,6 @@
 # Plano 004 — Dados iniciais
 
-Status: D01–D07 executadas localmente. Parecer D07 em docs/verificacoes/verificador/d07-integral.md: NÃO PRONTA; CA-D05/D06 SEM TESTE no destino real e CA-D07 BLOQUEADO por prova insuficiente do isolamento global. Demonstração isolada plantada/restaurada e checks concluídos. Próximo passo é decidir/provar o isolamento, conforme proposta-isolamento-d07.md, e obter evidências de D08 pelo operador. Nenhuma autorização de produção; critérios e decisões anteriores preservados.
+Status: D01–D07 executadas; D08 de dados/imagens publicada em 07/nov/2026 por delegação posterior ADR-007, com conta adiada expressamente. Revisão D08-R2: CA-D01/D02/D03/D04/D05/D08 ATENDE; CA-D06 SEM TESTE e CA-D07 NÃO ATENDE; spec NÃO PRONTA. Pendências: conta/login reais e isolamento original da prática. Sem autorização de push/deploy Vercel; critérios e pareceres históricos preservados.
 
 1. Resolver lacunas da spec e registrar alternativas; apresentar modelo de metadados/policies/DDL. Biblioteca e processamento foram aprovados na proposta da skill e registrados no ADR-005; sharp não foi instalado por mera menção no enunciado.
 2. Preparar verificador e skill conforme `docs/pratica.md`, com restrição efetiva de produção. Respeitar ADR-001 e ADR-002; skill não cria paleta nem altera landing.
@@ -45,3 +45,16 @@ Autorizado pelo responsável em 07/nov/2026: manter registro das mudanças, cria
 6. Registrar evidências em `docs/verificacoes/verificador/d07-*` e atualizar tarefas/handoff. Logs brutos ficam em `test-results/verificador/`; auxiliares/recibos transitórios em `.local/`. Não tocar nos HTMLs de Aulas/ do usuário.
 
 CA-D05 e a parte remota de CA-D06 continuam dependentes de D08. Qualquer SEM TESTE/BLOQUEADO/NÃO ATENDE mantém a spec NÃO PRONTA; concluir a execução da D07 não significa publicar ou aprovar a spec inteira.
+
+## D08 delegada — recorte atual
+
+Autorização atual e exceção de execução no ADR-007; conta adiada expressamente. CA-D07 continua BLOQUEADO, sem mudança no critério. Pré-consulta de leitura confirmou projeto correto, tenant ativo, migration inicial aplicada, nenhum bucket e nenhum dos 12 equipamentos no destino.
+
+1. Acrescentar simulação sem escrita ao módulo D05 (`prisma/dados-pratica.ts`), com teste de banco descartável.
+2. Criar `scripts/publicar-pratica.ts`: destino fixo conferido, argumentos explícitos `--project`/`--apply`, configuração Zod e erros sanitizados; nunca importado pela aplicação. Usar SDK já instalado, sem dependência nova. Testes puros de destino/configuração em `tests/unit/publication-config.test.ts`; incluir `scripts` no check de formatação e excluir artefatos ignorados `.local` do lint.
+3. Validar arquivos/manifesto D03 antes de qualquer mutação. Conferir migrations e destino; aplicar somente a linha de migrations inicial+D04 aprovada via Prisma Migrate, sem SQL de schema avulso.
+4. Simular lote e conferir objetos existentes antes de upload. Criar/reutilizar somente bucket público `equipamentos`, limitado a WebP/1 MiB. Nunca tornar outro bucket público, substituir objeto divergente ou excluir dado existente.
+5. Publicar ausentes e executar a população transacional aprovada. Repetir o processo, comparar arquivos/IDs/timestamps e verificar GET público/hash/dimensões. Verificação negativa de escrita anônima usa caminho de prova novo, nunca objeto de equipamento existente; limpar somente esse objeto de prova caso ocorra sucesso indevido e interromper.
+6. Não criar conta do professor. Guardar recibo sanitizado e a separação entre integração real e testes locais em `docs/verificacoes/imagens/d08-*`; registrar falhas/retomada e atualizar continuidade.
+
+O controle de destino, a simulação e a preservação são proteções do executor; não são apresentados como isolamento de todas as ferramentas da sessão. SDK/API de Storage seguem a documentação oficial do Supabase, consultada em 07/nov/2026. Sem deploy Vercel ou push nesta autorização.

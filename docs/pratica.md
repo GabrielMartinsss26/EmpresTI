@@ -1,6 +1,6 @@
 # Planejamento da prática — 06/nov/2026
 
-Status: D01–D07 executadas localmente até 07/nov/2026. Checks, demonstração plantada/restaurada e revisão independente integral concluídos; parecer `docs/verificacoes/verificador/d07-integral.md`: spec 004 NÃO PRONTA. Dados/imagens locais atendem; publicação/login real sem teste e isolamento global CA-D07 BLOQUEADO. Auditoria adicional não encontrou os padrões pesquisados no escopo local, mas não prova isolamento. Proposta pendente em `docs/specs/004-dados-iniciais/proposta-isolamento-d07.md`. Nenhum schema remoto, conta ou recurso de produção alterado; sem push.
+Status: D01–D07 executadas e D08 de dados/imagens publicada em 07/nov/2026 por delegação posterior do responsável, registrada no ADR-007. Migration D04 aplicada, 12 imagens/equipamentos publicados, repetição sem duplicação e proteção de escrita anônima confirmadas. Conta do professor adiada expressamente. Parecer `docs/verificacoes/verificador/d08-integral-r2.md`: spec 004 NÃO PRONTA por CA-D06 SEM TESTE e CA-D07 NÃO ATENDE; autorização de publicar não equivale a isolamento. Sem push/deploy Vercel nesta etapa.
 
 ## Fontes e histórico
 
@@ -21,6 +21,8 @@ Status: D01–D07 executadas localmente até 07/nov/2026. Checks, demonstração
 ## Produção e segredos nesta prática
 
 O agente prepara os artefatos e os verifica localmente. Escritas no banco, Auth ou Storage de produção são executadas pelo operador. Autorizações anteriores de integração/publicação não se estendem à execução desta prática. Dev ainda aponta para o mesmo Supabase de produção: executar scripts apenas em ambiente descartável, sem herdar URLs ou credenciais remotas. O verificador precisa de restrição efetiva no harness; texto de proibição sozinho não comprova isolamento.
+
+Exceção posterior, solicitada explicitamente em 07/nov/2026: o responsável delegou ao agente a publicação D08 no projeto Supabase existente; ADR-007 registra a mudança antes da execução. Conta do professor adiada por resposta explícita. Suíte de banco permanece exclusivamente descartável; integração D08 é separada. Esta exceção não satisfaz CA-D07, não altera o parecer D07 e não autoriza push/deploy Vercel.
 
 Senha da conta de correção e chave Pixabay não entram em código, fixture, manifesto, documentação ou logs. Registrar apenas os nomes das variáveis após definir os scripts. Não copiar a senha demonstrativa do enunciado para o seed. O material original é uma fonte histórica, não um script executável de provisionamento.
 

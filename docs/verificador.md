@@ -15,6 +15,8 @@ npm run verify:spec -- docs/specs/004-dados-iniciais/spec.md docs/verificacoes/r
 
 O segundo caminho é opcional e deve apontar para evidências reais preparadas pelo principal. Sem prova suficiente, o resultado será SEM TESTE/BLOQUEADO, não aprovação por suposição. O verificador inspeciona fontes e testes, mas não executa testes: o principal roda os checks, identifica comando, código de saída, fontes/revisão e guarda recibos para conferência. Esse limite é deliberado para eliminar o terminal do verificador.
 
+Spec/recibo são pontos de entrada, não uma lista exclusiva de leitura. O papel deve descobrir PRD, ADRs, regras, fontes e testes relacionados dentro da whitelist existente do MCP. Em D08 a primeira rodada interpretou “apenas estes caminhos” como restrição aos dois arquivos; o principal esclareceu a delegação e repetiu a revisão, sem ampliar ferramentas/permissões. Ambas as rodadas foram preservadas em `docs/verificacoes/verificador/d08-*`.
+
 Usar o lançador, que chama o Codex CLI instalado, com contexto novo, `--sandbox read-only`, aprovação `never`, sem configuração pessoal, sem shell, apps, plugins, memória ou pesquisa web. A autenticação normal do Codex continua pertencendo ao cliente; não é copiada ao projeto nem fornecida como ferramenta ao modelo. Não abre chat do usuário na sidebar.
 
 Não delegar a partir desta sessão de implementação com acesso irrestrito: subagentes herdam permissões do pai. O lançador também registra o papel explicitamente por configuração de linha de comando, pois descoberta automática pode depender de confiança no projeto/versão do cliente. Se falhar a delegação, a etapa fica BLOQUEADA, sem substituição pela opinião do principal.

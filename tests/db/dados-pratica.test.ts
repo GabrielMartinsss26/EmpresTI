@@ -75,6 +75,30 @@ async function snapshot() {
 }
 
 describe("D05 · CA-D01/CA-D02 — população em PostgreSQL descartável", () => {
+  it("D08 · simulação informa ausentes sem criar ou atualizar dados", async () => {
+    const before = await snapshot();
+    expect(
+      (await populatePractice(db, bundle, { dryRun: true })).created,
+    ).toEqual({ tenants: 1, categories: 4, equipment: 12, images: 12 });
+    expect(await snapshot()).toEqual(before);
+    await populatePractice(db, bundle);
+    const populated = await snapshot();
+    expect(
+      (await populatePractice(db, bundle, { dryRun: true })).created,
+    ).toEqual({ tenants: 0, categories: 0, equipment: 0, images: 0 });
+    expect(await snapshot()).toEqual(populated);
+  });
+
+  it("D08 · simulação interrompe por conflito sem alterar registros", async () => {
+    await populatePractice(db, bundle);
+    await db.equipment.updateMany({ data: { pickup_location: "Alterado" } });
+    const before = await snapshot();
+    await expect(
+      populatePractice(db, bundle, { dryRun: true }),
+    ).rejects.toBeInstanceOf(PopulationConflict);
+    expect(await snapshot()).toEqual(before);
+  });
+
   it("cria o inventário exato, sem identidades/pedidos/empréstimos, e reexecuta sem alterar IDs ou timestamps", async () => {
     const first = await populatePractice(db, bundle);
     expect(first.created).toEqual({

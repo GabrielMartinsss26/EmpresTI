@@ -1,24 +1,25 @@
 # Handoff — 07/nov/2026
 
-- Branch dev; remoto GabrielMartinsss26/EmpresTI; commits locais autorizados; sem push/publicação na prática.
-- Produção https://empresti-mauve.vercel.app/; dev/prod no mesmo Supabase; nenhuma migration remota nesta prática.
-- Login pronto; autocadastro fechado; catálogo/empréstimos ainda na spec 005, sem alterações visuais em D07.
-- ADR-004: aprovação, cinco ativos, 14 dias úteis seg–sex/São Paulo; três em manutenção. Banco ainda exige prazo antigo; spec 005 mudará.
-- D00–D07 executadas localmente; spec 004 NÃO PRONTA após parecer independente D07.
-- D05/D06: inventário preparado e conta simulada; reexecução preserva dados/senha; evidências docs/verificacoes/imagens/d05-* e d06-*.
-- D07 autorizada com pedido de registrar mudanças/criações/decisões; plano atualizado antes da execução.
-- Demonstração somente na fixture: commit 4e3c16b plantou limite errado e removeu teste de aprovação; falha esperada.
-- Verificador marcou CA-V01 NÃO ATENDE/CA-V02 SEM TESTE; principal restaurou em 80ddf07 e nova rodada aprovou a fixture.
-- Whitespace indevido no commit plantado foi preservado no histórico, registrado e removido na restauração; checks finais limpos.
-- Quatro rodadas reais: baseline, plantada, restaurada e integral; pareceres/delegações em docs/verificacoes/verificador/d07-*.
-- Recibo d07-evidencias.json identifica 11 comandos, saídas/códigos e 89 fontes/evidências por SHA; snapshot d07-spec-revisada.md preserva a spec avaliada.
-- Checks: 96 de banco, 11 unitários, dez de imagens, sete do verificador; imagens reais/execuções D05/D06, lint/tipos/formatação/build passaram.
-- Parecer integral: CA-D01/D02/D03/D04/D08 ATENDE; CA-D05/D06 SEM TESTE no destino real; CA-D07 BLOQUEADO por isolamento global não comprovado.
-- Auditoria adicional d07-auditoria.json: 267 blobs históricos e quatro logs dedicados, sem padrões encontrados no escopo; não prova ausência de todo segredo nem isolamento.
-- Não reclassificar CA-D07 pelo limite dos scripts/MCP: a sessão principal tem ferramentas amplas. Proposta estrutural pendente em docs/specs/004-dados-iniciais/proposta-isolamento-d07.md.
-- Próximo passo: decidir/provar ambiente separado com controle externo efetivo; não instalar/configurar nem escrever ADR antes de aprovação.
-- Depois obter evidências de publicação/login real D08 pelo operador; não alterar critérios para obter aprovação. D09 ENTREGA.md segue pendente.
-- Recibos/pareceres históricos intactos; cabeçalhos/continuidade atualizados depois da revisão, sem mudar os critérios.
-- Logs brutos em test-results/verificador/d07-*-events.log; auxiliares/backups/checks ignorados em .local/d07-*.
-- Servidor local reiniciado após build, /login porta 3000 HTTP 200; galeria em .local/imagens-equipamentos/preview, porta habitual 3002.
-- Três HTMLs não rastreados em Aulas/ pertencem ao usuário; fora dos commits. Sem credenciais em relatórios/handoff.
+- Branch dev; remoto GabrielMartinsss26/EmpresTI; commits locais autorizados; sem push/deploy Vercel nesta etapa.
+- Produção da aplicação https://empresti-mauve.vercel.app/; dev/prod no Supabase gverauqgerwjwwjkoybl.
+- Login pronto; autocadastro fechado; catálogo visual ainda é placeholder da spec 005, sem mudança de UI nesta tarefa.
+- ADR-004: aprovação, cinco ativos, 14 dias úteis seg–sex/São Paulo; três manutenção. Constraint do banco ainda usa 14 corridos; spec 005 futura.
+- D00–D07 executadas; D08 PARCIAL: dados/imagens publicados, conta/login reais adiados expressamente pelo responsável.
+- ADR-007 registra delegação explícita da D08 ao agente, antes do código/escrita; não autoriza execução ampla em outros projetos nem comprova isolamento.
+- Supabase agora tem a migration D04 202611060001_equipment_images; inicial intacta/checksum confirmado. Nenhuma migration nova nesta tarefa.
+- Bucket equipamentos público, somente image/webp/1 MiB; 12 objetos suporte_ti/TI-0001.webp a TI-0012.webp.
+- Populados quatro categorias, 12 equipamentos e 12 referências; nove disponíveis/três manutenção; zero pedidos/empréstimos desses itens.
+- Primeira publicação criou ausentes; segunda criou zero cadastros e zero uploads; IDs/timestamps/bytes preservados.
+- 12 GETs sem autenticação HTTP 200, hashes/dimensões conferidos; upload anônimo negado (HTTP 400/código Storage 403), listagem vazia/metadados HTTP 401.
+- RLS e guard restritivo reais conferidos; sem teste HTTP com JWT de colaborador. Nenhuma conta criada, convite enviado ou senha redefinida.
+- Executor scripts/publicar-pratica.ts exige projeto e --apply, checa destino/conflitos/TLS; nunca importado pela aplicação. Simulação em prisma/dados-pratica.ts.
+- npm run publicar:pratica é produção, não teste; usar só na autorização pontual ADR-007. Sem credencial em parâmetros/logs/relatórios.
+- Checks: 98 de banco descartável, 13 unitários, dez de imagens, sete do verificador; lint/tipos/formatação/build passaram.
+- Evidências em docs/verificacoes/imagens/d08-execucao.md, d08-recibo.json e d08-recibo-r2.json; logs sanitizados ignorados .local/d08-*.
+- Primeira revisão D08 bloqueou leitura de fontes por ambiguidade do lançador; texto esclarecido sem mudar whitelist/sandbox e sete testes refeitos.
+- Revisão D08-R2 conferiu 92 hashes: CA-D01/D02/D03/D04/D05/D08 ATENDE; CA-D06 SEM TESTE; CA-D07 NÃO ATENDE pela capacidade/uso de escrita real autorizada.
+- Spec 004 NÃO PRONTA. Pareceres originais/delegações em docs/verificacoes/verificador/d08-*; snapshot d08-spec-revisada.md preserva a spec avaliada.
+- Não reduzir CA-D07 nem confundir autorização com isolamento. Proposta de ambiente separado D07 permanece sem implementação aprovada.
+- Conta professor permanece para depois. D09/ENTREGA.md pendente; próximo trabalho visual é catálogo/fluxo da spec 005, com tarefas próprias.
+- Aplicação local reiniciada após build, /login porta 3000 HTTP 200; fotos reais já acessíveis no Storage, ainda sem catálogo implementado.
+- Três HTMLs não rastreados em Aulas/ pertencem ao usuário; fora do commit. Seed continua tenant-only; ambientes reais ignorados.

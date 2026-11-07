@@ -47,6 +47,7 @@ tenant e RLS foram verificadas e todos os checks aplicáveis passaram.
 
 - Não use Supabase CLI, Studio ou SQL avulso como um segundo dono do schema.
 - Não aplique, teste ou corrija migration diretamente no Supabase remoto.
+  Exceção pontual: publicação D08 explicitamente delegada pelo responsável no ADR-007 permite aplicar via Prisma Migrate somente a migration D04 já revisada e testada localmente. Não permite testar/corrigir schema no destino nem executar a suíte de testes contra ele.
 - Não edite uma migration que já tenha sido aplicada fora da sua máquina ou
   compartilhada com o time. Crie a próxima migration.
 - Não remova tabela, coluna ou dado sem aprovação explícita e uma estratégia de
