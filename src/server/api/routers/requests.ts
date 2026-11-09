@@ -3,11 +3,29 @@ import { z } from "zod";
 import { listOwnRequests, createRequest } from "../../services/requests";
 import { pageInput } from "../../services/read-input";
 import {
+  rejectRequest,
+  rejectionReason,
+} from "../../services/request-rejection";
+import {
   approveRequest,
   listPendingRequests,
 } from "../../services/request-approval";
 
 export const requestsRouter = router({
+  reject: operationsProcedure
+    .input(z.strictObject({ requestId: z.uuid(), reason: rejectionReason }))
+    .mutation(({ ctx, input }) =>
+      rejectRequest(
+        {
+          db: ctx.db,
+          userId: ctx.user.id,
+          membershipId: ctx.membership.id,
+          tenantId: ctx.tenantId,
+        },
+        input.requestId,
+        input.reason,
+      ),
+    ),
   pending: operationsProcedure.input(pageInput).query(({ ctx, input }) =>
     listPendingRequests(
       {

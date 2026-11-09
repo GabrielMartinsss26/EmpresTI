@@ -23,7 +23,7 @@ function notFound(): never {
   });
 }
 
-async function assertDecisionMaker(reader: Reader) {
+export async function assertDecisionMaker(reader: Reader) {
   const actor = await reader.db.membership.findFirst({
     where: {
       id: reader.membershipId,

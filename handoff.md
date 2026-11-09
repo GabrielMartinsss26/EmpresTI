@@ -1,23 +1,24 @@
 # Handoff — 09/nov/2026
 
 - Branch dev; remoto GabrielMartinsss26/EmpresTI; commits locais autorizados, sem push/deploy nesta tarefa.
-- E05 autorizada e implementada: requests.approve/pending, operationsProcedure e service request-approval.ts.
-- Papel OPERATIONS/ADMIN validado no middleware e no banco; ator/tenant do contexto, ativos revalidados sob locks.
-- Ordem: vínculos de solicitante/ator por UUID, depois equipamento e pedido. Perfil/tenant/categoria FOR SHARE.
-- Transação ReadCommitted, lock timeout 3s/timeout 10s, sem retry cego; índices/triggers preservados, sem DDL/dependência.
-- Aprovação revalida PENDING, IDs, ativos, disponibilidade, três ativos e atraso do solicitante. Data não antecede pedido, inclusive microssegundos.
-- createLoanPeriod captura relógio uma vez; pedido decidido e Loan BUSINESS_14_SP compartilham instante, vencimento 14 úteis São Paulo.
-- Auditoria atômica loan_request.approved/loan_request/ID pedido, ator/tenant contexto, metadata equipment_id/loan_id.
-- Pending lista só tenant, cursor 12/48, data asc/ID; dados mínimos do item e nome/situação ativa do solicitante.
-- 30 novos testes em tests/db/request-approval.test.ts, PostgreSQL real descartável/contexto Auth simulado, HTTP 403/200/409.
-- Provas: concorrência mesmo pedido não duplica; dois ativos + duas aprovações ficam três; falha Loan/auditoria faz rollback integral.
-- Checks: 210 banco/nove arquivos, 28 unitários, dez imagens, sete verificador; lint/tipos/formatação/build/diff passaram.
-- Evidências docs/verificacoes/e05-aprovacao.md; spec/plan/tasks/AGENTS atualizados. Spec 005 inteira NÃO PRONTA; verificador integral E10.
-- Próximo E06: rejeição com motivo/autorização/auditoria/liberação, aguardando autorização própria. Novas telas E07/E08.
-- E04 ed777b7 cria PENDING com validações; E03 f2a85f1 consultas; E02 ec94864 calendário; E01 832da9b prazo versionado.
-- Três ativos ADR-008, aprovação mantida, 14 úteis seg–sex sem feriados ADR-004. Não coletar CPF; rate limit login/fixture continuam cinco.
-- E01 não aplicada no Supabase; último registro remoto inicial+D04. Nenhuma consulta/aprovação/escrita remota nesta tarefa.
-- Publicador D08 mantém whitelist de duas migrations; não ampliar/reaproveitar ADR-007. Publicação E11 exige autorização própria.
+- E06 autorizada e implementada: requests.reject no router e service request-rejection.ts; helper de ator E05 reutilizado.
+- Input estrito requestId/reason; motivo trimado 1–500 validado em router/service; ator/tenant do contexto.
+- OPERATIONS/ADMIN e ativos revalidados; ordem vínculos solicitante/ator por UUID, equipamento, pedido, igual E05.
+- Transação ReadCommitted/lock 3s/timeout 10s; PENDING e relógio >= requested_at no SQL inclusive microssegundos; sem retry cego.
+- Grava REJECTED/motivo/data/ator e auditoria loan_request.rejected/loan_request/ID pedido, metadata somente equipment_id.
+- Falha de auditoria desfaz rejeição. Não cria/altera Loan, equipamento ou histórico; exclusividade libera pelo status.
+- Disponibilidade continua derivada; manutenção/fora de uso/emprestado permanecem indisponíveis. Limite/atraso não bloqueiam rejeitar.
+- tests/db/request-rejection.test.ts: 31 novos, PostgreSQL real descartável e contexto/Auth simulados, HTTP 400/403/200/409/500.
+- Provas: novo pedido após rejeição, repetição, isolamento, registros ativos, fronteiras motivo, rollback e lock ocupado.
+- Concorrência rejeitar/rejeitar e aprovar/rejeitar: uma decisão/evento, Loan somente quando APPROVED.
+- Checks: 241 banco/dez arquivos, 28 unitários, dez imagens, sete verificador; lint/tipos/formatação/build/diff passaram.
+- Evidências docs/verificacoes/e06-rejeicao.md; spec/plan/tasks/AGENTS atualizados. Sem DDL/dependência/UI/remoto.
+- CA-E04/E08 na parcela API; spec 005 inteira NÃO PRONTA. Verificador integral previsto E10 após as demais tarefas.
+- Próximo E07: catálogo e Meus empréstimos/diálogo de pedido/estados conforme layout/design system/E00, aguardando autorização própria.
+- E05 1f87c1b aprovação/pendentes; E04 ed777b7 pedidos; E03 f2a85f1 consultas; E02 ec94864 calendário; E01 832da9b prazo versionado.
+- Três ativos ADR-008, aprovação mantida, 14 úteis São Paulo seg–sex sem feriados ADR-004. Não coletar CPF.
+- E01 não aplicada no Supabase; último registro remoto inicial+D04. Nenhuma consulta/rejeição/escrita remota nesta tarefa.
+- Publicador D08 mantém whitelist duas migrations; não ampliar/reaproveitar ADR-007. Publicação E11 exige autorização própria.
 - Professor adiado. Spec 004 NÃO PRONTA (CA-D06 SEM TESTE/CA-D07 NÃO ATENDE); não alegar isolamento global.
-- Servidor local reiniciado após build na porta 3000; login HTTP 200; interface ainda placeholder.
+- Servidor local reiniciado após build na porta 3000; login HTTP 200; UI ainda placeholder até E07/E08.
 - Três HTMLs não rastreados em Aulas/ pertencem ao usuário, fora do commit; ambientes reais seguem ignorados.
