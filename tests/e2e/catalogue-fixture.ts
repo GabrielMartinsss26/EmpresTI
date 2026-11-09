@@ -75,7 +75,9 @@ async function sandbox() {
       },
     });
   }
-  async function member(role: "ADMIN" | "COLLABORATOR" = "COLLABORATOR") {
+  async function member(
+    role: "ADMIN" | "OPERATIONS" | "COLLABORATOR" = "COLLABORATOR",
+  ) {
     const id = randomUUID();
     await db.$executeRaw`INSERT INTO auth.users (id) VALUES (${id}::uuid)`;
     await db.profile.create({
@@ -205,11 +207,11 @@ async function sandbox() {
     async reset() {
       const now = new Date("2100-01-01T13:00:00Z");
       await db.loan.updateMany({
-        where: { returned_at: null },
+        where: { tenant_id: tenant.id, returned_at: null },
         data: { returned_at: now, returned_by_membership_id: operator.id },
       });
       await db.loanRequest.updateMany({
-        where: { status: "PENDING" },
+        where: { tenant_id: tenant.id, status: "PENDING" },
         data: {
           status: "REJECTED",
           rejection_reason: "Encerramento da fixture",
@@ -218,7 +220,10 @@ async function sandbox() {
         },
       });
       await db.equipment.updateMany({
-        where: { asset_tag: "TI-0013" },
+        where: {
+          tenant_id: tenant.id,
+          asset_tag: { notIn: inventory.map(([tag]) => tag) },
+        },
         data: { deactivated_at: now },
       });
     },
@@ -265,7 +270,7 @@ async function sandbox() {
     },
   };
 }
-type Sandbox = Awaited<ReturnType<typeof sandbox>>;
+export type Sandbox = Awaited<ReturnType<typeof sandbox>>;
 export const test = base.extend<
   { user: Awaited<ReturnType<Sandbox["member"]>> },
   { sandbox: Sandbox }

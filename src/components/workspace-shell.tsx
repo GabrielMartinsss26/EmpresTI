@@ -9,7 +9,7 @@ export function WorkspaceShell({
   active,
   children,
 }: {
-  active: "catalogue" | "loans";
+  active: "catalogue" | "loans" | "operations";
   children: React.ReactNode;
 }) {
   const me = trpc.auth.me.useQuery();
@@ -61,6 +61,25 @@ export function WorkspaceShell({
                 )}
               </Link>
             ))}
+            {!me.error &&
+              (me.data?.role === "OPERATIONS" || me.data?.role === "ADMIN") && (
+                <>
+                  <p className="px-[10px] pt-5 pb-2 text-[10px] tracking-[.12em] text-faint uppercase">
+                    Operações
+                  </p>
+                  <Link
+                    href="/operacoes/solicitacoes"
+                    aria-current={active === "operations" ? "page" : undefined}
+                    className={`flex items-center gap-2 rounded-control border-l-2 px-[9px] py-[10px] text-[13px] transition-colors hover:bg-sunken ${active === "operations" ? "border-accent bg-surface text-foreground" : "border-transparent text-muted"}`}
+                  >
+                    <i
+                      className="ph ph-list-checks text-base text-accent-icon"
+                      aria-hidden="true"
+                    />
+                    Solicitações
+                  </Link>
+                </>
+              )}
           </nav>
         </div>
         <div className="flex flex-col gap-4">

@@ -7,7 +7,9 @@ export default defineConfig({
     baseURL: `http://localhost:${port}`,
     viewport: { width: 1440, height: 820 },
   },
-  webServer: process.argv.some((arg) => arg.includes("catalogue.spec"))
+  webServer: process.argv.some(
+    (arg) => arg.includes("catalogue.spec") || arg.includes("operations.spec"),
+  )
     ? undefined
     : {
         command: `npm run start -- --port ${port}`,

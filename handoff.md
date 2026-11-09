@@ -1,24 +1,24 @@
 # Handoff — 09/nov/2026
 
 - Branch dev; remoto GabrielMartinsss26/EmpresTI; commits locais autorizados, sem push/deploy nesta tarefa.
-- E07 autorizada e implementada: catálogo substitui placeholder, /meus-emprestimos protegida, sidebar 236px e três colunas.
-- Componentes catalogue/card/workspace-shell/request-dialog/my-loans/domain-feedback; contratos/tipos inferidos do AppRouter.
-- Busca/categoria/disponíveis/paginação, fotos 4:3 object-contain/crédito, resumo real três segmentos; estados erro/vazio/carregamento.
-- Diálogo nativo com foco/Tab/Shift+Tab/Escape/retorno de foco; envia PENDING, trava repetição e invalida consultas em sucesso/conflito.
-- Meus empréstimos separa ativos/due_at real São Paulo de pedidos/decisões/motivo, sem devolver/histórico completo ou prazo inventado.
-- public-config valida origem pública/caminho/bucket; CSP img-src só adiciona origin configurado + caminho público equipamentos.
-- Proxy lê URL/chave públicas em runtime, sem bypass; imagem nativa evita style inline. Nenhuma biblioteca/migration nova.
-- read-input aceita direction:forward opcional técnico do tRPC infinite, preservando objeto estrito e direção única.
-- Testes novos: quatro unitários e nove E2E com Next/tRPC/services/PostgreSQL reais, Auth/Storage/contexto simulados e dados sintéticos.
-- Fixture usa D03 local quando disponível e WebP sintético no clone sem assets; não comprova Auth/Storage remoto.
-- Checks: 241 banco/dez arquivos, 32 unitários, nove E2E novos + dois login + um showcase; imagens dez/verificador sete e lint/tipos/formato/build/diff passaram.
-- Capturas conferidas test-results/e07-{catalogue,dialog,my-loans}.png; outputDir runner test-results/playwright preserva capturas.
-- EPERM em .next resolvido preservando build anterior em .local/e07-build-*; remoção automática rejeitada e não executada.
-- Evidências/falhas corrigidas docs/verificacoes/e07-telas.md; spec/plan/tasks/AGENTS atualizados. Spec inteira NÃO PRONTA, verificador integral E10.
-- Próximo E08: tela mínima de aprovar/rejeitar para Operações/Admin; aguardar autorização própria. Não expor links de páginas ausentes.
-- Três ativos ADR-008, aprovação e 14 úteis seg–sex sem feriados São Paulo ADR-004. Professor adiado; não coletar CPF.
-- E01 ainda não publicada: último registro remoto inicial+D04. Porta 3000 mantém ambiente atual; não afirmar fluxo novo válido nesse banco antes de E11.
-- Nenhum pedido/consulta/migration remotos nesta tarefa. Publicador D08 mantém duas migrations; não ampliar/reaproveitar ADR-007.
-- Servidor principal reiniciado na porta 3000; login sem sessão HTTP 200. Publicação E11 depende autorização própria.
+- E08 autorizada e concluída localmente: /operacoes/solicitacoes, components/operations-requests e decision-dialog.
+- Servidor exige sessão/vínculo/OPERATIONS ou ADMIN; colaborador volta catálogo, sem sessão login. APIs continuam protegidas.
+- Sidebar mostra Operações/Solicitações apenas para papéis permitidos; revogação atualiza auth.me e oculta linhas antigas no erro.
+- Lista real requests.pending paginada, nomes/itens/datas/contagem carregada, carregar/vazio/erro/retry; sem painel completo/cadastro/devolução.
+- Confirmações acessíveis, motivo trimado 1–500, envio único e ações bloqueadas até terminar invalidações. Sucesso só após API.
+- Aprovação mostra due_at real; rejeição não cria Loan. Resultado recebe foco; conflitos/limite/erro não mostram falso sucesso.
+- ui/modal extraído do request-dialog E07 preserva teclado/foco/Escape; E07 nove cenários de regressão passaram.
+- tests/e2e/operations.spec.ts tem 12 cenários novos com Next/tRPC/services/PostgreSQL reais, Auth/Storage/dados simulados.
+- Provas de papel/tenant, revogação, clique repetido, concorrência, rejeição/novo pedido, auditoria com falha real e paginação.
+- Fixture E07 aceita OPERATIONS e limpa apenas tenant local; desativa equipamentos extras. POST de teste inclui Origin e confere corpo tRPC.
+- Checks: 241 banco/dez arquivos, 32 unitários/oito arquivos, 12 E08 + nove E07 + dois login + um showcase, total 24 browser.
+- Imagens dez/verificador sete; lint/tipos/formatação/build/diff passaram. Capturas e08-{operations,approve,reject}.png conferidas.
+- Evidências docs/verificacoes/e08-operacoes.md; spec/plan/tasks/AGENTS atualizados. Spec inteira NÃO PRONTA, verificador integral E10.
+- Próximo E09: sincronizar textos/indicadores/specs da apresentação com três ativos e 14 dias úteis; aguardar autorização própria.
+- E07 0a34b57 catálogo/MyLoans; E06 96114e3 rejeição; E05 1f87c1b aprovação; E04 ed777b7 pedidos; E01/E02 locais.
+- Três ativos ADR-008, aprovação mantida, 14 úteis seg–sex sem feriados São Paulo ADR-004. Professor adiado; não coletar CPF.
+- E01 não aplicada no Supabase; último registro remoto inicial+D04. Não afirmar fluxo novo real antes da migração/publicação E11.
+- Nenhum pedido/decisão/consulta remotos de domínio nesta tarefa. Publicador D08 mantém duas migrations; não ampliar/reaproveitar ADR-007.
+- Servidor principal porta 3000 reiniciado; login sem sessão HTTP 200. Publicação exige autorização própria.
 - Spec 004 NÃO PRONTA (CA-D06 SEM TESTE/CA-D07 NÃO ATENDE); não alegar isolamento global.
 - Três HTMLs não rastreados em Aulas/ pertencem ao usuário, fora do commit; ambientes reais seguem ignorados.
