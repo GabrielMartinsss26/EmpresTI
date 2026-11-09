@@ -1,23 +1,23 @@
 # Handoff — 09/nov/2026
 
 - Branch dev; remoto GabrielMartinsss26/EmpresTI; commits locais autorizados, sem push/deploy nesta tarefa.
-- E03 autorizada após E02: cinco consultas em catalogue.list/categories, loans.summary/mine e requests.mine.
-- Novos routers e services em src/server/api/routers e src/server/services; Prisma no contexto, conforme ADR-001.
-- Services revalidam sessão/vínculo/perfil/tenant; input Zod estrito, nenhum tenant/pessoa recebido do cliente.
-- Catálogo ativo com imagem/crédito ativos e disponibilidade derivada, sem identidade de quem solicitou/tomou.
-- Listas próprias por tenant/vínculo; ativos excluem devolvidos, pedidos incluem decisões/motivo sem inventar prazo.
-- Paginação 12/48; UUID de cursor validado no mesmo escopo, comparação de timestamps no SQL preserva microssegundos.
-- Resumo retorna activeCount/maxActive:3/hasOverdue; não implementa ainda a imposição do limite (E04/E05).
-- Formatter preserva mensagem do login e usa erro interno genérico do domínio; HTTP privado/no-store permanece.
-- Testes novos em tests/db/domain-reads.test.ts: 24; contexto/Auth simulado com PostgreSQL real descartável, sem login real.
-- Checks: 153 de banco/sete arquivos, 28 unitários, dez imagens, sete verificador; lint/tipos/formatação/build/diff passaram.
-- Evidências e falhas corrigidas em docs/verificacoes/e03-consultas.md; spec/plan/tasks/AGENTS atualizados.
-- CA-E01/E09 somente parcela API/leitura; UI ainda placeholder. Spec 005 inteira NÃO PRONTA; verificador integral E10.
-- Próximo E04: pedido PENDING com limite/atraso e concorrência por equipamento; aguardar autorização própria.
-- Três ativos ADR-008, aprovação mantida, 14 dias úteis ADR-004. Não coletar CPF; login rate limit/fixture continuam cinco.
-- E01 832da9b e E02 ec94864 locais; prazo versionado e cálculo sem novas dependências. Integração à aprovação em E05.
-- E01 não aplicada no Supabase; último registro remoto inicial+D04. Sem consulta/escrita remota nesta tarefa.
+- E04 autorizada e implementada: requests.create em router/service existentes, somente LoanRequest PENDING.
+- Input estrito equipmentId UUID; pessoa/vínculo/tenant/ator do contexto. Sem Loan, decisão ou vencimento antes de E05.
+- Transação ReadCommitted: FOR UPDATE vínculo depois equipamento; FOR SHARE perfil/tenant/categoria ativos.
+- Lock timeout 3s, transação 10s; conflito de lock/unicidade/serialização sem retry cego. E05 deve seguir mesma ordem.
+- Revalida ativos, máximo três e atraso pelo relógio do servidor; devolução solicitada ainda ativa, devolvidos excluídos.
+- Pendentes não contam como empréstimos. Manutenção/fora de uso/ocupado CONFLICT; item ausente/externo/inativo NOT_FOUND.
+- Auditoria atômica loan_request.created/loan_request/ID pedido, ator/tenant do contexto, metadata equipment_id.
+- Concorrência mesma/outra pessoa: um pedido/auditoria. Falha real de auditoria desfaz pedido; lock timeout libera nova tentativa.
+- tests/db/request-create.test.ts: 27 novos; contexto/Auth simulados com PostgreSQL real descartável. Prova HTTP 200 e 409.
+- Checks: 180 de banco/oito arquivos, 28 unitários, dez imagens, sete verificador; lint/tipos/formatação/build/diff passaram.
+- Evidências docs/verificacoes/e04-pedidos.md; plano/spec/tasks/AGENTS atualizados. Sem nova migration/dependência.
+- CA-E02 e parte de solicitação CA-E03 locais; aprovação revalida em E05. Spec 005 inteira NÃO PRONTA; verificador integral E10.
+- Próximo E05: aprovação transacional/autorização/revalidação/concorrência/auditoria; aguardar autorização própria.
+- E03 f2a85f1: cinco consultas, isolamento e paginação; E02 ec94864: cálculo de dias úteis; E01 832da9b: prazo versionado.
+- Três ativos ADR-008, aprovação mantida, 14 dias úteis São Paulo seg–sex sem feriados ADR-004. Não coletar CPF.
+- E01 não aplicada no Supabase; último registro remoto inicial+D04. Nenhum pedido/consulta/escrita remota nesta tarefa.
 - Publicador D08 mantém whitelist de duas migrations; não ampliar/reaproveitar ADR-007. Publicação E11 exige autorização.
-- Professor segue adiado. Spec 004 NÃO PRONTA (CA-D06 SEM TESTE, CA-D07 NÃO ATENDE); não alegar isolamento global.
-- Servidor local reiniciado após build na porta 3000; login HTTP 200, novas telas previstas E07/E08.
+- Professor segue adiado. Spec 004 NÃO PRONTA (CA-D06 SEM TESTE/CA-D07 NÃO ATENDE); não alegar isolamento global.
+- Servidor local reiniciado após build na porta 3000; login HTTP 200; UI ainda placeholder, novas telas E07/E08.
 - Três HTMLs não rastreados em Aulas/ pertencem ao usuário, fora do commit; ambientes reais seguem ignorados.
