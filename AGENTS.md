@@ -77,7 +77,10 @@ E08 autorizada depois e implementada/testada localmente em 09/nov/2026: /operaco
 
 E09 autorizada depois e verificada localmente em 09/nov/2026: login/landing agora qualificam 14 dias úteis; três ativos e três segmentos do catálogo preservados/conferidos. Layout/PRD/prática/specs 001/002 distinguem estado atual, histórico de cinco/legado e futuras telas. Sem alteração de ADR/migration/API/rate limit cinco. 32 unitários/quatro E2E de apresentação e lint/tipos/formatação/build passaram, capturas conferidas; evidências docs/verificacoes/e09-apresentacao.md. Não reapresentar os 241 testes de banco da E08 como execução desta tarefa. EPERM de build contornado preservando .next anterior em .local/e09-build-*. Spec NÃO PRONTA; próximo E10 checks/verificador independente/prova plantada e restaurada, aguardando autorização própria. Sem publicação/conta do professor/push.
 
+E10 autorizada depois e concluída localmente em 09/nov/2026: 32 unitários/241 banco/10 imagens/7 verificador/24 browser e checks/build passaram; sete de verificador repetidos após restauração e nove de catálogo no modo estrito. Corrigido aviso duplicado de permissão sem alterar testes de autorização. Erro da fixture 611129b, restauração efetiva 2a943cf; ef0de08 menciona restauração por engano e alterou apenas plano/alerta, com falha e nova reprovação preservadas. Duas revisões integrais reais: R2 resolveu proveniência dos 12 corpos de imagem recebidos pelo navegador, iguais ao manifesto. CA-E02/E03/E04/E06/E07/E08/E11/E12/E13 ATENDE; CA-E01/E05/E09/E10 SEM TESTE por falta de prova publicada E11. Spec NÃO PRONTA; E10 concluída não significa publicação. Recibos/pareceres/snapshots e execução em docs/verificacoes/e10-execucao.md e verificador/e10-*. Próximo E11 exige autorização própria; E01 não aplicada no Supabase, professor adiado, sem push/deploy. Não reescrever hashes/pareceres antigos após estas atualizações documentais.
+
 ## Skills
+
 
 Skills do projeto ficam em `skills/<nome>/SKILL.md`. Para descobrir capacidades, ler apenas name/description do frontmatter; carregar o corpo somente quando a tarefa casar e referências somente quando indicadas. `imagens-equipamentos` prepara fotos do inventário da prática pelo Pixabay; não altera logo/landing nem faz upload. Rules e ADRs prevalecem sobre a skill. Há uma única cópia versionada em `skills/imagens-equipamentos/`.
 
@@ -117,6 +120,7 @@ Para conferir uma spec, usar `npm run verify:spec -- <caminho-da-spec> [caminho-
 - `npm run lint`, `npm run typecheck`, `npm run build` — verificação da aplicação.
 - `npm run format:check` — formatação; `npx prettier --write` para formatar os arquivos de implementação.
 - `npx playwright install chromium`, `npm run test:e2e` — instalação do navegador e E2E local.
+- `npm run test:e2e -- tests/e2e/catalogue.spec.ts --workers=1` com E10_VERIFY_APPROVED_IMAGES=true somente no processo de teste — prova local estrita CA-E01: hashes dos bytes recebidos pelo navegador iguais aos 12 arquivos aprovados no manifesto D03. Não usa Storage remoto; anexo e recibo distinguem imagem real de fallback sintético. Sem a flag, CI preserva o teste portátil e registra a proveniência sem alegar fotos reais.
 - `npm run start` — execução do build de produção.
 
 O deploy remoto depende das verificações locais. Credenciais nunca são impressas.

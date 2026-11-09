@@ -1,0 +1,23 @@
+{
+  "revision": "819f0ad6f1d5eaa050fb379cac9343f47757cb58",
+  "checks": [
+    {
+      "command": "npm test",
+      "startedAt": "2026-11-09T17:03:29.461Z",
+      "finishedAt": "2026-11-09T17:03:31.806Z",
+      "exitCode": 0,
+      "stdout": "\n> empresti@0.1.0 test\n> vitest run\n\n\n RUN  v5.0.5 C:/Users/gabrieloliveira-ieg/OneDrive - Instituto Germinare/Área de Trabalho/TECH 3° ano/Inova Tecno/Projeto EmpresTI/EmpresTI\n\n\n Test Files  8 passed (8)\n      Tests  32 passed (32)\n   Start at  14:03:30\n   Duration  1.19s (import 78%, transform 13%, tests 6%, worker 4%)\n\n",
+      "stderr": "",
+      "error": null
+    },
+    {
+      "command": "npm run test:db",
+      "startedAt": "2026-11-09T17:03:31.848Z",
+      "finishedAt": "2026-11-09T17:14:42.660Z",
+      "exitCode": null,
+      "stdout": "\n> empresti@0.1.0 test:db\n> vitest run --config vitest.db.config.ts\n\n\n RUN  v5.0.5 C:/Users/gabrieloliveira-ieg/OneDrive - Instituto Germinare/Área de Trabalho/TECH 3° ano/Inova Tecno/Projeto EmpresTI/EmpresTI\n\n",
+      "stderr": "",
+      "error": "ETIMEDOUT"
+    }
+  ]
+}

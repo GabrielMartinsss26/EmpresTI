@@ -1,9 +1,18 @@
 import { test, expect } from "./catalogue-fixture";
+import { createHash } from "node:crypto";
+import { readFile, writeFile } from "node:fs/promises";
 
 test("CA-E01/CA-E11: catálogo real com 12 fotos/créditos, três colunas e estados de manutenção", async ({
   page,
-}) => {
+}, testInfo) => {
   const violations: string[] = [];
+  const imageBytes = new Map<string, Promise<Buffer>>();
+  page.on("response", (response) => {
+    const tag = new URL(response.url()).pathname.match(
+      /^\/storage\/v1\/object\/public\/equipamentos\/suporte_ti\/(TI-\d{4})\.webp$/,
+    )?.[1];
+    if (tag && response.ok()) imageBytes.set(tag, response.body());
+  });
   await page.addInitScript(() =>
     document.addEventListener("securitypolicyviolation", (event) =>
       console.error(`E07-CSP:${event.violatedDirective}`),
@@ -42,6 +51,43 @@ test("CA-E01/CA-E11: catálogo real com 12 fotos/créditos, três colunas e esta
       )
       .toBe(800);
   }
+  const manifest = JSON.parse(
+    await readFile("docs/verificacoes/imagens/d03-manifesto.json", "utf8"),
+  ) as { entries: { assetTag: string; sha256: string }[] };
+  expect(manifest.entries).toHaveLength(12);
+  const provenance = [];
+  for (const entry of manifest.entries) {
+    expect(imageBytes.has(entry.assetTag), entry.assetTag).toBe(true);
+    const bytes = await imageBytes.get(entry.assetTag)!;
+    const sha256 = createHash("sha256").update(bytes).digest("hex");
+    const matchesApproved = sha256 === entry.sha256;
+    provenance.push({
+      assetTag: entry.assetTag,
+      sizeBytes: bytes.length,
+      receivedSha256: sha256,
+      approvedSha256: entry.sha256,
+      matchesApproved,
+    });
+    if (process.env.E10_VERIFY_APPROVED_IMAGES === "true")
+      expect(sha256, `${entry.assetTag}: foto aprovada, sem fallback`).toBe(
+        entry.sha256,
+      );
+  }
+  const imageEvidence = JSON.stringify(
+    {
+      strict: process.env.E10_VERIFY_APPROVED_IMAGES === "true",
+      transport: "Storage simulado local; bytes recebidos pelo navegador",
+      provenance,
+    },
+    null,
+    2,
+  );
+  await testInfo.attach("CA-E01-proveniencia-imagens", {
+    body: imageEvidence,
+    contentType: "application/json",
+  });
+  if (process.env.E10_VERIFY_APPROVED_IMAGES === "true")
+    await writeFile("test-results/e10-catalogue-images.json", imageEvidence);
   await page.evaluate(() => window.scrollTo(0, 0));
   const cards = await page.getByRole("article").evaluateAll((elements) =>
     elements.slice(0, 4).map((element) => ({

@@ -55,6 +55,8 @@ Calibração real anterior: `calibracao.md` recusou o recibo `baseline.json` ap�
 
 ## Fontes e versão
 
+E10 da spec 005 executada localmente em 09/nov/2026: prova negativa 611129b e restauração efetiva 2a943cf, com pareceres reais em docs/verificacoes/verificador/e10-*. Tentativa intermediária de restauração falhou; ef0de08 tem mensagem imprecisa, preservada e explicada em docs/verificacoes/e10-execucao.md. Verificador recusou também essa tentativa. Revisão integral R2 resolveu a proveniência local das 12 imagens, mantendo CA-E01/E05/E09/E10 SEM TESTE até E11 publicada; nove demais ATENDE. Spec NÃO PRONTA, sem alegar publicação ou isolamento global. Recibos e snapshots de ambas as rodadas foram preservados, sem substituir hashes depois das atualizações de estado.
+
 Consulta de 06/nov/2026 e CLI instalado `0.167.0-alpha.3.2`:
 
 - https://learn.chatgpt.com/docs/agent-configuration/subagents — arquivo TOML, capacidades e herança de permissões.

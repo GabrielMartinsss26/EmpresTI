@@ -1,24 +1,23 @@
 # Handoff — 09/nov/2026
 
-- Branch dev; remoto GabrielMartinsss26/EmpresTI; commits locais autorizados, sem push/deploy nesta tarefa.
-- E09 autorizada e concluída localmente: login/landing anunciam 3 itens e 14 dias úteis, após aprovação.
-- Landing explica dia útil seguinte sem descontar feriados e não promete botão de solicitação de devolução ainda ausente.
-- Catálogo já correto, três segmentos preservados/conferidos; nenhum limite/cálculo/serviço/API/schema alterado.
-- Layout atualizado conforme E00: telas atuais versus detalhe/cadastro/devolução/painel completo futuros, sem prazo antecipado em pedido.
-- PRD/prática e specs 001/002 sincronizados; cinco intermediários qualificados como histórico, ADRs/migrations/evidências anteriores preservados.
-- T8 de login/CA-03 verificado localmente; T6/T7 ainda pendentes. Rate limit cinco e fixture do verificador não mudaram.
-- Asserts de CA-E11/CA-03 em login.spec, showcase.spec e catalogue.spec; quatro cenários de navegador passaram.
-- Checks: 32 unitários; login dois, showcase um, catálogo um. Lint/tipos/formatação/build/diff passaram.
-- Não repetidos banco/imagens/verificador por serem mudanças só de apresentação; 241 de banco da E08 são histórico, não execução E09.
-- Build inicial EPERM em .next/server/app/operacoes; diretórios conferidos e backup preservado em .local/e09-build-*, sem exclusão.
-- Capturas login-desktop/landing-desktop/landing-mobile/e07-catalogue em test-results; desktop conferido visualmente.
-- Evidências docs/verificacoes/e09-apresentacao.md; spec/plan/tasks/AGENTS atualizados. Spec 005 inteira NÃO PRONTA.
-- Próximo E10: rodada integral e verificador independente via npm run verify:spec conforme docs/verificador.md, prova erro plantado/restaurado em dois commits.
-- Aguardar autorização própria E10; não simular verificador ou marcar critérios sem prova como aprovados. E11 publicação ainda pendente.
-- E08 2fd8181 decisões UI; E07 0a34b57 catálogo/MyLoans; E06 96114e3 rejeição; E05 1f87c1b aprovação; E01/E02 locais.
-- Três ativos ADR-008, aprovação mantida, 14 úteis seg–sex sem descontar feriados/São Paulo ADR-004. Professor adiado; não coletar CPF.
-- E01 não aplicada no Supabase; último registro remoto inicial+D04. Nenhum pedido/consulta/decisão remotos nesta tarefa.
-- Publicador D08 mantém duas migrations; não ampliar/reaproveitar ADR-007. E11 exige autorização própria; não alegar fluxo publicado.
-- Servidor principal porta 3000 reiniciado; login sem sessão HTTP 200. Ambiente principal preservado.
-- Spec 004 NÃO PRONTA (CA-D06 SEM TESTE/CA-D07 NÃO ATENDE); não alegar isolamento global.
-- Três HTMLs não rastreados em Aulas/ pertencem ao usuário, fora do commit; ambientes reais seguem ignorados.
+- Branch dev; E10 concluída localmente, próxima tarefa E11; não iniciar publicação sem autorização própria.
+- Código de produto: operations-requests.tsx omite aviso de decisão idêntico ao erro da lista; preserva alerta/retry/bloqueio de acesso.
+- Primeiro E2E de catálogo registra hashes dos corpos de imagens recebidos pelo navegador; modo estrito E10_VERIFY_APPROVED_IMAGES=true exige manifesto D03.
+- CI continua portátil com fallback identificado; modo estrito local passou 12 imagens distintas/aprovadas, sem mudar fotos ou fixture.
+- Checks: build, 32 unitários, 241 banco, 10 imagens, 7 verificador, lint/tipos/formatação e 24 browser passaram.
+- Repetidos 7 verificador após restauração e 9 catálogo estritos + lint/tipos/formatação após fortalecer teste; não somar repetições como testes distintos.
+- Timeout inicial de banco e falha de browser preservados; não foram convertidos em aprovação.
+- Fixture: erro plantado 611129b; reprovação real CA-V01 NÃO ATENDE/CA-V02 SEM TESTE; restauração efetiva 2a943cf, hashes iguais à baseline.
+- ef0de08 tem mensagem imprecisa: corrige alerta/plano, não restaura fixture; comando de cópia falhou e nova revisão recusou corretamente.
+- Pareceres originais/recibos/delegações em docs/verificacoes/verificador/e10-*; relato docs/verificacoes/e10-execucao.md.
+- Integral R2: CA-E02/E03/E04/E06/E07/E08/E11/E12/E13 ATENDE; CA-E01/E05/E09/E10 SEM TESTE por prova publicada E11 ausente.
+- Spec 005 NÃO PRONTA; E10 marcada concluída pelo processo executado/CA-E13, sem relaxar critérios ou ignorar E11.
+- Snapshots e10-spec/plan/tasks-revisada*.md preservam versões conferidas; recibos e pareceres não são reescritos após status final.
+- Verificador real separado, contexto limpo, read-only/never, só MCP leitor; não alegar isolamento global do principal.
+- E11: preparar publicação da versão validada/migration E01 e checar catálogo/fotos/aprovação/Meus empréstimos com conta própria; atualizar ENTREGA.md.
+- Supabase permanece no último estado remoto inicial+D04; E01 apenas em containers. Publicador D08 não autoriza E01/E11.
+- Três ativos ADR-008, aprovação mantida, 14 úteis seg–sex sem descontar feriados/São Paulo ADR-004; nenhum novo ADR/schema/dependência.
+- Professor adiado, sem usar sua conta. Spec 004 NÃO PRONTA: CA-D06 SEM TESTE/CA-D07 NÃO ATENDE.
+- Servidor principal porta 3000 reiniciado após build; testes de novo fluxo usaram Next/PostgreSQL locais e Auth/Storage simulados.
+- Sem recurso remoto, push, tag ou deploy nesta etapa; commits locais/evidências somente. Ambientes reais ignorados, sem leitura/impressão pelo agente.
+- Três HTMLs não rastreados em Aulas/ são do usuário e não entram nos commits.

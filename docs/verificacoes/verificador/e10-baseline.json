@@ -1,0 +1,16 @@
+{
+  "phase": "E10-baseline",
+  "executor": "principal",
+  "revision": "819f0ad6f1d5eaa050fb379cac9343f47757cb58",
+  "command": "node --test tests/verificador/fixture.test.mjs",
+  "startedAt": "2026-11-09T17:02:26.258Z",
+  "finishedAt": "2026-11-09T17:02:26.491Z",
+  "exitCode": 0,
+  "output": "✔ CA-V01: limite de cinco (0.6077ms)\n✔ CA-V02: aprovação obrigatória (0.1342ms)\nℹ tests 2\nℹ suites 0\nℹ pass 2\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 91.9768\n",
+  "stderr": "",
+  "sha256": {
+    "tests/verificador/spec.md": "a949d63fb1707fbcb203b665f3d3a4744dabc15c14ba5aed6eb531b4f96d2911",
+    "tests/verificador/contrato.json": "a040b678347ae47877e2e3d5628f5362e73a175e519b3110e380d0e89453f3bd",
+    "tests/verificador/fixture.test.mjs": "b98b6565c52c874d9e1de27e03cfa3081fd3ac8af8237e2f4c0970e42273d3c8"
+  }
+}
