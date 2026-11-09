@@ -1,23 +1,24 @@
 # Handoff — 09/nov/2026
 
 - Branch dev; remoto GabrielMartinsss26/EmpresTI; commits locais autorizados; sem push/deploy/escrita remota nesta tarefa.
-- Produção https://empresti-mauve.vercel.app/; dev/prod usam Supabase gverauqgerwjwwjkoybl.
-- Regra atual: três ativos por pessoa, por instrução explícita de 09/nov (ADR-008); mantém aprovação e 14 dias úteis seg–sex/São Paulo.
-- ADR-004 preserva aceitação histórica de cinco em 06/nov; ADR-008 substitui somente o limite. Não coletar CPF.
-- PRD v3, spec 005/CA-E03/E06/E11, apresentação documental e ENTREGA.md sincronizados para três; pendência de prazo no login permanece E09.
-- Não existe serviço de empréstimo implementado; nenhum contador/constraint de limite foi alterado no banco. Código de login e landing já mostra três.
-- Cinco tentativas do login e valor cinco da fixture do verificador são contratos distintos, preservados. Não fazer substituição global.
-- Próximo passo autorizado: E00 da spec 005; contratos de docs/specs/005-solicitar-emprestimo/proposta-e00.md aprovados expressamente após apresentação.
-- Contratos cobrem rotas/APIs/erros/desktop/concorrência e preservação histórica; aprovação recebida no chat. E00 concluída documentalmente, sem código.
-- E01 precisa apresentar SQL exato e obter aprovação antes de schema/migration; versionamento do prazo é proposta, não decisão estrutural aprovada.
-- Não recalcular vencimentos antigos já está definido; não confundir isso com aprovação de uma implementação de campo/função.
-- Crédito discreto e fotos já aprovados no ADR-005; não perguntar de novo. Catálogo visual permanece placeholder; telas/routers da spec 005 não implementados.
-- Conta do professor segue adiada pelo responsável. Não criá-la para testes nem interpretar a nova tarefa como autorização de produção.
-- D08 de 07/nov publicou migration D04, bucket e 12 imagens/equipamentos; quatro categorias, nove disponíveis/três manutenção; sem duplicações.
-- Recibos/pós-revisão D08 preservados em docs/verificacoes/imagens/d08-* e verificador/d08-*; commit 0bc071a.
-- Spec 004 NÃO PRONTA: CA-D06 SEM TESTE e CA-D07 NÃO ATENDE; autorização de publicação não comprova isolamento global.
-- D00–D07 executadas, D08 parcial por conta adiada; D09/ENTREGA.md completa segue pendente.
-- Últimos checks de código em 07/nov: 98 de banco, 13 unitários, dez de imagens, sete do verificador e build/lint/tipos/formatação passaram.
-- Tarefa 09/nov apenas documental: conferir regras/contagens/links/diff; não alegar testes ou mudanças de UI que não ocorreram.
-- Aplicação/galeria locais não foram reiniciadas ou verificadas nesta tarefa; último endereço da aplicação porta 3000.
+- Regras atuais: três ativos (ADR-008), aprovação mantida e 14 dias úteis seg–sex sem feriados/São Paulo (ADR-004).
+- Contratos E00 aprovados expressamente; registrados em docs/specs/005-solicitar-emprestimo/proposta-e00.md. Nenhuma API/tela da spec 005 implementada.
+- Pedido seguinte autorizou próximo passo E01: SQL completo apresentado em docs/specs/005-solicitar-emprestimo/proposta-e01.md.
+- E01 ainda NÃO IMPLEMENTADA: aguardando aprovação estrutural, inclusive antes de registrar ADR-009/schema/migration/testes.
+- Proposta: LoanDueRule + loans.due_rule; linhas existentes LEGACY_CALENDAR_14, default futuro BUSINESS_14_SP.
+- Datas antigas/IDs/timestamps preservados; CHECK nova valida úteis só para novas linhas; trigger impede legado novo e mudar início/vencimento/regra.
+- Função v1 usa São Paulo/ISODOW, exclui dia inicial, mantém horário; sem feriados e sem hardcode UTC−3.
+- SQL proposto é uma instrução DO atômica, lock exclusivo com timeout 5 s; sem alterar migrations anteriores, tenant/RLS/FKs/índices ou trigger da aprovação.
+- E01 inclui plano de upgrade/banco vazio, devolução antiga, calendário e permissões; nenhum SQL executado, nem em container.
+- Após aprovação: ADR estrutural antes do código; snapshot do schema, diff offline proposto no documento, migration 202611090001_loan_due_rules.
+- Fixtures em tests/db/dados-pratica.test.ts e conta-correcao.test.ts hoje usam 14 corridos; adaptar novas fixtures após migration, sem mudar objetivos dos testes.
+- Publicador D08 mantém whitelist das duas migrations anteriores: não ampliá-la para aplicar E01 no remoto. Publicação futura somente E11/autorização própria.
+- Validação atual documental: objetos/constraint anterior/fences/referências e diff/escopo; não declarar sintaxe SQL/testes CA-E12 aprovados.
+- Últimos checks de código são da D08: 98 de banco, 13 unitários, dez de imagens, sete do verificador e build/lint/tipos/formatação passaram.
+- Supabase tem migration inicial+D04; 12 objetos/imagens/equipamentos e quatro categorias, nove disponíveis/três manutenção; D08 publicou em 07/nov.
+- Dados/imagens aprovados na revisão D08-R2; conta/login professor expressamente adiados. Spec 004 NÃO PRONTA: CA-D06 SEM TESTE/CA-D07 NÃO ATENDE.
+- Autorização de publicação ADR-007 não comprova isolamento; não alterar critérios/pareceres históricos para obter aprovação.
+- Login pronto/cadastro fechado; catálogo ainda placeholder, interfaces futuras na spec 005. Não coletar CPF.
+- Rate limit de login e fixture do verificador continuam com cinco, por serem contratos distintos do limite de três.
+- D09/ENTREGA.md completa pendente; aplicação/galeria não reiniciadas ou verificadas nesta tarefa documental.
 - Três HTMLs não rastreados em Aulas/ pertencem ao usuário e ficam fora do commit; ambientes reais continuam ignorados.

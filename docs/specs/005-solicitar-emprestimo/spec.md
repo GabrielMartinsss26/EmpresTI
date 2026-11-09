@@ -55,3 +55,5 @@ Devolução, tela completa de Operações, cadastro de equipamentos por interfac
 Catálogo protegido, nova tela mínima de aprovação/rejeição, Meus empréstimos e routers/services tRPC correspondentes, mantendo Router → Service → Prisma. Procedimentos, rotas e mensagens aprovados em proposta-e00.md. DDL exato ainda depende de apresentação e aprovação em E01.
 
 O banco atual exige `loan_due_14_days` com 14 dias corridos: nova migration é necessária. Não recalcular datas históricas já está definido; mecanismo da migration e desenho detalhado seguem para aprovação. Crédito discreto está aprovado no ADR-005 e metadados/Storage foram implementados nos ADRs 006/007/spec 004. Nenhum critério desta spec tem evidência de implementação ainda.
+
+Próximo passo solicitado em 09/nov/2026: proposta-e01.md apresenta o SQL exato para preservar vencimentos históricos e validar novos prazos úteis. É proposta para aprovação estrutural, ainda sem alteração de schema/migration ou teste de execução; CA-E12 permanece pendente.
