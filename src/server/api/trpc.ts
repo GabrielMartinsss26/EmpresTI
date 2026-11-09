@@ -50,3 +50,11 @@ export const adminProcedure = tenantProcedure.use(({ ctx, next }) => {
   if (ctx.role !== "ADMIN") throw new TRPCError({ code: "FORBIDDEN" });
   return next({ ctx });
 });
+export const operationsProcedure = tenantProcedure.use(({ ctx, next }) => {
+  if (ctx.role !== "OPERATIONS" && ctx.role !== "ADMIN")
+    throw new TRPCError({
+      code: "FORBIDDEN",
+      message: "Você não tem permissão para decidir solicitações.",
+    });
+  return next({ ctx });
+});
