@@ -4,9 +4,11 @@ Status: D01–D07 executadas e D08 de dados/imagens publicada em 07/nov/2026 por
 
 ## Fontes e histórico
 
+Atualização em 09/nov/2026: limite vigente voltou a três ativos por decisão explícita do responsável (ADR-008). Aprovação e prazo permanecem; contratos E00 da spec 005 preparados e aprovados expressamente após apresentação. Nenhuma escrita remota ou alteração do fluxo funcional nesta revisão documental.
+
 - Enunciado preservado em `novas-orientacoes/pratica-sdd-subagentes.html`.
 - PRD atualizado e ADR-003 preservado como histórico, com substituição parcial explícita pelo ADR-004.
-- A decisão final do responsável mantém aprovação e adota cinco empréstimos, 14 dias úteis e três equipamentos em manutenção. A fala anterior de aceitar empréstimo imediato foi reconsiderada antes da implementação.
+- Em 06/nov o responsável manteve aprovação e adotou cinco empréstimos, 14 dias úteis e três equipamentos em manutenção. Em 09/nov voltou a três ativos pelo risco/volume por pessoa (ADR-008), mantendo aprovação e prazo. A fala anterior de aceitar empréstimo imediato foi reconsiderada antes da implementação.
 - Pixabay substitui Pexels por instrução explícita do responsável. Não afirmar que as condições dos dois provedores são iguais.
 - Specs 001 e 002 existentes não são renumeradas; 003 permanece cancelada. Novas funcionalidades: 004-dados-iniciais e 005-solicitar-emprestimo.
 

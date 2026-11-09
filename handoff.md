@@ -1,25 +1,23 @@
-# Handoff — 07/nov/2026
+# Handoff — 09/nov/2026
 
-- Branch dev; remoto GabrielMartinsss26/EmpresTI; commits locais autorizados; sem push/deploy Vercel nesta etapa.
-- Produção da aplicação https://empresti-mauve.vercel.app/; dev/prod no Supabase gverauqgerwjwwjkoybl.
-- Login pronto; autocadastro fechado; catálogo visual ainda é placeholder da spec 005, sem mudança de UI nesta tarefa.
-- ADR-004: aprovação, cinco ativos, 14 dias úteis seg–sex/São Paulo; três manutenção. Constraint do banco ainda usa 14 corridos; spec 005 futura.
-- D00–D07 executadas; D08 PARCIAL: dados/imagens publicados, conta/login reais adiados expressamente pelo responsável.
-- ADR-007 registra delegação explícita da D08 ao agente, antes do código/escrita; não autoriza execução ampla em outros projetos nem comprova isolamento.
-- Supabase agora tem a migration D04 202611060001_equipment_images; inicial intacta/checksum confirmado. Nenhuma migration nova nesta tarefa.
-- Bucket equipamentos público, somente image/webp/1 MiB; 12 objetos suporte_ti/TI-0001.webp a TI-0012.webp.
-- Populados quatro categorias, 12 equipamentos e 12 referências; nove disponíveis/três manutenção; zero pedidos/empréstimos desses itens.
-- Primeira publicação criou ausentes; segunda criou zero cadastros e zero uploads; IDs/timestamps/bytes preservados.
-- 12 GETs sem autenticação HTTP 200, hashes/dimensões conferidos; upload anônimo negado (HTTP 400/código Storage 403), listagem vazia/metadados HTTP 401.
-- RLS e guard restritivo reais conferidos; sem teste HTTP com JWT de colaborador. Nenhuma conta criada, convite enviado ou senha redefinida.
-- Executor scripts/publicar-pratica.ts exige projeto e --apply, checa destino/conflitos/TLS; nunca importado pela aplicação. Simulação em prisma/dados-pratica.ts.
-- npm run publicar:pratica é produção, não teste; usar só na autorização pontual ADR-007. Sem credencial em parâmetros/logs/relatórios.
-- Checks: 98 de banco descartável, 13 unitários, dez de imagens, sete do verificador; lint/tipos/formatação/build passaram.
-- Evidências em docs/verificacoes/imagens/d08-execucao.md, d08-recibo.json e d08-recibo-r2.json; logs sanitizados ignorados .local/d08-*.
-- Primeira revisão D08 bloqueou leitura de fontes por ambiguidade do lançador; texto esclarecido sem mudar whitelist/sandbox e sete testes refeitos.
-- Revisão D08-R2 conferiu 92 hashes: CA-D01/D02/D03/D04/D05/D08 ATENDE; CA-D06 SEM TESTE; CA-D07 NÃO ATENDE pela capacidade/uso de escrita real autorizada.
-- Spec 004 NÃO PRONTA. Pareceres originais/delegações em docs/verificacoes/verificador/d08-*; snapshot d08-spec-revisada.md preserva a spec avaliada.
-- Não reduzir CA-D07 nem confundir autorização com isolamento. Proposta de ambiente separado D07 permanece sem implementação aprovada.
-- Conta professor permanece para depois. D09/ENTREGA.md pendente; próximo trabalho visual é catálogo/fluxo da spec 005, com tarefas próprias.
-- Aplicação local reiniciada após build, /login porta 3000 HTTP 200; fotos reais já acessíveis no Storage, ainda sem catálogo implementado.
-- Três HTMLs não rastreados em Aulas/ pertencem ao usuário; fora do commit. Seed continua tenant-only; ambientes reais ignorados.
+- Branch dev; remoto GabrielMartinsss26/EmpresTI; commits locais autorizados; sem push/deploy/escrita remota nesta tarefa.
+- Produção https://empresti-mauve.vercel.app/; dev/prod usam Supabase gverauqgerwjwwjkoybl.
+- Regra atual: três ativos por pessoa, por instrução explícita de 09/nov (ADR-008); mantém aprovação e 14 dias úteis seg–sex/São Paulo.
+- ADR-004 preserva aceitação histórica de cinco em 06/nov; ADR-008 substitui somente o limite. Não coletar CPF.
+- PRD v3, spec 005/CA-E03/E06/E11, apresentação documental e ENTREGA.md sincronizados para três; pendência de prazo no login permanece E09.
+- Não existe serviço de empréstimo implementado; nenhum contador/constraint de limite foi alterado no banco. Código de login e landing já mostra três.
+- Cinco tentativas do login e valor cinco da fixture do verificador são contratos distintos, preservados. Não fazer substituição global.
+- Próximo passo autorizado: E00 da spec 005; contratos de docs/specs/005-solicitar-emprestimo/proposta-e00.md aprovados expressamente após apresentação.
+- Contratos cobrem rotas/APIs/erros/desktop/concorrência e preservação histórica; aprovação recebida no chat. E00 concluída documentalmente, sem código.
+- E01 precisa apresentar SQL exato e obter aprovação antes de schema/migration; versionamento do prazo é proposta, não decisão estrutural aprovada.
+- Não recalcular vencimentos antigos já está definido; não confundir isso com aprovação de uma implementação de campo/função.
+- Crédito discreto e fotos já aprovados no ADR-005; não perguntar de novo. Catálogo visual permanece placeholder; telas/routers da spec 005 não implementados.
+- Conta do professor segue adiada pelo responsável. Não criá-la para testes nem interpretar a nova tarefa como autorização de produção.
+- D08 de 07/nov publicou migration D04, bucket e 12 imagens/equipamentos; quatro categorias, nove disponíveis/três manutenção; sem duplicações.
+- Recibos/pós-revisão D08 preservados em docs/verificacoes/imagens/d08-* e verificador/d08-*; commit 0bc071a.
+- Spec 004 NÃO PRONTA: CA-D06 SEM TESTE e CA-D07 NÃO ATENDE; autorização de publicação não comprova isolamento global.
+- D00–D07 executadas, D08 parcial por conta adiada; D09/ENTREGA.md completa segue pendente.
+- Últimos checks de código em 07/nov: 98 de banco, 13 unitários, dez de imagens, sete do verificador e build/lint/tipos/formatação passaram.
+- Tarefa 09/nov apenas documental: conferir regras/contagens/links/diff; não alegar testes ou mudanças de UI que não ocorreram.
+- Aplicação/galeria locais não foram reiniciadas ou verificadas nesta tarefa; último endereço da aplicação porta 3000.
+- Três HTMLs não rastreados em Aulas/ pertencem ao usuário e ficam fora do commit; ambientes reais continuam ignorados.

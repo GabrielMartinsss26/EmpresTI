@@ -13,7 +13,7 @@ Status: rascunho iniciado em 06/nov/2026. Não é declaração de entrega conclu
 | Pedido | Contrariava o quê | O que foi decidido | Por quê | Registro | Commit/evidência |
 |---|---|---|---|---|---|
 | Empréstimo imediato sem aprovação | ADR-003, relações e trigger do banco existente | Manter aprovação por Operações/Admin; incluir decisão mínima na prática | Responsável não considera adequado emprestar a bel prazer e quer preservar o controle/modelo | ADR-004; spec 005, regras 3–8 | Decisão confirmada em 06/nov/2026; implementação pendente |
-| Cinco empréstimos | PRD original com três | Adotar cinco ativos | Responsável aceitou a sugestão da prática | PRD v2; ADR-004; CA-E03/E06 | Implementação pendente |
+| Três empréstimos | PRD original com três; revisão de 06/nov aceitou cinco | Retornar a três ativos em 09/nov | Responsável reconsiderou volume por pessoa e risco de não devolução/prejuízo | PRD v3; ADR-004 histórico e ADR-008 vigente; CA-E03/E06 | Implementação pendente |
 | 14 dias úteis | ADR-003 e constraint de 14 corridos | Adotar 14 úteis após aprovação | Responsável considera mais adequado que corridos | ADR-004; CA-E07/E12 | Nova migration pendente |
 | Somente TI-0004/TI-0007 em manutenção | Lista do mesmo enunciado também marca TI-0010 | Manter os três em manutenção | Responsável escolheu a lista completa | Spec 004, inventário e CA-D01 | População pendente |
 | Pexels como única fonte | Alteração de orientação pelo responsável | Usar Pixabay como única fonte | Nova orientação para a prática | docs/pratica.md; spec 004 | Skill ainda não criada |
@@ -40,6 +40,8 @@ Na calibração do verificador, o principal forneceu um recibo de execução ant
 ## 3. Uma decisão que merece (ou não) um ADR
 
 ADR-004 registra manutenção da aprovação e alteração de limite/prazo. Há alternativas defensáveis e impacto na constraint do banco, nas transações, nos testes e na interface. O ADR-003 permanece como histórico, sem fingir que previa cinco itens/dias úteis desde o começo.
+
+ADR-008 registra a decisão posterior de voltar a três empréstimos ativos em 09/nov/2026. A aprovação e os 14 dias úteis permanecem. Não houve exclusão de histórico, coleta de CPF ou implementação do fluxo nesta revisão documental; a decisão intermediária de cinco foi preservada para a correção.
 
 ## 4. A skill imagens-equipamentos
 

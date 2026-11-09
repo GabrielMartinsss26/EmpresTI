@@ -1,6 +1,6 @@
 # PRD — Empréstimo de Equipamentos Internos
 
-Versão 2 — regras revisadas pelo responsável pelo projeto em 06/nov/2026 para a prática. O texto original foi escrito pelo time de Operações; histórico das mudanças no ADR-004.
+Versão 3 — limite revisto pelo responsável em 09/nov/2026 para três empréstimos ativos (ADR-008). Aprovação e 14 dias úteis da revisão de 06/nov permanecem. O texto original foi escrito pelo time de Operações; histórico nos ADRs 004 e 008.
 
 ## Problema
 
@@ -24,7 +24,7 @@ lembra de atualizar a linha.
 
 ## Regras já decididas por Operações
 
-- Cada pessoa pode estar com, no máximo, cinco empréstimos ativos ao mesmo tempo.
+- Cada pessoa pode estar com, no máximo, três empréstimos ativos ao mesmo tempo.
 - Solicitar cria um pedido pendente; Operações ou Admin aprova antes de criar o empréstimo. Não há empréstimo imediato por autoatendimento.
 - O prazo de devolução é de 14 dias úteis a partir da aprovação: segunda a sexta, sem descontar feriados, começando no dia seguinte e mantendo o horário no fuso de São Paulo.
 - Quem tem item em atraso não pode pegar outro item emprestado.
@@ -43,3 +43,5 @@ Operações consegue abandonar a planilha depois de duas semanas de uso.
 ## Histórico da revisão para a prática
 
 O limite anterior era de três itens, e o ADR-003 detalhava o prazo como 14 dias corridos. A revisão adota cinco empréstimos e 14 dias úteis do briefing, mas mantém a aprovação já decidida no projeto. Essa escolha é do responsável pelo projeto, não uma decisão do agente. Detalhes e alternativas no ADR-004; implementação nas specs 004 e 005. A atualização documental não significa que o fluxo já esteja implementado ou publicado.
+
+Em 09/nov/2026 o responsável voltou ao limite de três, por considerar cinco equipamentos por pessoa um volume elevado e um risco de não devolução/prejuízo. ADR-008 registra essa nova decisão, preservando o histórico anterior. Não há coleta de CPF nem mudança da identidade do usuário. O limite ainda será validado no fluxo da spec 005; não foi publicada alteração de regras no banco nesta revisão documental.

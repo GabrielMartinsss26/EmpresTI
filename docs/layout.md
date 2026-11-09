@@ -3,7 +3,7 @@
 Documento de referência do front-end do EmpresTI (empréstimo de equipamentos internos).
 Base visual: design system **Nocturne** adaptado à primária `#001449`.
 
-Atualização de negócio em 06/nov/2026: menções abaixo a três itens/segmentos ou prazo de 14 dias sem qualificação preservam a referência anterior. Para a prática, prevalecem cinco empréstimos ativos e 14 dias úteis do ADR-004. Atualização visual/código pendente na spec 005, tarefa E09; demais tokens e composição permanecem.
+Atualização de negócio em 09/nov/2026: prevalecem três empréstimos ativos (ADR-008) e 14 dias úteis (ADR-004). A decisão intermediária de cinco foi reconsiderada pelo responsável. Três itens/segmentos da referência voltam a corresponder ao limite; textos de prazo ainda precisam qualificar dias úteis na spec 005, tarefa E09. Demais tokens e composição permanecem.
 **Somente modo escuro.** Não existe modo claro, nem alternador de tema.
 
 ---

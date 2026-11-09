@@ -1,6 +1,6 @@
 # ADR-002: Design system
 
-Nota de revisão em 06/nov/2026: números de itens e prazos abaixo refletem a regra original. O ADR-004 passa a reger limite de cinco e prazo de 14 dias úteis; a representação deve acompanhar essa regra sem alterar os tokens. Código e referências visuais serão sincronizados em E09 da spec 005.
+Nota de revisão em 09/nov/2026: o limite volta a três pelo ADR-008; prazo de 14 dias úteis permanece conforme ADR-004. A representação deve acompanhar essas regras sem alterar tokens. Três segmentos da referência permanecem adequados; comunicação de dias úteis será sincronizada em E09 da spec 005.
 
 ## Contexto
 

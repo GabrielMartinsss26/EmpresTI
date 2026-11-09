@@ -2,13 +2,15 @@
 
 Status: decisões de negócio aprovadas pelo responsável pelo projeto em 06/nov/2026. Implementação pendente. Substitui parcialmente o ADR-003 quanto ao limite e ao prazo; demais decisões permanecem.
 
+Atualização de 09/nov/2026: somente o limite de cinco abaixo foi substituído pelo retorno a **três** no ADR-008, a pedido do responsável. O texto restante preserva o histórico da revisão de 06/nov; aprovação e 14 dias úteis continuam vigentes.
+
 ## Contexto
 
 A prática apresenta empréstimo imediato, cinco empréstimos em aberto e 14 dias úteis. O projeto havia decidido aprovação por Operações, limite de três e 14 dias corridos. O responsável avaliou os conflitos, manteve a aprovação e adotou o novo limite e prazo. Sua resposta final substitui a proposta inicial de aceitar empréstimo imediato.
 
 ## Decisões
 
-| Item | Decisão anterior | Decisão vigente |
+| Item | Decisão anterior | Decisão em 06/nov/2026 (limite posteriormente revisto no ADR-008) |
 |---|---|---|
 | Aprovação | Operações aprova ou rejeita | Mantida; Operações ou Admin do mesmo tenant aprova ou rejeita |
 | Criação do empréstimo | Na aprovação | Mantida; solicitar cria somente pedido pendente |

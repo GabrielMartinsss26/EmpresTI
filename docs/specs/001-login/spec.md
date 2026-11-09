@@ -35,7 +35,7 @@ Permitir que uma pessoa provisionada pelo administrador entre com e-mail e senha
 - CA-01 · Uma pessoa sem sessão abre `/login` e vê o formulário; `/` continua sendo a landing, conforme spec 002.
 - CA-02 · Em 1440 × 820, o hero tem 560px e a área de formulário ocupa o restante, sem rolagem horizontal.
 - CA-02a · Não há rolagem horizontal ou vertical em 1440 × 820, 1366 × 768 e 1280 × 720, inclusive com erros de validação. Janelas menores e zoom podem rolar para manter os campos acessíveis.
-- CA-03 · Hero apresenta marca, “5 itens por pessoa”, “14 dias úteis de prazo” e “Operações · v1”, conforme ADR-004. A versão anterior mostrava três itens e 14 dias; sincronização pendente na tarefa E09 da spec 005.
+- CA-03 · Hero apresenta marca, “3 itens por pessoa”, “14 dias úteis de prazo” e “Operações · v1”, conforme ADR-008/ADR-004. O número três atual permanece adequado; qualificar dias úteis ainda depende da tarefa E09 da spec 005.
 - CA-04 · Campos têm rótulos, a senha é ocultada e o formulário apresenta o botão Entrar e a orientação de suporte.
 - CA-05 · Não existe ação de autocadastro; o provedor deve impedir cadastro público.
 - CA-06 · Controles interativos têm foco de teclado visível.
