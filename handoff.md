@@ -1,24 +1,25 @@
 # Handoff — 09/nov/2026
 
-- Branch dev; remoto GabrielMartinsss26/EmpresTI; commits locais autorizados; sem push/deploy/escrita remota nesta tarefa.
-- Regras atuais: três ativos (ADR-008), aprovação mantida e 14 dias úteis seg–sex sem feriados/São Paulo (ADR-004).
-- Contratos E00 aprovados expressamente; registrados em docs/specs/005-solicitar-emprestimo/proposta-e00.md. Nenhuma API/tela da spec 005 implementada.
-- Pedido seguinte autorizou próximo passo E01: SQL completo apresentado em docs/specs/005-solicitar-emprestimo/proposta-e01.md.
-- E01 ainda NÃO IMPLEMENTADA: aguardando aprovação estrutural, inclusive antes de registrar ADR-009/schema/migration/testes.
-- Proposta: LoanDueRule + loans.due_rule; linhas existentes LEGACY_CALENDAR_14, default futuro BUSINESS_14_SP.
-- Datas antigas/IDs/timestamps preservados; CHECK nova valida úteis só para novas linhas; trigger impede legado novo e mudar início/vencimento/regra.
-- Função v1 usa São Paulo/ISODOW, exclui dia inicial, mantém horário; sem feriados e sem hardcode UTC−3.
-- SQL proposto é uma instrução DO atômica, lock exclusivo com timeout 5 s; sem alterar migrations anteriores, tenant/RLS/FKs/índices ou trigger da aprovação.
-- E01 inclui plano de upgrade/banco vazio, devolução antiga, calendário e permissões; nenhum SQL executado, nem em container.
-- Após aprovação: ADR estrutural antes do código; snapshot do schema, diff offline proposto no documento, migration 202611090001_loan_due_rules.
-- Fixtures em tests/db/dados-pratica.test.ts e conta-correcao.test.ts hoje usam 14 corridos; adaptar novas fixtures após migration, sem mudar objetivos dos testes.
-- Publicador D08 mantém whitelist das duas migrations anteriores: não ampliá-la para aplicar E01 no remoto. Publicação futura somente E11/autorização própria.
-- Validação atual documental: objetos/constraint anterior/fences/referências e diff/escopo; não declarar sintaxe SQL/testes CA-E12 aprovados.
-- Últimos checks de código são da D08: 98 de banco, 13 unitários, dez de imagens, sete do verificador e build/lint/tipos/formatação passaram.
-- Supabase tem migration inicial+D04; 12 objetos/imagens/equipamentos e quatro categorias, nove disponíveis/três manutenção; D08 publicou em 07/nov.
-- Dados/imagens aprovados na revisão D08-R2; conta/login professor expressamente adiados. Spec 004 NÃO PRONTA: CA-D06 SEM TESTE/CA-D07 NÃO ATENDE.
-- Autorização de publicação ADR-007 não comprova isolamento; não alterar critérios/pareceres históricos para obter aprovação.
-- Login pronto/cadastro fechado; catálogo ainda placeholder, interfaces futuras na spec 005. Não coletar CPF.
-- Rate limit de login e fixture do verificador continuam com cinco, por serem contratos distintos do limite de três.
-- D09/ENTREGA.md completa pendente; aplicação/galeria não reiniciadas ou verificadas nesta tarefa documental.
-- Três HTMLs não rastreados em Aulas/ pertencem ao usuário e ficam fora do commit; ambientes reais continuam ignorados.
+- Branch dev; remoto GabrielMartinsss26/EmpresTI; commits locais autorizados; sem push/deploy/escrita Supabase nesta tarefa.
+- Regras: três ativos ADR-008, aprovação mantida, 14 dias úteis seg–sex sem descontar feriados/São Paulo ADR-004.
+- Contratos E00 aprovados; proposta E01 86d8127 depois aprovada explicitamente para implementação/testes descartáveis.
+- ADR-009 registrado antes do código; E01 implementada: LoanDueRule, Loan.due_rule e migration 202611090001_loan_due_rules.
+- Existentes recebem LEGACY_CALENDAR_14 sem alterar valores anteriores; default novo BUSINESS_14_SP. Guard impede legado novo e alteração de início/vencimento/regra.
+- SQL corresponde integralmente ao bloco aprovado em proposta-e01.md; duas migrations anteriores intactas. Sem mudança de semântica do SQL.
+- Função SQL v1 exclui o dia inicial, conta seg–sex, mantém horário São Paulo; privilégios públicos revogados, invoker; não alterar v1 para mudar calendário.
+- 28 testes novos: upgrade com microssegundos/ativo/devolvido, devolução antiga, datas/default/guard, expectativas fixas, papéis e falhas atômicas.
+- Controle negativo desativa guard em transação local e rollback o restaura. Colisão tardia e lock timeout falham sem objetos parcialmente criados.
+- Fixtures D05/D06 agora usam vencimento válido útil no container; objetivos de conflito preservados. D04 reexecução aponta ao seu schema histórico.
+- Checks: 126 de banco em cinco arquivos, 13 unitários, dez de imagens, sete do verificador, lint/tipos/formatação/build passaram.
+- Evidências/recibo em docs/verificacoes/e01-prazo.md e e01-prazo.json; snapshots/logs ignorados .local/e01-*.
+- Schema snapshot antes da edição .local/e01-schema-before.prisma; geração offline registrada no AGENTS; migration aplicada só via Prisma no container.
+- E01 concluída localmente/CA-E12; spec 005 inteira NÃO PRONTA. Próxima tarefa E02: cálculo TypeScript/relógio controlável, sem deps novas.
+- APIs, telas e limite de três ainda não implementados no servidor; E03–E09 pendentes. Verificador integral e prova E10 depois das demais tarefas.
+- Nenhuma aplicação remota da E01. Último estado registrado do Supabase é inicial+D04; não foi reconsultado nesta etapa.
+- Publicador D08 mantém whitelist de duas migrations e recusa a terceira; não ampliá-la nem reaproveitar ADR-007 para publicar E01.
+- Publicação futura E11 exige autorização própria e código de aprovação compatível com novo prazo; não reverter CHECK cegamente.
+- D08 anterior publicou 12 imagens/equipamentos/quatro categorias, nove disponíveis/três manutenção; conta do professor permanece adiada.
+- Spec 004 NÃO PRONTA: CA-D06 SEM TESTE e CA-D07 NÃO ATENDE; autorização não prova isolamento global.
+- Servidor deste projeto reiniciado após build na porta 3000; login sem sessão conferido HTTP 200; UI de catálogo ainda placeholder.
+- Não coletar CPF; rate limit de login e fixture isolada continuam com cinco, por serem contratos distintos.
+- Três HTMLs não rastreados em Aulas/ pertencem ao usuário; fora do commit. Ambientes reais continuam ignorados.

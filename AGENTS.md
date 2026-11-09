@@ -59,7 +59,7 @@ Depois, o responsável delegou expressamente ao agente a D08 no Supabase existen
 
 Em 09/nov/2026 o responsável restabeleceu três empréstimos ativos por pessoa, por volume/risco de não devolução ou prejuízo, e autorizou o próximo passo da spec 005. ADR-008 substitui somente o limite do ADR-004; aprovação e 14 dias úteis permanecem. PRD/specs/apresentação documental sincronizados; limite ainda não implementado no servidor. Rate limit de login e fixture isolada continuam com cinco, por serem contratos distintos. Contratos da E00 em docs/specs/005-solicitar-emprestimo/proposta-e00.md aprovados expressamente depois da apresentação no chat; próximo E01 deve apresentar/aprovar o SQL exato antes de implementação. Não tratar contratos/DDL como implementados ou republicar dados. Conta do professor permanece adiada; sem nova autorização de produção/push.
 
-O pedido seguinte de 09/nov autorizou preparar a E01: docs/specs/005-solicitar-emprestimo/proposta-e01.md apresenta SQL completo, versionamento/defaults/CHECK/trigger, preservação, efeitos e testes. Ainda é proposta sem aprovação estrutural; não escrever ADR-009 ou mudar schema/migrations até resposta explícita. Nenhum SQL foi executado, nem mesmo no container. A aprovação solicitada limita a futura execução ao PostgreSQL descartável; publicação da nova regra não está autorizada pela D08 anterior.
+Após a proposta E01 do commit 86d8127, o responsável aprovou expressamente implementar/testar em 09/nov/2026. ADR-009 registrado antes do código; enum/campo due_rule e migration 202611090001_loan_due_rules implementados somente em containers. 28 testes novos/126 de banco totais e checks gerais/build passaram; evidências docs/verificacoes/e01-prazo.md e .json. Preserva legado/datas, exige úteis para novos e impede mudar datas/regra. SQL coincide com a aprovação; migrations anteriores intactas. Próximo E02, cálculo TypeScript; nenhuma API/tela nova ou aplicação no Supabase. O publicador D08 permanece com duas migrations na whitelist, sem autorização para publicar E01.
 
 ## Skills
 
@@ -85,6 +85,7 @@ Para conferir uma spec, usar `npm run verify:spec -- <caminho-da-spec> [caminho-
 - `npx prisma format` — formatação do schema Prisma local; não aplica mudanças ao banco.
 - `npx prisma migrate diff --from-empty --to-schema-datamodel prisma/schema.prisma --script --output prisma/migrations/202610190001_initial/migration.sql` — geração inicial; SQL de segurança complementado na mesma migration.
 - `npx prisma migrate diff --from-schema-datamodel .local/d04-schema-before.prisma --to-schema-datamodel prisma/schema.prisma --script --output prisma/migrations/202611060001_equipment_images/migration.sql` — geração offline da D04 aprovada; snapshot anterior à edição; complementar checks/policies/trigger na mesma migration. Sem introspecção remota.
+- `npx prisma migrate diff --from-schema-datamodel .local/e01-schema-before.prisma --to-schema-datamodel prisma/schema.prisma --script --output prisma/migrations/202611090001_loan_due_rules/migration.sql` — E01 aprovada em 09/nov: geração offline executada, complementada pelo SQL aprovado; testar deploy somente no container descartável.
 - `npm run db:deploy` — aplicação de migrations no destino configurado.
 - `npm run db:seed` — seed idempotente.
 - `npm run test:db` — banco local descartável via Testcontainers; nunca usa o banco remoto.

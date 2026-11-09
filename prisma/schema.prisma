@@ -26,6 +26,11 @@ enum RequestStatus {
   REJECTED
 }
 
+enum LoanDueRule {
+  LEGACY_CALENDAR_14
+  BUSINESS_14_SP
+}
+
 model Tenant {
   id               String              @id @default(uuid()) @db.Uuid
   slug             String              @unique
@@ -190,6 +195,7 @@ model Loan {
   approved_by_membership_id String      @db.Uuid
   checked_out_at            DateTime    @db.Timestamptz(6)
   due_at                    DateTime    @db.Timestamptz(6)
+  due_rule                  LoanDueRule @default(BUSINESS_14_SP)
   return_requested_at       DateTime?   @db.Timestamptz(6)
   returned_at               DateTime?   @db.Timestamptz(6)
   returned_by_membership_id String?     @db.Uuid

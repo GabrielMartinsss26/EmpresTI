@@ -327,7 +327,11 @@ describe("D05 · CA-D01/CA-D02 — população em PostgreSQL descartável", () =
               borrower_membership_id: membership.id,
               approved_by_membership_id: membership.id,
               checked_out_at: now,
-              due_at: new Date(now.getTime() + 14 * 86_400_000),
+              due_at: (
+                await db.$queryRaw<
+                  { due: Date }[]
+                >`SELECT public.loan_due_14_business_days_v1(${now}::timestamptz) AS due`
+              )[0].due,
             },
           });
       }

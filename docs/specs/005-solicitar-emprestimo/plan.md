@@ -1,6 +1,6 @@
 # Plano 005 — Solicitação com aprovação
 
-Status: contratos E00 aprovados em 09/nov/2026; limite três vigente no ADR-008. Próximo passo solicitado produziu proposta-e01.md com SQL exato e efeitos; aguardar aprovação estrutural antes de schema/migration. APIs/telas ainda não implementadas; executar e verificar uma tarefa por vez.
+Status: E00 aprovada e E01 aprovada/implementada/testada localmente em 09/nov/2026. Decisão estrutural ADR-009, migration 202611090001_loan_due_rules, provas em docs/verificacoes/e01-prazo.md. Próxima tarefa E02; limite três permanece. APIs/telas e publicação da migration ainda pendentes; executar/verificar uma tarefa por vez.
 
 1. Fechar rotas, procedimentos, mensagens, crédito das fotos e política de empréstimos existentes. Dependências: skill/verificador e dados da spec 004.
 2. Apresentar mudança da constraint de prazo e eventuais funções/índices adicionais; manter relações de aprovação, tenant, unicidade e auditoria do ADR-003. Criar nova migration depois de aprovada, sem editar a inicial.
@@ -13,6 +13,6 @@ Status: contratos E00 aprovados em 09/nov/2026; limite três vigente no ADR-008.
 
 ## E01 — proposta apresentada
 
-`proposta-e01.md` detalha o enum/campo de versão do prazo, defaults de corte, função/CHECK/trigger, impacto em registros/atualizações, lock e plano de testes. Comando offline de geração proposto no documento, ainda não executado. SQL somente em Markdown: não há nova migration nem mudança no schema atual.
+`proposta-e01.md` preserva a versão apresentada em 86d8127 e aprovada posteriormente. Comando offline executado, schema alterado e SQL aprovado aplicado somente em containers. 28 testes novos e 126 de banco totais passaram; migrações anteriores intactas. O comando executado está no AGENTS, com snapshots/resultados locais ignorados e recibo versionado.
 
-Aprovação solicitada é para implementação/testes em PostgreSQL descartável; não inclui Supabase, publicação, push ou E02. Se aprovada, registrar a decisão estrutural em ADR antes do código, conforme regras existentes. Reusar os contratos E00 e as respostas sobre limite/calendário; não reabrir essas decisões.
+Aprovação recebida foi somente para implementação/testes em PostgreSQL descartável; ADR-009 foi registrado antes do código. Não inclui Supabase, publicação, push ou E02. Reusar os contratos E00 e as respostas sobre limite/calendário; não reabrir essas decisões.

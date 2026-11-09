@@ -1,9 +1,9 @@
 # Tarefas 005 — Catálogo, solicitação e aprovação
 
-Em 09/nov/2026 o responsável restabeleceu três ativos (ADR-008), aprovou os contratos E00 e autorizou o próximo passo. Proposta SQL da E01 apresentada em proposta-e01.md; aprovação estrutural ainda pendente. Nenhuma API/tela/migration nova implementada.
+Em 09/nov/2026 o responsável restabeleceu três ativos, aprovou E00 e depois a proposta SQL E01 de 86d8127. E01 implementada/testada somente em PostgreSQL descartável, conforme ADR-009. Nenhuma API/tela nova ou publicação da migration; próxima tarefa E02.
 
 - [x] E00 · Contratos/rotas/erros/desenho mínimo de proposta-e00.md aprovados expressamente pelo responsável em 09/nov/2026. Crédito reaproveita ADR-005; preservação de datas históricas mantida. Desenho/SQL exato da migration depende de aprovação em E01. Pré-requisito documental CA-E01–E13, sem evidência de implementação.
-- [ ] E01 · Proposta SQL preparada em 09/nov/2026: proposta-e01.md, com enum/campo/default, cálculo versionado, CHECK/trigger, preservação e testes previstos. Aguardar aprovação antes de registrar ADR-009, alterar schema ou criar/testar a migration. CA-E12 ainda sem prova de execução.
+- [x] E01 · Proposta 86d8127 aprovada; ADR-009 registrado antes do código. Migration 202611090001_loan_due_rules e campo de versão implementados/testados em PostgreSQL descartável: 28 testes novos/126 totais, upgrade e banco vazio, preservação de microssegundos/histórico, devolução legada, guard, funções/privilégios, falhas atômicas e controle negativo com rollback. Checks gerais/build passaram. CA-E12 local; recibo/execução em docs/verificacoes/e01-prazo.*. Nenhuma aplicação remota; E02/E05 ainda não implementadas.
 - [ ] E02 · Implementar cálculo de 14 dias úteis com relógio controlável e casos de fronteira. CA-E07.
 - [ ] E03 · Implementar consultas autorizadas de catálogo e dados próprios. CA-E01/E09.
 - [ ] E04 · Implementar pedido pendente com limite/atraso e concorrência por equipamento. CA-E02/E03.

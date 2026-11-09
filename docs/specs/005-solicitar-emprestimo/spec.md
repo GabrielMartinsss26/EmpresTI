@@ -1,6 +1,6 @@
 # Spec 005 — Catálogo, solicitação e aprovação
 
-Status: contratos da E00 aprovados expressamente em 09/nov/2026, registrados em proposta-e00.md, ainda sem implementação. Limite de três confirmado pelo ADR-008; aprovação e prazo do ADR-004 preservados. Desenho/SQL exato da migration precisa de aprovação em E01 antes do código correspondente.
+Status: spec inteira NÃO PRONTA. E00 aprovada e E01 aprovada/implementada/testada localmente em 09/nov/2026; ADR-009 registra prazo versionado. CA-E12 com provas locais em docs/verificacoes/e01-prazo.md. Limite três (ADR-008), aprovação e calendário (ADR-004) preservados. Cálculo TypeScript, APIs, telas e publicação ainda pendentes.
 
 ## Objetivo
 
@@ -52,8 +52,8 @@ Devolução, tela completa de Operações, cadastro de equipamentos por interfac
 
 ## Contrato afetado e pendências
 
-Catálogo protegido, nova tela mínima de aprovação/rejeição, Meus empréstimos e routers/services tRPC correspondentes, mantendo Router → Service → Prisma. Procedimentos, rotas e mensagens aprovados em proposta-e00.md. DDL exato ainda depende de apresentação e aprovação em E01.
+Catálogo protegido, nova tela mínima de aprovação/rejeição, Meus empréstimos e routers/services tRPC correspondentes, mantendo Router → Service → Prisma. Procedimentos, rotas e mensagens aprovados em proposta-e00.md. DDL E01 aprovado e implementado/testado somente em containers; ADR-009 e migration própria.
 
-O banco atual exige `loan_due_14_days` com 14 dias corridos: nova migration é necessária. Não recalcular datas históricas já está definido; mecanismo da migration e desenho detalhado seguem para aprovação. Crédito discreto está aprovado no ADR-005 e metadados/Storage foram implementados nos ADRs 006/007/spec 004. Nenhum critério desta spec tem evidência de implementação ainda.
+O Supabase ainda exige `loan_due_14_days` com 14 dias corridos. A versão local testada acrescenta regra versionada e 14 dias úteis para novos registros, sem recalcular os anteriores; publicação futura E11 depende de autorização própria. Crédito discreto está aprovado no ADR-005 e metadados/Storage nos ADRs 006/007/spec 004. E01 não implementa o fluxo de solicitação/aprovação ou seu limite de três.
 
-Próximo passo solicitado em 09/nov/2026: proposta-e01.md apresenta o SQL exato para preservar vencimentos históricos e validar novos prazos úteis. É proposta para aprovação estrutural, ainda sem alteração de schema/migration ou teste de execução; CA-E12 permanece pendente.
+Proposta E01 apresentada em 86d8127 e depois aprovada; proposta-e01.md preserva o SQL aceito. Execução e recibo em docs/verificacoes/e01-prazo.md e .json. Próxima etapa: E02, cálculo TypeScript; verificador independente integral permanece em E10, após as demais tarefas.

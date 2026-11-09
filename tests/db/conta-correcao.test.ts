@@ -217,7 +217,11 @@ describe("D06 · CA-D06/CA-D07 — identidade simulada e domínio PostgreSQL", (
           borrower_membership_id: membershipId,
           approved_by_membership_id: operator.id,
           checked_out_at: now,
-          due_at: new Date(now.getTime() + 14 * 86_400_000),
+          due_at: (
+            await db.$queryRaw<
+              { due: Date }[]
+            >`SELECT public.loan_due_14_business_days_v1(${now}::timestamptz) AS due`
+          )[0].due,
           ...(kind === "empréstimo devolvido"
             ? { returned_at: now, returned_by_membership_id: operator.id }
             : {}),

@@ -1,6 +1,6 @@
 # E01 — Proposta SQL do prazo versionado
 
-Data: 09/nov/2026. Status: proposta para aprovação; **não implementada nem executada**. Este arquivo apresenta a alteração estrutural antes do schema/migration, conforme `rules/migration.md`. Contratos E00 aprovados; limite três permanece no ADR-008. Regras de calendário são as já confirmadas no ADR-004, sem nova pergunta sobre feriados ou início da contagem.
+Data: 09/nov/2026. Status: proposta apresentada no commit `86d8127`, depois aprovada explicitamente pelo responsável para implementação e testes descartáveis; decisão registrada no ADR-009 antes do código. O SQL abaixo preserva o desenho aprovado, agora implementado na migration `202611090001_loan_due_rules`; resultados em `docs/verificacoes/e01-prazo.md`. Não autoriza publicação. Contratos E00 aprovados; limite três permanece no ADR-008. Regras de calendário são as já confirmadas no ADR-004, sem nova pergunta sobre feriados ou início da contagem.
 
 ## Resultado esperado e decisão solicitada
 
@@ -37,7 +37,7 @@ Nenhuma nova tabela, FK, relação ou índice. `tenant_id`, RLS, privilégios, a
 
 ## SQL proposto para a nova migration
 
-Nome previsto: `202611090001_loan_due_rules`. O bloco abaixo **é proposta Markdown**, não arquivo executável de migration. Uma única instrução `DO` torna o DDL atômico, seguindo o padrão local da D04; não usar um `BEGIN` externo.
+Nome: `202611090001_loan_due_rules`. O bloco abaixo preserva o SQL apresentado e aprovado; sua cópia executável fica na migration, nunca neste Markdown. Uma única instrução `DO` torna o DDL atômico, seguindo o padrão local da D04; não usar um `BEGIN` externo.
 
 ```sql
 DO $migration$
@@ -153,14 +153,14 @@ O publicador D08 tem whitelist de apenas duas migrations e deve continuar recusa
 
 ## Arquivos e comandos após aprovação
 
-Arquivos a criar/alterar somente depois da aprovação:
+Arquivos apresentados para criação/alteração após aprovação, agora executada:
 
 - ADR-009 para a decisão estrutural, registrado antes do código; `prisma/schema.prisma`; nova migration na pasta prevista acima.
 - `tests/db/loan-due-rules.test.ts`: upgrade e comportamento/segurança no PostgreSQL 16 descartável.
 - Fixtures de empréstimo em `tests/db/dados-pratica.test.ts` e `tests/db/conta-correcao.test.ts`: atualmente usam 14 dias corridos. Depois da migration, fixtures novas devem usar vencimento válido da regra nova, sem alterar o objetivo dos testes de conflito.
 - Preservar os testes históricos D04 e as duas migrations anteriores. Aplicar nova migration também em cenário de upgrade completo.
 
-Comando offline **proposto**, ainda não executado: guardar o schema anterior em `.local/e01-schema-before.prisma`, alterar o schema aprovado e gerar a parte declarativa com:
+Comando offline apresentado e depois executado: schema anterior preservado em `.local/e01-schema-before.prisma`, alteração aprovada gerada com:
 
 ```powershell
 npx prisma migrate diff --from-schema-datamodel .local/e01-schema-before.prisma --to-schema-datamodel prisma/schema.prisma --script --output prisma/migrations/202611090001_loan_due_rules/migration.sql
@@ -199,6 +199,6 @@ Os testes de calendário terão expectativas fixas, não serão aprovados compar
 
 ## Revisão documental e limites
 
-SQL revisado como texto contra os objetos atuais e a documentação oficial do PostgreSQL 16. Não foi executado, não teve teste de sintaxe em servidor e não comprova CA-E12 atendido. Após aprovação, a criação via Prisma Migrate e os testes reais podem revelar ajustes técnicos; qualquer mudança de semântica precisa voltar à revisão.
+Na fase documental do commit `86d8127`, o SQL foi apenas revisado como texto. Após a aprovação explícita, a migration foi aplicada/testada em PostgreSQL 16 descartável, com comparação automática ao bloco aprovado e sem mudança semântica do SQL. Execução e limites em `docs/verificacoes/e01-prazo.md`; não tratar a proposta original como prova anterior à aprovação.
 
 Fontes consultadas em 09/nov/2026: [CHECK e imutabilidade](https://www.postgresql.org/docs/16/ddl-constraints.html), [ALTER TABLE, defaults e NOT VALID](https://www.postgresql.org/docs/16/sql-altertable.html), [AT TIME ZONE, ISODOW e isfinite](https://www.postgresql.org/docs/16/functions-datetime.html), [CREATE FUNCTION e privilégios](https://www.postgresql.org/docs/16/sql-createfunction.html).

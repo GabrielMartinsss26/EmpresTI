@@ -179,9 +179,17 @@ describe("D04 / CA-D01/CA-D03: referência opcional e integridade da imagem", ()
   });
 
   it("reaplicar migrate deploy não recria objetos; colunas correspondem ao modelo Prisma", async () => {
-    expect(runPrisma(["migrate", "deploy"], local.url)).toContain(
-      "No pending migrations",
-    );
+    expect(
+      runPrisma(
+        [
+          "migrate",
+          "deploy",
+          "--schema",
+          path.join(migrationDir, "schema.prisma"),
+        ],
+        local.url,
+      ),
+    ).toContain("No pending migrations");
     // A FK manual profiles -> auth.users impede o diff global do Prisma 6.
     // Conferir o catálogo real da tabela nova sem retirar essa proteção de Auth.
     const columns = await db.$queryRaw<
