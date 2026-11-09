@@ -3,7 +3,9 @@ test.skip(
   process.env.APP_MODE === "showcase",
   "Login funcional usa configuração completa.",
 );
-test("entrada desktop, validação e proteção de rota", async ({ page }) => {
+test("CA-03/CA-E11 — entrada desktop, validação e proteção de rota", async ({
+  page,
+}) => {
   await page.goto("/");
   await page
     .getByRole("link", { name: "Acessar sistema", exact: true })
@@ -16,6 +18,19 @@ test("entrada desktop, validação e proteção de rota", async ({ page }) => {
   await expect(page.getByLabel("Senha", { exact: true })).toHaveAttribute(
     "type",
     "password",
+  );
+  // CA-03/CA-E11: conteúdo vigente do hero, sem alterar os tokens/layout.
+  const heroRegion = page.getByRole("region", { name: "Sobre o EmpresTI" });
+  await expect(heroRegion.locator("dd").first()).toHaveText("3");
+  await expect(heroRegion.locator("dd").last()).toHaveText("14");
+  await expect(
+    heroRegion.getByText("dias úteis de prazo", { exact: true }),
+  ).toBeVisible();
+  await expect(
+    heroRegion.getByText("Operações · v1", { exact: true }),
+  ).toBeVisible();
+  await expect(page.getByText(/dias corridos|5 itens por pessoa/)).toHaveCount(
+    0,
   );
   await page.screenshot({
     path: "test-results/login-desktop.png",

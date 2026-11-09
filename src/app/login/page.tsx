@@ -53,7 +53,9 @@ export default async function LoginPage() {
               <dd className="text-2xl font-semibold">3</dd>
             </div>
             <div className="flex flex-col gap-[5px]">
-              <dt className="order-2 text-xs text-muted">dias de prazo</dt>
+              <dt className="order-2 text-xs text-muted">
+                dias úteis de prazo
+              </dt>
               <dd className="text-2xl font-semibold">14</dd>
             </div>
           </dl>

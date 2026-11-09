@@ -4,6 +4,8 @@ Status: D01–D07 executadas e D08 de dados/imagens publicada em 07/nov/2026 por
 
 ## Fontes e histórico
 
+Situação local em 09/nov/2026: E01–E08 da spec 005 implementadas/testadas; E09 sincroniza textos/indicadores com três ativos e 14 dias úteis. Isso não publica o novo prazo/fluxo no Supabase; E10/E11 continuam pendentes. As linhas históricas abaixo preservam a sequência anterior.
+
 Atualização em 09/nov/2026: limite vigente voltou a três ativos por decisão explícita do responsável (ADR-008). Aprovação e prazo permanecem; contratos E00 da spec 005 preparados e aprovados expressamente após apresentação. Nenhuma escrita remota ou alteração do fluxo funcional nesta revisão documental.
 
 - Enunciado preservado em `novas-orientacoes/pratica-sdd-subagentes.html`.
@@ -34,11 +36,11 @@ Senha da conta de correção e chave Pixabay não entram em código, fixture, ma
 |---|---|
 | Biblioteca de processamento | sharp 0.35.5 direto de desenvolvimento, aprovado na proposta da skill; ADR-005 |
 | Formato final e enquadramento | WebP 800×600, foto inteira com bordas; parâmetros em ADR-005 |
-| Bucket, caminhos, metadados e policies de Storage | ADR-006 aprovado e D04 implementada/testada localmente: `equipment_images` e guard restritivo de Storage; manifesto mantém equipamentos / suporte_ti/patrimonio.webp. Bucket/publicação de produção continuam com o operador; nada criado externamente |
-| Crédito visível no catálogo com Pixabay | Link discreto de créditos aprovado na proposta; manifesto registra autor/origem/licença; implementação visual na spec 005 |
+| Bucket, caminhos, metadados e policies de Storage | ADR-006/D04 primeiro testados localmente, sem escrita externa naquela fase; depois D08 publicou dados/imagens por delegação específica ADR-007. Caminhos equipamentos / suporte_ti/patrimonio.webp. Essa exceção não autoriza outras migrations/publicações |
+| Crédito visível no catálogo com Pixabay | Link discreto aprovado; manifesto registra autor/origem/licença e E07 implementou a apresentação local, com evidências próprias |
 | Provisionamento de conta já existente ou inativa | Confirmado em 07/nov/2026 após esclarecimento: criar ausentes, reutilizar ativos compatíveis sem trocar senha; interromper por bloqueio/desativação, divergência ou empréstimos registrados; regra 9 da spec 004. D06 local usa identidade simulada, sem login real |
 | Política de reexecução sobre equipamentos modificados/em uso | Confirmada em 07/nov/2026: qualquer conflito interrompe o lote inteiro; criar ausentes e reutilizar ativos idênticos, preservando IDs, timestamps e campos não informados; detalhes na regra 7 da spec 004 |
-| DDL de prazo e preservação de empréstimos existentes | Não decidido; SQL e impacto devem ser aprovados antes da migration |
+| DDL de prazo e preservação de empréstimos existentes | Proposta E01 86d8127 depois aprovada, ADR-009 e migration versionada testada somente em containers; legado preservado sem recalcular datas. Não publicada no Supabase |
 | Configuração efetiva do verificador e seus comandos permitidos | Definida e provada em D01: lançador separado, sem terminal, MCP com lista/leitura; detalhes em docs/verificador.md |
 
 ## Fontes do Pixabay consultadas

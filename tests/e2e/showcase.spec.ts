@@ -4,7 +4,7 @@ test.skip(
   process.env.APP_MODE !== "showcase",
   "Teste exclusivo da publicação visual.",
 );
-test("página inicial sem banco não envia credenciais nem libera área protegida", async ({
+test("CA-L01/CA-E11 — página inicial sem banco não envia credenciais nem libera área protegida", async ({
   page,
   request,
 }) => {
@@ -24,6 +24,15 @@ test("página inicial sem banco não envia credenciais nem libera área protegid
       () => document.documentElement.scrollWidth <= window.innerWidth,
     ),
   ).toBe(true);
+  // CA-E11: a apresentação pública acompanha a regra, sem acessar o inventário.
+  await expect(
+    page.locator("#regras").getByText("dias úteis de prazo", { exact: true }),
+  ).toBeVisible();
+  await expect(page.locator("#regras").locator("dd").first()).toHaveText("03");
+  await expect(page.locator("#regras").locator("dd").last()).toHaveText("14");
+  await expect(page.getByText(/dias corridos|5 itens por pessoa/)).toHaveCount(
+    0,
+  );
   await page.screenshot({
     path: "test-results/landing-desktop.png",
     fullPage: true,

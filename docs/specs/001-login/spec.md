@@ -1,6 +1,6 @@
 # Spec — Login
 
-Status: vigente. Login conectado implementado e verificado em 05/nov/2026; pendências em `tasks.md`. Em 06/nov/2026, CA-03 foi revisado pelo ADR-004; os textos correspondentes ainda não foram atualizados no código/produção.
+Status: vigente. Login conectado implementado e verificado em 05/nov/2026; pendências em `tasks.md`. CA-03 acompanha ADR-004/008: três itens e 14 dias úteis. E09 da spec 005 sincroniza o texto local, com publicação ainda pendente; evidências antigas não provam o texto novo.
 
 ## Objetivo
 
@@ -35,7 +35,7 @@ Permitir que uma pessoa provisionada pelo administrador entre com e-mail e senha
 - CA-01 · Uma pessoa sem sessão abre `/login` e vê o formulário; `/` continua sendo a landing, conforme spec 002.
 - CA-02 · Em 1440 × 820, o hero tem 560px e a área de formulário ocupa o restante, sem rolagem horizontal.
 - CA-02a · Não há rolagem horizontal ou vertical em 1440 × 820, 1366 × 768 e 1280 × 720, inclusive com erros de validação. Janelas menores e zoom podem rolar para manter os campos acessíveis.
-- CA-03 · Hero apresenta marca, “3 itens por pessoa”, “14 dias úteis de prazo” e “Operações · v1”, conforme ADR-008/ADR-004. O número três atual permanece adequado; qualificar dias úteis ainda depende da tarefa E09 da spec 005.
+- CA-03 · Hero apresenta marca, “3 itens por pessoa”, “14 dias úteis de prazo” e “Operações · v1”, conforme ADR-008/ADR-004. Números e rótulos são verificados no navegador em E09/CA-E11 da spec 005, sem tratar o teste antigo como prova de dias úteis.
 - CA-04 · Campos têm rótulos, a senha é ocultada e o formulário apresenta o botão Entrar e a orientação de suporte.
 - CA-05 · Não existe ação de autocadastro; o provedor deve impedir cadastro público.
 - CA-06 · Controles interativos têm foco de teclado visível.

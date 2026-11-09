@@ -1,6 +1,6 @@
 import { test, expect } from "./catalogue-fixture";
 
-test("CA-E01: catálogo real com 12 fotos/créditos, três colunas e estados de manutenção", async ({
+test("CA-E01/CA-E11: catálogo real com 12 fotos/créditos, três colunas e estados de manutenção", async ({
   page,
 }) => {
   const violations: string[] = [];
@@ -18,6 +18,13 @@ test("CA-E01: catálogo real com 12 fotos/créditos, três colunas e estados de 
   ).toBeVisible();
   await expect(page.getByRole("article")).toHaveCount(12);
   await expect(page.getByText("0 de 3 itens com você")).toBeVisible();
+  // CA-E11: limite visual e regra do catálogo preservados na sincronização E09.
+  await expect(
+    page.getByText("Até 3 equipamentos · 14 dias úteis após aprovação"),
+  ).toBeVisible();
+  await expect(
+    page.locator('[aria-label="Limite de três equipamentos"] > span'),
+  ).toHaveCount(3);
   for (const tag of ["TI-0004", "TI-0007", "TI-0010"])
     await expect(
       page

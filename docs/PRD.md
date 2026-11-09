@@ -42,6 +42,6 @@ Operações consegue abandonar a planilha depois de duas semanas de uso.
 
 ## Histórico da revisão para a prática
 
-O limite anterior era de três itens, e o ADR-003 detalhava o prazo como 14 dias corridos. A revisão adota cinco empréstimos e 14 dias úteis do briefing, mas mantém a aprovação já decidida no projeto. Essa escolha é do responsável pelo projeto, não uma decisão do agente. Detalhes e alternativas no ADR-004; implementação nas specs 004 e 005. A atualização documental não significa que o fluxo já esteja implementado ou publicado.
+O limite anterior era de três itens, e o ADR-003 detalhava o prazo como 14 dias corridos. Em 06/nov/2026 a revisão adotou cinco empréstimos e 14 dias úteis do briefing, mantendo aprovação. Essa escolha intermediária foi do responsável e depois substituída somente no limite pelo ADR-008. Histórico no ADR-004; implementação nas specs 004 e 005. Não apresentar cinco como regra vigente.
 
-Em 09/nov/2026 o responsável voltou ao limite de três, por considerar cinco equipamentos por pessoa um volume elevado e um risco de não devolução/prejuízo. ADR-008 registra essa nova decisão, preservando o histórico anterior. Não há coleta de CPF nem mudança da identidade do usuário. O limite ainda será validado no fluxo da spec 005; não foi publicada alteração de regras no banco nesta revisão documental.
+Em 09/nov/2026 o responsável voltou ao limite de três, por considerar cinco equipamentos por pessoa um volume elevado e um risco de não devolução/prejuízo. ADR-008 registra essa decisão. Não há coleta de CPF nem mudança de identidade. E01–E08 implementaram/testaram o fluxo localmente; E09 sincroniza apresentação. Isso não publica o novo prazo/fluxo no Supabase: E11 continua pendente.
