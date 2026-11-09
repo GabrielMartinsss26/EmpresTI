@@ -1,6 +1,6 @@
 # Plano 005 — Solicitação com aprovação
 
-Status: E00 aprovada e E01 aprovada/implementada/testada localmente em 09/nov/2026. Decisão estrutural ADR-009, migration 202611090001_loan_due_rules, provas em docs/verificacoes/e01-prazo.md. Próxima tarefa E02; limite três permanece. APIs/telas e publicação da migration ainda pendentes; executar/verificar uma tarefa por vez.
+Status: E00 aprovada e E01 aprovada/implementada/testada localmente em 09/nov/2026. Decisão estrutural ADR-009, migration 202611090001_loan_due_rules, provas em docs/verificacoes/e01-prazo.md. E02 autorizada e implementada/testada localmente; provas em docs/verificacoes/e02-calculo.md. Próxima tarefa E03; limite três permanece. APIs/telas e publicação da migration ainda pendentes; executar/verificar uma tarefa por vez.
 
 1. Fechar rotas, procedimentos, mensagens, crédito das fotos e política de empréstimos existentes. Dependências: skill/verificador e dados da spec 004.
 2. Apresentar mudança da constraint de prazo e eventuais funções/índices adicionais; manter relações de aprovação, tenant, unicidade e auditoria do ADR-003. Criar nova migration depois de aprovada, sem editar a inicial.

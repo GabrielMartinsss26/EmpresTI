@@ -1,6 +1,6 @@
 # Spec 005 — Catálogo, solicitação e aprovação
 
-Status: spec inteira NÃO PRONTA. E00 aprovada e E01 aprovada/implementada/testada localmente em 09/nov/2026; ADR-009 registra prazo versionado. CA-E12 com provas locais em docs/verificacoes/e01-prazo.md. Limite três (ADR-008), aprovação e calendário (ADR-004) preservados. Cálculo TypeScript, APIs, telas e publicação ainda pendentes.
+Status: spec inteira NÃO PRONTA. E00 aprovada e E01 aprovada/implementada/testada localmente em 09/nov/2026; ADR-009 registra prazo versionado. CA-E12 com provas locais em docs/verificacoes/e01-prazo.md. Limite três (ADR-008), aprovação e calendário (ADR-004) preservados. E02 TypeScript implementada/testada localmente (CA-E07, docs/verificacoes/e02-calculo.md). APIs, telas e publicação ainda pendentes.
 
 ## Objetivo
 
@@ -56,4 +56,4 @@ Catálogo protegido, nova tela mínima de aprovação/rejeição, Meus emprésti
 
 O Supabase ainda exige `loan_due_14_days` com 14 dias corridos. A versão local testada acrescenta regra versionada e 14 dias úteis para novos registros, sem recalcular os anteriores; publicação futura E11 depende de autorização própria. Crédito discreto está aprovado no ADR-005 e metadados/Storage nos ADRs 006/007/spec 004. E01 não implementa o fluxo de solicitação/aprovação ou seu limite de três.
 
-Proposta E01 apresentada em 86d8127 e depois aprovada; proposta-e01.md preserva o SQL aceito. Execução e recibo em docs/verificacoes/e01-prazo.md e .json. Próxima etapa: E02, cálculo TypeScript; verificador independente integral permanece em E10, após as demais tarefas.
+Proposta E01 apresentada em 86d8127 e depois aprovada; proposta-e01.md preserva o SQL aceito. Execução e recibo em docs/verificacoes/e01-prazo.md e .json. E02 depois autorizada e implementada/testada em TypeScript; provas em docs/verificacoes/e02-calculo.md. Próxima etapa: E03, consultas autorizadas; verificador independente integral permanece em E10, após as demais tarefas.
