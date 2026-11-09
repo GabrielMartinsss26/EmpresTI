@@ -99,16 +99,18 @@ export function OperationsRequests() {
         Aprovar inicia um empréstimo de 14 dias úteis. Rejeitar exige um motivo
         e não cria empréstimo.
       </p>
-      {notice && (
-        <p
-          ref={message}
-          tabIndex={-1}
-          role={notice.error ? "alert" : "status"}
-          className={`rounded-control border p-4 text-[13px] ${notice.error ? "border-error/40 text-error" : "border-[#3FB98C]/35 text-[#5FD3AA]"}`}
-        >
-          {notice.text}
-        </p>
-      )}
+      {notice &&
+        (!pending.error ||
+          notice.text !== queryErrorMessage(pending.error)) && (
+          <p
+            ref={message}
+            tabIndex={-1}
+            role={notice.error ? "alert" : "status"}
+            className={`rounded-control border p-4 text-[13px] ${notice.error ? "border-error/40 text-error" : "border-[#3FB98C]/35 text-[#5FD3AA]"}`}
+          >
+            {notice.text}
+          </p>
+        )}
       {pending.isPending && (
         <Loading label="Carregando solicitações pendentes…" />
       )}
