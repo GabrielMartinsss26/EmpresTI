@@ -2,6 +2,7 @@ import { z } from "zod";
 
 export const pageInput = z.strictObject({
   cursor: z.uuid().optional(),
+  direction: z.literal("forward").optional(),
   limit: z.number().int().min(1).max(48).default(12),
 });
 export const catalogueInput = pageInput.extend({
