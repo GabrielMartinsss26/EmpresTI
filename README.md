@@ -2,7 +2,7 @@
 
 Aplicação publicada com Supabase: https://empresti-mauve.vercel.app/
 
-Login: https://empresti-mauve.vercel.app/login. Acesso exige usuário com perfil e vínculo ativos. O catálogo ainda é a área protegida inicial; os fluxos completos de equipamentos e empréstimos estão pendentes.
+Login: https://empresti-mauve.vercel.app/login. Acesso exige usuário com perfil e vínculo ativos. Catálogo, solicitação pendente, aprovação/rejeição mínima por Operações/Admin e Meus empréstimos estão publicados. Limite três ativos; 14 dias úteis após aprovação. Devolução, convites e painel completo continuam fora deste recorte.
 
 ## Rodar localmente
 
@@ -25,7 +25,7 @@ A integração completa exige as variáveis do `.env.example`, migrations aplica
 
 ## Publicação atual
 
-A versão conectada foi publicada pela CLI em 05/nov/2026, com as quatro variáveis necessárias cadastradas em Production. Não configurar `APP_MODE=showcase` em produção conectada. Evidências, ID do deploy e pendências estão em [docs/producao.md](docs/producao.md).
+A versão conectada foi atualizada pela CLI em 09/nov/2026 (E11), após aplicar a migration de prazo aprovada e preservar o histórico. Deploy dpl_3aSE1YQFhNGrtrWi224RgkAtmrv4, com as quatro variáveis existentes em Production. Evidências de login, fotos e fluxo real em [docs/verificacoes/e11-publicacao.md](docs/verificacoes/e11-publicacao.md); histórico em [docs/producao.md](docs/producao.md).
 
 O deploy enviou a pasta local. Os ajustes estão registrados em commits locais na branch `dev`; o push ainda não foi executado. As permissões de Git estão em `rules/operacao.md`.
 

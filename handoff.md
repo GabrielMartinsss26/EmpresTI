@@ -1,23 +1,22 @@
-# Handoff — 09/nov/2026
+# Handoff — 10/nov/2026
 
-- Branch dev; E10 concluída localmente, próxima tarefa E11; não iniciar publicação sem autorização própria.
-- Código de produto: operations-requests.tsx omite aviso de decisão idêntico ao erro da lista; preserva alerta/retry/bloqueio de acesso.
-- Primeiro E2E de catálogo registra hashes dos corpos de imagens recebidos pelo navegador; modo estrito E10_VERIFY_APPROVED_IMAGES=true exige manifesto D03.
-- CI continua portátil com fallback identificado; modo estrito local passou 12 imagens distintas/aprovadas, sem mudar fotos ou fixture.
-- Checks: build, 32 unitários, 241 banco, 10 imagens, 7 verificador, lint/tipos/formatação e 24 browser passaram.
-- Repetidos 7 verificador após restauração e 9 catálogo estritos + lint/tipos/formatação após fortalecer teste; não somar repetições como testes distintos.
-- Timeout inicial de banco e falha de browser preservados; não foram convertidos em aprovação.
-- Fixture: erro plantado 611129b; reprovação real CA-V01 NÃO ATENDE/CA-V02 SEM TESTE; restauração efetiva 2a943cf, hashes iguais à baseline.
-- ef0de08 tem mensagem imprecisa: corrige alerta/plano, não restaura fixture; comando de cópia falhou e nova revisão recusou corretamente.
-- Pareceres originais/recibos/delegações em docs/verificacoes/verificador/e10-*; relato docs/verificacoes/e10-execucao.md.
-- Integral R2: CA-E02/E03/E04/E06/E07/E08/E11/E12/E13 ATENDE; CA-E01/E05/E09/E10 SEM TESTE por prova publicada E11 ausente.
-- Spec 005 NÃO PRONTA; E10 marcada concluída pelo processo executado/CA-E13, sem relaxar critérios ou ignorar E11.
-- Snapshots e10-spec/plan/tasks-revisada*.md preservam versões conferidas; recibos e pareceres não são reescritos após status final.
-- Verificador real separado, contexto limpo, read-only/never, só MCP leitor; não alegar isolamento global do principal.
-- E11: preparar publicação da versão validada/migration E01 e checar catálogo/fotos/aprovação/Meus empréstimos com conta própria; atualizar ENTREGA.md.
-- Supabase permanece no último estado remoto inicial+D04; E01 apenas em containers. Publicador D08 não autoriza E01/E11.
-- Três ativos ADR-008, aprovação mantida, 14 úteis seg–sex sem descontar feriados/São Paulo ADR-004; nenhum novo ADR/schema/dependência.
-- Professor adiado, sem usar sua conta. Spec 004 NÃO PRONTA: CA-D06 SEM TESTE/CA-D07 NÃO ATENDE.
-- Servidor principal porta 3000 reiniciado após build; testes de novo fluxo usaram Next/PostgreSQL locais e Auth/Storage simulados.
-- Sem recurso remoto, push, tag ou deploy nesta etapa; commits locais/evidências somente. Ambientes reais ignorados, sem leitura/impressão pelo agente.
-- Três HTMLs não rastreados em Aulas/ são do usuário e não entram nos commits.
+- Branch dev; E11 concluída e spec 005 PRONTA, parecer independente verificador/e11-integral-r2.md: CA-E01–CA-E13 ATENDE.
+- Publicação delegada pelo responsável (ADR-010); sem push/tag/merge ou habilitar CI. Conta do professor permanece adiada.
+- Migration E01 aplicada em 09/nov/2026 via Prisma Migrate no build Vercel; inicial+D04 intactas, nove tabelas com contagens/fingerprints preservados.
+- Deploy dpl_3aSE1YQFhNGrtrWi224RgkAtmrv4 READY/promovido; https://empresti-mauve.vercel.app/login.
+- Portas PostgreSQL locais 5432/6543 expiraram/P1001; HTTPS e produção saudáveis. Session Pooler usado no build, sem mudar credenciais externas.
+- scripts/publicar-e11.mjs exige destino/Vercel Production/aplicar explícitos, três migrations/checksums e preservação; não ampliar D08.
+- .local/e11-vercel.json foi configuração temporária deste deploy; não executar publicação remota de novo sem autorização própria.
+- Nove testes novos/41 unitários, lint/tipos/formatação passaram; build completo remoto passou. Primeiro typecheck do teste corrigido e repetido.
+- src/ e prisma/ idênticos à E10. Banco 241/E2E 24/imagens 10/verificador 7 são provas E10; nove catálogo estritos reexecutados naquela etapa.
+- Integração real com conta própria: login, 12 imagens por hash, manutenção, pedir/rejeitar/pedir/aprovar, persistência, logout e proteção de rotas.
+- TI-0008 permanece ativo como empréstimo de validação na conta do responsável; vence 27/nov/2026 17:21. Não apagar/devolver por SQL.
+- Recibos docs/verificacoes/e11-integracao.json/e11-evidencias.json; relato e11-publicacao.md; fontes/snapshots/parecer preservados.
+- Primeira revisão E11 parou por limite de uso, sem parecer; registro e11-tentativa-interrompida.json. Nova revisão real teve contexto limpo/read-only/never.
+- Retomada 10/nov: mesmo deploy READY, login/catalogo funcionando; usuário esclareceu que não há erro atual. Nenhuma nova mutação de empréstimo.
+- PRD/prática/ENTREGA/README/producao/spec/plan/tasks/AGENTS atualizados só depois de preservar snapshots e pareceres originais.
+- Spec 004 NÃO PRONTA: professor adiado (CA-D06 SEM TESTE), isolamento global CA-D07 NÃO ATENDE. E11 não resolve esses pontos.
+- Futuras funcionalidades fora da spec 005: devolução, convites, cadastro por UI e painel completo; não iniciar sem spec/autorização.
+- Três ativos ADR-008; aprovação mantida; 14 úteis seg–sex sem descontar feriados/São Paulo ADR-004, versão ADR-009.
+- Snapshot visual test-results/e11-production.png; nova captura e11-production-20261110.png, ignoradas; aba produção deixada aberta.
+- Três HTMLs não rastreados em Aulas/ são do usuário; fora dos commits. Ambientes reais ignorados e sem credenciais nas evidências.

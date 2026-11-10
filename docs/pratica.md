@@ -4,7 +4,7 @@ Status: D01–D07 executadas e D08 de dados/imagens publicada em 07/nov/2026 por
 
 ## Fontes e histórico
 
-Situação local em 09/nov/2026: E01–E08 da spec 005 implementadas/testadas; E09 sincroniza textos/indicadores com três ativos e 14 dias úteis. Isso não publica o novo prazo/fluxo no Supabase; E10/E11 continuam pendentes. As linhas históricas abaixo preservam a sequência anterior.
+Situação em 10/nov/2026: E00–E11 da spec 005 concluídas, novo prazo/fluxo publicado em 09/nov/2026 e revisão independente final com 13 critérios ATENDE (PRONTA). Evidências docs/verificacoes/e11-*. Spec 004 continua NÃO PRONTA: conta do professor adiada e isolamento global não atendido. As linhas históricas abaixo preservam a sequência anterior.
 
 Atualização em 09/nov/2026: limite vigente voltou a três ativos por decisão explícita do responsável (ADR-008). Aprovação e prazo permanecem; contratos E00 da spec 005 preparados e aprovados expressamente após apresentação. Nenhuma escrita remota ou alteração do fluxo funcional nesta revisão documental.
 
@@ -23,6 +23,8 @@ Atualização em 09/nov/2026: limite vigente voltou a três ativos por decisão 
 5. Registrar rodadas reais e erro plantado/restaurado em commits distintos; preencher ENTREGA.md com evidências. Tag e push somente na entrega autorizada pelo responsável, não por existir um comando no enunciado.
 
 ## Produção e segredos nesta prática
+
+Em 09/nov/2026 o responsável também delegou a E11 após a conclusão local E10; ADR-010 registra somente a publicação da migration E01 já aprovada e aplicação no Supabase/Vercel existentes, com validação real separada. Não amplia D08, não autoriza push/tag/criação de conta e não satisfaz isolamento global da sessão. Conta do professor continua adiada. Esta exceção posterior não altera as autorizações históricas abaixo.
 
 O agente prepara os artefatos e os verifica localmente. Escritas no banco, Auth ou Storage de produção são executadas pelo operador. Autorizações anteriores de integração/publicação não se estendem à execução desta prática. Dev ainda aponta para o mesmo Supabase de produção: executar scripts apenas em ambiente descartável, sem herdar URLs ou credenciais remotas. O verificador precisa de restrição efetiva no harness; texto de proibição sozinho não comprova isolamento.
 

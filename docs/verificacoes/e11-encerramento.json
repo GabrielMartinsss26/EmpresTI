@@ -1,0 +1,17 @@
+{
+  "recordedAt": "2026-11-10T10:15:02.713Z",
+  "executor": "principal",
+  "runtimeSourcesUnchangedSinceReview": 114,
+  "criteriaUnchanged": 13,
+  "criteriaAtende": 13,
+  "snapshotsConfirmed": 4,
+  "delegationConfirmed": true,
+  "status": "Spec 005 PRONTA; E11 concluída. Spec 004 não concluída.",
+  "deployment": "dpl_3aSE1YQFhNGrtrWi224RgkAtmrv4",
+  "notes": [
+    "Encerramento documental posterior ao parecer; recibos, hashes históricos e snapshots revisados não foram reescritos.",
+    "Sem nova execução de testes de código ou publicação na retomada, porque código e deploy não mudaram.",
+    "TI-0008 continua ativo como validação na conta do responsável; professor adiado e não utilizado.",
+    "Sem push/tag/merge."
+  ]
+}

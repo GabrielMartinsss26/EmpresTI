@@ -1,6 +1,18 @@
 # Entrega da prática
 
-Status: rascunho iniciado em 06/nov/2026. Não é declaração de entrega concluída. Evidências, linhas, hashes e tabelas finais serão acrescentados conforme execução real; itens não executados permanecem assim identificados.
+Status em 10/nov/2026: publicação E11 executada em 09/nov/2026; verificação independente final da spec 005 concluída com 13 critérios ATENDE, PRONTA (docs/verificacoes/verificador/e11-integral-r2.md). A prática inteira não está concluída: conta do professor adiada e spec 004 NÃO PRONTA por falta da conta real e isolamento global não atendido. Sem push/tag de entrega.
+
+## Estado vigente — E10 e E11
+
+E10 verificou código, banco descartável, navegador e mecanismo independente: erro da fixture em 611129b, restauração efetiva em 2a943cf; tentativa intermediária incorreta preservada, sem reescrever o histórico. Parecer E10-R2: nove critérios ATENDE e quatro SEM TESTE até publicação. Lacuna local de fotos corrigida com comparação dos bytes recebidos pelo navegador ao manifesto D03. Evidências em docs/verificacoes/e10-execucao.md e verificador/e10-*.
+
+O responsável então delegou a E11 (ADR-010). Aplicada apenas a migration aprovada de prazo, via Prisma Migrate no build Vercel, com preservação do histórico, depois publicado o deploy dpl_3aSE1YQFhNGrtrWi224RgkAtmrv4 em https://empresti-mauve.vercel.app. Credenciais/ambientes reais ficaram fora do upload e das evidências. Não houve criação de conta ou alteração de senha, push, tag ou merge.
+
+Conferência real com conta própria: login, catálogo com 12 imagens aprovadas, manutenção em TI-0004/TI-0007/TI-0010, solicitar/rejeitar com motivo/solicitar novamente/aprovar, Meus empréstimos após recarregar, logout e proteção das três rotas. TI-0008 ficou como empréstimo de validação, vencendo 27/nov/2026 17:21. Não foi apagado por SQL. Recibos identificados em docs/verificacoes/e11-integracao.json e e11-evidencias.json; execução/limites em e11-publicacao.md.
+
+A prática original reservava escrita real ao operador; o responsável delegou pontualmente D08 e E11. Registrar essas diferenças na correção: autorização não equivale a isolamento técnico, não transforma CA-D07 em ATENDE e não permite afirmar que a prática inteira está pronta. As seções abaixo preservam o planejamento e as evidências históricas, com os estados de cada data.
+
+## Histórico iniciado em 06/nov/2026
 
 ## Links
 

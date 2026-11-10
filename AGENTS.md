@@ -79,6 +79,8 @@ E09 autorizada depois e verificada localmente em 09/nov/2026: login/landing agor
 
 E10 autorizada depois e concluída localmente em 09/nov/2026: 32 unitários/241 banco/10 imagens/7 verificador/24 browser e checks/build passaram; sete de verificador repetidos após restauração e nove de catálogo no modo estrito. Corrigido aviso duplicado de permissão sem alterar testes de autorização. Erro da fixture 611129b, restauração efetiva 2a943cf; ef0de08 menciona restauração por engano e alterou apenas plano/alerta, com falha e nova reprovação preservadas. Duas revisões integrais reais: R2 resolveu proveniência dos 12 corpos de imagem recebidos pelo navegador, iguais ao manifesto. CA-E02/E03/E04/E06/E07/E08/E11/E12/E13 ATENDE; CA-E01/E05/E09/E10 SEM TESTE por falta de prova publicada E11. Spec NÃO PRONTA; E10 concluída não significa publicação. Recibos/pareceres/snapshots e execução em docs/verificacoes/e10-execucao.md e verificador/e10-*. Próximo E11 exige autorização própria; E01 não aplicada no Supabase, professor adiado, sem push/deploy. Não reescrever hashes/pareceres antigos após estas atualizações documentais.
 
+E11 autorizada em 09/nov/2026 após E10 e registrada no ADR-010 antes da execução. Portas PostgreSQL locais expiraram; executor guardado scripts/publicar-e11.mjs rodou no build Vercel Production com Session Pooler, allowlist/checksums e snapshots agregados. Aplicada somente E01, histórico preservado, build passou; deploy dpl_3aSE1YQFhNGrtrWi224RgkAtmrv4 READY/promovido para empresti-mauve.vercel.app. Nove testes novos de guardas/41 unitários e lint/tipos/formatação passaram; fonte de produto/SQL idênticos à E10. Integração real com conta própria confirmou 12 fotos por hashes, rejeitar/pedir/aprovar/Meus empréstimos/logout; TI-0008 permanece ativo como validação, vence 27/nov/2026 17:21. Primeiro verificador parou por limite de uso; retomada 10/nov/2026 concluiu 13 critérios ATENDE, spec 005 PRONTA. Parecer/delegação/snapshots e evidências em docs/verificacoes/e11-* e verificador/e11-*. Sem push/tag, conta do professor adiada, spec 004 NÃO PRONTA e sem alegação de isolamento global. Nova autorização necessária para outras operações/funcionalidades; não repetir o executor remoto por rotina.
+
 ## Skills
 
 
@@ -97,6 +99,9 @@ Para conferir uma spec, usar `npm run verify:spec -- <caminho-da-spec> [caminho-
 - `tests/unit`, `tests/db`, `tests/e2e` — validação, PostgreSQL real e navegador.
 
 ## Comandos do plano autorizado
+
+- E11/ADR-010: CLI Vercel instalada no cache npm, executar `deploy --prod --skip-domain --yes --local-config .local/e11-vercel.json --logs` no projeto já vinculado. Configuração temporária manda executar `node scripts/publicar-e11.mjs --apply --project=gverauqgerwjwwjkoybl` antes de `npm run build`; exige ambiente Vercel Production, valida destino/checksums e preservação, sem seed. Somente esta publicação autorizada; não habilitar execução automática em outros builds.
+- `vercel deploy --dry --json` confere arquivos de upload sem publicar; `vercel env ls production` confere configuração por nomes, sem exportar valores; `vercel promote <deploy-validado> --yes` promove somente após recibo e build aprovados. Usar a CLI já instalada, sem nova dependência do projeto.
 
 - `npm install` — dependências; depois do lockfile, `npm ci`.
 - `npm run dev` — execução local.

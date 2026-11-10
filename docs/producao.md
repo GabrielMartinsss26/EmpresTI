@@ -1,9 +1,17 @@
 # Publicação na Vercel e Supabase
 
+## Versão vigente — E11, 09/nov/2026
+
+Publicação explicitamente delegada pelo responsável (ADR-010). Deploy dpl_3aSE1YQFhNGrtrWi224RgkAtmrv4 READY e promovido para https://empresti-mauve.vercel.app após migration e build. Catálogo, pedidos, decisão mínima e Meus empréstimos publicados; três ativos e 14 úteis. Migration 202611090001_loan_due_rules aplicada via Prisma Migrate no build Vercel, com preservação das contagens/fingerprints anteriores; inicial/D04 intactas. Caminho remoto adotado porque as portas PostgreSQL estavam inacessíveis da rede local; credenciais existentes Production, sem alteração de ambiente externo.
+
+Login/logout/proteção das três rotas e fluxo rejeitar/solicitar/aprovar conferidos realmente com conta própria. TI-0008 ficou ativo como registro de validação, vencendo 27/nov/2026 17:21. Doze imagens do DOM publicado conferidas por hashes. Professor adiado; sem push/tag/merge ou habilitar CI. Recibos e limitações em docs/verificacoes/e11-*. Em 10/nov/2026, revisão independente final confirmou os 13 critérios da spec 005 ATENDE, PRONTA. O mesmo deploy e login/catalogo foram reconferidos na retomada. Isso não conclui spec 004, conta do professor ou isolamento global.
+
+As seções abaixo preservam entregas anteriores; seus IDs, escopo e pendências são históricos.
+
 ## Produção conectada — 05/nov/2026
 
 - Publicado em https://empresti-mauve.vercel.app/; login em `/login`.
-- Deploy atual `dpl_73nD7wLbW4nRYkuGojwWAHX67YMw`, estado `READY`, destino `production`.
+- Deploy daquela etapa `dpl_73nD7wLbW4nRYkuGojwWAHX67YMw`, estado `READY`, destino `production`.
 - Inclui o login sem rolagem nas resoluções desktop verificadas e o link do ícone/nome EmpresTI para a landing. Conferência no domínio público: 1440×820, 1366×768 e 1280×720, inclusive após validação do formulário vazio; clique no link retornou a `/`.
 - Cadastradas na Vercel, em Production, as variáveis `DATABASE_URL`, `DIRECT_URL`, `NEXT_PUBLIC_SUPABASE_URL` e `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`. Connection strings foram armazenadas como secrets. A chave administrativa não foi enviada.
 - O modo `showcase` não está habilitado nesta publicação. Arquivos reais de ambiente são excluídos do upload por `.vercelignore`.

@@ -1,0 +1,8 @@
+{
+  "recordedAt": "2026-11-10T10:14:07.825Z",
+  "command": "npm run verify:spec -- docs/specs/005-solicitar-emprestimo/spec.md docs/verificacoes/e11-evidencias.json",
+  "exitCode": 1,
+  "result": "Interrompida por limite de uso do cliente, sem parecer final. Não é reprovação técnica ou aprovação da spec.",
+  "logSha256": "d7ad73bd16b4c346ae4d2033e61312729742200e5e180ab9a10f512c9f060f76",
+  "followUp": "e11-integral-r2.md"
+}
