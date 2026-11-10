@@ -1,5 +1,7 @@
 # Spec 004 — Dados iniciais e imagens
 
+Atualização 10/nov/2026: após pedido expresso do responsável, conta do professor criada em produção com perfil/vínculo COLLABORATOR, zero empréstimos, autenticação e GET autenticado de catálogo verificados; reexecução sem duplicação. Evidências em docs/verificacoes/conta-professor-20261110.md e .json. CA-D06 aguarda nova classificação independente; CA-D07 continua NÃO ATENDE e a spec inteira NÃO PRONTA. O status e os pareceres históricos abaixo descrevem a revisão anterior.
+
 Status: spec inteira NÃO PRONTA após revisão independente D08-R2 em 07/nov/2026. CA-D01/D02/D03/D04/D05/D08 ATENDE; conta/login real de CA-D06 SEM TESTE, expressamente adiados. CA-D07 NÃO ATENDE pela existência/uso do executor de produção, autorizado excepcionalmente no ADR-007. Dados e imagens publicados no Supabase; parecer em `docs/verificacoes/verificador/d08-integral-r2.md`. Critérios abaixo permanecem inalterados; pareceres D07 e primeira rodada D08 preservados.
 
 ## Objetivo

@@ -1,5 +1,7 @@
 # Tarefas 004 — Dados iniciais
 
+Atualização 10/nov/2026: responsável solicitou a conta antes adiada; identidade, perfil e vínculo foram criados, autenticação e catálogo publicado testados, zero empréstimos e reexecução sem duplicação. Provas em docs/verificacoes/conta-professor-20261110.md e .json. Revisão independente anterior permanece histórica; CA-D07 continua NÃO ATENDE.
+
 D01–D07 executadas localmente por autorizações explícitas; a revisão integral concluiu NÃO PRONTA. CA-D07 BLOQUEADO; publicação/login real de D08 sem teste. Evidências abaixo não aprovam a funcionalidade inteira.
 
 - [x] D00 · Biblioteca/formato/recorte/Storage definidos nos ADRs 005/006; reexecução e contas existentes confirmadas nas regras 7/9 da spec 004. Isso fecha decisões prévias, sem provar publicação ou login real.

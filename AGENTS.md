@@ -83,6 +83,8 @@ E11 autorizada em 09/nov/2026 após E10 e registrada no ADR-010 antes da execuç
 
 ## Skills
 
+Em 10/nov/2026 o responsável pediu a conta do professor anteriormente adiada. Foi criada no Supabase existente por provisionCorrectionAccount: identidade confirmada, perfil/vínculo COLLABORATOR, Auth válido, GET autenticado /catalogo 200 e zero empréstimos; reexecução zero criações. Evidências docs/verificacoes/conta-professor-20261110.*. Parecer histórico D08 não foi alterado; CA-D06 aguarda nova avaliação independente, CA-D07 permanece NÃO ATENDE e spec 004 NÃO PRONTA. Nenhum push/deploy ou teste de formulário foi realizado. Menções anteriores ao adiamento são históricas.
+
 
 Skills do projeto ficam em `skills/<nome>/SKILL.md`. Para descobrir capacidades, ler apenas name/description do frontmatter; carregar o corpo somente quando a tarefa casar e referências somente quando indicadas. `imagens-equipamentos` prepara fotos do inventário da prática pelo Pixabay; não altera logo/landing nem faz upload. Rules e ADRs prevalecem sobre a skill. Há uma única cópia versionada em `skills/imagens-equipamentos/`.
 

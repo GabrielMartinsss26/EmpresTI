@@ -1,5 +1,7 @@
 # Entrega da prática
 
+Atualização 10/nov/2026: conta do professor criada após solicitação do responsável, com perfil COLLABORATOR, zero empréstimos, autenticação e acesso HTTP ao catálogo publicado conferidos. Reexecução sem duplicar. Recibo docs/verificacoes/conta-professor-20261110.json; CA-D06 ainda depende de nova avaliação independente e CA-D07 continua NÃO ATENDE. As menções anteriores ao adiamento são históricas.
+
 Status em 10/nov/2026: publicação E11 executada em 09/nov/2026; verificação independente final da spec 005 concluída com 13 critérios ATENDE, PRONTA (docs/verificacoes/verificador/e11-integral-r2.md). A prática inteira não está concluída: conta do professor adiada e spec 004 NÃO PRONTA por falta da conta real e isolamento global não atendido. Sem push/tag de entrega.
 
 ## Estado vigente — E10 e E11

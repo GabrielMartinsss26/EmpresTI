@@ -1,5 +1,7 @@
 # Planejamento da prática — 06/nov/2026
 
+Atualização 10/nov/2026: a conta do professor antes adiada foi criada após pedido do responsável. Auth e acesso autenticado ao catálogo publicado passaram; zero empréstimos e reexecução sem duplicar. Evidências docs/verificacoes/conta-professor-20261110.md. A classificação histórica CA-D06 aguarda nova revisão; CA-D07 continua NÃO ATENDE. As menções ao adiamento abaixo preservam o histórico.
+
 Status: D01–D07 executadas e D08 de dados/imagens publicada em 07/nov/2026 por delegação posterior do responsável, registrada no ADR-007. Migration D04 aplicada, 12 imagens/equipamentos publicados, repetição sem duplicação e proteção de escrita anônima confirmadas. Conta do professor adiada expressamente. Parecer `docs/verificacoes/verificador/d08-integral-r2.md`: spec 004 NÃO PRONTA por CA-D06 SEM TESTE e CA-D07 NÃO ATENDE; autorização de publicar não equivale a isolamento. Sem push/deploy Vercel nesta etapa.
 
 ## Fontes e histórico
