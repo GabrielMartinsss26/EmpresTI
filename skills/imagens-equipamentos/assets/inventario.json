@@ -1,0 +1,14 @@
+[
+  { "assetTag": "TI-0001", "query": "closed laptop" },
+  { "assetTag": "TI-0002", "query": "open laptop minimal desk" },
+  { "assetTag": "TI-0003", "query": "laptop lid" },
+  { "assetTag": "TI-0004", "query": "laptop black screen" },
+  { "assetTag": "TI-0005", "query": "lcd monitor blank" },
+  { "assetTag": "TI-0006", "query": "computer monitor isolated" },
+  { "assetTag": "TI-0007", "query": "monitor screen off" },
+  { "assetTag": "TI-0008", "query": "hdmi cable" },
+  { "assetTag": "TI-0009", "query": "usb c connector" },
+  { "assetTag": "TI-0010", "query": "rj45 cable" },
+  { "assetTag": "TI-0011", "query": "usb webcam" },
+  { "assetTag": "TI-0012", "query": "digital compact camera" }
+]

@@ -1,0 +1,45 @@
+[
+  {
+    "session": "01a1b0c5-bdb5-73e2-a43c-ff05420634c7",
+    "parent": "01a1b0c5-bdb5-73e2-a43c-ff05420634c7",
+    "calls": [
+      "spawn_agent",
+      "wait_agent",
+      "wait_agent"
+    ],
+    "permissionEvidence": [
+      {
+        "approval_policy": "never",
+        "sandbox_policy": {
+          "type": "read-only"
+        }
+      }
+    ],
+    "spawn": {
+      "task_name": "verificacao_d02",
+      "agent_type": "verificador-spec",
+      "fork_turns": "none"
+    }
+  },
+  {
+    "session": "01a1b0c5-dda4-7ac1-bcd7-b3e194d5f3bb",
+    "parent": "01a1b0c5-bdb5-73e2-a43c-ff05420634c7",
+    "calls": [
+      "exec",
+      "exec",
+      "exec",
+      "exec",
+      "exec",
+      "exec",
+      "exec"
+    ],
+    "permissionEvidence": [
+      {
+        "approval_policy": "never",
+        "sandbox_policy": {
+          "type": "read-only"
+        }
+      }
+    ]
+  }
+]

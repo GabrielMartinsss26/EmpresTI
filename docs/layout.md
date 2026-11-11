@@ -2,6 +2,8 @@
 
 Documento de referência do front-end do EmpresTI (empréstimo de equipamentos internos).
 Base visual: design system **Nocturne** adaptado à primária `#001449`.
+
+Atualização de negócio em 09/nov/2026: prevalecem três empréstimos ativos (ADR-008) e 14 dias úteis após aprovação (ADR-004), de segunda a sexta, sem descontar feriados, começando no dia seguinte e mantendo horário de São Paulo. A decisão intermediária de cinco foi substituída. E09 sincroniza a apresentação local; publicação permanece pendente. Tokens preservados. E00/spec 005 define o recorte atual; detalhe, cadastro, devolução e painel completo abaixo são referências futuras, sem links/ações funcionais nesta entrega.
 **Somente modo escuro.** Não existe modo claro, nem alternador de tema.
 
 ---
@@ -295,46 +297,43 @@ Tamanhos: 12px (breadcrumb) · 13px (caret) · 15–16px (nav/marca) · 17px (he
 
 ### 01 · Login (1440×820)
 Split `560px | 1fr`.
-- **Esquerda** — hero em `linear-gradient(160deg,#001449,#00102F 60%,#080C1A)`, padding 56px, `justify-content:space-between`: marca no topo (ícone 34px, texto 16px) · bloco central com título 34px (máx. 20ch), subtítulo 14px `#93A0C6` (máx. 38ch), régua-marca esmaecida, dois números (3 itens por pessoa / 14 dias de prazo) com `gap:40px` · rodapé "Operações · v1" 11px.
+- **Esquerda** — hero em `linear-gradient(160deg,#001449,#00102F 60%,#080C1A)`, padding 56px, `justify-content:space-between`: marca no topo (ícone 34px, texto 16px) · bloco central com título 34px (máx. 20ch), subtítulo 14px `#93A0C6` (máx. 38ch), régua-marca esmaecida, dois números (3 itens por pessoa / 14 dias úteis de prazo) com `gap:40px` · rodapé "Operações · v1" 11px.
 - **Direita** — formulário centralizado de 372px, padding 56px: "Entrar" 22px/600, subtítulo 13px, campos e-mail + senha (`gap:18px`), botão primário 44px com `ph-arrow-right`, régua esmaecida, nota de suporte 12px centralizada.
 
 ### 02 · Catálogo (1440×900)
-Sidebar + header (busca, "2 de 3 itens com você", `ph-bell`).
-Conteúdo: H1 "Catálogo" + contagem ("32 equipamentos · 11 disponíveis agora") → **faixa de aviso de regras** (limite de 3, prazo de 14 dias, bloqueio por atraso, manutenção fora do catálogo) → chips de categoria + "Só disponíveis" à direita → grid 3×2 de cards mostrando os três estados.
+Sidebar + header com contador real de ativos/limite três e três segmentos; sem notificação fictícia. Conteúdo: H1 "Catálogo" → **faixa de regras** (até três equipamentos, 14 dias úteis após aprovação) → busca por nome/patrimônio, categoria e "Somente disponíveis" → grid de três colunas com paginação e dados reais. Fotos 4:3 sem recorte, crédito Pixabay discreto; manutenção permanece visível e não solicitável, distinguindo emprestado/pedido pendente/fora de uso. Card disponível abre diálogo: retirada, limite e prazo após aprovação, sem vencimento antecipado; confirmação cria apenas PENDING. Sem página de detalhe neste recorte.
 
-### 03 · Detalhe do item (1440×900)
+### 03 · Detalhe do item (referência futura, fora da spec 005)
 Sidebar + header com breadcrumb (Catálogo › Notebooks › item) e contador à direita.
 Conteúdo `1fr 356px`:
 - Coluna principal: bloco de imagem 260px com ícone 64px → título 28px + pill de estado → descrição (máx. 60ch) → régua esmaecida → ficha técnica em 4 colunas (Categoria, Patrimônio, Local, Última devolução) → "Histórico" em linhas `data | evento | resultado`.
-- Coluna lateral: card **Solicitar empréstimo** (Retirada / Prazo padrão 14 dias / Devolver até — valor em `#B4C6F6` 600 — botão 44px + nota de retirada) e card **Seus itens** com "2 de 3", segmentos de limite e nota de status.
-- Sobreposto: diálogo de confirmação (§5.9) com o prazo calculado e o aviso de que o colaborador chegará a 3 de 3.
+- Coluna lateral de referência: retirada e prazo padrão de 14 dias úteis após aprovação; nenhum "Devolver até" antes de existir empréstimo. Card **Seus itens** usa contagem real e três segmentos.
+- Se implementado futuramente, o diálogo respeita §5.9 e E00: pedido pendente não ocupa o limite; vencimento só vem da aprovação, sem promessa de chegar a três ao solicitar.
 
 ### 04 · Meus empréstimos (1440×820)
-Sidebar + header com breadcrumb simples e botão "Pegar emprestado".
-Conteúdo: cabeçalho "Comigo agora" + "2 de 3 itens · nenhum em atraso" com segmentos de limite (180px) à direita → duas linhas de empréstimo (ícone 44px | nome + meta | prazo com barra | botão "Devolver") → régua esmaecida → tabela **Histórico** (Item / Retirada / Devolução / Situação) com "No prazo" verde e atraso em âmbar.
+Sidebar + header com ativos/limite reais e três segmentos; link "Consultar catálogo". Conteúdo: **Comigo agora**, somente empréstimos ativos próprios com equipamento e vencimento armazenado no horário de São Paulo → divisor → **Minhas solicitações**, com pendentes/decisões/motivo de rejeição separados, sem inventar prazo no pedido. Carregamento, vazio, erro/retry e paginação independentes. Botão Devolver e tabela completa de histórico da referência original ficam para depois.
 
-### 05 · Operações — empréstimos em aberto (1440×900)
-Sidebar (usuário = "Operações · Balcão · 2º andar") + header com busca ampliada e "Cadastrar equipamento".
-Conteúdo: H1 + "21 itens fora · atualizado agora" → 4 cards de estatística (Em aberto 21 · Vencem em 3 dias 4 · **Em atraso 3** com borda e números em vermelho · Em manutenção 2) → chips (Todos / Em atraso / Vencem esta semana / Notebooks) → tabela de 7 linhas com botão "Devolver" por linha, linhas em atraso tingidas e com botão reforçado → paginação "7 de 21 empréstimos" + Anterior/Próximo.
+### 05 · Operações — solicitações pendentes (recorte atual)
+Somente OPERATIONS/ADMIN do tenant: sidebar com Solicitações e tabela real de pedidos pendentes, com equipamento, solicitante, data em São Paulo e ações Aprovar/Rejeitar. Confirmações acessíveis, motivo obrigatório 1–500, envio bloqueado contra repetição e resultado/erro após API. Aprovação inicia Loan e prazo de 14 dias úteis; rejeição não cria Loan. Sem estatísticas fictícias, cadastro, devolução ou painel completo de empréstimos em aberto nesta spec.
 
-### 06 · Operações — cadastrar equipamento (1440×820)
+### 06 · Operações — cadastrar equipamento (referência futura, fora da spec 005)
 Sidebar + header com breadcrumb (Operações › Cadastrar equipamento).
 Conteúdo `1fr 320px`:
-- Formulário (máx. 620px): H1 + nota "Um registro por unidade física" → Nome (largo) · Categoria · Patrimônio · Número de série · Local de retirada · **Situação inicial** (segmentado: Disponível / Em manutenção / Fora de uso + nota "Em manutenção não aparece no catálogo") · Observações (textarea) → ações "Cadastrar" (primário) e "Cadastrar e adicionar outro" (secundário).
+- Formulário de referência (máx. 620px): nome, categoria, patrimônio, série, retirada, situação e observações. Manutenção deve continuar visível no catálogo como indisponível, conforme ADR-003/E00. Ações de cadastrar não são implementadas nesta etapa.
 - Coluna lateral: **Prévia no catálogo** (card real renderizado com os dados do formulário) e **Últimos cadastros** (3 linhas item/data).
 
 ---
 
 ## 7. Navegação
 
-- **Sidebar fixa de 236px**, presente em todas as telas do app (não no login), dividida em dois grupos rotulados: **Colaborador** (Catálogo, Meus empréstimos) e **Operações** (Empréstimos em aberto, Cadastrar equipamento). Operações é seção extra no mesmo app, não app separado.
+- **Sidebar de 236px**, presente nas telas do app (não no login), com **Colaborador** (Catálogo, Meus empréstimos) e **Operações** (Solicitações), este último apenas para OPERATIONS/ADMIN. Sem links de funcionalidades futuras.
 - **Item ativo**: fundo `#0E1530`, texto `#E6EAF6`, ícone Phosphor *fill* em `#8AA6EE` e barra de 2px à esquerda via `box-shadow: inset 2px 0 0 #5B7FE0`.
 - **Item inativo**: texto `#9AA3BC`, ícone regular; hover `background:#0B1128; color:#E6EAF6`.
 - **Badge de contagem** em "Meus empréstimos": pill `padding:1px 7px`, fundo `#132663`, texto `#B4C6F6` 11px, `margin-left:auto`.
 - **Breadcrumb** no header das telas de profundidade 2 (03 e 06): links em `#8AA6EE`, separador `ph-caret-right` 12px, item atual em `#E6EAF6`.
-- Fluxos: Catálogo → card disponível → Detalhe → diálogo de confirmação → Meus empréstimos. Meus empréstimos → "Pegar emprestado" → Catálogo. Operações → "Cadastrar equipamento" → tela 06.
-- O contador "2 de 3 itens com você" aparece no header do Catálogo e do Detalhe.
-- Neste layout as telas são estáticas e ligadas por âncoras (`#s1`…`#s6`); em implementação real, rotas: `/login`, `/catalogo`, `/catalogo/:patrimonio`, `/meus-emprestimos`, `/operacoes/emprestimos`, `/operacoes/equipamentos/novo`.
+- Fluxo atual: Catálogo → diálogo no card → pedido PENDING → decisão por Operações/Admin → empréstimo somente se aprovado. Meus empréstimos separa pedidos de ativos e volta ao catálogo.
+- Contador do header usa dados reais; "2 de 3" é exemplo de composição, nunca número fixo apresentado como inventário real.
+- Rotas atuais: `/` (landing pública), `/login`, `/catalogo`, `/meus-emprestimos` e `/operacoes/solicitacoes`. Detalhe/cadastro/painel completo da referência original não ganham rotas ou âncoras funcionais nesta entrega.
 
 ---
 
@@ -360,9 +359,9 @@ Regras: nunca animar `box-shadow` de moldura; nada acima de 240ms; respeitar `@m
 
 ## 9. Regras de negócio visíveis na interface
 
-1. **Máximo de 3 itens por pessoa** — contador no header ("2 de 3 itens com você"), segmentos de limite no detalhe e em Meus empréstimos, aviso no diálogo quando a solicitação leva ao terceiro item.
-2. **Prazo padrão de 14 dias** — data calculada no card de solicitação ("Devolver até 14/set"), barra de progresso por item, coluna "Prazo" em Operações.
-3. **Atraso bloqueia novo empréstimo** — linha tingida em vermelho suave, card de estatística "Em atraso" com borda vermelha, botão "Solicitar" desabilitado (`opacity:.45`) com nota explicativa quando houver atraso.
+1. **Máximo de 3 empréstimos ativos por pessoa** — contador real e três segmentos; dois ativos podem receber aprovação do terceiro, nunca do quarto. Pedido pendente não ocupa segmento.
+2. **14 dias úteis após aprovação** — segunda a sexta, sem descontar feriados, excluindo o dia inicial e mantendo horário de São Paulo. Login/landing/catálogo anunciam a regra. "Devolver até" usa due_at real de empréstimo, nunca cálculo antecipado de pedido.
+3. **Atraso bloqueia novo pedido e aprovação** — interface mostra motivo e desabilita Solicitar; API revalida. Não criar estatística fictícia para comunicar o bloqueio.
 4. **Manutenção não fica disponível** — pill âmbar, card sem ação, e nota no controle "Situação inicial" do cadastro.
 5. Fora de escopo v1 (não desenhar): reserva com data futura, notificação por e-mail, importação de planilha.
 

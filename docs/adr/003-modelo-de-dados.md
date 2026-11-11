@@ -1,5 +1,9 @@
 # ADR-003: Modelo de dados
 
+Status: parcialmente substituído pelo ADR-004 em 06/nov/2026 quanto ao limite de empréstimos e ao cálculo do prazo. O texto abaixo preserva a decisão original, que orientou a migration inicial. A aprovação por Operações permanece vigente. A implementação do novo prazo ainda depende de nova migration; a antiga não deve ser editada.
+
+Atualização de 09/nov/2026: ADR-008 restabeleceu o limite de três. O prazo vigente continua sendo de 14 dias úteis do ADR-004, ainda dependente de implementação; o contexto original abaixo é histórico.
+
 ## Contexto
 
 O sistema precisa controlar usuários, equipamentos, solicitações, empréstimos e devoluções por tenant. As regras do PRD exigem limite de três empréstimos ativos, prazo de 14 dias corridos, bloqueio de novas solicitações para quem estiver em atraso e indisponibilidade de equipamentos em manutenção.

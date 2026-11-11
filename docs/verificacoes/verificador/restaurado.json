@@ -1,0 +1,13 @@
+{
+  "phase": "restaurado-pelo-principal",
+  "executor": "principal",
+  "baseCommit": "f26262e29fec5553d681698c6ce48b54e7bd4658",
+  "command": "node --test tests/verificador/fixture.test.mjs",
+  "exitCode": 0,
+  "output": "âœ” CA-V01: limite de cinco (0.6275ms)\nâœ” CA-V02: aprovaÃ§Ã£o obrigatÃ³ria (0.132ms)\nâ„¹ tests 2\nâ„¹ suites 0\nâ„¹ pass 2\nâ„¹ fail 0\nâ„¹ cancelled 0\nâ„¹ skipped 0\nâ„¹ todo 0\nâ„¹ duration_ms 78.0948\n",
+  "sha256": {
+    "tests/verificador/spec.md": "a949d63fb1707fbcb203b665f3d3a4744dabc15c14ba5aed6eb531b4f96d2911",
+    "tests/verificador/contrato.json": "a040b678347ae47877e2e3d5628f5362e73a175e519b3110e380d0e89453f3bd",
+    "tests/verificador/fixture.test.mjs": "b98b6565c52c874d9e1de27e03cfa3081fd3ac8af8237e2f4c0970e42273d3c8"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "phase": "D07-baseline",
+  "executor": "principal",
+  "command": "node --test tests/verificador/fixture.test.mjs",
+  "exitCode": 0,
+  "output": "✔ CA-V01: limite de cinco (0.5575ms)\n✔ CA-V02: aprovação obrigatória (0.1175ms)\nℹ tests 2\nℹ suites 0\nℹ pass 2\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 87.1804\n",
+  "sha256": {
+    "tests/verificador/spec.md": "a949d63fb1707fbcb203b665f3d3a4744dabc15c14ba5aed6eb531b4f96d2911",
+    "tests/verificador/contrato.json": "a040b678347ae47877e2e3d5628f5362e73a175e519b3110e380d0e89453f3bd",
+    "tests/verificador/fixture.test.mjs": "b98b6565c52c874d9e1de27e03cfa3081fd3ac8af8237e2f4c0970e42273d3c8"
+  },
+  "recordedAt": "2026-11-07T19:47:39.514Z"
+}

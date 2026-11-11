@@ -1,0 +1,85 @@
+{
+  "phase": "integral",
+  "parent": "01a1c165-8c6f-7340-8420-4cd687a14f1d",
+  "logSha256": "9e6ef28ff858eac71714932038b878dd16b22404157e01061257849e46ef4943",
+  "sessions": [
+    {
+      "session": "01a1c165-8c6f-7340-8420-4cd687a14f1d",
+      "parent": "01a1c165-8c6f-7340-8420-4cd687a14f1d",
+      "sourceSha256": "d5b375a32f8f5c8bc6fae84cc38192fee5487c84c49f51bd2fa55d2d4f5aef81",
+      "calls": [
+        "spawn_agent",
+        "wait_agent",
+        "wait_agent",
+        "wait_agent",
+        "wait_agent",
+        "wait_agent",
+        "wait_agent",
+        "wait_agent",
+        "wait_agent",
+        "wait_agent",
+        "send_message",
+        "wait_agent",
+        "wait_agent",
+        "wait_agent",
+        "wait_agent",
+        "wait_agent",
+        "wait_agent",
+        "wait_agent",
+        "wait_agent",
+        "wait_agent"
+      ],
+      "permissionEvidence": [
+        {
+          "approval_policy": "never",
+          "sandbox_policy": {
+            "type": "read-only"
+          }
+        }
+      ],
+      "spawn": {
+        "task_name": "verificacao_e10",
+        "agent_type": "verificador-spec",
+        "fork_turns": "none"
+      },
+      "readerCalls": 0
+    },
+    {
+      "session": "01a1c165-b276-7622-b267-20f9859a1e3d",
+      "parent": "01a1c165-8c6f-7340-8420-4cd687a14f1d",
+      "sourceSha256": "815c9c8ed4a2756a5804917d0f655f98073a26db56bb9d62aa76e6032e28bcea",
+      "calls": [
+        "exec",
+        "exec",
+        "exec",
+        "exec",
+        "exec",
+        "exec",
+        "exec",
+        "exec",
+        "exec",
+        "exec",
+        "exec",
+        "exec",
+        "exec",
+        "exec",
+        "exec",
+        "exec",
+        "exec",
+        "send_message",
+        "exec",
+        "send_message"
+      ],
+      "permissionEvidence": [
+        {
+          "approval_policy": "never",
+          "sandbox_policy": {
+            "type": "read-only"
+          }
+        }
+      ],
+      "readerCalls": 12
+    }
+  ],
+  "recordedAt": "2026-11-09T17:45:00.548Z"
+}

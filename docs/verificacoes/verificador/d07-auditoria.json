@@ -1,0 +1,37 @@
+{
+  "task": "D07",
+  "recordedAt": "2026-11-07T19:59:42.259Z",
+  "executor": "principal",
+  "commands": [
+    "git rev-list --objects --all",
+    "git cat-file --batch"
+  ],
+  "scope": "Blobs de texto alcançáveis nas referências locais e logs dedicados D07; sem abrir ambientes reais ou configuração pessoal.",
+  "blobsScanned": 267,
+  "realEnvironmentPathsInHistory": [],
+  "findings": [],
+  "logs": [
+    {
+      "path": "test-results/verificador/d07-baseline-events.log",
+      "sha256": "554304314cb32cdb557c2a904d7341b832f349724a029dc74aec08ab6134b760"
+    },
+    {
+      "path": "test-results/verificador/d07-integral-events.log",
+      "sha256": "5c44add483ae9c081d6ac25a47e5d3ba5a2fd0a81a8e21836289018e601ad5c1"
+    },
+    {
+      "path": "test-results/verificador/d07-plantado-events.log",
+      "sha256": "4c9f1117b877f11e53eb524eac138d0269694db002e5a674ae0a3749cbe09171"
+    },
+    {
+      "path": "test-results/verificador/d07-restaurado-events.log",
+      "sha256": "5cd9a3dc90cb26b34f5e886516f55693336bbae6963563cbb0500da973e10b83"
+    }
+  ],
+  "limits": [
+    "Busca heurística por padrões; não prova ausência de toda senha ou segredo possível.",
+    "Não examina refs remotas não obtidas, objetos inalcançáveis ou logs fora do escopo declarado.",
+    "Não demonstra isolamento de rede/escrita da sessão principal; CA-D07 permanece BLOQUEADO."
+  ],
+  "result": "SEM PADRÕES ENCONTRADOS NO ESCOPO"
+}

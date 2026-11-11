@@ -1,0 +1,130 @@
+{
+  "scope": "auditoria determinística local da skill; sem configuração real ou rede",
+  "skill": {
+    "file": "skills/imagens-equipamentos/SKILL.md",
+    "sha256": "3816120f92c0040a2149d703eeda55ee5a392c6049b4bd7f5ebbfd353957f479",
+    "frontmatterValid": true,
+    "references": [
+      "references/pixabay.md",
+      "references/pipeline.md"
+    ],
+    "uniqueAssets": 12
+  },
+  "envExample": {
+    "file": ".env.example",
+    "sha256": "e0a57bfe4e95e0f9687eb39f53bc577056cec8a244faeb3ed06bff20d6db3bfa",
+    "variable": "PIXABAY_API_KEY",
+    "line": 17,
+    "empty": true
+  },
+  "sourceScan": {
+    "referencesToSkill": [],
+    "sources": [
+      {
+        "path": "src/app/api/trpc/[trpc]/route.ts",
+        "sha256": "c75d664926beeedbd713d09bbe5412823ba7b8a2196d480d6f909d55370bb315"
+      },
+      {
+        "path": "src/app/catalogo/page.tsx",
+        "sha256": "0cbc3f0ca86234421f5161ba5aeec1f7c858157b2a72736a44475a8be10ed511"
+      },
+      {
+        "path": "src/app/health/route.ts",
+        "sha256": "722472737c742cb573651c1109fcbf8831c531ddd15e7ee9754f579540e700f4"
+      },
+      {
+        "path": "src/app/layout.tsx",
+        "sha256": "bf8227ce90627b55193ed2c090b0b8967c5b123de8c723141f21a2d481046478"
+      },
+      {
+        "path": "src/app/login/page.tsx",
+        "sha256": "805553192e9342ec695579db08d5939aada726b2f846898338d6168849f18769"
+      },
+      {
+        "path": "src/app/page.tsx",
+        "sha256": "b88d34aa66868f9b3b65c26684a4be7d382f5c362bf7e1c78f7b162fc7f7423e"
+      },
+      {
+        "path": "src/components/brand.tsx",
+        "sha256": "93560b8af102f62982b9c4dc95ab3394fcd460d31304fbf182d052c2488f2100"
+      },
+      {
+        "path": "src/components/catalogue.tsx",
+        "sha256": "9bc3677ee9260eb0c073ecef9d6df9c06bbfee78a40c0ff616d4251af3aa199a"
+      },
+      {
+        "path": "src/components/login-form.tsx",
+        "sha256": "b9718b625541240904e46889b5898361c005de8503a85db9e6d9c5f6886a1eda"
+      },
+      {
+        "path": "src/components/providers.tsx",
+        "sha256": "19207df59eb20a7233326b73ecedaa8b26f5717e8a4a083873c3fe72cd6ef6b7"
+      },
+      {
+        "path": "src/components/ui/button.tsx",
+        "sha256": "a8da17057629ead5cd632eca05aeb838b958f752e61caaac406ee3f62eaaac47"
+      },
+      {
+        "path": "src/components/ui/input.tsx",
+        "sha256": "b1a70f816372eaef73cc6573233f8f3f9f312e01eefa3dc506c3ed1a9aeea8b7"
+      },
+      {
+        "path": "src/instrumentation.ts",
+        "sha256": "c30ace75c30bff087f8ebae794b188b9e9fb49784ac31f3721fc1716e060037a"
+      },
+      {
+        "path": "src/lib/auth-input.ts",
+        "sha256": "7f8987d61be6367fa36175e02dd8008a9f570ebdd76dc7ac9c239b6e9116cd7e"
+      },
+      {
+        "path": "src/lib/same-origin.ts",
+        "sha256": "6f405dbd6356a87055693d422b2c267c0d7aa2ad0dbe2970b558dee272a02074"
+      },
+      {
+        "path": "src/lib/trpc.ts",
+        "sha256": "52842bf34dab7f6497f2df97b1da82fca58fafe97e9a3e13516e37f78511d5e7"
+      },
+      {
+        "path": "src/proxy.ts",
+        "sha256": "c45566e662e40eab3688f1bd7c7e342f330e417b124bcab5cd62fec6b937999b"
+      },
+      {
+        "path": "src/server/api/root.ts",
+        "sha256": "bc02bab6a8434b62f1a084dac8bac3d306a85473288d889aed5fd075b4241b65"
+      },
+      {
+        "path": "src/server/api/routers/auth.ts",
+        "sha256": "00da3cb8606714ac2e451a6f33c43bf41bc36feeb89d4e9b170d93646b14c63c"
+      },
+      {
+        "path": "src/server/api/trpc.ts",
+        "sha256": "233e485693c49d57a2fc7888ddfe3760c51481269966a65473d77abe8995b4e5"
+      },
+      {
+        "path": "src/server/auth.ts",
+        "sha256": "baddcbb7fba68e445bd99730efb24985b9784f5aa6886d839a2053dcb80eb7d3"
+      },
+      {
+        "path": "src/server/db.ts",
+        "sha256": "863a98cd2d9bb0534b6816eb024b37101ed062718bd35e95e661b4597a9b8252"
+      },
+      {
+        "path": "src/server/env.ts",
+        "sha256": "44be0cddde48627d9819c975e845dad7eaa325cca1fc18ae46e2d70cf1d1a92b"
+      },
+      {
+        "path": "src/server/services/access.ts",
+        "sha256": "d6633ff4ce71b6409c1986e5368571a8f144bf01db6887811af6babc9716c1e6"
+      },
+      {
+        "path": "src/server/services/login.ts",
+        "sha256": "cdc0415587458dd95f477d96a7d3c6bbab11fa7aa8c8fbc8a9e247301e162a20"
+      },
+      {
+        "path": "src/types/assets.d.ts",
+        "sha256": "39bbc936aea28a6264008888fc8ee15bab4de204726249f78b0850a79ba7858c"
+      }
+    ],
+    "note": "Nenhum arquivo de src referencia a skill; conferência textual e hashes de todas as fontes para inspeção independente."
+  }
+}

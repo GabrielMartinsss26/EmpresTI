@@ -29,8 +29,7 @@ const steps = [
     number: "03",
     icon: "ph-arrow-u-up-left",
     title: "Use e devolva no prazo.",
-    description:
-      "Acompanhe seus itens e solicite a devolução. Operações confirma o recebimento no balcão.",
+    description: "Acompanhe seus itens e o vencimento em Meus empréstimos.",
   },
 ];
 
@@ -261,10 +260,11 @@ export default function Home() {
                     14
                   </dd>
                   <dt className="text-[13px] text-foreground">
-                    dias corridos de prazo
+                    dias úteis de prazo
                   </dt>
                   <p className="text-xs leading-5 text-muted">
-                    Contados a partir da aprovação.
+                    Contados do dia útil seguinte à aprovação, sem descontar
+                    feriados.
                   </p>
                 </div>
               </dl>

@@ -26,19 +26,25 @@ enum RequestStatus {
   REJECTED
 }
 
+enum LoanDueRule {
+  LEGACY_CALENDAR_14
+  BUSINESS_14_SP
+}
+
 model Tenant {
-  id             String              @id @default(uuid()) @db.Uuid
-  slug           String              @unique
-  name           String
-  deactivated_at DateTime?           @db.Timestamptz(6)
-  created_at     DateTime            @default(now()) @db.Timestamptz(6)
-  updated_at     DateTime            @updatedAt @db.Timestamptz(6)
-  memberships    Membership[]
-  categories     EquipmentCategory[]
-  equipment      Equipment[]
-  requests       LoanRequest[]
-  loans          Loan[]
-  audits         AuditLog[]
+  id               String              @id @default(uuid()) @db.Uuid
+  slug             String              @unique
+  name             String
+  deactivated_at   DateTime?           @db.Timestamptz(6)
+  created_at       DateTime            @default(now()) @db.Timestamptz(6)
+  updated_at       DateTime            @updatedAt @db.Timestamptz(6)
+  memberships      Membership[]
+  categories       EquipmentCategory[]
+  equipment        Equipment[]
+  equipment_images EquipmentImage[]
+  requests         LoanRequest[]
+  loans            Loan[]
+  audits           AuditLog[]
 
   @@map("tenants")
 }
@@ -112,12 +118,48 @@ model Equipment {
   category           EquipmentCategory @relation(fields: [category_id, tenant_id], references: [id, tenant_id], onDelete: Restrict)
   requests           LoanRequest[]
   loans              Loan[]
+  image              EquipmentImage?
 
   @@unique([id, tenant_id])
   @@unique([tenant_id, asset_tag])
   @@unique([tenant_id, serial_number])
   @@index([tenant_id, operational_status])
   @@map("equipment")
+}
+
+model EquipmentImage {
+  id               String    @id @default(uuid()) @db.Uuid
+  tenant_id        String    @db.Uuid
+  equipment_id     String    @unique(map: "equipment_images_equipment_key") @db.Uuid
+  storage_bucket   String
+  object_path      String
+  source_provider  String
+  source_id        BigInt
+  source_author    String
+  source_author_id BigInt
+  source_page_url  String
+  license_name     String
+  license_url      String
+  media_kind       String
+  mime_type        String
+  width            Int
+  height           Int
+  size_bytes       Int
+  source_sha256    String
+  sha256           String
+  reviewed_at      DateTime  @db.Timestamptz(6)
+  reviewed_by      String
+  review_note      String
+  deactivated_at   DateTime? @db.Timestamptz(6)
+  created_at       DateTime  @default(now()) @db.Timestamptz(6)
+  updated_at       DateTime  @updatedAt @db.Timestamptz(6)
+  tenant           Tenant    @relation(fields: [tenant_id], references: [id], onDelete: Restrict)
+  equipment        Equipment @relation(fields: [equipment_id, tenant_id], references: [id, tenant_id], onDelete: Restrict)
+
+  @@unique([storage_bucket, object_path], map: "equipment_images_object_key")
+  @@unique([equipment_id, tenant_id], map: "equipment_images_equipment_tenant_key")
+  @@index([tenant_id], map: "equipment_images_tenant_idx")
+  @@map("equipment_images")
 }
 
 model LoanRequest {
@@ -153,6 +195,7 @@ model Loan {
   approved_by_membership_id String      @db.Uuid
   checked_out_at            DateTime    @db.Timestamptz(6)
   due_at                    DateTime    @db.Timestamptz(6)
+  due_rule                  LoanDueRule @default(BUSINESS_14_SP)
   return_requested_at       DateTime?   @db.Timestamptz(6)
   returned_at               DateTime?   @db.Timestamptz(6)
   returned_by_membership_id String?     @db.Uuid

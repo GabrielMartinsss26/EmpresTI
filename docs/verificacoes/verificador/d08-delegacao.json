@@ -1,0 +1,53 @@
+{
+  "phase": "d08",
+  "parent": "01a1b7b1-62d0-7ac3-a011-cba1ee655746",
+  "logSha256": "71065cbba4b527db244d1f6d0796b0c0386b1e5ab48043b874b0d14e2f78eaea",
+  "sessions": [
+    {
+      "session": "01a1b7b1-62d0-7ac3-a011-cba1ee655746",
+      "parent": "01a1b7b1-62d0-7ac3-a011-cba1ee655746",
+      "sourceSha256": "0de44255f98d6a85fa87858ea9693205beb7d48f44e77a244a3d54a297d9e252",
+      "calls": [
+        "spawn_agent",
+        "wait_agent",
+        "wait_agent",
+        "wait_agent",
+        "wait_agent"
+      ],
+      "permissionEvidence": [
+        {
+          "approval_policy": "never",
+          "sandbox_policy": {
+            "type": "read-only"
+          }
+        }
+      ],
+      "spawn": {
+        "task_name": "verificacao_d08",
+        "agent_type": "verificador-spec",
+        "fork_turns": "none"
+      },
+      "readerCalls": 0
+    },
+    {
+      "session": "01a1b7b1-80bc-70a2-a4b4-f43ad0fc1970",
+      "parent": "01a1b7b1-62d0-7ac3-a011-cba1ee655746",
+      "sourceSha256": "8b32ca956dc9ff5880ec8a0b54310ae5c1aaa575019d74f36b6d4861ade84903",
+      "calls": [
+        "exec",
+        "exec",
+        "exec"
+      ],
+      "permissionEvidence": [
+        {
+          "approval_policy": "never",
+          "sandbox_policy": {
+            "type": "read-only"
+          }
+        }
+      ],
+      "readerCalls": 3
+    }
+  ],
+  "recordedAt": "2026-11-07T20:28:21.426Z"
+}

@@ -1,0 +1,77 @@
+{
+  "revision": "819f0ad6f1d5eaa050fb379cac9343f47757cb58",
+  "checks": [
+    {
+      "command": "npm test",
+      "startedAt": "2026-11-09T17:25:17.633Z",
+      "finishedAt": "2026-11-09T17:25:19.969Z",
+      "exitCode": 0,
+      "stdout": "\n> empresti@0.1.0 test\n> vitest run\n\n\n RUN  v5.0.5 C:/Users/gabrieloliveira-ieg/OneDrive - Instituto Germinare/Área de Trabalho/TECH 3° ano/Inova Tecno/Projeto EmpresTI/EmpresTI\n\n\n Test Files  8 passed (8)\n      Tests  32 passed (32)\n   Start at  14:25:18\n   Duration  1.40s (import 77%, transform 14%, tests 5%, worker 4%)\n\n",
+      "stderr": "",
+      "error": null
+    },
+    {
+      "command": "npm run test:db",
+      "startedAt": "2026-11-09T17:25:20.026Z",
+      "finishedAt": "2026-11-09T17:27:42.843Z",
+      "exitCode": 0,
+      "stdout": "\n> empresti@0.1.0 test:db\n> vitest run --config vitest.db.config.ts\n\n\n RUN  v5.0.5 C:/Users/gabrieloliveira-ieg/OneDrive - Instituto Germinare/Área de Trabalho/TECH 3° ano/Inova Tecno/Projeto EmpresTI/EmpresTI\n\n\n Test Files  10 passed (10)\n      Tests  241 passed (241)\n   Start at  14:25:20\n   Duration  141.90s (tests 90%, import 10%)\n\n",
+      "stderr": "",
+      "error": null
+    },
+    {
+      "command": "npm run test:imagens",
+      "startedAt": "2026-11-09T17:27:42.917Z",
+      "finishedAt": "2026-11-09T17:27:45.689Z",
+      "exitCode": 0,
+      "stdout": "\n> empresti@0.1.0 test:imagens\n> node --test tests/imagens/*.test.mjs\n\n✔ CA-D07: chave ausente falha antes da rede; erro do provedor não expõe segredo (9.63ms)\n✔ CA-D03/D07: cache 24h, filtros de foto e sanitização sem chave no disco (44.7702ms)\n✔ D03: página e categoria têm caches distintos e paginação inválida não chama a rede (22.8ms)\n✔ CA-D07: download bloqueia origem externa, redirect externo e conteúdo excessivo (1.978ms)\n✔ CA-D03/D04: selecionar não aprova a foto, não duplica ID e reutiliza original local (37.4541ms)\n✔ CA-D03: WebP 800×600 sem cortar foto panorâmica ou retrato; rejeita arquivo falso (112.9527ms)\n✔ CA-D03/D04: pacote requer revisão atual, rejeita conjunto incompleto e arquivo alterado (30.3318ms)\n✔ CA-D04: aprovação sem revisor, motivo ou data válida não autoriza pacote (22.5589ms)\n✔ CA-D03: detecta mesma foto por ID e por bytes, mesmo com outro ID (78.1743ms)\n✔ CA-D02/D03: 12 arquivos idempotentes, créditos íntegros e pacote invalidado por revisão posterior (1236.1851ms)\nℹ tests 10\nℹ suites 0\nℹ pass 10\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 1976.696\n",
+      "stderr": "",
+      "error": null
+    },
+    {
+      "command": "npm run test:verificador",
+      "startedAt": "2026-11-09T17:27:45.729Z",
+      "finishedAt": "2026-11-09T17:27:46.568Z",
+      "exitCode": 0,
+      "stdout": "\n> empresti@0.1.0 test:verificador\n> node --test tests/verificador/seguranca.test.mjs tests/verificador/fixture.test.mjs\n\n✔ CA-V01: limite de cinco (1.293ms)\n✔ CA-V02: aprovação obrigatória (0.1255ms)\n✔ CA-D08: transporte stdio inicializa e recusa ferramenta de escrita (109.5967ms)\n✔ CA-D08: MCP expõe somente lista e leitura; execução/escrita/rede não existem (1.1344ms)\n✔ CA-I07: exemplo público retorna só metadados e não aceita caminho arbitrário (21.0999ms)\n✔ CA-D08: leitura nega ambientes, traversal e caminhos absolutos antes de abrir (1.719ms)\n✔ CA-D08: descoberta filtra segredos e leitura bloqueia junction externa (19.1648ms)\nℹ tests 7\nℹ suites 0\nℹ pass 7\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 280.9199\n",
+      "stderr": "",
+      "error": null
+    },
+    {
+      "command": "npm run lint",
+      "startedAt": "2026-11-09T17:27:46.606Z",
+      "finishedAt": "2026-11-09T17:27:59.963Z",
+      "exitCode": 0,
+      "stdout": "\n> empresti@0.1.0 lint\n> eslint .\n\n",
+      "stderr": "",
+      "error": null
+    },
+    {
+      "command": "npm run typecheck",
+      "startedAt": "2026-11-09T17:28:00.019Z",
+      "finishedAt": "2026-11-09T17:28:05.856Z",
+      "exitCode": 0,
+      "stdout": "\n> empresti@0.1.0 typecheck\n> tsc --noEmit\n\n",
+      "stderr": "",
+      "error": null
+    },
+    {
+      "command": "npm run format:check",
+      "startedAt": "2026-11-09T17:28:05.907Z",
+      "finishedAt": "2026-11-09T17:28:08.474Z",
+      "exitCode": 0,
+      "stdout": "\n> empresti@0.1.0 format:check\n> prettier --check src prisma tests scripts *.json *.ts *.mjs\n\nChecking formatting...\nAll matched files use Prettier code style!\n",
+      "stderr": "",
+      "error": null
+    },
+    {
+      "command": "npm run test:e2e -- tests/e2e/catalogue.spec.ts tests/e2e/operations.spec.ts --workers=1 --max-failures=1",
+      "startedAt": "2026-11-09T17:28:08.519Z",
+      "finishedAt": "2026-11-09T17:28:42.868Z",
+      "exitCode": 1,
+      "stdout": "\n> empresti@0.1.0 test:e2e\n> playwright test tests/e2e/catalogue.spec.ts tests/e2e/operations.spec.ts --workers=1 --max-failures=1\n\n\nRunning 21 tests using 1 worker\n\n  ok  1 tests\\e2e\\catalogue.spec.ts:3:1 › CA-E01/CA-E11: catálogo real com 12 fotos/créditos, três colunas e estados de manutenção (2.5s)\n  ok  2 tests\\e2e\\catalogue.spec.ts:72:1 › CA-E01: busca, categoria, disponíveis e estado vazio (1.3s)\n  ok  3 tests\\e2e\\catalogue.spec.ts:96:1 › CA-E02: diálogo acessível, envio sem repetição e pedido PENDING visível (2.1s)\n  ok  4 tests\\e2e\\catalogue.spec.ts:161:1 › CA-E02: conflito atualiza catálogo e não mostra sucesso nem cria outro pedido (940ms)\n  ok  5 tests\\e2e\\catalogue.spec.ts:202:1 › CA-E03: limite três e atraso desabilitam solicitação com motivo (953ms)\n  ok  6 tests\\e2e\\catalogue.spec.ts:231:1 › CA-E09: empréstimos/datas reais, pedidos separados e motivo de rejeição (634ms)\n  ok  7 tests\\e2e\\catalogue.spec.ts:282:1 › CA-E01/E09: erro de rede tem retry e imagem com falha tem fallback (705ms)\n  ok  8 tests\\e2e\\catalogue.spec.ts:316:1 › CA-E01: paginação carrega itens adicionais sem duplicar (615ms)\n  ok  9 tests\\e2e\\catalogue.spec.ts:348:1 › CA-E09: sem sessão as duas rotas voltam ao login (615ms)\n  ok 10 tests\\e2e\\operations.spec.ts:26:3 › CA-E04/E10: ADMIN acessa lista e link de Operações (868ms)\n  ok 11 tests\\e2e\\operations.spec.ts:26:3 › CA-E04/E10: OPERATIONS acessa lista e link de Operações (731ms)\n  ok 12 tests\\e2e\\operations.spec.ts:47:1 › CA-E04/E10: colaborador não vê link nem dados por página/API; sem sessão vai ao login (982ms)\n  ok 13 tests\\e2e\\operations.spec.ts:91:1 › CA-E05/E10: confirmação acessível e aprovação única com prazo real (1.7s)\n  ok 14 tests\\e2e\\operations.spec.ts:157:1 › CA-E08/E10: rejeição exige motivo, preserva texto e libera novo pedido (1.6s)\n  ok 15 tests\\e2e\\operations.spec.ts:212:1 › CA-E05/E10: decisão concorrente gera conflito visível sem falso sucesso (732ms)\n  ok 16 tests\\e2e\\operations.spec.ts:243:1 › CA-E06/E10: limite revalidado exibe erro e mantém pedido pendente (811ms)\n  x  17 tests\\e2e\\operations.spec.ts:272:1 › CA-E04/E10: papel revogado fecha acesso sem manter linhas antigas (704ms)\nTesting stopped early after 1 maximum allowed failures.\n\n\n  1) tests\\e2e\\operations.spec.ts:272:1 › CA-E04/E10: papel revogado fecha acesso sem manter linhas antigas \n\n    Error: expect(locator).toBeVisible() failed\n\n    Locator: getByRole('alert').filter({ hasText: 'Você não tem permissão para decidir' })\n    Expected: visible\n    Error: strict mode violation: getByRole('alert').filter({ hasText: 'Você não tem permissão para decidir' }) resolved to 2 elements:\n        1) <p role=\"alert\" tabindex=\"-1\" class=\"rounded-control border p-4 text-[13px] border-error/40 text-error\">Você não tem permissão para decidir solicitações.</p> aka getByRole('alert').filter({ hasText: /^Você não tem permissão para decidir solicitações\\.$/ })\n        2) <div role=\"alert\" class=\"flex flex-wrap items-center gap-4 rounded-xl border border-error/40 bg-error/5 p-4 text-[13px]\">…</div> aka getByText('Você não tem permissão para decidir solicitações.Tentar novamenteIr para login')\n\n    Call log:\n      - Expect \"toBeVisible\" getByRole('alert').filter({ hasText: 'Você não tem permissão para decidir' }) with timeout 5000ms\n      - waiting for getByRole('alert').filter({ hasText: 'Você não tem permissão para decidir' })\n\n\n      288 |         .getByRole(\"alert\")\n      289 |         .filter({ hasText: \"Você não tem permissão para decidir\" }),\n    > 290 |     ).toBeVisible();\n          |       ^\n      291 |     await expect(page.getByRole(\"table\")).toHaveCount(0);\n      292 |     await expect(\n      293 |       page.getByRole(\"link\", { name: \"Solicitações\", exact: true }),\n        at C:\\Users\\gabrieloliveira-ieg\\OneDrive - Instituto Germinare\\Área de Trabalho\\TECH 3° ano\\Inova Tecno\\Projeto EmpresTI\\EmpresTI\\tests\\e2e\\operations.spec.ts:290:7\n\n    Error Context: test-results\\playwright\\operations-CA-E04-E10-pape-7bd15-o-sem-manter-linhas-antigas\\error-context.md\n\n  1 failed\n    tests\\e2e\\operations.spec.ts:272:1 › CA-E04/E10: papel revogado fecha acesso sem manter linhas antigas \n  4 did not run\n  16 passed (33.2s)\n  1 error was not a part of any test, see above for details\n",
+      "stderr": "(node:24008) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\n",
+      "error": null
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "phase": "D07-restaurado-pelo-principal",
+  "executor": "principal",
+  "baseRevision": "4e3c16ba90d7dab091b6903939fd0494d7e0faab",
+  "command": "npm run test:verificador",
+  "exitCode": 0,
+  "output": "\n> empresti@0.1.0 test:verificador\n> node --test tests/verificador/seguranca.test.mjs tests/verificador/fixture.test.mjs\n\n✔ CA-V01: limite de cinco (0.8329ms)\n✔ CA-V02: aprovação obrigatória (0.1488ms)\n✔ CA-D08: transporte stdio inicializa e recusa ferramenta de escrita (89.6067ms)\n✔ CA-D08: MCP expõe somente lista e leitura; execução/escrita/rede não existem (0.6287ms)\n✔ CA-I07: exemplo público retorna só metadados e não aceita caminho arbitrário (14.4784ms)\n✔ CA-D08: leitura nega ambientes, traversal e caminhos absolutos antes de abrir (0.9915ms)\n✔ CA-D08: descoberta filtra segredos e leitura bloqueia junction externa (16.0897ms)\nℹ tests 7\nℹ suites 0\nℹ pass 7\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 233.4158\n",
+  "sha256": {
+    "tests/verificador/spec.md": "a949d63fb1707fbcb203b665f3d3a4744dabc15c14ba5aed6eb531b4f96d2911",
+    "tests/verificador/contrato.json": "a040b678347ae47877e2e3d5628f5362e73a175e519b3110e380d0e89453f3bd",
+    "tests/verificador/fixture.test.mjs": "b98b6565c52c874d9e1de27e03cfa3081fd3ac8af8237e2f4c0970e42273d3c8"
+  },
+  "identicalToBaseline": true,
+  "recordedAt": "2026-11-07T19:54:07.737Z"
+}

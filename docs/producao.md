@@ -1,5 +1,40 @@
 # Publicação na Vercel e Supabase
 
+## Versão vigente — E11, 09/nov/2026
+
+Publicação explicitamente delegada pelo responsável (ADR-010). Deploy dpl_3aSE1YQFhNGrtrWi224RgkAtmrv4 READY e promovido para https://empresti-mauve.vercel.app após migration e build. Catálogo, pedidos, decisão mínima e Meus empréstimos publicados; três ativos e 14 úteis. Migration 202611090001_loan_due_rules aplicada via Prisma Migrate no build Vercel, com preservação das contagens/fingerprints anteriores; inicial/D04 intactas. Caminho remoto adotado porque as portas PostgreSQL estavam inacessíveis da rede local; credenciais existentes Production, sem alteração de ambiente externo.
+
+Login/logout/proteção das três rotas e fluxo rejeitar/solicitar/aprovar conferidos realmente com conta própria. TI-0008 ficou ativo como registro de validação, vencendo 27/nov/2026 17:21. Doze imagens do DOM publicado conferidas por hashes. Professor adiado; sem push/tag/merge ou habilitar CI. Recibos e limitações em docs/verificacoes/e11-*. Em 10/nov/2026, revisão independente final confirmou os 13 critérios da spec 005 ATENDE, PRONTA. O mesmo deploy e login/catalogo foram reconferidos na retomada. Isso não conclui spec 004, conta do professor ou isolamento global.
+
+As seções abaixo preservam entregas anteriores; seus IDs, escopo e pendências são históricos.
+
+## Produção conectada — 05/nov/2026
+
+- Publicado em https://empresti-mauve.vercel.app/; login em `/login`.
+- Deploy daquela etapa `dpl_73nD7wLbW4nRYkuGojwWAHX67YMw`, estado `READY`, destino `production`.
+- Inclui o login sem rolagem nas resoluções desktop verificadas e o link do ícone/nome EmpresTI para a landing. Conferência no domínio público: 1440×820, 1366×768 e 1280×720, inclusive após validação do formulário vazio; clique no link retornou a `/`.
+- Cadastradas na Vercel, em Production, as variáveis `DATABASE_URL`, `DIRECT_URL`, `NEXT_PUBLIC_SUPABASE_URL` e `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`. Connection strings foram armazenadas como secrets. A chave administrativa não foi enviada.
+- O modo `showcase` não está habilitado nesta publicação. Arquivos reais de ambiente são excluídos do upload por `.vercelignore`.
+- Landing e login responderam HTTP 200; `/health` retornou HTTP 200 com `status: ok`; catálogo sem sessão redirecionou ao login.
+- Teste real em Chromium no domínio público confirmou login ADMIN, cookie `httpOnly` e `secure`, persistência após recarregar, logout e bloqueio de rota após sair.
+- Antes do deploy passaram 11 testes unitários, seis testes de banco local descartável, dois E2E, lint, tipos e formatação. O build remoto terminou com sucesso.
+- Publicação feita por CLI a partir da pasta local. Código dos ajustes registrado no commit local `ea86780`; nenhum push executado. Commits locais estão autorizados em `rules/operacao.md`.
+- O usuário fechou o cadastro público no painel Supabase Auth após a publicação. Conferência em 05/nov/2026: `/auth/v1/settings` respondeu HTTP 200 com `disable_signup: true`. A verificação foi somente de leitura, sem criar contas.
+- As seções de publicação visual abaixo registram entregas anteriores, não o modo atual de produção.
+
+## Integração local com Supabase — 04/nov/2026
+
+- O projeto foi retomado pelo usuário no painel Supabase.
+- O `.env` local foi corrigido: senha e caminho do banco nas conexões. Runtime usa Transaction Pooler; migrations usam a conexão direta, ambas com TLS obrigatório.
+- A migration `202610190001_initial` foi aplicada ao banco autorizado e o seed criou o tenant `suporte_ti`.
+- As nove tabelas foram conferidas com RLS habilitado e nove policies. Os seis testes de migration passaram em PostgreSQL local descartável; nove testes unitários também passaram.
+- O primeiro usuário foi provisionado por solicitação explícita, com e-mail confirmado, perfil ativo e vínculo `ADMIN` no tenant `suporte_ti`. Credenciais não fazem parte deste documento nem do seed.
+- A entrada real pelo formulário foi verificada em Chromium: destino `/catalogo`, procedimento `auth.me` retornando `ADMIN`, cookie de sessão `httpOnly`, `secure` e `sameSite=lax`, sessão preservada ao recarregar e logout bloqueando novamente a rota protegida.
+- A verificação de origem da API foi corrigida para comparar o `Origin` com o `Host` recebido e o protocolo da requisição; o hostname interno do Next pode diferir do endereço usado pelo navegador. Origens externas continuam bloqueadas, com testes de regressão.
+- Após a correção: 11 testes unitários, dois testes E2E, build com checagem de tipos, lint e formatação passaram. O teste exclusivo de showcase foi ignorado no modo conectado.
+- O cadastro público está habilitado no Supabase Auth e precisa ser fechado para cumprir o acesso por convite. Essa configuração não foi alterada nesta integração.
+- As informações de publicação visual abaixo são históricas. Esta integração local não altera variáveis nem o modo de execução na Vercel.
+
 ## Landing publicada
 
 A landing está na raiz https://empresti-mauve.vercel.app/ e o login permanece em `/login`. Deploy `dpl_48JUKvsFw1QDDwAvr7Djp74JZA7e` confirmado como `READY`; as duas rotas responderam HTTP 200. A publicação continua em `APP_MODE=showcase`.

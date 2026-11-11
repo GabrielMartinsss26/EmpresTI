@@ -1,0 +1,13 @@
+{
+  "phase": "erro-plantado",
+  "executor": "principal",
+  "baseCommit": "e56b9ad19676ef94203117d4e662363360ba1d3d",
+  "command": "node --test tests/verificador/fixture.test.mjs",
+  "exitCode": 1,
+  "output": "âœ– CA-V01: limite de cinco (2.0237ms)\nâ„¹ tests 1\nâ„¹ suites 0\nâ„¹ pass 0\nâ„¹ fail 1\nâ„¹ cancelled 0\nâ„¹ skipped 0\nâ„¹ todo 0\nâ„¹ duration_ms 78.4014\n\nâœ– failing tests:\n\ntest at tests\\verificador\\fixture.test.mjs:9:1\nâœ– CA-V01: limite de cinco (2.0237ms)\n  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n  \n  4 !== 5\n  \n      at TestContext.<anonymous> (file:///C:/Users/gabrieloliveira-ieg/OneDrive%20-%20Instituto%20Germinare/%C3%81rea%20de%20Trabalho/TECH%203%C2%B0%20ano/Inova%20Tecno/Projeto%20EmpresTI/EmpresTI/tests/verificador/fixture.test.mjs:10:10)\n      at Test.runInAsyncScope (node:async_hooks:227:14)\n      at Test.run (node:internal/test_runner/test:1325:25)\n      at Test.start (node:internal/test_runner/test:1191:17)\n      at startSubtestAfterBootstrap (node:internal/test_runner/harness:385:17) {\n    generatedMessage: true,\n    code: 'ERR_ASSERTION',\n    actual: 4,\n    expected: 5,\n    operator: 'strictEqual',\n    diff: 'simple'\n  }\n",
+  "sha256": {
+    "tests/verificador/spec.md": "a949d63fb1707fbcb203b665f3d3a4744dabc15c14ba5aed6eb531b4f96d2911",
+    "tests/verificador/contrato.json": "cf181e980e8fd026035e849e63ec32ce67f8959410638c51d03797eef2ef8b17",
+    "tests/verificador/fixture.test.mjs": "15ce0b6d8e0082f414288348304b05b06d18da61a04e00e7d318bf4f84c7e18d"
+  }
+}

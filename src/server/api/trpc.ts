@@ -3,6 +3,7 @@ import { initTRPC, TRPCError } from "@trpc/server";
 import superjson from "superjson";
 import { createAuthClient } from "../auth";
 import { getActiveMembership } from "../services/access";
+import { db } from "../db";
 
 export async function createContext({ headers }: { headers: Headers }) {
   const auth = await createAuthClient();
@@ -10,17 +11,19 @@ export async function createContext({ headers }: { headers: Headers }) {
     data: { user },
   } = await auth.auth.getUser();
   const membership = user ? await getActiveMembership(user.id) : null;
-  return { auth, user, membership, headers };
+  return { auth, user, membership, headers, db };
 }
 
 const t = initTRPC.context<typeof createContext>().create({
   transformer: superjson,
-  errorFormatter({ shape, error }) {
+  errorFormatter({ shape, error, path }) {
     return {
       ...shape,
       message:
         error.code === "INTERNAL_SERVER_ERROR"
-          ? "Não foi possível entrar agora. Tente novamente."
+          ? path?.startsWith("auth.")
+            ? "Não foi possível entrar agora. Tente novamente."
+            : "Não foi possível concluir agora. Tente novamente."
           : shape.message,
       data: { ...shape.data, stack: undefined },
     };
@@ -45,5 +48,13 @@ export const tenantProcedure = protectedProcedure.use(({ ctx, next }) => {
 });
 export const adminProcedure = tenantProcedure.use(({ ctx, next }) => {
   if (ctx.role !== "ADMIN") throw new TRPCError({ code: "FORBIDDEN" });
+  return next({ ctx });
+});
+export const operationsProcedure = tenantProcedure.use(({ ctx, next }) => {
+  if (ctx.role !== "OPERATIONS" && ctx.role !== "ADMIN")
+    throw new TRPCError({
+      code: "FORBIDDEN",
+      message: "Você não tem permissão para decidir solicitações.",
+    });
   return next({ ctx });
 });

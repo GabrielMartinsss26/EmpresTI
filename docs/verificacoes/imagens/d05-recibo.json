@@ -1,0 +1,65 @@
+{
+  "task": "D05",
+  "recordedAt": "2026-11-07T19:23:26.267Z",
+  "database": "PostgreSQL 16 em container descartável; fixtures de Auth/Storage",
+  "manifestSha256": "47b7ec509a49d8094ac2df136a405225668d9ab6393be29c731d23412c5d5c5b",
+  "d03ProofSha256": "ab364f5acf24b421541d64594ccade2aec4a2e86ecbddd351d9de15bfc92ee70",
+  "first": {
+    "tenants": 1,
+    "categories": 4,
+    "equipment": 12,
+    "images": 12
+  },
+  "second": {
+    "tenants": 0,
+    "categories": 0,
+    "equipment": 0,
+    "images": 0
+  },
+  "counts": {
+    "equipment": 12,
+    "categories": 4,
+    "available": 9,
+    "maintenance": 3,
+    "images": 12,
+    "requests": 0,
+    "loans": 0,
+    "profiles": 0,
+    "memberships": 0
+  },
+  "unchangedIdsAndTimestamps": true,
+  "productionWrites": false,
+  "uploads": false,
+  "fullSpecReady": false,
+  "baseRevision": "1f50d9ca426bca3ea86a1f9e4d87cf12bb774b7c",
+  "checks": {
+    "database": 73,
+    "d05Database": 25,
+    "unit": 11,
+    "images": 10,
+    "verifierTests": 7,
+    "lint": "PASSOU",
+    "typecheck": "PASSOU",
+    "format": "PASSOU",
+    "build": "PASSOU",
+    "fullIndependentVerifier": "PENDENTE D07"
+  },
+  "files": {
+    "prisma/dados-pratica.ts": "283b1811c4b215d12a80eba606b6203f932103cc6fe3be0e728199c13c97273e",
+    "tests/db/dados-pratica.test.ts": "ac0f5505ce1341ca1aa28c68808fabe2a52645a477486d2ee4fc5fc165ef8d02",
+    "tests/db/d05-local.ts": "38f0d28a7bd17dbeda4f8db93b075d542f3b2529971246bb3210ab2869b8c319",
+    "tests/db/setup.ts": "2aa75b95e4024b2ebebb5a9e4b7378d43193f8cb236e0f3b590b1956a15dddad",
+    "prisma/schema.prisma": "6972fec4d2a624d49248dd7ae52d5c2d3684dd34ec05e361ebd7c36bcbe8ba77",
+    "prisma/seed.ts": "91058997d883b5907cd2f88aab537b519c568f96098474b0443861dec939a567",
+    "prisma/migrations/202610190001_initial/migration.sql": "38333361e345e711c68d1c5590bf480547e58c731a0acba4f504c9d60a71f20c",
+    "prisma/migrations/202611060001_equipment_images/migration.sql": "3d3b0611708ee4d2e4652c5f57a685f4f47339749421b6cf4c0a8cd2908cc73a",
+    "package.json": "0d920b647a8e6987f0054399d573f7df1281b10e2df7b2e58e5143518bd90575"
+  },
+  "databaseLogSha256": "9a22a8df9e33d3c2079ef339956bb1c56f751b91a94605b02fcdf665a6203e38",
+  "databaseRun": {
+    "files": 3,
+    "tests": 73,
+    "durationSeconds": 117.9
+  },
+  "checksRecordedAt": "2026-11-07T19:29:04.188Z"
+}

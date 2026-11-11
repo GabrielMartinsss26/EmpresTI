@@ -1,4 +1,5 @@
 import { fetchRequestHandler } from "@trpc/server/adapters/fetch";
+import { isSameOrigin } from "@/lib/same-origin";
 
 async function handler(req: Request) {
   if (process.env.APP_MODE === "showcase")
@@ -8,10 +9,7 @@ async function handler(req: Request) {
     );
   const { appRouter } = await import("@/server/api/root");
   const { createContext } = await import("@/server/api/trpc");
-  if (
-    req.method === "POST" &&
-    req.headers.get("origin") !== new URL(req.url).origin
-  )
+  if (req.method === "POST" && !isSameOrigin(req))
     return new Response("Forbidden", { status: 403 });
   return fetchRequestHandler({
     endpoint: "/api/trpc",

@@ -1,0 +1,22 @@
+{
+  "recordedAt": "2026-11-09T17:53:53.282Z",
+  "executor": "principal",
+  "runtimeSourceHashesConfirmed": 112,
+  "criteriaUnchanged": 13,
+  "snapshotsVerified": 6,
+  "independentDelegationsVerified": 6,
+  "reports": [
+    {
+      "phase": "integral",
+      "atende": 9,
+      "semTeste": 4
+    },
+    {
+      "phase": "integral-r2",
+      "atende": 9,
+      "semTeste": 4
+    }
+  ],
+  "finalStatus": "E10 concluída localmente; spec 005 NÃO PRONTA até E11. Sem push/deploy ou teste remoto.",
+  "note": "Atualizações finais de estado são posteriores às revisões; hashes dos relatórios/recibos originais e snapshots permanecem históricos."
+}

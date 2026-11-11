@@ -1,6 +1,8 @@
 # EmpresTI
 
-Landing publicada: https://empresti-mauve.vercel.app/
+Aplicação publicada com Supabase: https://empresti-mauve.vercel.app/
+
+Login: https://empresti-mauve.vercel.app/login. Acesso exige usuário com perfil e vínculo ativos. Catálogo, solicitação pendente, aprovação/rejeição mínima por Operações/Admin e Meus empréstimos estão publicados. Limite três ativos; 14 dias úteis após aprovação. Devolução, convites e painel completo continuam fora deste recorte.
 
 ## Rodar localmente
 
@@ -8,13 +10,12 @@ Abra o PowerShell dentro da pasta `EmpresTI`, onde está `package.json`. Use Nod
 
 ```powershell
 npm ci
-$env:APP_MODE = "showcase"
 npm run dev
 ```
 
-Abra http://localhost:3000. A landing está em `/` e o login visual em `/login`. Se a porta estiver ocupada, o Next informa outra porta no terminal. Encerre com `Ctrl+C`.
+Abra http://localhost:3000. A landing está em `/` e o login em `/login`. Se a porta estiver ocupada, o Next informa outra porta no terminal. Encerre com `Ctrl+C`.
 
-Esse modo não usa banco nem exige Docker. Para sair do modo visual nesta sessão do PowerShell:
+Para usar somente a demonstração visual local, sem banco, defina `APP_MODE=showcase` antes de executar. Para voltar ao login conectado:
 
 ```powershell
 Remove-Item Env:APP_MODE
@@ -22,32 +23,17 @@ Remove-Item Env:APP_MODE
 
 A integração completa exige as variáveis do `.env.example`, migrations aplicadas e usuário com perfil/vínculo ativo. O `.env` local permanece ignorado pelo Git.
 
-## Publicar automaticamente ao fazer push
+## Publicação atual
 
-Para a versão visual atual, configure uma vez no projeto `empresti` da Vercel:
+A versão conectada foi atualizada pela CLI em 09/nov/2026 (E11), após aplicar a migration de prazo aprovada e preservar o histórico. Deploy dpl_3aSE1YQFhNGrtrWi224RgkAtmrv4, com as quatro variáveis existentes em Production. Evidências de login, fotos e fluxo real em [docs/verificacoes/e11-publicacao.md](docs/verificacoes/e11-publicacao.md); histórico em [docs/producao.md](docs/producao.md).
 
-1. Em **Settings → Git**, conecte `GabrielMartinsss26/EmpresTI`.
-2. Em **Settings → Environments → Production**, defina a branch de produção. Para publicar diretamente os próximos pushes da branch atual, selecione `dev`. Se preferir produção em `main`, faça merge de `dev` em `main` quando quiser publicar.
-3. Em **Settings → Environment Variables**, cadastre `APP_MODE` com valor `showcase` em **Production** e **Preview**. Os valores passados nos deploys anteriores pela CLI não substituem essa configuração persistente do projeto.
-4. Use a raiz do repositório como **Root Directory**, framework **Next.js**, Node **24**, instalação `npm ci` e build `npm run build`.
-
-Depois, na branch `dev`:
-
-```powershell
-git push origin dev
-```
-
-Se `dev` for a branch de produção, esse push dispara o build e atualiza o endereço público quando o build termina. Se `main` for a branch de produção, o push em `dev` gera preview; o merge/push em `main` publica em produção.
-
-Configuração externa ainda precisa ser feita no painel. Nenhuma dessas configurações foi alterada automaticamente por este guia.
-
-Referências: [integração Git da Vercel](https://vercel.com/docs/git) e [variáveis por ambiente](https://vercel.com/docs/environment-variables).
+O deploy enviou a pasta local. Os ajustes estão registrados em commits locais na branch `dev`; o push ainda não foi executado. As permissões de Git estão em `rules/operacao.md`.
 
 ## Futuro deploy com banco
 
 O workflow `.github/workflows/ci.yml` verifica o código. O job de migrations e publicação com banco fica desativado por padrão e só roda se a variável de repositório `ENABLE_DATABASE_DEPLOY` for `true`, na branch `main`.
 
-Antes de habilitá-lo, configure os secrets/variables descritos em [docs/producao.md](docs/producao.md), remova o modo visual na Vercel e use o workflow como único caminho de produção com banco, aplicando migrations antes do deploy. A publicação automática direta por Git é o fluxo da demonstração visual, não a configuração final do banco.
+Antes de habilitá-lo, configure os secrets/variables descritos em [docs/producao.md](docs/producao.md) e use o workflow como único caminho automático de produção com banco, aplicando migrations antes do deploy. Esse workflow não foi habilitado pela publicação manual atual.
 
 ## Verificações
 

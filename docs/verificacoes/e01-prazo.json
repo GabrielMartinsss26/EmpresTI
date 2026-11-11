@@ -1,0 +1,85 @@
+{
+  "task": "E01",
+  "recordedAt": "2026-11-09T12:22:00.021Z",
+  "executor": "principal",
+  "baseRevision": "86d812796bfb7c8b4b50ec07f07bf4ce7cadd9a2",
+  "authorization": "Aprovação explícita da proposta 86d8127; ADR-009 antes do código; somente banco descartável",
+  "scope": "PostgreSQL 16 em Testcontainers, fixtures explícitas Auth/Storage; nenhuma integração Supabase",
+  "approvedSqlSha256": "4f72650763fa6486cd4b4d0674ace88c16c6cc311ef68dcbc24337a3e62b0a07",
+  "sqlMatchesApprovedBlock": true,
+  "previousMigrationsUnchanged": true,
+  "beforeSchemaSha256": "6972fec4d2a624d49248dd7ae52d5c2d3684dd34ec05e361ebd7c36bcbe8ba77",
+  "generatedSqlSha256": "92b861fe4a376b09887963c903a2f5c5e620e6b240864b645d4a823ba344a5f2",
+  "checks": {
+    "targetDatabase": {
+      "command": "npm run test:db -- tests/db/loan-due-rules.test.ts",
+      "exitCode": 0,
+      "tests": 28,
+      "durationSeconds": 27.56
+    },
+    "database": {
+      "command": "npm run test:db",
+      "exitCode": 0,
+      "files": 5,
+      "tests": 126,
+      "durationSeconds": 95.11,
+      "output": "\r\n> empresti@0.1.0 test:db\r\n> vitest run --config vitest.db.config.ts\r\n\r\n\r\n RUN  v5.0.5 C:/Users/gabrieloliveira-ieg/OneDrive - Instituto Germinare/Área de Trabalho/TECH 3° ano/Inova Tecno/Projeto EmpresTI/EmpresTI\r\n\r\n\r\n Test Files  5 passed (5)\r\n      Tests  126 passed (126)\r\n   Start at  09:14:14\r\n   Duration  95.11s (tests 92%, import 7%)\r\n\r\n"
+    },
+    "unit": {
+      "command": "npm test",
+      "exitCode": 0,
+      "tests": 13
+    },
+    "images": {
+      "command": "npm run test:imagens",
+      "exitCode": 0,
+      "tests": 10
+    },
+    "verifierTests": {
+      "command": "npm run test:verificador",
+      "exitCode": 0,
+      "tests": 7
+    },
+    "lint": {
+      "command": "npm run lint",
+      "exitCode": 0
+    },
+    "typecheck": {
+      "command": "npm run typecheck",
+      "exitCode": 0
+    },
+    "format": {
+      "command": "npm run format:check",
+      "exitCode": 0
+    },
+    "build": {
+      "command": "npm run build",
+      "exitCode": 0
+    }
+  },
+  "files": {
+    "prisma/schema.prisma": "043d47761618955e7efd368f5b0a7ff3f57631ae14c0cdb5ab864d777d514ac2",
+    "prisma/migrations/202611090001_loan_due_rules/migration.sql": "4f72650763fa6486cd4b4d0674ace88c16c6cc311ef68dcbc24337a3e62b0a07",
+    "prisma/migrations/202610190001_initial/migration.sql": "38333361e345e711c68d1c5590bf480547e58c731a0acba4f504c9d60a71f20c",
+    "prisma/migrations/202611060001_equipment_images/migration.sql": "3d3b0611708ee4d2e4652c5f57a685f4f47339749421b6cf4c0a8cd2908cc73a",
+    "tests/db/loan-due-rules.test.ts": "8ee6a982a977a60e7373a019317d312ccf421ae0ce0b6f98ca13b731d2d14dfd",
+    "tests/db/equipment-images.test.ts": "03113c823e82211d92d6a8b8f1835d1594b24cb449eb345983c0b1a6c6d98c19",
+    "tests/db/dados-pratica.test.ts": "6d7225b418c9c25278cd0aa2503726a16c4cbf079f0a935ecf4d536dbdd7fa36",
+    "tests/db/conta-correcao.test.ts": "46c1a949a511cc8d6f6963982441a9c20fb2788ef9e202715442f6662e3a83eb",
+    "tests/db/setup.ts": "2aa75b95e4024b2ebebb5a9e4b7378d43193f8cb236e0f3b590b1956a15dddad",
+    "vitest.db.config.ts": "b3f4f6c1a98cd87b952fde97c66dc88d5923aa77099b944824441f560ea6adb6",
+    "package.json": "b062c6815d593a4c43e8dba779890ed10e7fb193101c8aadf1dcbd48c004b81c"
+  },
+  "logs": {
+    ".local/e01-target.log": "be6274bbe916193377604a63bc23c48f57ad1d9e9ac4d9c89333f705621e15d0",
+    ".local/e01-test-db.log": "ddbf2bc5d81484e171494bdad96608fbcc3a5859e50193ee28c9004dad8a529a"
+  },
+  "productionWrites": false,
+  "productionMigrationApplied": false,
+  "fullSpecReady": false,
+  "limitations": [
+    "Cálculo TypeScript E02 e APIs/telas não implementados.",
+    "CA-E12 verificado localmente; spec integral/verificador E10 continuam pendentes.",
+    "Publicador D08 não foi alterado e recusa a terceira migration."
+  ]
+}

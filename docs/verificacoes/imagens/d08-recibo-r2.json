@@ -1,0 +1,547 @@
+{
+  "task": "D08-dados-imagens",
+  "executor": "principal por delegação explícita ADR-007",
+  "baseRevision": "e41044a27ec42ce6c933dc4a59147193dfa36633",
+  "recordedAt": "2026-11-07T20:30:30.139Z",
+  "scope": "Árvore local com hashes; integração real separada de testes descartáveis. Conta expressamente adiada.",
+  "runs": [
+    {
+      "task": "D08",
+      "project": "gverauqgerwjwwjkoybl",
+      "startedAt": "2026-11-07T20:19:59.271Z",
+      "manifestSha256": "47b7ec509a49d8094ac2df136a405225668d9ab6393be29c731d23412c5d5c5b",
+      "account": "ADIADA PELO RESPONSÁVEL; nenhuma mutação de Auth",
+      "authorization": "ADR-007; publicação delegada",
+      "globalIsolation": "NÃO COMPROVADO; CA-D07 BLOQUEADO",
+      "uploaded": [
+        "TI-0001",
+        "TI-0002",
+        "TI-0003",
+        "TI-0004",
+        "TI-0005",
+        "TI-0006",
+        "TI-0007",
+        "TI-0008",
+        "TI-0009",
+        "TI-0010",
+        "TI-0011",
+        "TI-0012"
+      ],
+      "stages": [
+        "migration D04",
+        "bucket validado"
+      ],
+      "productionWrites": true,
+      "fullSpecReady": false,
+      "migration": {
+        "applied": "202611060001_equipment_images",
+        "exitCode": 0
+      },
+      "databaseSecurity": {
+        "metadata_rls": true,
+        "storage_rls": true,
+        "metadata_anon_revoked": true,
+        "metadata_authenticated_revoked": true,
+        "restrictive_storage_guard": true
+      },
+      "planned": {
+        "tenants": 0,
+        "categories": 4,
+        "equipment": 12,
+        "images": 12
+      },
+      "anonymousWrite": {
+        "denied": true,
+        "status": 400,
+        "code": "403",
+        "probeCreated": false
+      },
+      "population": {
+        "tenants": 0,
+        "categories": 4,
+        "equipment": 12,
+        "images": 12
+      },
+      "reexecution": {
+        "tenants": 0,
+        "categories": 0,
+        "equipment": 0,
+        "images": 0
+      },
+      "unchangedIdsAndTimestamps": true,
+      "publicDownloads": [
+        {
+          "assetTag": "TI-0001",
+          "url": "https://gverauqgerwjwwjkoybl.supabase.co/storage/v1/object/public/equipamentos/suporte_ti/TI-0001.webp",
+          "status": 200,
+          "width": 800,
+          "height": 600,
+          "sha256": "41158b15f87a55c0f8fec5cd5c3ba237aeafde3e93dd0759fae40cf248e18858"
+        },
+        {
+          "assetTag": "TI-0002",
+          "url": "https://gverauqgerwjwwjkoybl.supabase.co/storage/v1/object/public/equipamentos/suporte_ti/TI-0002.webp",
+          "status": 200,
+          "width": 800,
+          "height": 600,
+          "sha256": "59bfa9dac9b9e7ec9d7763be0a502dc1577f9972888cf3f6e94b62ebd13041b6"
+        },
+        {
+          "assetTag": "TI-0003",
+          "url": "https://gverauqgerwjwwjkoybl.supabase.co/storage/v1/object/public/equipamentos/suporte_ti/TI-0003.webp",
+          "status": 200,
+          "width": 800,
+          "height": 600,
+          "sha256": "11b1685f0c13cc8b417822006fbd43e8b93602c8d03cb2e243d757aa3d57422f"
+        },
+        {
+          "assetTag": "TI-0004",
+          "url": "https://gverauqgerwjwwjkoybl.supabase.co/storage/v1/object/public/equipamentos/suporte_ti/TI-0004.webp",
+          "status": 200,
+          "width": 800,
+          "height": 600,
+          "sha256": "3a4af3e2445dfcf377caa470aed29f3c0aeb3343bf65df60a81d1109e6f2d7c0"
+        },
+        {
+          "assetTag": "TI-0005",
+          "url": "https://gverauqgerwjwwjkoybl.supabase.co/storage/v1/object/public/equipamentos/suporte_ti/TI-0005.webp",
+          "status": 200,
+          "width": 800,
+          "height": 600,
+          "sha256": "9006e55c56d5f7bef305f7174576c56e947194908135d976173a95e450ce3d6c"
+        },
+        {
+          "assetTag": "TI-0006",
+          "url": "https://gverauqgerwjwwjkoybl.supabase.co/storage/v1/object/public/equipamentos/suporte_ti/TI-0006.webp",
+          "status": 200,
+          "width": 800,
+          "height": 600,
+          "sha256": "56ed40743d4a67158741d73cd8519fd38dfcd61a5ea240576829f98adbcfd0ec"
+        },
+        {
+          "assetTag": "TI-0007",
+          "url": "https://gverauqgerwjwwjkoybl.supabase.co/storage/v1/object/public/equipamentos/suporte_ti/TI-0007.webp",
+          "status": 200,
+          "width": 800,
+          "height": 600,
+          "sha256": "fccd9e4089f389f4f306f501c25f46e3a90b3d211cc1062243e2b287541a1272"
+        },
+        {
+          "assetTag": "TI-0008",
+          "url": "https://gverauqgerwjwwjkoybl.supabase.co/storage/v1/object/public/equipamentos/suporte_ti/TI-0008.webp",
+          "status": 200,
+          "width": 800,
+          "height": 600,
+          "sha256": "686e577c42f4409f3cf5224197bcb84a310ac5bb637e08641d15e135407ed63c"
+        },
+        {
+          "assetTag": "TI-0009",
+          "url": "https://gverauqgerwjwwjkoybl.supabase.co/storage/v1/object/public/equipamentos/suporte_ti/TI-0009.webp",
+          "status": 200,
+          "width": 800,
+          "height": 600,
+          "sha256": "db3e71ebf87611b8676c78a5fde119563afc4b22f99a4e36c31416009bb7b735"
+        },
+        {
+          "assetTag": "TI-0010",
+          "url": "https://gverauqgerwjwwjkoybl.supabase.co/storage/v1/object/public/equipamentos/suporte_ti/TI-0010.webp",
+          "status": 200,
+          "width": 800,
+          "height": 600,
+          "sha256": "529999bb2257b5190c3e916f1fb270447d1d3e516b7151537f13873742335547"
+        },
+        {
+          "assetTag": "TI-0011",
+          "url": "https://gverauqgerwjwwjkoybl.supabase.co/storage/v1/object/public/equipamentos/suporte_ti/TI-0011.webp",
+          "status": 200,
+          "width": 800,
+          "height": 600,
+          "sha256": "d09d9439ab687a91b5ae6dcd9f51642891acbe7d01d5272737a53bc73bf7d614"
+        },
+        {
+          "assetTag": "TI-0012",
+          "url": "https://gverauqgerwjwwjkoybl.supabase.co/storage/v1/object/public/equipamentos/suporte_ti/TI-0012.webp",
+          "status": 200,
+          "width": 800,
+          "height": 600,
+          "sha256": "ea77f74a6ee096124517fa370bf115da76d5929ce848988933394528f4eb619a"
+        }
+      ],
+      "anonymousListing": {
+        "exposedObjects": 0,
+        "deniedOrEmpty": true
+      },
+      "anonymousMetadata": {
+        "denied": true,
+        "status": 401
+      },
+      "counts": {
+        "equipment": 12,
+        "images": 12,
+        "available": 9,
+        "maintenance": 3
+      },
+      "status": "DADOS/IMAGENS PUBLICADOS E VERIFICADOS; CONTA ADIADA",
+      "finishedAt": "2026-11-07T20:20:37.940Z"
+    },
+    {
+      "task": "D08",
+      "project": "gverauqgerwjwwjkoybl",
+      "startedAt": "2026-11-07T20:21:51.589Z",
+      "manifestSha256": "47b7ec509a49d8094ac2df136a405225668d9ab6393be29c731d23412c5d5c5b",
+      "account": "ADIADA PELO RESPONSÁVEL; nenhuma mutação de Auth",
+      "authorization": "ADR-007; publicação delegada",
+      "globalIsolation": "NÃO COMPROVADO; CA-D07 BLOQUEADO",
+      "uploaded": [],
+      "stages": [
+        "migration D04",
+        "bucket validado"
+      ],
+      "productionWrites": true,
+      "fullSpecReady": false,
+      "migration": {
+        "alreadyApplied": true
+      },
+      "databaseSecurity": {
+        "metadata_rls": true,
+        "storage_rls": true,
+        "metadata_anon_revoked": true,
+        "metadata_authenticated_revoked": true,
+        "restrictive_storage_guard": true
+      },
+      "planned": {
+        "tenants": 0,
+        "categories": 0,
+        "equipment": 0,
+        "images": 0
+      },
+      "anonymousWrite": {
+        "denied": true,
+        "status": 400,
+        "code": "403",
+        "probeCreated": false
+      },
+      "population": {
+        "tenants": 0,
+        "categories": 0,
+        "equipment": 0,
+        "images": 0
+      },
+      "reexecution": {
+        "tenants": 0,
+        "categories": 0,
+        "equipment": 0,
+        "images": 0
+      },
+      "unchangedIdsAndTimestamps": true,
+      "publicDownloads": [
+        {
+          "assetTag": "TI-0001",
+          "url": "https://gverauqgerwjwwjkoybl.supabase.co/storage/v1/object/public/equipamentos/suporte_ti/TI-0001.webp",
+          "status": 200,
+          "width": 800,
+          "height": 600,
+          "sha256": "41158b15f87a55c0f8fec5cd5c3ba237aeafde3e93dd0759fae40cf248e18858"
+        },
+        {
+          "assetTag": "TI-0002",
+          "url": "https://gverauqgerwjwwjkoybl.supabase.co/storage/v1/object/public/equipamentos/suporte_ti/TI-0002.webp",
+          "status": 200,
+          "width": 800,
+          "height": 600,
+          "sha256": "59bfa9dac9b9e7ec9d7763be0a502dc1577f9972888cf3f6e94b62ebd13041b6"
+        },
+        {
+          "assetTag": "TI-0003",
+          "url": "https://gverauqgerwjwwjkoybl.supabase.co/storage/v1/object/public/equipamentos/suporte_ti/TI-0003.webp",
+          "status": 200,
+          "width": 800,
+          "height": 600,
+          "sha256": "11b1685f0c13cc8b417822006fbd43e8b93602c8d03cb2e243d757aa3d57422f"
+        },
+        {
+          "assetTag": "TI-0004",
+          "url": "https://gverauqgerwjwwjkoybl.supabase.co/storage/v1/object/public/equipamentos/suporte_ti/TI-0004.webp",
+          "status": 200,
+          "width": 800,
+          "height": 600,
+          "sha256": "3a4af3e2445dfcf377caa470aed29f3c0aeb3343bf65df60a81d1109e6f2d7c0"
+        },
+        {
+          "assetTag": "TI-0005",
+          "url": "https://gverauqgerwjwwjkoybl.supabase.co/storage/v1/object/public/equipamentos/suporte_ti/TI-0005.webp",
+          "status": 200,
+          "width": 800,
+          "height": 600,
+          "sha256": "9006e55c56d5f7bef305f7174576c56e947194908135d976173a95e450ce3d6c"
+        },
+        {
+          "assetTag": "TI-0006",
+          "url": "https://gverauqgerwjwwjkoybl.supabase.co/storage/v1/object/public/equipamentos/suporte_ti/TI-0006.webp",
+          "status": 200,
+          "width": 800,
+          "height": 600,
+          "sha256": "56ed40743d4a67158741d73cd8519fd38dfcd61a5ea240576829f98adbcfd0ec"
+        },
+        {
+          "assetTag": "TI-0007",
+          "url": "https://gverauqgerwjwwjkoybl.supabase.co/storage/v1/object/public/equipamentos/suporte_ti/TI-0007.webp",
+          "status": 200,
+          "width": 800,
+          "height": 600,
+          "sha256": "fccd9e4089f389f4f306f501c25f46e3a90b3d211cc1062243e2b287541a1272"
+        },
+        {
+          "assetTag": "TI-0008",
+          "url": "https://gverauqgerwjwwjkoybl.supabase.co/storage/v1/object/public/equipamentos/suporte_ti/TI-0008.webp",
+          "status": 200,
+          "width": 800,
+          "height": 600,
+          "sha256": "686e577c42f4409f3cf5224197bcb84a310ac5bb637e08641d15e135407ed63c"
+        },
+        {
+          "assetTag": "TI-0009",
+          "url": "https://gverauqgerwjwwjkoybl.supabase.co/storage/v1/object/public/equipamentos/suporte_ti/TI-0009.webp",
+          "status": 200,
+          "width": 800,
+          "height": 600,
+          "sha256": "db3e71ebf87611b8676c78a5fde119563afc4b22f99a4e36c31416009bb7b735"
+        },
+        {
+          "assetTag": "TI-0010",
+          "url": "https://gverauqgerwjwwjkoybl.supabase.co/storage/v1/object/public/equipamentos/suporte_ti/TI-0010.webp",
+          "status": 200,
+          "width": 800,
+          "height": 600,
+          "sha256": "529999bb2257b5190c3e916f1fb270447d1d3e516b7151537f13873742335547"
+        },
+        {
+          "assetTag": "TI-0011",
+          "url": "https://gverauqgerwjwwjkoybl.supabase.co/storage/v1/object/public/equipamentos/suporte_ti/TI-0011.webp",
+          "status": 200,
+          "width": 800,
+          "height": 600,
+          "sha256": "d09d9439ab687a91b5ae6dcd9f51642891acbe7d01d5272737a53bc73bf7d614"
+        },
+        {
+          "assetTag": "TI-0012",
+          "url": "https://gverauqgerwjwwjkoybl.supabase.co/storage/v1/object/public/equipamentos/suporte_ti/TI-0012.webp",
+          "status": 200,
+          "width": 800,
+          "height": 600,
+          "sha256": "ea77f74a6ee096124517fa370bf115da76d5929ce848988933394528f4eb619a"
+        }
+      ],
+      "anonymousListing": {
+        "exposedObjects": 0,
+        "deniedOrEmpty": true
+      },
+      "anonymousMetadata": {
+        "denied": true,
+        "status": 401
+      },
+      "counts": {
+        "equipment": 12,
+        "images": 12,
+        "available": 9,
+        "maintenance": 3
+      },
+      "status": "DADOS/IMAGENS PUBLICADOS E VERIFICADOS; CONTA ADIADA",
+      "finishedAt": "2026-11-07T20:22:09.681Z"
+    }
+  ],
+  "remoteState": {
+    "recordedAt": "2026-11-07T20:24:18.240Z",
+    "readOnly": true,
+    "migrations": [
+      {
+        "migration_name": "202610190001_initial",
+        "checksum": "38333361e345e711c68d1c5590bf480547e58c731a0acba4f504c9d60a71f20c",
+        "applied": true
+      },
+      {
+        "migration_name": "202611060001_equipment_images",
+        "checksum": "3d3b0611708ee4d2e4652c5f57a685f4f47339749421b6cf4c0a8cd2908cc73a",
+        "applied": true
+      }
+    ],
+    "bucket": [
+      {
+        "id": "equipamentos",
+        "public": true,
+        "file_size_limit": 1048576,
+        "allowed_mime_types": [
+          "image/webp"
+        ]
+      }
+    ],
+    "objects": 12,
+    "categories": 4,
+    "equipment": 12,
+    "images": 12,
+    "available": 9,
+    "maintenance": 3,
+    "distinctSourceIds": 12,
+    "distinctHashes": 12,
+    "requests": 0,
+    "loans": 0
+  },
+  "checks": [
+    {
+      "command": "npm test",
+      "exitCode": 0,
+      "stdout": "\n> empresti@0.1.0 test\n> vitest run\n\n\n RUN  v5.0.5 C:/Users/gabrieloliveira-ieg/OneDrive - Instituto Germinare/Área de Trabalho/TECH 3° ano/Inova Tecno/Projeto EmpresTI/EmpresTI\n\n\n Test Files  6 passed (6)\n      Tests  13 passed (13)\n   Start at  17:25:19\n   Duration  1.54s (import 76%, transform 15%, tests 5%, worker 4%)\n\n",
+      "stderr": ""
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0,
+      "stdout": "\n> empresti@0.1.0 lint\n> eslint .\n\n",
+      "stderr": ""
+    },
+    {
+      "command": "npm run typecheck",
+      "exitCode": 0,
+      "stdout": "\n> empresti@0.1.0 typecheck\n> tsc --noEmit\n\n",
+      "stderr": ""
+    },
+    {
+      "command": "npm run format:check",
+      "exitCode": 0,
+      "stdout": "\n> empresti@0.1.0 format:check\n> prettier --check src prisma tests scripts *.json *.ts *.mjs\n\nChecking formatting...\nAll matched files use Prettier code style!\n",
+      "stderr": ""
+    },
+    {
+      "command": "npm run test:db",
+      "exitCode": 0,
+      "stdout": "\r\n> empresti@0.1.0 test:db\r\n> vitest run --config vitest.db.config.ts\r\n\r\n\r\n RUN  v5.0.5 C:/Users/gabrieloliveira-ieg/OneDrive - Instituto Germinare/Área de Trabalho/TECH 3° ano/Inova Tecno/Projeto EmpresTI/EmpresTI\r\n\r\n\r\n Test Files  4 passed (4)\r\n      Tests  98 passed (98)\r\n   Start at  17:15:16\r\n   Duration  122.02s (tests 91%, import 9%)\r\n\r\n",
+      "scope": "PostgreSQL descartável por Testcontainers; 98 testes",
+      "logSha256": "3e9fe9dacdc211bdd54a06914a4a968b5fcee43eca4374f694dbfd51ffe589c1"
+    },
+    {
+      "command": "npm run test:imagens",
+      "exitCode": 0,
+      "tests": 10,
+      "evidence": "Execução pelo principal nesta sessão, antes de publicar; saída conferida."
+    },
+    {
+      "command": "npm run test:verificador",
+      "exitCode": 0,
+      "tests": 7,
+      "evidence": "Execução pelo principal nesta sessão, antes de publicar; saída conferida."
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "evidence": "Execução pelo principal nesta sessão, depois de encerrar testes de banco e antes de publicar; compilação e tipos passaram."
+    },
+    {
+      "command": "npm run test:verificador",
+      "exitCode": 0,
+      "tests": 7,
+      "evidence": "Reexecutado depois do esclarecimento de delegação; bloqueios MCP e fixture passaram."
+    }
+  ],
+  "sha256": {
+    ".codex/agents/verificador-spec.toml": "4b3d4a5f5dc95dbb446aa91dc884cb0f62772df2afc537ef90dd4b59515a541a",
+    ".codex/config.toml": "6d625107b17ecd37abb8259e8cf15b7f6a918daa787ce04713580e48079e1aa2",
+    "eslint.config.mjs": "e0ef420547ebe92cfcf43d74af898ec5975974a277a9c34dae321a6fd585e2ca",
+    "next.config.ts": "99b82e2da185d817289f2d51951b61e309837258990c3ca4b56960c6bfa2f02a",
+    "package-lock.json": "aa50d133ac18c4c535448142eab7d3458832eafb440340c97ae3a1f72d16926f",
+    "package.json": "b062c6815d593a4c43e8dba779890ed10e7fb193101c8aadf1dcbd48c004b81c",
+    "prisma/conta-correcao.ts": "e4a523208ad42cb19ee77f807c4f42713d981bb39e8aeca29717cf056dfa78d8",
+    "prisma/dados-pratica.ts": "183e49e6d6852cc5352e84b68c1a050e1ba3d86286096f448bb5217b385b1db4",
+    "prisma/migrations/202610190001_initial/migration.sql": "38333361e345e711c68d1c5590bf480547e58c731a0acba4f504c9d60a71f20c",
+    "prisma/migrations/202611060001_equipment_images/migration.sql": "3d3b0611708ee4d2e4652c5f57a685f4f47339749421b6cf4c0a8cd2908cc73a",
+    "prisma/migrations/migration_lock.toml": "1db17a8d051aa136110736752c5e1f8b7ed92b6ea8e803112fbbe2497047c210",
+    "prisma/schema.prisma": "6972fec4d2a624d49248dd7ae52d5c2d3684dd34ec05e361ebd7c36bcbe8ba77",
+    "prisma/seed.ts": "91058997d883b5907cd2f88aab537b519c568f96098474b0443861dec939a567",
+    "rules/checks.md": "7ef352bde050c12b12df832b35fb54db5e5d4f0368ed0def1fe7bdd79134aeec",
+    "rules/handoff.md": "582d3a1eb67442de8e66777e15d98806229dcb10b857341319642a48c3487a9e",
+    "rules/migration.md": "3ec1e1de8aa132f0d316f298653d52a2a4a1382a85b3bf4e8ab1c50c90f571a6",
+    "rules/operacao.md": "dd9bbfab0310d0bc13ea6ff9e2a73066daec120795d122cc83ea4b03f82368df",
+    "rules/restrictions.md": "61bb5eecea1131db492ed89638a72f7775f2aa1adef6f07f2bcb4735e2675a43",
+    "rules/secrets.md": "6e1b81bed3d1bfab36debec0cde170218769038968153840fd2c9d38c1a8ad55",
+    "rules/spec-flow.md": "e37eae29d79a53554b281eb202e92babe6d33c6c16e0b489ca56d7898bfdd992",
+    "rules/tests.md": "68aaebb4ede27dd26b2b39254382e3035226441da489f4bc37fa0fee20eae431",
+    "scripts/auditar-skill-imagens.mjs": "92db7dde0f66bb055b10898d83b303a9e97275bc09bee1d6f05d6b57b38bcfd1",
+    "scripts/verificador-mcp.mjs": "30c297e9371ae5db5c6c5761287ba5a0c2d1de4a02af6186cff4fc43d0db612e",
+    "scripts/verificar-spec.mjs": "4c15e04abb1ebed076f693705f57b35ff0454f94768bdf154491abc2d528d117",
+    "skills/imagens-equipamentos/SKILL.md": "5b897935f35796e9d2c272f1f23cce4fa18a2db3434bd3a69d8f6c83b51c3ceb",
+    "skills/imagens-equipamentos/assets/inventario.json": "9921c06b976d5840860cf5fc24f589d172b2baaa4f3b9c49e2b274385672879b",
+    "skills/imagens-equipamentos/references/pipeline.md": "2420422eb5c8b1d9d2c2034cdf9f0b5019fae8f8d73a247a5eafecfb5d5627af",
+    "skills/imagens-equipamentos/references/pixabay.md": "8fa1de3c78f6a56cfabc18c239707ad142e369341befd39fe9f93f90db5cd631",
+    "skills/imagens-equipamentos/scripts/cli.mjs": "9219004e32108c0c50b4ce1889a901fd2091c4c47f29339c65a0fc44624ea3d0",
+    "skills/imagens-equipamentos/scripts/galeria.mjs": "77bc5fee596153e55a5ceb14ad794eb0d6cd84c1235932884332ab2e265609ab",
+    "skills/imagens-equipamentos/scripts/pipeline.mjs": "7e201d58de3cb1331abfaf749aeef16b71ab19d495d31b72cdbf313e1af6397c",
+    "skills/imagens-equipamentos/scripts/refinar.mjs": "1d87348fcb7b03d04b88355da92356dd769f064661fbb05bbcc92a91f8670f0c",
+    "src/app/api/trpc/[trpc]/route.ts": "c75d664926beeedbd713d09bbe5412823ba7b8a2196d480d6f909d55370bb315",
+    "src/app/catalogo/page.tsx": "0cbc3f0ca86234421f5161ba5aeec1f7c858157b2a72736a44475a8be10ed511",
+    "src/app/globals.css": "fd865753fbefbd7414298911266386e48d645df3fda0f63e80cc4bb80cd8cfe3",
+    "src/app/health/route.ts": "722472737c742cb573651c1109fcbf8831c531ddd15e7ee9754f579540e700f4",
+    "src/app/layout.tsx": "bf8227ce90627b55193ed2c090b0b8967c5b123de8c723141f21a2d481046478",
+    "src/app/login/page.tsx": "805553192e9342ec695579db08d5939aada726b2f846898338d6168849f18769",
+    "src/app/page.tsx": "b88d34aa66868f9b3b65c26684a4be7d382f5c362bf7e1c78f7b162fc7f7423e",
+    "src/components/brand.tsx": "93560b8af102f62982b9c4dc95ab3394fcd460d31304fbf182d052c2488f2100",
+    "src/components/catalogue.tsx": "9bc3677ee9260eb0c073ecef9d6df9c06bbfee78a40c0ff616d4251af3aa199a",
+    "src/components/login-form.tsx": "b9718b625541240904e46889b5898361c005de8503a85db9e6d9c5f6886a1eda",
+    "src/components/providers.tsx": "19207df59eb20a7233326b73ecedaa8b26f5717e8a4a083873c3fe72cd6ef6b7",
+    "src/components/ui/button.tsx": "a8da17057629ead5cd632eca05aeb838b958f752e61caaac406ee3f62eaaac47",
+    "src/components/ui/input.tsx": "b1a70f816372eaef73cc6573233f8f3f9f312e01eefa3dc506c3ed1a9aeea8b7",
+    "src/instrumentation.ts": "c30ace75c30bff087f8ebae794b188b9e9fb49784ac31f3721fc1716e060037a",
+    "src/lib/auth-input.ts": "7f8987d61be6367fa36175e02dd8008a9f570ebdd76dc7ac9c239b6e9116cd7e",
+    "src/lib/same-origin.ts": "6f405dbd6356a87055693d422b2c267c0d7aa2ad0dbe2970b558dee272a02074",
+    "src/lib/trpc.ts": "52842bf34dab7f6497f2df97b1da82fca58fafe97e9a3e13516e37f78511d5e7",
+    "src/proxy.ts": "c45566e662e40eab3688f1bd7c7e342f330e417b124bcab5cd62fec6b937999b",
+    "src/server/api/root.ts": "bc02bab6a8434b62f1a084dac8bac3d306a85473288d889aed5fd075b4241b65",
+    "src/server/api/routers/auth.ts": "00da3cb8606714ac2e451a6f33c43bf41bc36feeb89d4e9b170d93646b14c63c",
+    "src/server/api/trpc.ts": "233e485693c49d57a2fc7888ddfe3760c51481269966a65473d77abe8995b4e5",
+    "src/server/auth.ts": "baddcbb7fba68e445bd99730efb24985b9784f5aa6886d839a2053dcb80eb7d3",
+    "src/server/db.ts": "863a98cd2d9bb0534b6816eb024b37101ed062718bd35e95e661b4597a9b8252",
+    "src/server/env.ts": "44be0cddde48627d9819c975e845dad7eaa325cca1fc18ae46e2d70cf1d1a92b",
+    "src/server/services/access.ts": "d6633ff4ce71b6409c1986e5368571a8f144bf01db6887811af6babc9716c1e6",
+    "src/server/services/login.ts": "cdc0415587458dd95f477d96a7d3c6bbab11fa7aa8c8fbc8a9e247301e162a20",
+    "src/types/assets.d.ts": "39bbc936aea28a6264008888fc8ee15bab4de204726249f78b0850a79ba7858c",
+    "tests/db/auth-fixture.ts": "5346b207b3815521f9136db188fa7cf032265486c541db5645524ba8accabd05",
+    "tests/db/conta-correcao.test.ts": "3d82ee817015598d91b047033bafd92c1f219f0208b006cc3638a92164ddfa91",
+    "tests/db/d05-local.ts": "38f0d28a7bd17dbeda4f8db93b075d542f3b2529971246bb3210ab2869b8c319",
+    "tests/db/d06-local.ts": "b01a68669da647c77b70f2190d1374fdafbc42d1b1596aa25e296de046136db2",
+    "tests/db/dados-pratica.test.ts": "a1d27b0b157439c1603f95f8a6e2b072e46042328e65aff6cdeae00db9486c87",
+    "tests/db/equipment-images.test.ts": "e9fda9388b842bc7cf091ccf88c7a53b10e74f9198e3f8c32b148afa1a231fb6",
+    "tests/db/migration.test.ts": "63065154da9264b4647fb5bdfa5de27b062d328850757b6dd56760e0a62fc399",
+    "tests/db/setup.ts": "2aa75b95e4024b2ebebb5a9e4b7378d43193f8cb236e0f3b590b1956a15dddad",
+    "tests/e2e/login.spec.ts": "07521be3a0327c6be6d9bb9d84f6651c187fc1671bcad92d58b59326320a2dbe",
+    "tests/e2e/showcase.spec.ts": "bc32d2e762d861551437d738a3d53953f3ade4f6e73432ff632f614911c6fe23",
+    "tests/imagens/pipeline.test.mjs": "ff8fa095a2a53e0fc7b190675f17e2a572c59d4350b18f05bf6287227e4ceac5",
+    "tests/unit/auth-input.test.ts": "f6ee1a701d9df7875df39d889a76e6ed306aaf0d149e127837947975c0ff540f",
+    "tests/unit/env.test.ts": "60ce87a9e7c189b07803d055a4c8db93deeadaf815714ac9d30821131cf861c8",
+    "tests/unit/login-service.test.ts": "8b2ff165bd8f53bc4acf6edc023765f856679718230beec7ff36bfd0e084521d",
+    "tests/unit/router.test.ts": "e1033b6b1522d1e1415a7cf47a383327c4a3facf732252ce0ef48735d32d28fe",
+    "tests/unit/same-origin.test.ts": "18dde1b69ab613efd0b0f378fa76ce7bb2cde8b90193c47e340a6f97b0d790be",
+    "tests/verificador/contrato.json": "a040b678347ae47877e2e3d5628f5362e73a175e519b3110e380d0e89453f3bd",
+    "tests/verificador/fixture.test.mjs": "b98b6565c52c874d9e1de27e03cfa3081fd3ac8af8237e2f4c0970e42273d3c8",
+    "tests/verificador/seguranca.test.mjs": "15f900d07812a0161987801dea847ae3196c26b753b81e10a0c7164e8c940a29",
+    "tests/verificador/spec.md": "a949d63fb1707fbcb203b665f3d3a4744dabc15c14ba5aed6eb531b4f96d2911",
+    "tsconfig.json": "29c5cc4c45c8547da6771cab92163880505b7d757fb12c5a74a987dd9b3e6ad2",
+    "vitest.config.ts": "608f6d34f5c09d812b52b8c3854a5ddf917e8c99f84992686c8229143a420c5f",
+    "vitest.db.config.ts": "b3f4f6c1a98cd87b952fde97c66dc88d5923aa77099b944824441f560ea6adb6",
+    "docs/verificacoes/imagens/d03-manifesto.json": "47b7ec509a49d8094ac2df136a405225668d9ab6393be29c731d23412c5d5c5b",
+    "docs/verificacoes/imagens/d03-final.json": "ab364f5acf24b421541d64594ccade2aec4a2e86ecbddd351d9de15bfc92ee70",
+    "docs/verificacoes/imagens/d04-recibo.json": "f33fc2bcc21ebdb95ae8d1d0f2596c17921d48681d6a8428c9acf8ce7947356d",
+    "docs/verificacoes/imagens/d05-recibo.json": "750d3f08e7662ee0c6a52f946b22c9163475b0662ddc1529edcf87e544395ace",
+    "docs/verificacoes/imagens/d06-recibo.json": "47e1e5fc90560e26ad47c3d10c3decc38e0e070210c6a718be2a224e7b56be0e",
+    "docs/specs/004-dados-iniciais/spec.md": "c9e3b1ead627fbf6515c3a1a48a3affcf85bbdd5c5b1e3189564711d44b0608c",
+    "docs/specs/004-dados-iniciais/plan.md": "53e67eead04178e265af1f93b55cdbd62b76985331c84fcd79b30f146d996981",
+    "scripts/publicar-pratica.ts": "6ea03b8d49862326397a09e3a72e23db83cc3f70f3d6df41833a786793a06513",
+    "tests/unit/publication-config.test.ts": "bfe1159061126acccbd9e390226ea4279ab130a7eece13f357df51cd4899a69f",
+    "docs/adr/007-execucao-delegada-d08.md": "8b4c9617359fe3365ab60fb4d5f74e3868e2e53d64283f65c8402313d46beff6"
+  },
+  "limitations": [
+    "Conta do professor e login real adiados pelo responsável.",
+    "Não há comprovação de isolamento global da sessão; o publicador possui capacidade de escrita real, explicitamente autorizada para esta exceção. Não declarar CA-D07 atendido.",
+    "A verificação HTTP negativa foi anônima; papel authenticated foi conferido no catálogo real e em testes descartáveis, sem usar um JWT de colaborador nesta integração.",
+    "Nenhum push/deploy Vercel ou mudança de UI nesta etapa."
+  ],
+  "fullSpecReady": false,
+  "reviewRound": "R2: esclarecimento de pontos de entrada/leitura das fontes, sem ampliar permissões"
+}

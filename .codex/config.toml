@@ -1,0 +1,10 @@
+# Somente ferramentas de leitura, sem credenciais ou conexão externa.
+[mcp_servers.verificador_local]
+command = "node"
+args = ["scripts/verificador-mcp.mjs"]
+enabled_tools = ["list_files", "read_file", "inspect_public_env_example"]
+startup_timeout_sec = 15
+
+[agents]
+enabled = true
+max_concurrent_threads_per_session = 1

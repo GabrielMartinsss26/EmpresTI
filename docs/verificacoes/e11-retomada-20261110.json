@@ -1,0 +1,18 @@
+{
+  "recordedAt": "2026-11-10T10:14:07.828Z",
+  "executor": "principal",
+  "deployment": {
+    "id": "dpl_3aSE1YQFhNGrtrWi224RgkAtmrv4",
+    "readyState": "READY",
+    "url": "https://empresti-mauve.vercel.app"
+  },
+  "browserObservation": "Novo login real bem-sucedido e catálogo carregado com 12 itens, três manutenções e TI-0008 emprestado, resumo um de três. Nenhum novo pedido/empréstimo criado nesta retomada.",
+  "userClarification": "Responsável informou que a dificuldade de ontem não se repetiu e produção funciona agora.",
+  "screenshot": {
+    "path": "test-results/e11-production-20261110.png",
+    "sha256": "3e08a143a4c9205defdfc513a861b9d13e7855f51bcfafbe45e7bcd359cf9dd2"
+  },
+  "review": "docs/verificacoes/verificador/e11-integral-r2.md",
+  "reviewResult": "13 critérios ATENDE; PRONTA",
+  "note": "Não reexecutados os checks de código sem mudança de código; resultados anteriores identificados permanecem históricos."
+}

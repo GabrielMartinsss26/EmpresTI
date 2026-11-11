@@ -1,0 +1,306 @@
+{
+  "version": 1,
+  "bucket": "equipamentos",
+  "entries": [
+    {
+      "assetTag": "TI-0001",
+      "file": "TI-0001.webp",
+      "objectPath": "suporte_ti/TI-0001.webp",
+      "width": 800,
+      "height": 600,
+      "sha256": "41158b15f87a55c0f8fec5cd5c3ba237aeafde3e93dd0759fae40cf248e18858",
+      "sourceSha256": "da0aa345794ae6097ae347d66c0ec68cbbfd0077a678aa6ea2a9c77c3e5f5543",
+      "source": {
+        "provider": "Pixabay",
+        "id": 2425303,
+        "pageURL": "https://pixabay.com/photos/coffee-caffeine-beverage-table-2425303/",
+        "author": "Engin_Akyurt",
+        "authorId": 3656355,
+        "license": {
+          "name": "Pixabay Content License",
+          "url": "https://pixabay.com/service/license-summary/"
+        }
+      },
+      "review": {
+        "reviewer": "Codex — inspeção visual do arquivo original",
+        "reviewedAt": "2026-11-06T12:50:55.658Z",
+        "reason": "Notebook com tela preta sem conteúdo; apenas letras de teclas de fábrica, permitidas pelo responsável. Sem pessoa ou marca/logo legível."
+      }
+    },
+    {
+      "assetTag": "TI-0002",
+      "file": "TI-0002.webp",
+      "objectPath": "suporte_ti/TI-0002.webp",
+      "width": 800,
+      "height": 600,
+      "sha256": "59bfa9dac9b9e7ec9d7763be0a502dc1577f9972888cf3f6e94b62ebd13041b6",
+      "sourceSha256": "19f8016847c26a17621a159b4f016a4183c83fa24a429ddc43ac4fa943f175b4",
+      "source": {
+        "provider": "Pixabay",
+        "id": 791032,
+        "pageURL": "https://pixabay.com/photos/technology-laptop-computer-netbook-791032/",
+        "author": "kaboompics",
+        "authorId": 1013994,
+        "license": {
+          "name": "Pixabay Content License",
+          "url": "https://pixabay.com/service/license-summary/"
+        }
+      },
+      "review": {
+        "reviewer": "Codex — inspeção visual do arquivo original",
+        "reviewedAt": "2026-11-06T12:26:16.288Z",
+        "reason": "Original mostra notebook de perfil, sem pessoa, logo ou texto legível; tela oculta. Foto ilustrativa, sem comprovar dimensão física em polegadas."
+      }
+    },
+    {
+      "assetTag": "TI-0003",
+      "file": "TI-0003.webp",
+      "objectPath": "suporte_ti/TI-0003.webp",
+      "width": 800,
+      "height": 600,
+      "sha256": "11b1685f0c13cc8b417822006fbd43e8b93602c8d03cb2e243d757aa3d57422f",
+      "sourceSha256": "56e8511c8834cc3f79cc30caa8e62321c9a1b9ac88e3a6c641603196e1c6a119",
+      "source": {
+        "provider": "Pixabay",
+        "id": 925806,
+        "pageURL": "https://pixabay.com/photos/office-desk-business-working-925806/",
+        "author": "StockSnap",
+        "authorId": 894430,
+        "license": {
+          "name": "Pixabay Content License",
+          "url": "https://pixabay.com/service/license-summary/"
+        }
+      },
+      "review": {
+        "reviewer": "Codex — inspeção visual do arquivo original e retorno do responsável",
+        "reviewedAt": "2026-11-06T13:29:30.059Z",
+        "reason": "Notebook em primeiro plano e como foco, com tela preta sem conteúdo; sem pessoa ou marca/logo legível. A caneca encobre parte da lateral; foto ilustrativa, com teclas de fábrica permitidas."
+      }
+    },
+    {
+      "assetTag": "TI-0004",
+      "file": "TI-0004.webp",
+      "objectPath": "suporte_ti/TI-0004.webp",
+      "width": 800,
+      "height": 600,
+      "sha256": "3a4af3e2445dfcf377caa470aed29f3c0aeb3343bf65df60a81d1109e6f2d7c0",
+      "sourceSha256": "95ebd266db3d4898438b1616135d1cb6710a4749688552ebce7042686f1fd22c",
+      "source": {
+        "provider": "Pixabay",
+        "id": 1868510,
+        "pageURL": "https://pixabay.com/photos/apple-computer-connection-display-1868510/",
+        "author": "Pexels",
+        "authorId": 2286921,
+        "license": {
+          "name": "Pixabay Content License",
+          "url": "https://pixabay.com/service/license-summary/"
+        }
+      },
+      "review": {
+        "reviewer": "Codex — inspeção visual do arquivo original e retorno do responsável",
+        "reviewedAt": "2026-11-06T13:29:30.059Z",
+        "reason": "Notebook inteiro como único equipamento e foco na mesa; tela apagada, teclas de fábrica permitidas, sem pessoas, marcas/logos legíveis ou conteúdo acrescentado."
+      }
+    },
+    {
+      "assetTag": "TI-0005",
+      "file": "TI-0005.webp",
+      "objectPath": "suporte_ti/TI-0005.webp",
+      "width": 800,
+      "height": 600,
+      "sha256": "9006e55c56d5f7bef305f7174576c56e947194908135d976173a95e450ce3d6c",
+      "sourceSha256": "285756bd9b2611ab5a736aa6040590b4d0159896dc12143d6d284c9ec3116c07",
+      "source": {
+        "provider": "Pixabay",
+        "id": 17768,
+        "pageURL": "https://pixabay.com/photos/blank-business-computer-desktop-17768/",
+        "author": "PublicDomainPictures",
+        "authorId": 14,
+        "license": {
+          "name": "Pixabay Content License",
+          "url": "https://pixabay.com/service/license-summary/"
+        }
+      },
+      "review": {
+        "reviewer": "Codex — inspeção visual do arquivo original",
+        "reviewedAt": "2026-11-06T12:34:38.570Z",
+        "reason": "Monitor isolado com tela sem conteúdo, sem pessoas ou marca/texto editorial legível; símbolos de controle são inscrições técnicas. Foto ilustrativa."
+      }
+    },
+    {
+      "assetTag": "TI-0006",
+      "file": "TI-0006.webp",
+      "objectPath": "suporte_ti/TI-0006.webp",
+      "width": 800,
+      "height": 600,
+      "sha256": "56ed40743d4a67158741d73cd8519fd38dfcd61a5ea240576829f98adbcfd0ec",
+      "sourceSha256": "226e20e608be75acd82428405d48aee47232ca819dec222892373dfe1468b140",
+      "source": {
+        "provider": "Pixabay",
+        "id": 17894,
+        "pageURL": "https://pixabay.com/photos/blank-business-computer-desktop-17894/",
+        "author": "PublicDomainPictures",
+        "authorId": 14,
+        "license": {
+          "name": "Pixabay Content License",
+          "url": "https://pixabay.com/service/license-summary/"
+        }
+      },
+      "review": {
+        "reviewer": "Codex — inspeção visual do arquivo original",
+        "reviewedAt": "2026-11-06T12:34:38.570Z",
+        "reason": "Monitor com painel vazio e sem pessoa ou marca/texto editorial legível. Foto distinta da outra perspectiva, com ID e bytes próprios; imagem ilustrativa."
+      }
+    },
+    {
+      "assetTag": "TI-0007",
+      "file": "TI-0007.webp",
+      "objectPath": "suporte_ti/TI-0007.webp",
+      "width": 800,
+      "height": 600,
+      "sha256": "fccd9e4089f389f4f306f501c25f46e3a90b3d211cc1062243e2b287541a1272",
+      "sourceSha256": "465774117cf51c2a19bbf90623922f321700b1091670ec4d388bcf2876957340",
+      "source": {
+        "provider": "Pixabay",
+        "id": 313011,
+        "pageURL": "https://pixabay.com/illustrations/monitor-isolated-display-white-313011/",
+        "author": "Mocho",
+        "authorId": 156870,
+        "license": {
+          "name": "Pixabay Content License",
+          "url": "https://pixabay.com/service/license-summary/"
+        }
+      },
+      "review": {
+        "reviewer": "Codex — inspeção visual do original; exceção confirmada pelo responsável no chat",
+        "reviewedAt": "2026-11-06T13:32:04.525Z",
+        "reason": "Ilustração Pixabay, não fotografia. Exceção autorizada pelo responsável somente para TI-0007 após ver esta candidata. Monitor inteiro sem pessoa, marca/logo legível, texto acrescentado ou conteúdo na tela; apenas símbolo técnico de ligar."
+      }
+    },
+    {
+      "assetTag": "TI-0008",
+      "file": "TI-0008.webp",
+      "objectPath": "suporte_ti/TI-0008.webp",
+      "width": 800,
+      "height": 600,
+      "sha256": "686e577c42f4409f3cf5224197bcb84a310ac5bb637e08641d15e135407ed63c",
+      "sourceSha256": "419bcc42e9ad77433474b588a7da559ae4bdcad96535fa5d2da5617cbcddf433",
+      "source": {
+        "provider": "Pixabay",
+        "id": 1827,
+        "pageURL": "https://pixabay.com/photos/high-definition-multimedia-1827/",
+        "author": "PublicDomainPictures",
+        "authorId": 14,
+        "license": {
+          "name": "Pixabay Content License",
+          "url": "https://pixabay.com/service/license-summary/"
+        }
+      },
+      "review": {
+        "reviewer": "Codex — inspeção visual do arquivo original",
+        "reviewedAt": "2026-11-06T12:26:16.288Z",
+        "reason": "Original mostra conector HDMI e cabo, sem pessoa, marca ou texto legível. Fotografia ilustrativa."
+      }
+    },
+    {
+      "assetTag": "TI-0009",
+      "file": "TI-0009.webp",
+      "objectPath": "suporte_ti/TI-0009.webp",
+      "width": 800,
+      "height": 600,
+      "sha256": "db3e71ebf87611b8676c78a5fde119563afc4b22f99a4e36c31416009bb7b735",
+      "sourceSha256": "23dbd49858f20a182a9ebe2d30f321fc1f0532c948a40d7b2dcfab6773790da4",
+      "source": {
+        "provider": "Pixabay",
+        "id": 4498745,
+        "pageURL": "https://pixabay.com/photos/cable-wire-technology-plug-4498745/",
+        "author": "tomekwalecki",
+        "authorId": 13027968,
+        "license": {
+          "name": "Pixabay Content License",
+          "url": "https://pixabay.com/service/license-summary/"
+        }
+      },
+      "review": {
+        "reviewer": "Codex — inspeção visual do arquivo original",
+        "reviewedAt": "2026-11-06T12:34:38.570Z",
+        "reason": "Original mostra conector USB-C isolado, sem pessoas, marca legível ou conteúdo textual editorial."
+      }
+    },
+    {
+      "assetTag": "TI-0010",
+      "file": "TI-0010.webp",
+      "objectPath": "suporte_ti/TI-0010.webp",
+      "width": 800,
+      "height": 600,
+      "sha256": "529999bb2257b5190c3e916f1fb270447d1d3e516b7151537f13873742335547",
+      "sourceSha256": "061d962b59047fb0f2dd426f632857bb570172649aaa14f0478ddcec7617acba",
+      "source": {
+        "provider": "Pixabay",
+        "id": 494648,
+        "pageURL": "https://pixabay.com/photos/network-cable-network-plug-cable-494648/",
+        "author": "blickpixel",
+        "authorId": 52945,
+        "license": {
+          "name": "Pixabay Content License",
+          "url": "https://pixabay.com/service/license-summary/"
+        }
+      },
+      "review": {
+        "reviewer": "Codex — inspeção visual do arquivo original",
+        "reviewedAt": "2026-11-06T12:34:38.570Z",
+        "reason": "Original mostra conectores RJ45 em fundo branco, sem pessoas, logos ou inscrições legíveis. Fotografia ilustrativa de cabos de rede."
+      }
+    },
+    {
+      "assetTag": "TI-0011",
+      "file": "TI-0011.webp",
+      "objectPath": "suporte_ti/TI-0011.webp",
+      "width": 800,
+      "height": 600,
+      "sha256": "d09d9439ab687a91b5ae6dcd9f51642891acbe7d01d5272737a53bc73bf7d614",
+      "sourceSha256": "fa88156048e819e15de5c4405c0254a2d58f88c156249bb4ac357e479fd4d1ad",
+      "source": {
+        "provider": "Pixabay",
+        "id": 4607652,
+        "pageURL": "https://pixabay.com/photos/cam-camera-live-streaming-hd-4607652/",
+        "author": "Curious_Collectibles",
+        "authorId": 11004713,
+        "license": {
+          "name": "Pixabay Content License",
+          "url": "https://pixabay.com/service/license-summary/"
+        }
+      },
+      "review": {
+        "reviewer": "Codex — inspeção visual do arquivo original",
+        "reviewedAt": "2026-11-06T12:50:55.661Z",
+        "reason": "Webcam com inscrição técnica HD1080p de fábrica; exceção autorizada. Sem pessoa, marca/logo legível ou tela com conteúdo."
+      }
+    },
+    {
+      "assetTag": "TI-0012",
+      "file": "TI-0012.webp",
+      "objectPath": "suporte_ti/TI-0012.webp",
+      "width": 800,
+      "height": 600,
+      "sha256": "ea77f74a6ee096124517fa370bf115da76d5929ce848988933394528f4eb619a",
+      "sourceSha256": "ed1ec1590e11cbac22fc6a5fe3de99b8f96eaac9ef23b9b7581eef1a204fde4a",
+      "source": {
+        "provider": "Pixabay",
+        "id": 2125547,
+        "pageURL": "https://pixabay.com/photos/technology-camera-sport-laptop-2125547/",
+        "author": "JESHOOTS-com",
+        "authorId": 264599,
+        "license": {
+          "name": "Pixabay Content License",
+          "url": "https://pixabay.com/service/license-summary/"
+        }
+      },
+      "review": {
+        "reviewer": "Codex — inspeção visual do arquivo original e retorno do responsável",
+        "reviewedAt": "2026-11-06T13:29:30.067Z",
+        "reason": "Câmera de ação compacta como foco, sem pessoas, marca/logo legível ou conteúdo em tela. Responsável confirmou esse tipo de câmera como ilustração de TI-0012 no chat."
+      }
+    }
+  ]
+}

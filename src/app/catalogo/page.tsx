@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
 import { Catalogue } from "@/components/catalogue";
+import { publicConfig } from "@/lib/public-config";
 export const dynamic = "force-dynamic";
 export default async function CataloguePage() {
   if (process.env.APP_MODE === "showcase") redirect("/login");
@@ -10,5 +11,5 @@ export default async function CataloguePage() {
     data: { user },
   } = await auth.auth.getUser();
   if (!user || !(await getActiveMembership(user.id))) redirect("/login");
-  return <Catalogue />;
+  return <Catalogue imageBase={publicConfig().imageBase} />;
 }

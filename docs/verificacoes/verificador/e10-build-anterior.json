@@ -1,0 +1,14 @@
+{
+  "revision": "819f0ad6f1d5eaa050fb379cac9343f47757cb58",
+  "checks": [
+    {
+      "command": "npm run build",
+      "startedAt": "2026-11-09T17:02:38.881Z",
+      "finishedAt": "2026-11-09T17:02:55.790Z",
+      "exitCode": 0,
+      "stdout": "\n> empresti@0.1.0 build\n> prisma generate && next build\n\nPrisma schema loaded from prisma\\schema.prisma\n\n✔ Generated Prisma Client (v6.19.3) to .\\node_modules\\@prisma\\client in 167ms\n\nStart by importing your Prisma Client (See: https://pris.ly/d/importing-client)\n\nTip: Want to turn off tips and other hints? https://pris.ly/tip-4-nohints\n\n▲ Next.js 16.4.2 (Turbopack)\n- Environments: .env.local, .env\n✓ Running next.config.ts took 48ms\n\n  Creating an optimized production build ...\n✓ Compiled successfully in 1897ms\n  Running TypeScript ...\n  Finished TypeScript in 5.6s ...\n  Collecting page data using 10 workers ...\n  Generating static pages using 10 workers (0/3) ...\n✓ Generating static pages using 10 workers (3/3) in 1477ms\n  Finalizing page optimization ...\n\nRoute (app)\n┌ ○ /\n├ ○ /_not-found\n├ ƒ /api/trpc/[trpc]\n├ ƒ /catalogo\n├ ƒ /health\n├ ƒ /login\n├ ƒ /meus-emprestimos\n└ ƒ /operacoes/solicitacoes\n\n\nƒ Proxy (Middleware)\n\n○  (Static)   prerendered as static content\nƒ  (Dynamic)  server-rendered on demand\n\n",
+      "stderr": "warn The configuration property `package.json#prisma` is deprecated and will be removed in Prisma 7. Please migrate to a Prisma config file (e.g., `prisma.config.ts`).\nFor more information, see: https://pris.ly/prisma-config\n\nEnvironment variables loaded from .env\n",
+      "error": null
+    }
+  ]
+}

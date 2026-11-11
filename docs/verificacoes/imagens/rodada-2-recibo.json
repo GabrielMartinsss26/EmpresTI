@@ -1,0 +1,57 @@
+{
+  "scope": "D02: ferramenta e testes sintéticos; não aprova fotos reais/população/publicação",
+  "executor": "principal",
+  "checks": [
+    {
+      "command": "node --test tests/imagens/pipeline.test.mjs",
+      "exitCode": 0,
+      "output": "✔ CA-D07: chave ausente falha antes da rede; erro do provedor não expõe segredo (11.4567ms)\n✔ CA-D03/D07: cache 24h, filtros de foto e sanitização sem chave no disco (67.3662ms)\n✔ CA-D07: download bloqueia origem externa, redirect externo e conteúdo excessivo (2.3291ms)\n✔ CA-D03/D04: selecionar não aprova a foto, não duplica ID e reutiliza original local (52.7399ms)\n✔ CA-D03: WebP 800×600 sem cortar foto panorâmica ou retrato; rejeita arquivo falso (146.6359ms)\n✔ CA-D03/D04: pacote requer revisão atual, rejeita conjunto incompleto e arquivo alterado (40.6925ms)\n✔ CA-D03: detecta mesma foto por ID e por bytes, mesmo com outro ID (121.2411ms)\n✔ CA-D02/D03: 12 arquivos idempotentes, créditos íntegros e pacote invalidado por revisão posterior (2452.3087ms)\nℹ tests 8\nℹ suites 0\nℹ pass 8\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 3641.9935\n"
+    },
+    {
+      "command": "quick_validate.py skills/imagens-equipamentos",
+      "exitCode": 0,
+      "output": "Skill is valid!\n"
+    },
+    {
+      "command": "node scripts/auditar-skill-imagens.mjs",
+      "exitCode": 0,
+      "outputFile": "docs/verificacoes/imagens/auditoria.json"
+    }
+  ],
+  "realSearch": {
+    "command": "npm run imagens -- buscar",
+    "observedExitCode": 0,
+    "assets": 12,
+    "candidates": 96,
+    "source": "Pixabay API; cache local ignorado pelo Git",
+    "visualReview": "pendente",
+    "upload": "não executado"
+  },
+  "envExample": {
+    "name": "PIXABAY_API_KEY",
+    "value": "vazio"
+  },
+  "sha256": {
+    "skills/imagens-equipamentos/SKILL.md": "3816120f92c0040a2149d703eeda55ee5a392c6049b4bd7f5ebbfd353957f479",
+    "skills/imagens-equipamentos/assets/inventario.json": "dc7a795ca23036bf1ff0ac60dec3c33e394947464192535a4b99b63d7a3eda74",
+    "skills/imagens-equipamentos/references/pipeline.md": "6abb350ce2e2df3edaeca5cec7e668fb5bb3db4cf6a83e326aca581b3edc683c",
+    "skills/imagens-equipamentos/references/pixabay.md": "ea87bb10510b6f077c5e5182907fc4e739a1b84bc49c1c712fb790b800246c26",
+    "skills/imagens-equipamentos/scripts/cli.mjs": "9219004e32108c0c50b4ce1889a901fd2091c4c47f29339c65a0fc44624ea3d0",
+    "skills/imagens-equipamentos/scripts/pipeline.mjs": "134420ab7d041e0a1b3109a495cbee36276a2e6535c31927cbfd7e257d7d2d71",
+    "tests/imagens/pipeline.test.mjs": "b3c3445ba97ab8cfb39b1c9a1a86f6a097b9cd123767983f98e3f356f59a83f0",
+    "docs/specs/004-dados-iniciais/skill.md": "a3452c3b87b034a7aafae6dffae3a8faf22904993c07f558a9d5237f91eec21f",
+    ".gitignore": "4ec938df814e91f18c143955053929c69c4114df4aaf3c713beb276c96489f1b",
+    ".vercelignore": "250679ebb2bee26c5f1025113015ee33393a8315e6839d5b61b5aaf854b001cf",
+    "package.json": "08676741ff74a5d8a13ff0902d0ecf22bf8a1e874ab26b63c19f7b2432cf41a8",
+    "docs/adr/005-imagens-equipamentos.md": "e5c3276250a8893d901c31753c2bcbea4dae9d6236b53a37d30aa055ff7bc57f",
+    "scripts/auditar-skill-imagens.mjs": "92db7dde0f66bb055b10898d83b303a9e97275bc09bee1d6f05d6b57b38bcfd1",
+    "docs/verificacoes/imagens/auditoria.json": "491569247312a6872fff82b468a2f03c060f0b0c4717647dfcc6f6d728bdac81"
+  },
+  "hostValidator": {
+    "name": "skill-creator/scripts/quick_validate.py",
+    "sha256": "5347a0a09cfb546bba1c0d1a30dae0a233d9a05f57bd4e7877155c588bcdabf7",
+    "command": "python <host-skill-creator>/scripts/quick_validate.py skills/imagens-equipamentos",
+    "version": "identificada pelo SHA-256 do arquivo instalado"
+  },
+  "additionalEvidence": "docs/verificacoes/imagens/auditoria.json"
+}

@@ -1,0 +1,53 @@
+{
+  "phase": "restaurado",
+  "parent": "01a1c162-ee5b-7793-9af8-f560966241ac",
+  "logSha256": "772bc3941a15b77004e356809ba198d0de3fd4ca4125456d18ca2a9812b327cd",
+  "sessions": [
+    {
+      "session": "01a1c162-ee5b-7793-9af8-f560966241ac",
+      "parent": "01a1c162-ee5b-7793-9af8-f560966241ac",
+      "sourceSha256": "f2e5d85bf3c881575f123392e4bd4a56b8f9a87d6b126c6f25bfccd16f176b0e",
+      "calls": [
+        "spawn_agent",
+        "wait_agent",
+        "wait_agent",
+        "wait_agent"
+      ],
+      "permissionEvidence": [
+        {
+          "approval_policy": "never",
+          "sandbox_policy": {
+            "type": "read-only"
+          }
+        }
+      ],
+      "spawn": {
+        "task_name": "verificacao_e10_restaurado",
+        "agent_type": "verificador-spec",
+        "fork_turns": "none"
+      },
+      "readerCalls": 0
+    },
+    {
+      "session": "01a1c163-1627-7402-a1c3-8b70ad469d9f",
+      "parent": "01a1c162-ee5b-7793-9af8-f560966241ac",
+      "sourceSha256": "a3c8e7e450d05f4d5e3779e1a345098760431eb904e03c40964c493dba4e1a0c",
+      "calls": [
+        "exec",
+        "exec",
+        "exec",
+        "exec"
+      ],
+      "permissionEvidence": [
+        {
+          "approval_policy": "never",
+          "sandbox_policy": {
+            "type": "read-only"
+          }
+        }
+      ],
+      "readerCalls": 4
+    }
+  ],
+  "recordedAt": "2026-11-09T17:38:35.458Z"
+}

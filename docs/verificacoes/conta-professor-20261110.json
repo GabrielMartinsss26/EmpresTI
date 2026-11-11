@@ -1,0 +1,28 @@
+{
+  "startedAt": "2026-11-10T10:23:27.772Z",
+  "project": "gverauqgerwjwwjkoybl",
+  "scope": "conta do professor",
+  "ok": true,
+  "created": {
+    "identities": 1,
+    "profiles": 1,
+    "memberships": 1
+  },
+  "reexecution": {
+    "identities": 0,
+    "profiles": 0,
+    "memberships": 0
+  },
+  "login": true,
+  "active": true,
+  "role": "COLLABORATOR",
+  "loans": 0,
+  "finishedAt": "2026-11-10T10:23:35.610Z",
+  "site": {
+    "checkedAt": "2026-11-10T10:24:10.214Z",
+    "login": true,
+    "catalogue": true,
+    "status": 200,
+    "ok": true
+  }
+}

@@ -1,0 +1,451 @@
+{
+  "executor": "principal",
+  "recordedAt": "2026-11-09T20:26:30.763Z",
+  "method": "CLI Vercel/Prisma Migrate + UI real por cua_repl + HTTP real sem mocks",
+  "deployment": {
+    "id": "dpl_3aSE1YQFhNGrtrWi224RgkAtmrv4",
+    "url": "https://empresti-mauve.vercel.app",
+    "uniqueUrl": "empresti-ftfhrfeoz-empresta-ai.vercel.app",
+    "target": "production",
+    "readyState": "READY",
+    "project": "empresti",
+    "scope": "empresta-ai"
+  },
+  "migration": {
+    "phase": "E11-migration",
+    "startedAt": "2026-11-09T20:17:22.864Z",
+    "sourceSha256": {
+      "202610190001_initial": "38333361e345e711c68d1c5590bf480547e58c731a0acba4f504c9d60a71f20c",
+      "202611060001_equipment_images": "3d3b0611708ee4d2e4652c5f57a685f4f47339749421b6cf4c0a8cd2908cc73a",
+      "202611090001_loan_due_rules": "4f72650763fa6486cd4b4d0674ace88c16c6cc311ef68dcbc24337a3e62b0a07"
+    },
+    "before": {
+      "migrations": [
+        {
+          "migration_name": "202610190001_initial",
+          "checksum": "38333361e345e711c68d1c5590bf480547e58c731a0acba4f504c9d60a71f20c",
+          "applied": true,
+          "rolled_back": false
+        },
+        {
+          "migration_name": "202611060001_equipment_images",
+          "checksum": "3d3b0611708ee4d2e4652c5f57a685f4f47339749421b6cf4c0a8cd2908cc73a",
+          "applied": true,
+          "rolled_back": false
+        }
+      ],
+      "history": {
+        "tenants": {
+          "count": 1,
+          "fingerprint": "bf8978f7c91b4a53dd3a20dc29d47acf"
+        },
+        "profiles": {
+          "count": 1,
+          "fingerprint": "7ceeddace65f83f63d371a221fdfa79c"
+        },
+        "memberships": {
+          "count": 1,
+          "fingerprint": "f52bcfa488a8871893a0b218b90af2f3"
+        },
+        "equipment_categories": {
+          "count": 4,
+          "fingerprint": "df51e4fae1f029a1f4d9cd44834e4288"
+        },
+        "equipment": {
+          "count": 12,
+          "fingerprint": "7669d21854910877c84c3dea7d9b98f1"
+        },
+        "equipment_images": {
+          "count": 12,
+          "fingerprint": "25e667e8039b911f0ea1b3be1c0bc11c"
+        },
+        "loan_requests": {
+          "count": 0,
+          "fingerprint": "d41d8cd98f00b204e9800998ecf8427e"
+        },
+        "loans": {
+          "count": 0,
+          "fingerprint": "d41d8cd98f00b204e9800998ecf8427e"
+        },
+        "audit_logs": {
+          "count": 10,
+          "fingerprint": "deebc953e3bf481ad9827c452eb29c14"
+        }
+      }
+    },
+    "migrateExitCode": 0,
+    "after": {
+      "migrations": [
+        {
+          "migration_name": "202610190001_initial",
+          "checksum": "38333361e345e711c68d1c5590bf480547e58c731a0acba4f504c9d60a71f20c",
+          "applied": true,
+          "rolled_back": false
+        },
+        {
+          "migration_name": "202611060001_equipment_images",
+          "checksum": "3d3b0611708ee4d2e4652c5f57a685f4f47339749421b6cf4c0a8cd2908cc73a",
+          "applied": true,
+          "rolled_back": false
+        },
+        {
+          "migration_name": "202611090001_loan_due_rules",
+          "checksum": "4f72650763fa6486cd4b4d0674ace88c16c6cc311ef68dcbc24337a3e62b0a07",
+          "applied": true,
+          "rolled_back": false
+        }
+      ],
+      "history": {
+        "tenants": {
+          "count": 1,
+          "fingerprint": "bf8978f7c91b4a53dd3a20dc29d47acf"
+        },
+        "profiles": {
+          "count": 1,
+          "fingerprint": "7ceeddace65f83f63d371a221fdfa79c"
+        },
+        "memberships": {
+          "count": 1,
+          "fingerprint": "f52bcfa488a8871893a0b218b90af2f3"
+        },
+        "equipment_categories": {
+          "count": 4,
+          "fingerprint": "df51e4fae1f029a1f4d9cd44834e4288"
+        },
+        "equipment": {
+          "count": 12,
+          "fingerprint": "7669d21854910877c84c3dea7d9b98f1"
+        },
+        "equipment_images": {
+          "count": 12,
+          "fingerprint": "25e667e8039b911f0ea1b3be1c0bc11c"
+        },
+        "loan_requests": {
+          "count": 0,
+          "fingerprint": "d41d8cd98f00b204e9800998ecf8427e"
+        },
+        "loans": {
+          "count": 0,
+          "fingerprint": "d41d8cd98f00b204e9800998ecf8427e"
+        },
+        "audit_logs": {
+          "count": 10,
+          "fingerprint": "deebc953e3bf481ad9827c452eb29c14"
+        }
+      },
+      "dueRuleDefault": "'BUSINESS_14_SP'::\"LoanDueRule\""
+    },
+    "historyPreserved": true,
+    "ok": true,
+    "finishedAt": "2026-11-09T20:17:24.948Z"
+  },
+  "http": [
+    {
+      "path": "/",
+      "status": 200,
+      "location": null
+    },
+    {
+      "path": "/login",
+      "status": 200,
+      "location": null
+    },
+    {
+      "path": "/health",
+      "status": 200,
+      "location": null,
+      "body": {
+        "status": "ok"
+      }
+    },
+    {
+      "path": "/catalogo",
+      "status": 307,
+      "location": "/login"
+    },
+    {
+      "path": "/meus-emprestimos",
+      "status": 307,
+      "location": "/login"
+    },
+    {
+      "path": "/operacoes/solicitacoes",
+      "status": 307,
+      "location": "/login"
+    }
+  ],
+  "images": [
+    {
+      "assetTag": "TI-0001",
+      "url": "https://gverauqgerwjwwjkoybl.supabase.co/storage/v1/object/public/equipamentos/suporte_ti/TI-0001.webp",
+      "status": 200,
+      "sizeBytes": 44190,
+      "receivedSha256": "41158b15f87a55c0f8fec5cd5c3ba237aeafde3e93dd0759fae40cf248e18858",
+      "approvedSha256": "41158b15f87a55c0f8fec5cd5c3ba237aeafde3e93dd0759fae40cf248e18858"
+    },
+    {
+      "assetTag": "TI-0002",
+      "url": "https://gverauqgerwjwwjkoybl.supabase.co/storage/v1/object/public/equipamentos/suporte_ti/TI-0002.webp",
+      "status": 200,
+      "sizeBytes": 26854,
+      "receivedSha256": "59bfa9dac9b9e7ec9d7763be0a502dc1577f9972888cf3f6e94b62ebd13041b6",
+      "approvedSha256": "59bfa9dac9b9e7ec9d7763be0a502dc1577f9972888cf3f6e94b62ebd13041b6"
+    },
+    {
+      "assetTag": "TI-0003",
+      "url": "https://gverauqgerwjwwjkoybl.supabase.co/storage/v1/object/public/equipamentos/suporte_ti/TI-0003.webp",
+      "status": 200,
+      "sizeBytes": 23094,
+      "receivedSha256": "11b1685f0c13cc8b417822006fbd43e8b93602c8d03cb2e243d757aa3d57422f",
+      "approvedSha256": "11b1685f0c13cc8b417822006fbd43e8b93602c8d03cb2e243d757aa3d57422f"
+    },
+    {
+      "assetTag": "TI-0004",
+      "url": "https://gverauqgerwjwwjkoybl.supabase.co/storage/v1/object/public/equipamentos/suporte_ti/TI-0004.webp",
+      "status": 200,
+      "sizeBytes": 49066,
+      "receivedSha256": "3a4af3e2445dfcf377caa470aed29f3c0aeb3343bf65df60a81d1109e6f2d7c0",
+      "approvedSha256": "3a4af3e2445dfcf377caa470aed29f3c0aeb3343bf65df60a81d1109e6f2d7c0"
+    },
+    {
+      "assetTag": "TI-0005",
+      "url": "https://gverauqgerwjwwjkoybl.supabase.co/storage/v1/object/public/equipamentos/suporte_ti/TI-0005.webp",
+      "status": 200,
+      "sizeBytes": 6928,
+      "receivedSha256": "9006e55c56d5f7bef305f7174576c56e947194908135d976173a95e450ce3d6c",
+      "approvedSha256": "9006e55c56d5f7bef305f7174576c56e947194908135d976173a95e450ce3d6c"
+    },
+    {
+      "assetTag": "TI-0006",
+      "url": "https://gverauqgerwjwwjkoybl.supabase.co/storage/v1/object/public/equipamentos/suporte_ti/TI-0006.webp",
+      "status": 200,
+      "sizeBytes": 5866,
+      "receivedSha256": "56ed40743d4a67158741d73cd8519fd38dfcd61a5ea240576829f98adbcfd0ec",
+      "approvedSha256": "56ed40743d4a67158741d73cd8519fd38dfcd61a5ea240576829f98adbcfd0ec"
+    },
+    {
+      "assetTag": "TI-0007",
+      "url": "https://gverauqgerwjwwjkoybl.supabase.co/storage/v1/object/public/equipamentos/suporte_ti/TI-0007.webp",
+      "status": 200,
+      "sizeBytes": 2800,
+      "receivedSha256": "fccd9e4089f389f4f306f501c25f46e3a90b3d211cc1062243e2b287541a1272",
+      "approvedSha256": "fccd9e4089f389f4f306f501c25f46e3a90b3d211cc1062243e2b287541a1272"
+    },
+    {
+      "assetTag": "TI-0008",
+      "url": "https://gverauqgerwjwwjkoybl.supabase.co/storage/v1/object/public/equipamentos/suporte_ti/TI-0008.webp",
+      "status": 200,
+      "sizeBytes": 32154,
+      "receivedSha256": "686e577c42f4409f3cf5224197bcb84a310ac5bb637e08641d15e135407ed63c",
+      "approvedSha256": "686e577c42f4409f3cf5224197bcb84a310ac5bb637e08641d15e135407ed63c"
+    },
+    {
+      "assetTag": "TI-0009",
+      "url": "https://gverauqgerwjwwjkoybl.supabase.co/storage/v1/object/public/equipamentos/suporte_ti/TI-0009.webp",
+      "status": 200,
+      "sizeBytes": 11046,
+      "receivedSha256": "db3e71ebf87611b8676c78a5fde119563afc4b22f99a4e36c31416009bb7b735",
+      "approvedSha256": "db3e71ebf87611b8676c78a5fde119563afc4b22f99a4e36c31416009bb7b735"
+    },
+    {
+      "assetTag": "TI-0010",
+      "url": "https://gverauqgerwjwwjkoybl.supabase.co/storage/v1/object/public/equipamentos/suporte_ti/TI-0010.webp",
+      "status": 200,
+      "sizeBytes": 25576,
+      "receivedSha256": "529999bb2257b5190c3e916f1fb270447d1d3e516b7151537f13873742335547",
+      "approvedSha256": "529999bb2257b5190c3e916f1fb270447d1d3e516b7151537f13873742335547"
+    },
+    {
+      "assetTag": "TI-0011",
+      "url": "https://gverauqgerwjwwjkoybl.supabase.co/storage/v1/object/public/equipamentos/suporte_ti/TI-0011.webp",
+      "status": 200,
+      "sizeBytes": 25404,
+      "receivedSha256": "d09d9439ab687a91b5ae6dcd9f51642891acbe7d01d5272737a53bc73bf7d614",
+      "approvedSha256": "d09d9439ab687a91b5ae6dcd9f51642891acbe7d01d5272737a53bc73bf7d614"
+    },
+    {
+      "assetTag": "TI-0012",
+      "url": "https://gverauqgerwjwwjkoybl.supabase.co/storage/v1/object/public/equipamentos/suporte_ti/TI-0012.webp",
+      "status": 200,
+      "sizeBytes": 16422,
+      "receivedSha256": "ea77f74a6ee096124517fa370bf115da76d5929ce848988933394528f4eb619a",
+      "approvedSha256": "ea77f74a6ee096124517fa370bf115da76d5929ce848988933394528f4eb619a"
+    }
+  ],
+  "catalog": {
+    "at": "2026-11-09T20:23:59.760Z",
+    "url": "https://empresti-mauve.vercel.app/catalogo",
+    "articles": [
+      {
+        "disabled": false,
+        "image": {
+          "height": 600,
+          "src": "https://gverauqgerwjwwjkoybl.supabase.co/storage/v1/object/public/equipamentos/suporte_ti/TI-0001.webp",
+          "width": 800
+        },
+        "label": "TI-0001 — Notebook 14 polegadas",
+        "text": "TI-0001DisponívelNotebook 14 polegadasnotebookRetirada: OperaçõesFoto: Engin_Akyurt · PixabaySolicitar"
+      },
+      {
+        "disabled": false,
+        "image": {
+          "height": 600,
+          "src": "https://gverauqgerwjwwjkoybl.supabase.co/storage/v1/object/public/equipamentos/suporte_ti/TI-0002.webp",
+          "width": 800
+        },
+        "label": "TI-0002 — Notebook 15 polegadas",
+        "text": "TI-0002DisponívelNotebook 15 polegadasnotebookRetirada: OperaçõesFoto: kaboompics · PixabaySolicitar"
+      },
+      {
+        "disabled": false,
+        "image": {
+          "height": 600,
+          "src": "https://gverauqgerwjwwjkoybl.supabase.co/storage/v1/object/public/equipamentos/suporte_ti/TI-0003.webp",
+          "width": 800
+        },
+        "label": "TI-0003 — Notebook 13 polegadas",
+        "text": "TI-0003DisponívelNotebook 13 polegadasnotebookRetirada: OperaçõesFoto: StockSnap · PixabaySolicitar"
+      },
+      {
+        "disabled": true,
+        "image": {
+          "height": 600,
+          "src": "https://gverauqgerwjwwjkoybl.supabase.co/storage/v1/object/public/equipamentos/suporte_ti/TI-0004.webp",
+          "width": 800
+        },
+        "label": "TI-0004 — Notebook 15 polegadas",
+        "text": "TI-0004ManutençãoNotebook 15 polegadasnotebookRetirada: OperaçõesFoto: Pexels · PixabayManutenção"
+      },
+      {
+        "disabled": false,
+        "image": {
+          "height": 600,
+          "src": "https://gverauqgerwjwwjkoybl.supabase.co/storage/v1/object/public/equipamentos/suporte_ti/TI-0005.webp",
+          "width": 800
+        },
+        "label": "TI-0005 — Monitor 24 polegadas",
+        "text": "TI-0005DisponívelMonitor 24 polegadasmonitorRetirada: OperaçõesFoto: PublicDomainPictures · PixabaySolicitar"
+      },
+      {
+        "disabled": false,
+        "image": {
+          "height": 600,
+          "src": "https://gverauqgerwjwwjkoybl.supabase.co/storage/v1/object/public/equipamentos/suporte_ti/TI-0006.webp",
+          "width": 800
+        },
+        "label": "TI-0006 — Monitor 27 polegadas",
+        "text": "TI-0006DisponívelMonitor 27 polegadasmonitorRetirada: OperaçõesFoto: PublicDomainPictures · PixabaySolicitar"
+      },
+      {
+        "disabled": true,
+        "image": {
+          "height": 600,
+          "src": "https://gverauqgerwjwwjkoybl.supabase.co/storage/v1/object/public/equipamentos/suporte_ti/TI-0007.webp",
+          "width": 800
+        },
+        "label": "TI-0007 — Monitor 22 polegadas",
+        "text": "TI-0007ManutençãoMonitor 22 polegadasmonitorRetirada: OperaçõesFoto: Mocho · PixabayManutenção"
+      },
+      {
+        "disabled": true,
+        "image": {
+          "height": 600,
+          "src": "https://gverauqgerwjwwjkoybl.supabase.co/storage/v1/object/public/equipamentos/suporte_ti/TI-0008.webp",
+          "width": 800
+        },
+        "label": "TI-0008 — Cabo HDMI 2 m",
+        "text": "TI-0008EmprestadoCabo HDMI 2 mcaboRetirada: OperaçõesFoto: PublicDomainPictures · PixabayEmprestado"
+      },
+      {
+        "disabled": false,
+        "image": {
+          "height": 600,
+          "src": "https://gverauqgerwjwwjkoybl.supabase.co/storage/v1/object/public/equipamentos/suporte_ti/TI-0009.webp",
+          "width": 800
+        },
+        "label": "TI-0009 — Cabo USB-C 1 m",
+        "text": "TI-0009DisponívelCabo USB-C 1 mcaboRetirada: OperaçõesFoto: tomekwalecki · PixabaySolicitar"
+      },
+      {
+        "disabled": true,
+        "image": {
+          "height": 600,
+          "src": "https://gverauqgerwjwwjkoybl.supabase.co/storage/v1/object/public/equipamentos/suporte_ti/TI-0010.webp",
+          "width": 800
+        },
+        "label": "TI-0010 — Cabo de rede 3 m",
+        "text": "TI-0010ManutençãoCabo de rede 3 mcaboRetirada: OperaçõesFoto: blickpixel · PixabayManutenção"
+      },
+      {
+        "disabled": false,
+        "image": {
+          "height": 600,
+          "src": "https://gverauqgerwjwwjkoybl.supabase.co/storage/v1/object/public/equipamentos/suporte_ti/TI-0011.webp",
+          "width": 800
+        },
+        "label": "TI-0011 — Webcam Full HD",
+        "text": "TI-0011DisponívelWebcam Full HDcameraRetirada: OperaçõesFoto: Curious_Collectibles · PixabaySolicitar"
+      },
+      {
+        "disabled": false,
+        "image": {
+          "height": 600,
+          "src": "https://gverauqgerwjwwjkoybl.supabase.co/storage/v1/object/public/equipamentos/suporte_ti/TI-0012.webp",
+          "width": 800
+        },
+        "label": "TI-0012 — Câmera compacta",
+        "text": "TI-0012DisponívelCâmera compactacameraRetirada: OperaçõesFoto: JESHOOTS-com · PixabaySolicitar"
+      }
+    ]
+  },
+  "loans": {
+    "at": "2026-11-09T20:24:31.389Z",
+    "url": "https://empresti-mauve.vercel.app/meus-emprestimos",
+    "text": "Meus empréstimosPedidos e equipamentos com você, em listas separadas.Consultar catálogoComigo agoraVencimentos no horário de São Paulo. Pedidos pendentes não entram nesta lista.Cabo HDMI 2 mTI-0008 · OperaçõesDevolver até27/nov/2026 · 17:21Retirado em 09/nov/2026 · 17:21Minhas solicitaçõesO prazo começa somente quando Operações aprova o pedido.Cabo HDMI 2 mTI-0008 · Solicitado em 09/nov/2026 · 17:21AprovadaDecisão em 09/nov/2026 · 17:21Cabo HDMI 2 mTI-0008 · Solicitado em 09/nov/2026 · 17:20RejeitadaDecisão em 09/nov/2026 · 17:20Motivo: Validação E11 — conferência do fluxo publicado.",
+    "times": [
+      {
+        "display": "27/nov/2026 · 17:21",
+        "iso": "2026-11-27T20:21:51.227Z"
+      }
+    ]
+  },
+  "anonymous": {
+    "at": "2026-11-09T20:25:01.752Z",
+    "logoutVerified": true,
+    "routes": [
+      {
+        "requested": "/catalogo",
+        "destination": "https://empresti-mauve.vercel.app/login"
+      },
+      {
+        "requested": "/meus-emprestimos",
+        "destination": "https://empresti-mauve.vercel.app/login"
+      },
+      {
+        "requested": "/operacoes/solicitacoes",
+        "destination": "https://empresti-mauve.vercel.app/login"
+      }
+    ]
+  },
+  "screenshot": {
+    "path": "test-results/e11-production.png",
+    "sha256": "99a810514ac9de7216ca233a715f4a2de9303a6f1b9234e126b63b3d571bf36b"
+  },
+  "observedSequence": [
+    "Login real com a conta existente do responsável, sem criar conta/resetar senha ou usar chave administrativa para autorização.",
+    "Catálogo autenticado apresentou 12 itens e manutenção desabilitada em TI-0004/TI-0007/TI-0010.",
+    "Primeiro pedido TI-0008 apareceu como uma solicitação pendente na lista de Operações às 17:20, resumo zero ativos.",
+    "Rejeição com motivo Validação E11 — conferência do fluxo publicado.; lista pendente vazia, zero ativos e histórico de rejeição visível.",
+    "Novo pedido TI-0008 às 17:21 aprovado via confirmação da tela de Operações; aviso de vencimento 27/nov/2026 17:21.",
+    "Após recarregar, Meus empréstimos mostrou um ativo TI-0008 e dois pedidos separados (aprovado/rejeitado), sem apagar o histórico.",
+    "Catálogo marcou TI-0008 como Emprestado e desabilitou solicitar; resumo um de três.",
+    "Logout e redirecionamento das três rotas protegidas ao login conferidos em UI e HTTP sem sessão."
+  ],
+  "limits": [
+    "O empréstimo de validação TI-0008 permanece ativo na conta do responsável; não foi apagado ou devolvido fora do fluxo aprovado.",
+    "Conta do professor permanece adiada e não foi utilizada.",
+    "Sem push/tag/merge ou habilitar CI; deploy da pasta local via CLI.",
+    "Nenhuma suíte descartável foi executada no Supabase; checks de integração são separados.",
+    "A delegação não comprova isolamento global nem conclui a spec 004."
+  ]
+}
