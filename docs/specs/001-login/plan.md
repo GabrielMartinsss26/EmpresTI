@@ -1,5 +1,9 @@
 # Plano de implementação — primeira página e banco
 
+## Correção do build CI — Open Sans local
+
+Em 10/nov/2026 o responsável autorizou corrigir o build do Pull Request após falha do Turbopack ao processar `next/font/google`. Arquivos: `src/app/layout.tsx`, fonte oficial variável e licença em `src/app/fonts/`; registrar execução em `docs/verificacoes/` e continuidade. Usar `next/font/local`, mantendo Open Sans, pesos 400/600, variável CSS e `display: swap` do ADR-002, sem alterar regra ou dependência. Rodar build, testes e checks aplicáveis; commit local e push para `dev` autorizados pelo pedido de atualizar o Pull Request. Verificação remota depende do resultado real do GitHub Actions.
+
 ## Histórico da publicação visual autorizada
 
 O pedido posterior autoriza publicar somente a página inicial sem variáveis de banco. A Vercel usará `APP_MODE=showcase`, sem credenciais de Supabase ou PostgreSQL. Neste modo, o login é uma demonstração visual, com envio desabilitado e aviso explícito; rotas protegidas redirecionam ao login, API de autenticação responde 503 e `/health` informa somente o modo visual. A aplicação completa continua exigindo as variáveis quando este modo não estiver ativado.

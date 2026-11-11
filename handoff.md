@@ -1,5 +1,7 @@
 # Handoff — 10/nov/2026
 
+- Correção CI autorizada: Open Sans oficial local via next/font/local, licença e fonte em src/app/fonts; build com valores fictícios, 41 unitários, lint/tipos/formatação, sete verificador, dez imagens, 23 E2E e showcase separado passaram. docs/verificacoes/ci-fonte-local-20261110.md. Push da correção para dev autorizado; acompanhar o job do PR antes do merge.
+
 - Branch dev; E11 concluída e spec 005 PRONTA, parecer independente verificador/e11-integral-r2.md: CA-E01–CA-E13 ATENDE.
 - Publicação delegada pelo responsável (ADR-010); sem push/tag/merge ou habilitar CI. Depois, responsável autorizou criar a conta do professor.
 - Migration E01 aplicada em 09/nov/2026 via Prisma Migrate no build Vercel; inicial+D04 intactas, nove tabelas com contagens/fingerprints preservados.

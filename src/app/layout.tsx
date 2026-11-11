@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { Open_Sans } from "next/font/google";
+import localFont from "next/font/local";
 import "@phosphor-icons/web/regular";
 import "./globals.css";
 import { Providers } from "@/components/providers";
 
-const font = Open_Sans({
-  subsets: ["latin"],
-  weight: ["400", "600"],
+const font = localFont({
+  src: "./fonts/OpenSans-Variable.ttf",
+  weight: "400 600",
   variable: "--font-open-sans",
   display: "swap",
 });
