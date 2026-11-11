@@ -1,5 +1,7 @@
 # ADR-010 — Execução delegada da E11
 
+Esclarecimento posterior do responsável: ao pedir continuidade, ele não tinha intenção de modificar a regra da prática sobre escrita em produção. A restrição não foi retomada na conversa, e o agente interpretou uma autorização anterior de ajuda como aplicável às etapas seguintes. A execução registrada ocorreu após testes em ambientes controlados; depois houve verificações reais de integração. Este esclarecimento corrige a atribuição de intenção, sem alterar os fatos.
+
 Status: aprovado pelo pedido do responsável em 09/nov/2026 para seguir à E11, após o relato de que o próximo passo seria publicar e validar o fluxo real. Registra essa autorização antes da execução; não muda regras do produto.
 
 ## Decisões

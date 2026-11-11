@@ -1,5 +1,7 @@
 # ADR-007 — Execução delegada da D08
 
+Esclarecimento posterior do responsável: o pedido de ajuda ocorreu no contexto de problemas de conexão; ele não tinha intenção de alterar a regra da prática sobre produção. A restrição não voltou a ser discutida, e o agente interpretou uma autorização anterior como aplicável às etapas seguintes. As suítes foram executadas em ambientes controlados antes das publicações, com verificações reais de integração depois. As operações registradas ocorreram; o texto histórico abaixo não deve ser entendido como decisão consciente do responsável de mudar a regra.
+
 Status: aprovado pela solicitação explícita do responsável em 07/nov/2026 para o agente seguir com segurança/publicação da D08. Depois, o responsável adiou expressamente a conta do professor. Substitui somente a exigência de execução manual pelo operador na D08 dos documentos anteriores; não aprova isolamento global nem muda regras do produto.
 
 ## Decisões

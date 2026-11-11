@@ -1,25 +1,29 @@
 # Entrega da prática
 
-Atualização 10/nov/2026: conta do professor criada após solicitação do responsável, com perfil COLLABORATOR, zero empréstimos, autenticação e acesso HTTP ao catálogo publicado conferidos. Reexecução sem duplicar. Recibo docs/verificacoes/conta-professor-20261110.json; CA-D06 ainda depende de nova avaliação independente e CA-D07 continua NÃO ATENDE. As menções anteriores ao adiamento são históricas.
+Atualização: conta do professor criada após solicitação do responsável, com perfil COLLABORATOR, zero empréstimos, autenticação e acesso HTTP ao catálogo publicado conferidos. Reexecução sem duplicar. Nova revisão independente classificou CA-D06 ATENDE e CA-D07 NÃO ATENDE: docs/verificacoes/verificador/conta-revisao-integral.md. As menções anteriores ao adiamento são históricas.
 
-Status em 10/nov/2026: publicação E11 executada em 09/nov/2026; verificação independente final da spec 005 concluída com 13 critérios ATENDE, PRONTA (docs/verificacoes/verificador/e11-integral-r2.md). A prática inteira não está concluída: conta do professor adiada e spec 004 NÃO PRONTA por falta da conta real e isolamento global não atendido. Sem push/tag de entrega.
+Status atual: publicação E11 executada e spec 005 aprovada com 13 critérios ATENDE (docs/verificacoes/verificador/e11-integral-r2.md). A conta do professor foi criada e conferida sem empréstimos; CA-D06 ATENDE na nova revisão. A spec 004 continua NÃO PRONTA porque CA-D07 permanece NÃO ATENDE. A tag de entrega ainda não foi criada.
+
+Senha da turma: o enunciado recebido continha a mesma senha compartilhada entre os alunos e foi incluído no repositório antes de essa exposição ser identificada. O responsável esclareceu que se trata de ambiente escolar simulado e considera aceitável a presença dessa senha comum para a turma. A versão atual do enunciado foi editada localmente para não reproduzir o valor; a alteração ainda precisa chegar ao GitHub, e o histórico publicado continua contendo o valor. Fora desse contexto, uma senha de acesso deve ser mantida em configuração não versionada, e a exposição exigiria troca da credencial; remover o texto atual não apaga o histórico.
 
 ## Estado vigente — E10 e E11
 
 E10 verificou código, banco descartável, navegador e mecanismo independente: erro da fixture em 611129b, restauração efetiva em 2a943cf; tentativa intermediária incorreta preservada, sem reescrever o histórico. Parecer E10-R2: nove critérios ATENDE e quatro SEM TESTE até publicação. Lacuna local de fotos corrigida com comparação dos bytes recebidos pelo navegador ao manifesto D03. Evidências em docs/verificacoes/e10-execucao.md e verificador/e10-*.
 
-O responsável então delegou a E11 (ADR-010). Aplicada apenas a migration aprovada de prazo, via Prisma Migrate no build Vercel, com preservação do histórico, depois publicado o deploy dpl_3aSE1YQFhNGrtrWi224RgkAtmrv4 em https://empresti-mauve.vercel.app. Credenciais/ambientes reais ficaram fora do upload e das evidências. Não houve criação de conta ou alteração de senha, push, tag ou merge.
+Na E11, o agente aplicou a migration aprovada de prazo via Prisma Migrate no build Vercel e publicou o deploy dpl_3aSE1YQFhNGrtrWi224RgkAtmrv4 em https://empresti-mauve.vercel.app. O histórico foi preservado. Credenciais/ambientes reais ficaram fora do upload e das evidências. Naquela execução não houve criação de conta ou alteração de senha, push, tag ou merge.
 
 Conferência real com conta própria: login, catálogo com 12 imagens aprovadas, manutenção em TI-0004/TI-0007/TI-0010, solicitar/rejeitar com motivo/solicitar novamente/aprovar, Meus empréstimos após recarregar, logout e proteção das três rotas. TI-0008 ficou como empréstimo de validação, vencendo 27/nov/2026 17:21. Não foi apagado por SQL. Recibos identificados em docs/verificacoes/e11-integracao.json e e11-evidencias.json; execução/limites em e11-publicacao.md.
 
-A prática original reservava escrita real ao operador; o responsável delegou pontualmente D08 e E11. Registrar essas diferenças na correção: autorização não equivale a isolamento técnico, não transforma CA-D07 em ATENDE e não permite afirmar que a prática inteira está pronta. As seções abaixo preservam o planejamento e as evidências históricas, com os estados de cada data.
+A prática reservava escrita em produção ao operador. Essa restrição não voltou a ser discutida quando o trabalho prosseguiu, e uma autorização anterior de ajuda com o Supabase foi interpretada pelo agente como aplicável às etapas seguintes. O agente não informou previamente que faria essas operações em produção nem confirmou que a autorização anterior se aplicava à prática. Por isso, o isolamento da IA em produção não foi efetivado; o responsável esclareceu que não pretendia mudar a regra. As suítes de testes foram executadas em ambientes controlados antes das publicações; depois, foram feitas verificações de integração no ambiente publicado. CA-D07 permanece NÃO ATENDE. As seções abaixo preservam o histórico, com os estados de cada data.
 
 ## Histórico iniciado em 06/nov/2026
+
+As tabelas e anotações seguintes registram o estado observado nas etapas anteriores; descrições como “pendente” referem-se à data dessas anotações, e não substituem o status atual acima.
 
 ## Links
 
 - Repositório: https://github.com/GabrielMartinsss26/EmpresTI
-- Produção existente: https://empresti-mauve.vercel.app/ — contém a base de login/landing, ainda não as funcionalidades desta prática.
+- Produção: https://empresti-mauve.vercel.app/ — catálogo, solicitação, aprovação mínima e Meus empréstimos publicados; evidências em docs/verificacoes/e11-publicacao.md.
 - Arquitetura: monolito Next/tRPC; uma verificação cobre frontend, backend e banco, com evidências distintas para cada camada.
 
 ## 1. Conflitos: o que foi pedido contra o que já existia
@@ -35,7 +39,7 @@ A prática original reservava escrita real ao operador; o responsável delegou p
 | Senha literal no script | rules/secrets.md e regra geral da prática | Não copiar credencial ao seed; operador fornece por configuração | Manter segredo fora do código/histórico | docs/pratica.md; regra 8 da spec 004 | Provisionamento pendente |
 | Instalar sharp diretamente | ADR-001 e regra de aprovação de dependências | Proposta apresentada; responsável autorizou sharp na etapa da skill | Nome no briefing sozinho não era aprovação; depois houve autorização explícita | ADR-005 | sharp 0.35.5 registrado como devDependency direta |
 | Catálogo sem crédito × crédito exigido na seção de fotos | Contradição interna e mudança de provedor | Manifesto com autoria/licença e link discreto de créditos no catálogo | Escolha do responsável após proposta, sem transportar a condição do Pexels | ADR-005 | Manifesto implementado; interface pendente na spec 005 |
-| Agente publica dados/imagens por autorizações antigas | Limite mais restritivo da prática | Operador executa escritas em produção nesta prática | Agente prepara e testa localmente | rules/operacao.md → docs/pratica.md | Nenhuma escrita de prática executada |
+| Escrita em produção | A prática reserva a operação ao responsável | Manter registrada a regra da prática e a execução efetiva pelo agente | O responsável esclareceu que solicitou ajuda de conexão sem intenção de alterar a regra | rules/operacao.md → docs/pratica.md | Execução e limitações registradas em docs/verificacoes/e11-publicacao.md |
 
 ## 1b. Lacunas: o que foi pedido de forma incompleta
 

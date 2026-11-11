@@ -53,6 +53,8 @@ Em D07, 07/nov/2026, nova demonstração: `4e3c16b` plantou o erro somente na fi
 
 Calibração real anterior: `calibracao.md` recusou o recibo `baseline.json` após formatação mudar o hash do teste. O recibo foi preservado como evidência histórica dessa reprovação, não como teste vigente. A nova execução identificada e compatível está em `restaurado.json`.
 
+Após a criação da conta do professor, nova revisão isolada da spec 004 recebeu os recibos reais e classificou CA-D01/D02/D03/D04/D05/D06/D08 ATENDE e CA-D07 NÃO ATENDE: docs/verificacoes/verificador/conta-revisao-integral.md. O agente não havia recebido o recibo da própria delegação durante a avaliação; após a resposta, o principal coletou metadados da sessão pai/filho, incluindo papel, fork limpo, permissões e 21 leituras, em conta-revisao-delegacao-integral.json. Isso não comprova isolamento global. Recibo e snapshots conta-revisao-* guardam os arquivos revisados antes da atualização posterior de status; D08-R2 permanece histórico.
+
 ## Fontes e versão
 
 E11 da spec 005 publicada em 09/nov/2026; revisão retomada em 10/nov/2026 após a primeira tentativa encerrar por limite de uso, sem parecer final. Instância separada verificador-spec conferiu as provas reais e locais e classificou CA-E01–CA-E13 ATENDE, PRONTA. Parecer original em docs/verificacoes/verificador/e11-integral-r2.md; delegação em e11-delegacao-integral-r2.json e execução em docs/verificacoes/e11-publicacao.md. Snapshots da spec/plano/tarefas/PRD preservam os bytes revisados antes da atualização de estado. Não conclui spec 004, conta do professor ou isolamento global.

@@ -1,6 +1,6 @@
 # Plano 004 — Dados iniciais
 
-Status: D01–D07 executadas; D08 de dados/imagens publicada em 07/nov/2026 por delegação posterior ADR-007, com conta adiada expressamente. Revisão D08-R2: CA-D01/D02/D03/D04/D05/D08 ATENDE; CA-D06 SEM TESTE e CA-D07 NÃO ATENDE; spec NÃO PRONTA. Pendências: conta/login reais e isolamento original da prática. Sem autorização de push/deploy Vercel; critérios e pareceres históricos preservados.
+Status atual: D01–D07 executadas; dados/imagens publicados em 07/nov e conta do professor criada/conferida em 10/nov/2026. Nova revisão independente: CA-D01/D02/D03/D04/D05/D06/D08 ATENDE; CA-D07 NÃO ATENDE e spec NÃO PRONTA. Revisão histórica D08-R2 e critérios preservados.
 
 1. Resolver lacunas da spec e registrar alternativas; apresentar modelo de metadados/policies/DDL. Biblioteca e processamento foram aprovados na proposta da skill e registrados no ADR-005; sharp não foi instalado por mera menção no enunciado.
 2. Preparar verificador e skill conforme `docs/pratica.md`, com restrição efetiva de produção. Respeitar ADR-001 e ADR-002; skill não cria paleta nem altera landing.
@@ -44,11 +44,11 @@ Autorizado pelo responsável em 07/nov/2026: manter registro das mudanças, cria
 5. Executar revisão independente da spec 004 inteira com os recibos atuais; corrigir somente achados locais dentro do escopo, sem inventar prova de produção. Guardar todos os critérios/limitações e eventuais rodadas, mesmo reprovadas.
 6. Registrar evidências em `docs/verificacoes/verificador/d07-*` e atualizar tarefas/handoff. Logs brutos ficam em `test-results/verificador/`; auxiliares/recibos transitórios em `.local/`. Não tocar nos HTMLs de Aulas/ do usuário.
 
-CA-D05 e a parte remota de CA-D06 continuam dependentes de D08. Qualquer SEM TESTE/BLOQUEADO/NÃO ATENDE mantém a spec NÃO PRONTA; concluir a execução da D07 não significa publicar ou aprovar a spec inteira.
+Na conclusão da D07, CA-D05 e a parte remota de CA-D06 ainda dependiam de D08. Qualquer SEM TESTE/BLOQUEADO/NÃO ATENDE mantém a spec NÃO PRONTA; concluir a execução da D07 não significa publicar ou aprovar a spec inteira.
 
-## D08 delegada — recorte atual
+## D08 — recorte histórico de 07/nov/2026
 
-Autorização atual e exceção de execução no ADR-007; conta adiada expressamente. CA-D07 continua BLOQUEADO, sem mudança no critério. Pré-consulta de leitura confirmou projeto correto, tenant ativo, migration inicial aplicada, nenhum bucket e nenhum dos 12 equipamentos no destino.
+Naquele momento, a execução foi interpretada pelo agente como delegada no ADR-007 e a conta havia sido adiada. CA-D07 estava BLOQUEADO na revisão D07; depois foi classificado NÃO ATENDE. Pré-consulta de leitura confirmou projeto correto, tenant ativo, migration inicial aplicada, nenhum bucket e nenhum dos 12 equipamentos no destino. Ver esclarecimento posterior do responsável no ADR-007 e status atual no início deste plano.
 
 1. Acrescentar simulação sem escrita ao módulo D05 (`prisma/dados-pratica.ts`), com teste de banco descartável.
 2. Criar `scripts/publicar-pratica.ts`: destino fixo conferido, argumentos explícitos `--project`/`--apply`, configuração Zod e erros sanitizados; nunca importado pela aplicação. Usar SDK já instalado, sem dependência nova. Testes puros de destino/configuração em `tests/unit/publication-config.test.ts`; incluir `scripts` no check de formatação e excluir artefatos ignorados `.local` do lint.

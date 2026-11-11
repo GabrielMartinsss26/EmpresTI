@@ -1,12 +1,14 @@
 # Planejamento da prática — 06/nov/2026
 
-Atualização 10/nov/2026: a conta do professor antes adiada foi criada após pedido do responsável. Auth e acesso autenticado ao catálogo publicado passaram; zero empréstimos e reexecução sem duplicar. Evidências docs/verificacoes/conta-professor-20261110.md. A classificação histórica CA-D06 aguarda nova revisão; CA-D07 continua NÃO ATENDE. As menções ao adiamento abaixo preservam o histórico.
+Esclarecimento posterior do responsável: os pedidos de ajuda e continuidade ocorreram no contexto de dificuldades de conexão e não expressavam intenção de alterar a regra da prática que reserva a escrita em produção ao operador. Como a restrição não voltou a ser discutida, o agente interpretou uma autorização anterior como aplicável às etapas seguintes e realizou operações em produção. As suítes foram executadas em ambientes controlados antes das publicações; depois houve verificações de integração reais. Menções históricas a exceções nos ADRs 007/010 devem ser lidas com esse esclarecimento; o resultado CA-D07 não foi alterado.
 
-Status: D01–D07 executadas e D08 de dados/imagens publicada em 07/nov/2026 por delegação posterior do responsável, registrada no ADR-007. Migration D04 aplicada, 12 imagens/equipamentos publicados, repetição sem duplicação e proteção de escrita anônima confirmadas. Conta do professor adiada expressamente. Parecer `docs/verificacoes/verificador/d08-integral-r2.md`: spec 004 NÃO PRONTA por CA-D06 SEM TESTE e CA-D07 NÃO ATENDE; autorização de publicar não equivale a isolamento. Sem push/deploy Vercel nesta etapa.
+Atualização: a conta do professor antes adiada foi criada após pedido do responsável. Auth e acesso autenticado ao catálogo publicado passaram; zero empréstimos e reexecução sem duplicar. Nova revisão independente classificou CA-D06 ATENDE; CA-D07 continua NÃO ATENDE. Evidências docs/verificacoes/conta-professor-20261110.md e verificador/conta-revisao-integral.md. As menções ao adiamento abaixo preservam o histórico.
+
+Histórico de 07/nov/2026: D01–D07 executadas e D08 de dados/imagens publicada; migration D04 aplicada, 12 imagens/equipamentos publicados, repetição sem duplicação e proteção de escrita anônima confirmadas. Naquele momento a conta ainda estava adiada, e o parecer D08-R2 classificou CA-D06 SEM TESTE e CA-D07 NÃO ATENDE. O estado atual está na atualização acima; o histórico do ADR-007 deve ser lido com o esclarecimento posterior do responsável.
 
 ## Fontes e histórico
 
-Situação em 10/nov/2026: E00–E11 da spec 005 concluídas, novo prazo/fluxo publicado em 09/nov/2026 e revisão independente final com 13 critérios ATENDE (PRONTA). Evidências docs/verificacoes/e11-*. Spec 004 continua NÃO PRONTA: conta do professor adiada e isolamento global não atendido. As linhas históricas abaixo preservam a sequência anterior.
+Situação atual: E00–E11 da spec 005 concluídas, novo prazo/fluxo publicado em 09/nov e revisão independente final com 13 critérios ATENDE (PRONTA). A conta do professor foi criada e conferida em 10/nov; a nova revisão classificou CA-D06 como ATENDE. Spec 004 continua NÃO PRONTA porque CA-D07 não foi atendido. As linhas históricas abaixo preservam a sequência anterior.
 
 Atualização em 09/nov/2026: limite vigente voltou a três ativos por decisão explícita do responsável (ADR-008). Aprovação e prazo permanecem; contratos E00 da spec 005 preparados e aprovados expressamente após apresentação. Nenhuma escrita remota ou alteração do fluxo funcional nesta revisão documental.
 
