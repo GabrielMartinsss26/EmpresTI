@@ -1,8 +1,10 @@
 # Entrega da prática
 
-Atualização 10/nov/2026: conta do professor criada após solicitação do responsável, com perfil COLLABORATOR, zero empréstimos, autenticação e acesso HTTP ao catálogo publicado conferidos. Reexecução sem duplicar. Recibo docs/verificacoes/conta-professor-20261110.json; CA-D06 ainda depende de nova avaliação independente e CA-D07 continua NÃO ATENDE. As menções anteriores ao adiamento são históricas.
+Atualização: conta do professor criada após solicitação do responsável, com perfil COLLABORATOR, zero empréstimos, autenticação e acesso HTTP ao catálogo publicado conferidos. Reexecução sem duplicar. Nova revisão independente classificou CA-D06 ATENDE e CA-D07 NÃO ATENDE: docs/verificacoes/verificador/conta-revisao-integral.md. As menções anteriores ao adiamento são históricas.
 
-Status em 10/nov/2026: publicação E11 executada e spec 005 aprovada com 13 critérios ATENDE (docs/verificacoes/verificador/e11-integral-r2.md). A conta do professor foi criada e conferida sem empréstimos. A spec 004 continua NÃO PRONTA: CA-D06 aguarda reavaliação independente após a criação da conta, e CA-D07 permanece NÃO ATENDE. A tag de entrega ainda não foi criada.
+Status atual: publicação E11 executada e spec 005 aprovada com 13 critérios ATENDE (docs/verificacoes/verificador/e11-integral-r2.md). A conta do professor foi criada e conferida sem empréstimos; CA-D06 ATENDE na nova revisão. A spec 004 continua NÃO PRONTA porque CA-D07 permanece NÃO ATENDE. A tag de entrega ainda não foi criada.
+
+Senha da turma: o enunciado recebido continha a mesma senha compartilhada entre os alunos e foi incluído no repositório antes de essa exposição ser identificada. O responsável esclareceu que se trata de ambiente escolar simulado e considera aceitável a presença dessa senha comum para a turma. A versão atual do enunciado foi editada localmente para não reproduzir o valor; a alteração ainda precisa chegar ao GitHub, e o histórico publicado continua contendo o valor. Fora desse contexto, uma senha de acesso deve ser mantida em configuração não versionada, e a exposição exigiria troca da credencial; remover o texto atual não apaga o histórico.
 
 ## Estado vigente — E10 e E11
 

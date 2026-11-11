@@ -17,7 +17,7 @@
 - Primeira revisão E11 parou por limite de uso, sem parecer; registro e11-tentativa-interrompida.json. Nova revisão real teve contexto limpo/read-only/never.
 - Retomada 10/nov: mesmo deploy READY, login/catalogo funcionando; usuário esclareceu que não há erro atual. Nenhuma nova mutação de empréstimo.
 - PRD/prática/ENTREGA/README/producao/spec/plan/tasks/AGENTS atualizados só depois de preservar snapshots e pareceres originais.
-- Conta do professor criada em 10/nov: COLLABORATOR ativo, Auth e GET autenticado /catalogo 200, zero empréstimos; reexecução zero criações. docs/verificacoes/conta-professor-20261110.*. CA-D06 aguarda nova revisão independente; CA-D07 NÃO ATENDE e spec 004 permanece NÃO PRONTA.
+- Conta do professor criada em 10/nov: COLLABORATOR ativo, Auth e GET autenticado /catalogo 200, zero empréstimos; reexecução zero criações. Nova revisão conta-revisao-integral.md: CA-D06 ATENDE, CA-D07 NÃO ATENDE e spec 004 permanece NÃO PRONTA. Senha era compartilhada na turma segundo o responsável; valor removido localmente do enunciado, mas permanece no histórico remoto.
 - Futuras funcionalidades fora da spec 005: devolução, convites, cadastro por UI e painel completo; não iniciar sem spec/autorização.
 - Três ativos ADR-008; aprovação mantida; 14 úteis seg–sex sem descontar feriados/São Paulo ADR-004, versão ADR-009.
 - Snapshot visual test-results/e11-production.png; nova captura e11-production-20261110.png, ignoradas; aba produção deixada aberta.
