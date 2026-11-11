@@ -1,6 +1,6 @@
 # Spec 004 — Dados iniciais e imagens
 
-Status atual: spec inteira NÃO PRONTA. Dados/imagens e conta do professor foram publicados e conferidos; a conta tem papel COLLABORATOR, zero empréstimos e reexecução sem duplicação. Na nova revisão independente, CA-D01/D02/D03/D04/D05/D06/D08 ATENDE e CA-D07 NÃO ATENDE, por falta de isolamento de escrita em produção e pela credencial presente no histórico publicado. Parecer em docs/verificacoes/verificador/conta-revisao-integral.md; delegação em conta-revisao-delegacao-integral.json. A revisão D08-R2 de 07/nov classificou CA-D06 como SEM TESTE antes da criação da conta; esse parecer histórico foi preservado.
+Status atual: implementação dos dados, imagens e conta concluída e conferida, com uma pendência de conformidade. A conta tem papel COLLABORATOR, zero empréstimos e reexecução sem duplicação. Na revisão independente, CA-D01/D02/D03/D04/D05/D06/D08 ATENDE e CA-D07 NÃO ATENDE, por falta de isolamento de escrita em produção e pela credencial presente no histórico publicado. Por isso, o veredito formal da spec permanece NÃO PRONTA. Parecer em docs/verificacoes/verificador/conta-revisao-integral.md; delegação em conta-revisao-delegacao-integral.json. A revisão D08-R2 de 07/nov classificou CA-D06 como SEM TESTE antes da criação da conta; esse parecer histórico foi preservado.
 
 ## Objetivo
 
